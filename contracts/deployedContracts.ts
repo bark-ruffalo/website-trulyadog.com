@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   84532: {
     RewardsMarket: {
-      address: "0x12919101F3dD996b44Af2487C5dD100B05a093A7",
+      address: "0x40C514F9d92b1b05f70459eB9CF10Ae53c5B9611",
       abi: [
         {
           inputs: [
@@ -936,7 +936,7 @@ const deployedContracts = {
       },
     },
     RewardToken: {
-      address: "0x61832d72354Cdb5391b31D0364b89C25DA462D89",
+      address: "0xe3eb5F9A5119F6d2f298031Ba31F3C59c26Be4B2",
       abi: [
         {
           inputs: [],
@@ -1429,7 +1429,7 @@ const deployedContracts = {
       },
     },
     StakingVault: {
-      address: "0x97938a993917eAD15C6836C7248b1ACe5af52Fd9",
+      address: "0xbcf0eb5f05Daf3faa684799f00f8fab32c50841f",
       abi: [
         {
           inputs: [
@@ -1845,6 +1845,32 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "getTotalLockedUsers",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getTotalStakedAmount",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",
@@ -2216,7 +2242,7 @@ const deployedContracts = {
       },
     },
     TestnetToken: {
-      address: "0x6fcEBeeb97eb13887cfaBa3Da3f36EACC326C085",
+      address: "0x6000370fD0F6Aa423b225CD3F11e5e2644Da0A0C",
       abi: [
         {
           inputs: [
