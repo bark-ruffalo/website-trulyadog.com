@@ -48,6 +48,10 @@ Visit your app on: `http://localhost:3000`. You can interact with your smart con
 If you're contract owner, then you can perform following actions.
 
 1. Add pools
+
+   Currently our staking platform has 3 pools. First 2 pools are for $PAWSY and $LP tokens and last one is for Test token.
+   PAWSY and LP tokens are not deployed on baseSepolia yet, so TestnetToken is only available to lock now.
+
 2. Pause/Unpause
 3. Set reward token
 4. Transfer ownership
@@ -64,7 +68,7 @@ If you're contract owner, then you can perform following actions.
 - Edit the app config
 
   You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-  In the app config, you can set `targetNetwork` where your contract deployed.
+  In the app config, you can set `targetNetwork` where your contract deployed. Current config has been set to `baseSepolia`.
   Customize the app config to add or update your app config settings and global variables.
 
 ## Documentation
