@@ -10,6 +10,7 @@
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
 
 ![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+![image](https://github.com/user-attachments/assets/e33ad02b-79d3-4cd2-a9c9-cab36d38e133)
 
 ## Requirements
 
