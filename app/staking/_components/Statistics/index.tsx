@@ -1,4 +1,5 @@
 import { Card } from "./Card";
+import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
@@ -8,7 +9,7 @@ export function Statistics() {
   const { data: totalStaking } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getTotalStakedAmount",
-  });
+  }) as { data: bigint };
 
   const { data: totalUsers } = useScaffoldReadContract({
     contractName: "StakingVault",
@@ -29,7 +30,7 @@ export function Statistics() {
   const cards = [
     {
       title: "Total Value Locked on STAKING",
-      value: `${totalStaking} USDC`,
+      value: `${totalStaking ? formatEther(totalStaking) : 0} USDC`,
       className: "blue",
     },
     {

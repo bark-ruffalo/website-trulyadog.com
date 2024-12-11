@@ -22,7 +22,7 @@ export function Card({ cards }: CardProps) {
             <div className={`absolute inset-0 rounded-2xl z-0 ${bgClass} bg-opacity-20 blur-sm`}></div>
             <div className="relative z-10 text-white">
               <div className="text-sm font-semibold uppercase mb-1 leading-4">{card.title}</div>
-              <div className="text-2xl font-light leading-4">{card.value}</div>
+              <div className="text-2xl font-light leading-4 pt-6">{card.value}</div>
             </div>
           </div>
         );
