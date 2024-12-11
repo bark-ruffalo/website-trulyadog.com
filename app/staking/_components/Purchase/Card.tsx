@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { parseEther } from "viem";
-import { useAccount, useWaitForTransactionReceipt } from "wagmi";
+import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { calculateRewardRate, convertSecondsToDays } from "~~/utils/scaffold-eth";
 
 interface CardProps {
-  poolId: string;
+  poolId: bigint;
   stakingToken: string;
   lockPeriods: string[];
   rewardRates: string[];
@@ -40,11 +40,11 @@ export function StakingCard({ item }: { item: CardProps }) {
     }
   };
 
-  const onStake = async (_poolId: bigint): Promise<void> => {
+  const onStake = async (): Promise<void> => {
     try {
       await stake({
         functionName: "stake",
-        args: [_poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])], // args: [amount, lock period in seconds]
+        args: [item.poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])], // args: [amount, lock period in seconds]
       });
       console.log("Stake successful!");
       // Optionally reset stake amount or update state here
@@ -73,7 +73,7 @@ export function StakingCard({ item }: { item: CardProps }) {
       <div className="flex flex-col mb-2 gap-2 w-full">
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Pool Index</span>
-          <span className="text-white font-light">{item.poolId.toString()}</span>
+          <span className="text-white font-light">{item.poolId}</span>
         </div>
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Reward Rate per period</span>
@@ -122,8 +122,9 @@ export function StakingCard({ item }: { item: CardProps }) {
         </div>
 
         <button
-          className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl"
-          onClick={() => onStake(BigInt(item.poolId))}
+          className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl bg-disabled-gray"
+          onClick={() => onStake()}
+          disabled={stakeAmount <= 0}
         >
           {isStakePending ? <span className="loading loading-spinner loading-sm"></span> : "Stake"}
         </button>

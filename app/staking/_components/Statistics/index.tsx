@@ -30,17 +30,17 @@ export function Statistics() {
   const cards = [
     {
       title: "Total Value Locked on STAKING",
-      value: `${totalStaking ? formatEther(totalStaking) : 0} USDC`,
+      value: `${totalStaking ? formatEther(totalStaking) : 0}`,
       className: "blue",
     },
     {
       title: "Total Users",
-      value: `${totalUsers} USERS`,
+      value: `${totalUsers}`,
       className: "blue",
     },
     {
       title: "Lifetime Rewards",
-      value: `${totalRewards} ${rewardTokenSymbol}`,
+      value: `${totalRewards ? totalRewards : 0} ${rewardTokenSymbol}`,
       className: "green",
     },
   ];
