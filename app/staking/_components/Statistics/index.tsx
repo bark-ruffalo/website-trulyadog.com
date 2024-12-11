@@ -4,6 +4,7 @@ import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export function Statistics() {
   const account = useAccount();
+
   const { data: totalStaking } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getTotalStakedAmount",

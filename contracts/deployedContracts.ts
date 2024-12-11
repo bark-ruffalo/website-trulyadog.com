@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   84532: {
     RewardsMarket: {
-      address: "0x40C514F9d92b1b05f70459eB9CF10Ae53c5B9611",
+      address: "0x4c92c1E1b33a878fF98aD21056917F494D129676",
       abi: [
         {
           inputs: [
@@ -936,7 +936,7 @@ const deployedContracts = {
       },
     },
     RewardToken: {
-      address: "0xe3eb5F9A5119F6d2f298031Ba31F3C59c26Be4B2",
+      address: "0x73A0fa94076a8687dF9F4dEdbb164eebcf31009E",
       abi: [
         {
           inputs: [],
@@ -1429,7 +1429,7 @@ const deployedContracts = {
       },
     },
     StakingVault: {
-      address: "0xbcf0eb5f05Daf3faa684799f00f8fab32c50841f",
+      address: "0x8d9F6efD245e314e6B1e52C15E029faeFf34900E",
       abi: [
         {
           inputs: [
@@ -1845,6 +1845,84 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+          ],
+          name: "getLockedUsersByPool",
+          outputs: [
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPools",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "poolId",
+                  type: "uint256",
+                },
+                {
+                  internalType: "contract IERC20",
+                  name: "stakingToken",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "lockPeriods",
+                  type: "uint256[]",
+                },
+                {
+                  internalType: "uint256[]",
+                  name: "rewardRates",
+                  type: "uint256[]",
+                },
+                {
+                  internalType: "bool",
+                  name: "isActive",
+                  type: "bool",
+                },
+              ],
+              internalType: "struct StakingVault.Pool[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+          ],
+          name: "getStakingAmountByPool",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [],
           name: "getTotalLockedUsers",
           outputs: [
@@ -2242,7 +2320,7 @@ const deployedContracts = {
       },
     },
     TestnetToken: {
-      address: "0x6000370fD0F6Aa423b225CD3F11e5e2644Da0A0C",
+      address: "0xacaE389c272E59E122aB30eFBb34ABea817Ab77e",
       abi: [
         {
           inputs: [

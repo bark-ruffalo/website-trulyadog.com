@@ -1,9 +1,10 @@
 "use client";
 
-import { Statistics } from "./_components/Statistics/Statistics";
+import { Purchase } from "./_components/Purchase";
+import { Statistics } from "./_components/Statistics";
 import type { NextPage } from "next";
 
-const Home: NextPage = () => {
+const Staking: NextPage = () => {
   return (
     <>
       <div className="flex items-center flex-col flex-grow">
@@ -11,10 +12,13 @@ const Home: NextPage = () => {
           <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
             <Statistics />
           </div>
+          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row mt-10">
+            <Purchase />
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default Home;
+export default Staking;
