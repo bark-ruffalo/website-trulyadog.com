@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { calculateRewardRate, convertSecondsToDays } from "~~/utils/scaffold-eth";
+import { calculateRewardRate, convertSecondsToDays, getPoolTokens } from "~~/utils/scaffold-eth";
 
 interface CardProps {
   poolId: bigint;
@@ -15,9 +15,14 @@ interface CardProps {
 
 export function StakingCard({ item }: { item: CardProps }) {
   const { address } = useAccount();
-  const [stakeAmount, setStakeAmount] = useState<number>(0);
+  const [stakeAmount, setStakeAmount] = useState<bigint>(BigInt(0));
   const [lockPeriodIndex, setLockPeriodIndex] = useState<number>(0);
 
+  const { data: tokenBalance, refetch: refetchTokenBalance } = useScaffoldReadContract({
+    contractName: getPoolTokens(Number(item.poolId)),
+    functionName: "balanceOf",
+    args: [address],
+  });
   const { data: stakingVault } = useDeployedContractInfo("StakingVault");
   const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
     contractName: "TestnetToken",
@@ -53,6 +58,12 @@ export function StakingCard({ item }: { item: CardProps }) {
     }
   };
 
+  useEffect(() => {
+    if (tokenBalance && tokenBalance > 0) {
+      setStakeAmount(tokenBalance);
+    }
+  }, [tokenBalance]);
+
   return (
     <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
       <div className="text-white font-medium flex gap-2 items-center mb-3">
@@ -73,7 +84,7 @@ export function StakingCard({ item }: { item: CardProps }) {
       <div className="flex flex-col mb-2 gap-2 w-full">
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Pool Index</span>
-          <span className="text-white font-light">{item.poolId}</span>
+          <span className="text-white font-light">{item.poolId.toString()}</span>
         </div>
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Reward Rate per period</span>
@@ -90,9 +101,14 @@ export function StakingCard({ item }: { item: CardProps }) {
           </span>
         </div>
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Staking Token</span>
+          <span className="text-[#b2bfce] font-light">Pool Token Address</span>
           <Address address={item.stakingToken} />
         </div>
+        <div className="flex justify-between w-full">
+          <span className="text-[#b2bfce] font-light">Staking Token Name</span>
+          {getPoolTokens(Number(item.poolId))}
+        </div>
+
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Pool Status</span>
           <span className="text-white font-light">{item.isActive ? "Active" : "Paused"}</span>
@@ -106,12 +122,12 @@ export function StakingCard({ item }: { item: CardProps }) {
               className="bg-transparent border-none outline-none text-white px-2 w-3/4"
               type="text"
               placeholder="500"
-              value={stakeAmount}
-              onChange={e => setStakeAmount(Number(e.target.value))}
+              value={stakeAmount.toString()}
+              onChange={e => setStakeAmount(BigInt(e.target.value))}
             />
             <span className="text-white/60">TOKEN</span>
           </div>
-          {allowance && parseEther(stakeAmount.toString()) > allowance && (
+          {allowance?.toString() && parseEther(stakeAmount.toString()) > allowance && (
             <button
               className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl"
               onClick={onApprove}
