@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { parseEther } from "viem";
+import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -25,11 +25,11 @@ export function StakingCard({ item }: { item: CardProps }) {
   });
   const { data: stakingVault } = useDeployedContractInfo("StakingVault");
   const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
-    contractName: "TestnetToken",
+    contractName: "TTK",
     functionName: "allowance",
     args: [address, stakingVault?.address],
   });
-  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("TestnetToken");
+  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("TTK");
   const { writeContractAsync: stake, isPending: isStakePending } = useScaffoldWriteContract("StakingVault");
 
   const onApprove = async (): Promise<void> => {
@@ -60,7 +60,7 @@ export function StakingCard({ item }: { item: CardProps }) {
 
   useEffect(() => {
     if (tokenBalance && tokenBalance > 0) {
-      setStakeAmount(tokenBalance);
+      setStakeAmount(BigInt(formatEther(tokenBalance)));
     }
   }, [tokenBalance]);
 
@@ -125,7 +125,7 @@ export function StakingCard({ item }: { item: CardProps }) {
               value={stakeAmount.toString()}
               onChange={e => setStakeAmount(BigInt(e.target.value))}
             />
-            <span className="text-white/60">TOKEN</span>
+            <span className="text-white/60">{getPoolTokens(Number(item.poolId))}</span>
           </div>
           {allowance?.toString() && parseEther(stakeAmount.toString()) > allowance && (
             <button
