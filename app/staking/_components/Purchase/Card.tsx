@@ -3,7 +3,7 @@ import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { calculateRewardRate, convertSecondsToDays, getPoolTokens } from "~~/utils/scaffold-eth";
+import { calculateRewardRate, convertSecondsToDays, getPoolTokens, notification } from "~~/utils/scaffold-eth";
 
 interface CardProps {
   poolId: bigint;
@@ -36,7 +36,7 @@ export function StakingCard({ item }: { item: CardProps }) {
     try {
       await approve({
         functionName: "approve",
-        args: [stakingVault?.address, parseEther(stakeAmount.toString())], // args: [spender address, amount]
+        args: [stakingVault?.address, parseEther(stakeAmount.toString())],
       });
       console.log("Approval successful!");
       await refetchTokenAllowance();
@@ -46,13 +46,22 @@ export function StakingCard({ item }: { item: CardProps }) {
   };
 
   const onStake = async (): Promise<void> => {
+    if (!stakeAmount) {
+      notification.error("Staking Vault: Cannot stake zero amount.");
+      return;
+    }
+
+    if (!allowance || stakeAmount > allowance) {
+      notification.error("Staking Vault: You should approve stake amount to StakingVault.");
+      return;
+    }
+
     try {
       await stake({
         functionName: "stake",
-        args: [item.poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])], // args: [amount, lock period in seconds]
+        args: [item.poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])],
       });
       console.log("Stake successful!");
-      // Optionally reset stake amount or update state here
     } catch (error) {
       console.error("Staking failed:", error);
     }
@@ -140,7 +149,6 @@ export function StakingCard({ item }: { item: CardProps }) {
         <button
           className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl bg-disabled-gray"
           onClick={() => onStake()}
-          disabled={stakeAmount <= 0}
         >
           {isStakePending ? <span className="loading loading-spinner loading-sm"></span> : "Stake"}
         </button>
