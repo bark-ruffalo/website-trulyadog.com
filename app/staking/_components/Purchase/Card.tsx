@@ -18,60 +18,60 @@ export function StakingCard({ item }: { item: CardProps }) {
   const [stakeAmount, setStakeAmount] = useState<bigint>(BigInt(0));
   const [lockPeriodIndex, setLockPeriodIndex] = useState<number>(0);
 
-  const { data: tokenBalance, refetch: refetchTokenBalance } = useScaffoldReadContract({
-    contractName: getPoolTokens(Number(item.poolId)),
-    functionName: "balanceOf",
-    args: [address],
-  });
-  const { data: stakingVault } = useDeployedContractInfo("StakingVault");
-  const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
-    contractName: "TTK",
-    functionName: "allowance",
-    args: [address, stakingVault?.address],
-  });
-  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("TTK");
-  const { writeContractAsync: stake, isPending: isStakePending } = useScaffoldWriteContract("StakingVault");
+  // const { data: tokenBalance, refetch: refetchTokenBalance } = useScaffoldReadContract({
+  //   contractName: getPoolTokens(Number(item.poolId)),
+  //   functionName: "balanceOf",
+  //   args: [address],
+  // });
+  // const { data: stakingVault } = useDeployedContractInfo("StakingVault");
+  // const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
+  //   contractName: "TTK",
+  //   functionName: "allowance",
+  //   args: [address, stakingVault?.address],
+  // });
+  // const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("TTK");
+  // const { writeContractAsync: stake, isPending: isStakePending } = useScaffoldWriteContract("StakingVault");
 
-  const onApprove = async (): Promise<void> => {
-    try {
-      await approve({
-        functionName: "approve",
-        args: [stakingVault?.address, parseEther(stakeAmount.toString())],
-      });
-      console.log("Approval successful!");
-      await refetchTokenAllowance();
-    } catch (error) {
-      console.error("Approval failed:", error);
-    }
-  };
+  // const onApprove = async (): Promise<void> => {
+  //   try {
+  //     await approve({
+  //       functionName: "approve",
+  //       args: [stakingVault?.address, parseEther(stakeAmount.toString())],
+  //     });
+  //     console.log("Approval successful!");
+  //     await refetchTokenAllowance();
+  //   } catch (error) {
+  //     console.error("Approval failed:", error);
+  //   }
+  // };
 
-  const onStake = async (): Promise<void> => {
-    if (!stakeAmount) {
-      notification.error("Staking Vault: Cannot stake zero amount.");
-      return;
-    }
+  // const onStake = async (): Promise<void> => {
+  //   if (!stakeAmount) {
+  //     notification.error("Staking Vault: Cannot stake zero amount.");
+  //     return;
+  //   }
 
-    if (!allowance || stakeAmount > allowance) {
-      notification.error("Staking Vault: You should approve stake amount to StakingVault.");
-      return;
-    }
+  //   if (!allowance || stakeAmount > allowance) {
+  //     notification.error("Staking Vault: You should approve stake amount to StakingVault.");
+  //     return;
+  //   }
 
-    try {
-      await stake({
-        functionName: "stake",
-        args: [item.poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])],
-      });
-      console.log("Stake successful!");
-    } catch (error) {
-      console.error("Staking failed:", error);
-    }
-  };
+  //   try {
+  //     await stake({
+  //       functionName: "stake",
+  //       args: [item.poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])],
+  //     });
+  //     console.log("Stake successful!");
+  //   } catch (error) {
+  //     console.error("Staking failed:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (tokenBalance && tokenBalance > 0) {
-      setStakeAmount(BigInt(formatEther(tokenBalance)));
-    }
-  }, [tokenBalance]);
+  // useEffect(() => {
+  //   if (tokenBalance && tokenBalance > 0) {
+  //     setStakeAmount(BigInt(formatEther(tokenBalance)));
+  //   }
+  // }, [tokenBalance]);
 
   return (
     <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
@@ -124,7 +124,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
+      {/* <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
         <div className="flex justify-between items-center gap-4 w-full">
           <div className="flex justify-between items-center bg-[#541752] border border-[#e8effb33] rounded-lg p-2 w-full">
             <input
@@ -152,7 +152,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         >
           {isStakePending ? <span className="loading loading-spinner loading-sm"></span> : "Stake"}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
