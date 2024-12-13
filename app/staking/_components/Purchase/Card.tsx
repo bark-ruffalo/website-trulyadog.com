@@ -138,7 +138,7 @@ export function StakingCard({ item }: { item: CardProps }) {
           </div>
           {allowance?.toString() && parseEther(stakeAmount.toString()) > allowance && (
             <button
-              className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl"
+              className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
               onClick={onApprove}
             >
               {isApprovePending ? <span className="loading loading-spinner loading-sm"></span> : "Approve"}
@@ -147,7 +147,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         </div>
 
         <button
-          className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl bg-disabled-gray"
+          className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
           onClick={() => onStake()}
         >
           {isStakePending ? <span className="loading loading-spinner loading-sm"></span> : "Stake"}
