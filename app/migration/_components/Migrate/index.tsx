@@ -89,17 +89,23 @@ export function Migrate() {
         <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
           <p className="text-white">
             $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem's profitability, and our future so that we
-            do not depend on Virtuals Protocol. Read below how it started in our Telegram group.
+            do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
           </p>
 
           <div className="flex flex-row gap-4">
-            <BalanceCard title="PAWSY balance" balance={pawsyBalance ? formatEther(pawsyBalance) : "0"} />
-            <BalanceCard title="mPAWSY balance" balance={mPawsyBalance ? formatEther(mPawsyBalance) : "0"} />
+            <BalanceCard
+              title="$PAWSY balance"
+              balance={pawsyBalance ? Number(formatEther(pawsyBalance)).toFixed(2) : "0"}
+            />
+            <BalanceCard
+              title="$mPAWSY balance"
+              balance={mPawsyBalance ? Number(formatEther(mPawsyBalance)).toFixed(2) : "0"}
+            />
           </div>
 
           <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
             <div className="flex justify-between items-center gap-4 w-full">
-              <div className="flex justify-between items-center bg-[#541752] border border-[#e8effb33] rounded-lg p-2 w-full">
+              <div className="flex justify-between items-center bg-base-100 border border-[#e8effb33] rounded-lg p-2 w-full">
                 <input
                   className="bg-transparent border-none outline-none text-white px-2 w-full"
                   type="text"
