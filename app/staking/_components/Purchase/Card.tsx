@@ -133,6 +133,7 @@ export function StakingCard({ item }: { item: CardProps }) {
             <button
               className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
               onClick={onApprove}
+              disabled={isApprovePending}
             >
               {isApprovePending ? <span className="loading loading-spinner loading-sm"></span> : "Approve"}
             </button>
@@ -142,6 +143,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         <button
           className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
           onClick={() => onStake()}
+          disabled={isStakingPending}
         >
           {isStakePending ? <span className="loading loading-spinner loading-sm"></span> : "Stake"}
         </button>
