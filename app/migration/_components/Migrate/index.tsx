@@ -117,13 +117,27 @@ export function Migrate() {
           <div className="flex flex-row gap-4">
             <BalanceCard
               title="$PAWSY balance"
-              balance={pawsyBalance ? Number(formatEther(pawsyBalance)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "0"}
+              balance={
+                pawsyBalance
+                  ? Number(formatEther(pawsyBalance)).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  : "0"
+              }
               tokenAddress={pawsyContract?.address}
               // onAddToMetamask={() => addTokenToMetamask(pawsyContract?.address || "", "PAWSY")}
             />
             <BalanceCard
               title="$mPAWSY balance"
-              balance={mPawsyBalance ? Number(formatEther(mPawsyBalance)).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "0"}
+              balance={
+                mPawsyBalance
+                  ? Number(formatEther(mPawsyBalance)).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  : "0"
+              }
               tokenAddress={mPawsyContract?.address}
               onAddToMetamask={() => addTokenToMetamask(mPawsyContract?.address || "", "mPAWSY")}
             />
@@ -134,17 +148,17 @@ export function Migrate() {
               <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full">
                 <input
                   className="bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full"
-                  type="number"
+                  type="text"
                   placeholder="500"
                   value={pawsyAmount.toString()}
-                  onChange={e => setPawsyAmount(parseFloat(e.target.value))}
+                  onChange={e => setPawsyAmount(Number(e.target.value))}
                 />
                 <span className="text-gray-600 dark:text-white/60">{}</span>
               </div>
             </div>
 
             {allowance?.toString() &&
-              (parseEther(pawsyAmount.toString()) > allowance ? (
+              (parseEther(pawsyAmount.toString()) > allowance || pawsyAmount === 0 ? (
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
                   onClick={onApprove}
