@@ -4,7 +4,13 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bars3Icon, BugAntIcon, CakeIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BugAntIcon,
+  CakeIcon,
+  CurrencyDollarIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -28,6 +34,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Stake",
     href: "/staking",
     icon: <CakeIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Why $PAWSY",
+    href: "/why",
+    icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
   },
   {
     label: "Debug Contracts",
