@@ -94,7 +94,7 @@ export function Migrate() {
 
           <div className="flex flex-row gap-4">
             <BalanceCard title="PAWSY balance" balance={pawsyBalance ? formatEther(pawsyBalance) : "0"} />
-            <BalanceCard title="PAWSY balance" balance={mPawsyBalance ? formatEther(mPawsyBalance) : "0"} />
+            <BalanceCard title="mPAWSY balance" balance={mPawsyBalance ? formatEther(mPawsyBalance) : "0"} />
           </div>
 
           <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
