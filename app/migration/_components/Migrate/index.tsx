@@ -144,7 +144,7 @@ export function Migrate() {
             </div>
 
             {allowance?.toString() &&
-              (parseEther(pawsyAmount.toString()) >= allowance ? (
+              (parseEther(pawsyAmount.toString()) > allowance ? (
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
                   onClick={onApprove}
