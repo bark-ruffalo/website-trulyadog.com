@@ -20,12 +20,12 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "Token Migration",
+    label: "$mPAWSY",
     href: "/migration",
     icon: <ArrowRightCircleIcon className="h-4 w-4" />,
   },
   {
-    label: "Staking",
+    label: "Stake",
     href: "/staking",
     icon: <CakeIcon className="h-4 w-4" />,
   },

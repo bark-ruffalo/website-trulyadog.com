@@ -14,7 +14,7 @@ interface PoolDataProps {
 }
 export function Migrate() {
   const { address } = useAccount();
-  const [pawsyAmount, setPawsyAmount] = useState<bigint>(BigInt(0));
+  const [pawsyAmount, setPawsyAmount] = useState<number>(0);
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
 
@@ -77,7 +77,7 @@ export function Migrate() {
 
   useEffect(() => {
     if (pawsyBalance && pawsyBalance > 0) {
-      setPawsyAmount(BigInt(formatEther(pawsyBalance)));
+      setPawsyAmount(Number(formatEther(pawsyBalance)));
     }
   }, [pawsyBalance]);
 
@@ -105,7 +105,7 @@ export function Migrate() {
                   type="text"
                   placeholder="500"
                   value={pawsyAmount.toString()}
-                  onChange={e => setPawsyAmount(BigInt(e.target.value))}
+                  onChange={e => setPawsyAmount(Number(e.target.value))}
                 />
                 <span className="text-white/60">{}</span>
               </div>
