@@ -23,7 +23,7 @@ export function Portfolio() {
   return (
     <div className="m-1 grid gap-2">
       {stakeData && stakeData.length > 0 && (
-        <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col h-full">
+        <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-lg flex flex-col h-full">
           <div className="w-full grid grid-rows-[auto_1fr] h-full">
             <div className="flex items-center mb-2">
               <h2 className="mr-10 text-white whitespace-nowrap font-semibold uppercase">My Portfolio</h2>

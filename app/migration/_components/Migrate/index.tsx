@@ -103,34 +103,36 @@ export function Migrate() {
             />
           </div>
 
-          <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
+          <div className="flex flex-col gap-2 w-full border-t border-gray-300 dark:border-[#b2bfce] pt-2">
             <div className="flex justify-between items-center gap-4 w-full">
-              <div className="flex justify-between items-center bg-base-100 border border-[#e8effb33] rounded-lg p-2 w-full">
+              <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full">
                 <input
-                  className="bg-transparent border-none outline-none text-white px-2 w-full"
+                  className="bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full"
                   type="text"
                   placeholder="500"
                   value={pawsyAmount.toString()}
                   onChange={e => setPawsyAmount(Number(e.target.value))}
                 />
-                <span className="text-white/60">{}</span>
+                <span className="text-gray-600 dark:text-white/60">{}</span>
               </div>
-              {allowance?.toString() && parseEther(pawsyAmount.toString()) > allowance && (
+            </div>
+
+            {allowance?.toString() &&
+              (parseEther(pawsyAmount.toString()) >= allowance ? (
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
                   onClick={onApprove}
                 >
-                  Approve
+                  Approve in order to Migrate
                 </button>
-              )}
-            </div>
-
-            <button
-              className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
-              onClick={onMigrate}
-            >
-              Migrate
-            </button>
+              ) : (
+                <button
+                  className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
+                  onClick={onMigrate}
+                >
+                  Migrate
+                </button>
+              ))}
           </div>
         </div>
       </div>
