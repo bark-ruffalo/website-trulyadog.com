@@ -40,11 +40,12 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/why",
     icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
   },
-  {
+  // Only show Debug menu item in development
+  ...(process.env.NODE_ENV !== 'production' ? [{
     label: "Debug Contracts",
     href: "/debug",
     icon: <BugAntIcon className="h-4 w-4" />,
-  },
+  }] : []),
 ];
 
 export const HeaderMenuLinks = () => {
