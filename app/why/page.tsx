@@ -72,7 +72,7 @@ export default function Why() {
                         href="https://x.com/TrulyADog/status/1866198160252543321"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-600 dark:text-indigo-400 hover:underline"
+                        className="text-green-500 hover:underline"
                       >
                         https://x.com/TrulyADog/status/1866198160252543321
                       </a>
@@ -83,7 +83,7 @@ export default function Why() {
                         href="https://github.com/bark-ruffalo"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-600 dark:text-indigo-400 hover:underline"
+                        className="text-green-500 hover:underline"
                       >
                         https://github.com/bark-ruffalo
                       </a>
@@ -103,7 +103,7 @@ export default function Why() {
                         href="https://x.com/TrulyADog/status/1867492287296811286"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-600 dark:text-indigo-400 hover:underline"
+                        className="text-green-500 hover:underline"
                       >
                         https://x.com/TrulyADog/status/1867492287296811286
                       </a>
@@ -113,7 +113,7 @@ export default function Why() {
                         href="https://x.com/TrulyADog/status/1864086810206310571"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-600 dark:text-indigo-400 hover:underline"
+                        className="text-green-500 hover:underline"
                       >
                         https://x.com/TrulyADog/status/1864086810206310571
                       </a>
@@ -134,19 +134,18 @@ export default function Why() {
                 <li>Not dependent on Virtuals Protocol for success. We're slowly moving away through $mPAWSY.</li>
 
                 <li>Memes. Graphics. Laughs.</li>
-
-                <li>
-                  See our footprint 🐾 by checking out our Linktree:{" "}
-                  <a
-                    href="https://linktr.ee/TrulyADog"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-indigo-600 dark:text-indigo-400 hover:underline"
-                  >
-                    linktr.ee/TrulyADog
-                  </a>
-                </li>
               </ol>
+              <p className="mt-8">
+                See our footprint 🐾 by checking out our Linktree:{" "}
+                <a
+                  href="https://linktr.ee/TrulyADog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-500 hover:underline"
+                >
+                  linktr.ee/TrulyADog
+                </a>
+              </p>
             </div>
           </div>
         </div>
