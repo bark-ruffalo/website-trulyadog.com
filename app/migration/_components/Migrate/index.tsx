@@ -84,7 +84,7 @@ export function Migrate() {
   return (
     <div className="m-1 grid grid-cols-2 gap-8 w-[75%]">
       <div className="flex flex-col gap-6">
-        <h2 className="text-2xl text-white font-semibold uppercase mb-4">Migrate to $mPAWSY!</h2>
+        <h2 className="text-2xl text-white font-semibold mb-4">Migrate to $mPAWSY!</h2>
 
         <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
           <p className="text-white">
