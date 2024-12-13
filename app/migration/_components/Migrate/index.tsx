@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import BalanceCard from "./BalanceCard";
-import { formatEther, parseEther } from "viem";
+import { formatEther, parseEther, formatUnits } from "viem";
 import { useAccount } from "wagmi";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
@@ -14,7 +14,7 @@ interface PoolDataProps {
 }
 export function Migrate() {
   const { address } = useAccount();
-  const [pawsyAmount, setPawsyAmount] = useState<number>(0);
+  const [pawsyAmount, setPawsyAmount] = useState<string>("0");
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
   const { data: pawsyContract } = useDeployedContractInfo("PAWSY");
@@ -99,16 +99,34 @@ export function Migrate() {
 
   useEffect(() => {
     if (pawsyBalance && pawsyBalance > 0) {
-      setPawsyAmount(Number(formatEther(pawsyBalance)));
+      setPawsyAmount(formatEther(pawsyBalance));
     }
   }, [pawsyBalance]);
 
+  const [inputError, setInputError] = useState<string>("");
+
   function handlePawsyAmountChange(event: ChangeEvent<HTMLInputElement>): void {
     const value = event.target.value;
+    setInputError("");
+    
     if (value === "" || /^\d*\.?\d*$/.test(value)) {
-      setPawsyAmount(Number(value));
+      setPawsyAmount(value);
+      
+      const numValue = Number(value);
+      if (pawsyBalance && numValue > Number(formatEther(pawsyBalance))) {
+        setInputError("Amount exceeds balance");
+      }
+      else if (numValue < 0) {
+        setInputError("Amount must be positive");
+      }
     }
   }
+
+  const handleMaxClick = () => {
+    if (pawsyBalance) {
+      setPawsyAmount(formatEther(pawsyBalance));
+    }
+  };
 
   return (
     <div className="m-1 grid grid-cols-12 gap-8 w-[90%]">
@@ -152,21 +170,33 @@ export function Migrate() {
 
           <div className="flex flex-col gap-2 w-full border-t border-gray-300 dark:border-[#b2bfce] pt-2">
             <div className="flex justify-between items-center gap-4 w-full">
-              <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full">
+              <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full relative">
                 <input
-                  className="bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full"
-                  type="number"
-                  step="any"
-                  placeholder="500"
-                  value={pawsyAmount.toString()}
+                  className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full ${
+                    inputError ? 'border-red-500' : ''
+                  }`}
+                  type="text"
+                  placeholder="Enter amount"
+                  value={pawsyAmount}
                   onChange={handlePawsyAmountChange}
+                  disabled={isApprovePending || isMigratePending}
                 />
-                <span className="text-gray-600 dark:text-white/60">{}</span>
+                <button
+                  onClick={handleMaxClick}
+                  className="px-2 py-1 text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                  disabled={isApprovePending || isMigratePending}
+                >
+                  MAX
+                </button>
               </div>
             </div>
+            
+            {inputError && (
+              <span className="text-red-500 text-sm mt-1">{inputError}</span>
+            )}
 
             {allowance?.toString() &&
-              (parseEther(pawsyAmount.toString()) > allowance || pawsyAmount === 0 ? (
+              (parseEther(pawsyAmount || "0") > allowance || Number(pawsyAmount) === 0 ? (
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
                   onClick={onApprove}
