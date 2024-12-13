@@ -14,12 +14,12 @@ export default function Why() {
               <p className="text-gray-600 dark:text-gray-300">DAO Allocation</p>
             </div>
             <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-200">
-              <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2">$9M</h3>
-              <p className="text-gray-600 dark:text-gray-300">Target Market Cap</p>
+              <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2">5.25%</h3>
+              <p className="text-gray-600 dark:text-gray-300">Operational Funds</p>
             </div>
             <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-200">
-              <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2">5+ Years</h3>
-              <p className="text-gray-600 dark:text-gray-300">Team Experience</p>
+              <h3 className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2">14.5%</h3>
+              <p className="text-gray-600 dark:text-gray-300">Team Funds</p>
             </div>
           </div>
 
@@ -28,8 +28,8 @@ export default function Why() {
             <ol className="space-y-8 list-decimal pl-4 text-gray-800 dark:text-gray-200">
               <li>
                 We are creating an ecosystem and a community focused on making money. Employing AI agents for this
-                purpose will be a primary objective, but we will do it all! Bark Ruffalo will be their top 🐕. Never
-                mention to him that he looks like a 🐕!
+                purpose will be a primary objective, but we will do it all! Bark Ruffalo will be their top 🐶. Never
+                mention to him that he looks like a 🐈!
               </li>
 
               <li>
@@ -109,12 +109,14 @@ export default function Why() {
               <li>Not dependent on Virtuals Protocol for success. We're slowly moving away through $mPAWSY.</li>
 
               <li>Memes. Graphics. Laughs.</li>
+
+              <li>See our footprint 🐾 by checking out our Linktree: <a href="https://linktr.ee/TrulyADog" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">linktr.ee/TrulyADog</a></li>
             </ol>
           </div>
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl shadow-lg p-6 text-white">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12"> */}
+            {/* <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl shadow-lg p-6 text-white">
               <h3 className="text-xl font-bold mb-4">Staking Rewards</h3>
               <p className="mb-4">Earn passive income by staking your $PAWSY tokens</p>
               <Link
@@ -136,7 +138,7 @@ export default function Why() {
                 Provide Liquidity
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
