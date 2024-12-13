@@ -13,11 +13,12 @@ interface UserLockProps {
 }
 export function Portfolio() {
   const { address } = useAccount();
-  const { data: stakeData } = useScaffoldReadContract({
-    contractName: "StakingVault",
-    functionName: "getUserLocks",
-    args: [address],
-  }) as unknown as { data: UserLockProps[] };
+  const stakeData: any[] = [];
+  // const { data: stakeData } = useScaffoldReadContract({
+  //   contractName: "StakingVault",
+  //   functionName: "getUserLocks",
+  //   args: [address],
+  // }) as unknown as { data: UserLockProps[] };
 
   return (
     <div className="m-1 grid gap-2">
