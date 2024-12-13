@@ -15,7 +15,7 @@ const scaffoldConfig = {
   // The networks on which your DApp is live
   targetNetworks: [chains.base],
 
-  poolTokens: ["PAWSY", "mPAWSY", "LP"],
+  poolTokens: ["$PAWSY", "$mPAWSY", "$PAWSY/$VIRTUAL LP"],
 
   pawsyAddress: "0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a",
   pawsyPrice: 0.001279,
