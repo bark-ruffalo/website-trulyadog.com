@@ -3,6 +3,7 @@ export * from "./useContractLogs";
 export * from "./useDeployedContractInfo";
 export * from "./useFetchBlocks";
 export * from "./useInitializeNativeCurrencyPrice";
+export * from "./useInitializePawsyPrice";
 export * from "./useNetworkColor";
 export * from "./useOutsideClick";
 export * from "./useScaffoldContract";
