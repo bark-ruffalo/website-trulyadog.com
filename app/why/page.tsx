@@ -27,13 +27,15 @@ export default function Why() {
           <h1 className="text-4xl font-bold text-center mb-12 text-base-content dark:text-white">Why $PAWSY?</h1>
 
           {/* Stats Cards - Updated to match staking style */}
-          <div className="flex items-center justify-start w-full flex-nowrap overflow-x-auto mb-12">
+          <div className="flex items-center justify-center w-full flex-nowrap mb-12">
             {statsCards.map((card, index) => (
               <div
                 key={index}
                 className="flex flex-col justify-between items-start p-6 min-h-[120px] w-[300px] m-2 relative bg-base-200 dark:bg-white dark:bg-opacity-10 rounded-2xl shadow-md flex-shrink-0 sm:w-[350px] md:w-[450px]"
               >
-                <div className={`absolute inset-0 rounded-2xl z-0 ${card.className === "green" ? "bg-green-500" : "bg-blue-500"} bg-opacity-10 dark:bg-opacity-20 blur-sm`}></div>
+                <div
+                  className={`absolute inset-0 rounded-2xl z-0 ${card.className === "green" ? "bg-green-500" : "bg-blue-500"} bg-opacity-10 dark:bg-opacity-20 blur-sm`}
+                ></div>
                 <div className="relative z-10 text-base-content dark:text-white">
                   <div className="text-sm font-semibold uppercase mb-1 leading-4">{card.title}</div>
                   <div className="text-2xl font-light leading-4 pt-6">{card.value}</div>
@@ -121,17 +123,29 @@ export default function Why() {
 
                 <li>
                   The team members have already been financially independent for more than 5 years. We know how to
-                  succeed, which is more important in the long term than knowing the photo format for Instagram, which is
-                  the main strength of our competition.
+                  succeed, which is more important in the long term than knowing the photo format for Instagram, which
+                  is the main strength of our competition.
                 </li>
 
-                <li>Token-gated channels and goodies for stakers. Those who also provide liquidity are highly valued.</li>
+                <li>
+                  Token-gated channels and goodies for stakers. Those who also provide liquidity are highly valued.
+                </li>
 
                 <li>Not dependent on Virtuals Protocol for success. We're slowly moving away through $mPAWSY.</li>
 
                 <li>Memes. Graphics. Laughs.</li>
 
-                <li>See our footprint 🐾 by checking out our Linktree: <a href="https://linktr.ee/TrulyADog" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">linktr.ee/TrulyADog</a></li>
+                <li>
+                  See our footprint 🐾 by checking out our Linktree:{" "}
+                  <a
+                    href="https://linktr.ee/TrulyADog"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-600 dark:text-indigo-400 hover:underline"
+                  >
+                    linktr.ee/TrulyADog
+                  </a>
+                </li>
               </ol>
             </div>
           </div>
