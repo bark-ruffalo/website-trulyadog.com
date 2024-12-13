@@ -17,6 +17,8 @@ export function Migrate() {
   const [pawsyAmount, setPawsyAmount] = useState<number>(0);
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
+  const { data: pawsyContract } = useDeployedContractInfo("PAWSY");
+  const { data: mPawsyContract } = useDeployedContractInfo("mPAWSY");
 
   const { data: pawsyBalance, refetch: refetchPawsyBalance } = useScaffoldReadContract({
     contractName: "PAWSY",
@@ -38,6 +40,26 @@ export function Migrate() {
 
   const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("PAWSY");
   const { writeContractAsync: migrate, isPending: isMigratePending } = useScaffoldWriteContract("TokenMigration");
+
+  const addTokenToMetamask = async (address: string, symbol: string) => {
+    try {
+      if (!window.ethereum) throw new Error("No crypto wallet found");
+
+      await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address,
+            symbol,
+            decimals: 18,
+          },
+        },
+      });
+    } catch (error) {
+      console.error("Error adding token to metamask:", error);
+    }
+  };
 
   const onApprove = async (): Promise<void> => {
     try {
@@ -82,8 +104,8 @@ export function Migrate() {
   }, [pawsyBalance]);
 
   return (
-    <div className="m-1 grid grid-cols-2 gap-8 w-[75%]">
-      <div className="flex flex-col gap-6">
+    <div className="m-1 grid grid-cols-12 gap-8 w-[90%]">
+      <div className="col-span-7 flex flex-col gap-6">
         <h2 className="text-2xl text-white font-semibold mb-4">Migrate to $mPAWSY!</h2>
 
         <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
@@ -96,10 +118,14 @@ export function Migrate() {
             <BalanceCard
               title="$PAWSY balance"
               balance={pawsyBalance ? Number(formatEther(pawsyBalance)).toFixed(2) : "0"}
+              tokenAddress={pawsyContract?.address}
+              onAddToMetamask={() => addTokenToMetamask(pawsyContract?.address || "", "PAWSY")}
             />
             <BalanceCard
               title="$mPAWSY balance"
               balance={mPawsyBalance ? Number(formatEther(mPawsyBalance)).toFixed(2) : "0"}
+              tokenAddress={mPawsyContract?.address}
+              onAddToMetamask={() => addTokenToMetamask(mPawsyContract?.address || "", "mPAWSY")}
             />
           </div>
 
@@ -137,7 +163,7 @@ export function Migrate() {
         </div>
       </div>
 
-      <div className="flex items-start justify-center">
+      <div className="col-span-5 flex items-start justify-center">
         <img src="/vote.png" className="w-full object-contain" alt="community vote" />
       </div>
     </div>
