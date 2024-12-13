@@ -74,13 +74,13 @@ export function StakingCard({ item }: { item: CardProps }) {
   // }, [tokenBalance]);
 
   return (
-    <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
-      <div className="text-white font-medium flex gap-2 items-center mb-3">
-        <label className="text-[#b2bfce] font-light mr-2">Lock Period:</label>
+    <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
+      <div className="text-base-content dark:text-white font-medium flex gap-2 items-center mb-3">
+        <label className="text-base-content/70 dark:text-[#b2bfce] font-light mr-2">Lock Period:</label>
         <select
           value={lockPeriodIndex}
           onChange={e => setLockPeriodIndex(Number(e.target.value))}
-          className="bg-base-100 border border-[#e8effb33] rounded-xl p-1 text-white"
+          className="bg-base-100 border border-base-300 dark:border-[#e8effb33] rounded-xl p-1 text-base-content dark:text-white"
         >
           {item.lockPeriods.map((period, index) => (
             <option key={index} value={index}>
@@ -92,20 +92,22 @@ export function StakingCard({ item }: { item: CardProps }) {
 
       <div className="flex flex-col mb-2 gap-2 w-full">
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Token Name</span>
-          {getPoolTokens(Number(item.poolId))}
+          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Token Name</span>
+          <span className="text-base-content dark:text-white">{getPoolTokens(Number(item.poolId))}</span>
         </div>
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Token Address</span>
+          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Token Address</span>
           <Address address={item.stakingToken} />
         </div>
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Pool Status</span>
-          <span className="text-white font-light">{item.isActive ? "COMING SOON" : "Paused"}</span>
+          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Pool Status</span>
+          <span className="text-base-content dark:text-white font-light">
+            {item.isActive ? "COMING SOON" : "Paused"}
+          </span>
         </div>
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Reward APY</span>
-          <span className="text-white font-light">
+          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Reward APY</span>
+          <span className="text-base-content dark:text-white font-light">
             {calculateRewardRate(
               Number(item.rewardRates[lockPeriodIndex]),
               Number(item.lockPeriods[lockPeriodIndex]),

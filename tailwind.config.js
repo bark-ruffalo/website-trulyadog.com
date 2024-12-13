@@ -4,7 +4,7 @@ module.exports = {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("daisyui")],
   darkTheme: "dark",
-  darkMode: ["selector", "[data-theme='dark']"],
+  darkMode: 'class',
   // DaisyUI theme colors
   daisyui: {
     themes: [
