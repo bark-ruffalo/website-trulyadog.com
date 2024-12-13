@@ -32,13 +32,13 @@ export function Statistics() {
       title: "TOTAL VALUE LOCKED",
       // value: `${totalStaking ? formatEther(totalStaking) : 0}`,
       value: "0",
-      className: "blue",
+      className: "green",
     },
     {
       title: "TOTAL STAKERS",
       // value: `${totalUsers}`,
       value: "0",
-      className: "blue",
+      className: "green",
     },
     {
       title: "LIFETIME REWARDS",
