@@ -92,12 +92,16 @@ export function StakingCard({ item }: { item: CardProps }) {
 
       <div className="flex flex-col mb-2 gap-2 w-full">
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Pool Index</span>
-          <span className="text-white font-light">{item.poolId.toString()}</span>
+          <span className="text-[#b2bfce] font-light">Token Name</span>
+          {getPoolTokens(Number(item.poolId))}
         </div>
         <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Reward Rate per period</span>
-          <span className="text-white font-light">{Number(item.rewardRates[lockPeriodIndex])}</span>
+          <span className="text-[#b2bfce] font-light">Token Address</span>
+          <Address address={item.stakingToken} />
+        </div>
+        <div className="flex justify-between w-full">
+          <span className="text-[#b2bfce] font-light">Pool Status</span>
+          <span className="text-white font-light">{item.isActive ? "COMING SOON" : "Paused"}</span>
         </div>
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Reward APY</span>
@@ -108,19 +112,6 @@ export function StakingCard({ item }: { item: CardProps }) {
             ).toFixed(2)}{" "}
             %
           </span>
-        </div>
-        <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Pool Token Address</span>
-          <Address address={item.stakingToken} />
-        </div>
-        <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Staking Token Name</span>
-          {getPoolTokens(Number(item.poolId))}
-        </div>
-
-        <div className="flex justify-between w-full">
-          <span className="text-[#b2bfce] font-light">Pool Status</span>
-          <span className="text-white font-light">{item.isActive ? "COMING SOON" : "Paused"}</span>
         </div>
       </div>
 
