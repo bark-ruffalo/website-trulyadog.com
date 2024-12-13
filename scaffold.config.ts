@@ -18,7 +18,7 @@ const scaffoldConfig = {
   poolTokens: ["PAWSY", "mPAWSY", "LP"],
 
   pawsyAddress: "0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a",
-  pawsyPrice: 0.00382646,
+  pawsyPrice: 0.001279,
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect if you only target the local network (default is 4000)
