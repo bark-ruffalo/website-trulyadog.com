@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import BalanceCard from "./BalanceCard";
 import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
@@ -103,6 +103,13 @@ export function Migrate() {
     }
   }, [pawsyBalance]);
 
+  function handlePawsyAmountChange(event: ChangeEvent<HTMLInputElement>): void {
+    const value = event.target.value;
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setPawsyAmount(Number(value));
+    }
+  }
+
   return (
     <div className="m-1 grid grid-cols-12 gap-8 w-[90%]">
       <div className="col-span-7 flex flex-col gap-6">
@@ -148,10 +155,11 @@ export function Migrate() {
               <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full">
                 <input
                   className="bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full"
-                  type="text"
+                  type="number"
+                  step="any"
                   placeholder="500"
                   value={pawsyAmount.toString()}
-                  onChange={e => setPawsyAmount(Number(e.target.value))}
+                  onChange={handlePawsyAmountChange}
                 />
                 <span className="text-gray-600 dark:text-white/60">{}</span>
               </div>
