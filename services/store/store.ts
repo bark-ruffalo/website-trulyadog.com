@@ -23,7 +23,7 @@ type GlobalState = {
   setNativeCurrencyPrice: (newNativeCurrencyPriceState: number) => void;
   setPawsyPrice: (newPawsyPriceState: number) => void;
   setIsNativeCurrencyFetching: (newIsNativeCurrencyFetching: boolean) => void;
-  setIsPawsyFetching: (newIsNativeCurrencyFetching: boolean) => void;
+  setIsPawsyFetching: (newIsPawsyFetching: boolean) => void;
   targetNetwork: ChainWithAttributes;
   setTargetNetwork: (newTargetNetwork: ChainWithAttributes) => void;
 };

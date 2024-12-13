@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRightCircleIcon, Bars3Icon, BugAntIcon, CakeIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BugAntIcon, CakeIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -20,9 +20,9 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "$mPAWSY",
+    label: "mPAWSY",
     href: "/migration",
-    icon: <ArrowRightCircleIcon className="h-4 w-4" />,
+    icon: <CurrencyDollarIcon className="h-4 w-4" />,
   },
   {
     label: "Stake",

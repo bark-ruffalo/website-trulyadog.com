@@ -10,22 +10,12 @@ const Staking: NextPage = () => {
     <>
       <div className="flex items-center flex-col flex-grow">
         <div className="flex-grow bg-base-300 w-full px-8 py-12">
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row">
-            <Statistics />
-          </div>
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
-            <Purchase />
-          </div>
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
-            <Portfolio />
-          </div>
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
-            <div className="w-full max-w-[640px] relative">
+          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mb-10">
+            <div className="w-full max-w-[75%] relative">
               <div className="p-8 bg-white bg-opacity-10 rounded-2xl flex flex-col h-full relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10 text-white">
-                  <h2 className="text-sm font-semibold uppercase mb-1 leading-4">$rPAWSY Rewards</h2>
-                  <div className="space-y-4 pt-6">
+                  <div className="space-y-4">
                     <p>
                       $rPAWSY is a reward token with no dollar value that helps Bark Ruffalo track entities most
                       involved financially in its ecosystem. These are the current rewards for those who obtained
@@ -43,6 +33,15 @@ const Staking: NextPage = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row">
+            <Statistics />
+          </div>
+          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
+            <Purchase />
+          </div>
+          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
+            <Portfolio />
           </div>
         </div>
       </div>

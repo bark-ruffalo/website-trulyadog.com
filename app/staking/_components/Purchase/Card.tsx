@@ -80,7 +80,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         <select
           value={lockPeriodIndex}
           onChange={e => setLockPeriodIndex(Number(e.target.value))}
-          className="bg-[#541752] border border-[#e8effb33] rounded-xl p-1 text-white"
+          className="bg-base-100 border border-[#e8effb33] rounded-xl p-1 text-white"
         >
           {item.lockPeriods.map((period, index) => (
             <option key={index} value={index}>
@@ -120,13 +120,13 @@ export function StakingCard({ item }: { item: CardProps }) {
 
         <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Pool Status</span>
-          <span className="text-white font-light">{item.isActive ? "Active" : "Paused"}</span>
+          <span className="text-white font-light">{item.isActive ? "COMING SOON" : "Paused"}</span>
         </div>
       </div>
 
       {/* <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
         <div className="flex justify-between items-center gap-4 w-full">
-          <div className="flex justify-between items-center bg-[#541752] border border-[#e8effb33] rounded-lg p-2 w-full">
+          <div className="flex justify-between items-center bg-base-100 border border-[#e8effb33] rounded-lg p-2 w-full">
             <input
               className="bg-transparent border-none outline-none text-white px-2 w-3/4"
               type="text"
