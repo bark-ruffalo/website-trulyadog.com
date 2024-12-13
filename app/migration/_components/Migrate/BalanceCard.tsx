@@ -1,10 +1,36 @@
-const BalanceCard = ({ title, balance }: { title: string; balance: string }) => {
+import { Address } from "~~/components/scaffold-eth";
+
+interface BalanceCardProps {
+  title: string;
+  balance: string;
+  tokenAddress?: string;
+  onAddToMetamask?: () => void;
+}
+
+const BalanceCard = ({ title, balance, tokenAddress, onAddToMetamask }: BalanceCardProps) => {
   return (
-    <div className="flex flex-col justify-between items-start p-6 min-h-[120px] flex-1 relative bg-blue-500 bg-opacity-10 rounded-2xl shadow-md overflow-hidden">
-      <div className="absolute inset-0 bg-blue-500 bg-opacity-20 backdrop-blur-sm"></div>
-      <div className="relative z-10 text-white">
-        <div className="text-sm font-semibold mb-1 leading-4">{title}</div>
-        <div className="text-2xl font-light leading-4 pt-6">{balance}</div>
+    <div className="flex-1 bg-black bg-opacity-25 rounded-lg p-6 hover:bg-opacity-30 transition-all duration-200">
+      <div className="flex flex-col gap-4">
+        <h3 className="text-white text-lg font-medium">{title}</h3>
+        <p className="text-3xl text-white font-bold">{balance}</p>
+
+        {tokenAddress && (
+          <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-700">
+            <div className="flex items-center gap-2 text-sm text-gray-400">
+              <span>Token:</span>
+              <Address address={tokenAddress} />
+            </div>
+            {onAddToMetamask && (
+              <button
+                onClick={onAddToMetamask}
+                className="px-3 py-1.5 text-sm bg-gradient-to-r from-[#1976d2] to-[#64b5f6] hover:from-[#1565c0] hover:to-[#42a5f5] text-white rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg"
+              >
+                <img src="/metamask-fox.svg" alt="MetaMask" className="w-8" />
+                Add to MetaMask
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
