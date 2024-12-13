@@ -162,15 +162,21 @@ export function Migrate() {
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
                   onClick={onApprove}
+                  disabled={isApprovePending}
                 >
-                  Approve in order to Migrate
+                  {isApprovePending ? (
+                    <span className="loading loading-spinner loading-sm"></span>
+                  ) : (
+                    "Approve in order to Migrate"
+                  )}
                 </button>
               ) : (
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
                   onClick={onMigrate}
+                  disabled={isMigratePending}
                 >
-                  Migrate
+                  {isMigratePending ? <span className="loading loading-spinner loading-sm"></span> : "Migrate"}
                 </button>
               ))}
           </div>
