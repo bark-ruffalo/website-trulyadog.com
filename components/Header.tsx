@@ -26,7 +26,7 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "mPAWSY",
+    label: "$mPAWSY",
     href: "/migration",
     icon: <CurrencyDollarIcon className="h-4 w-4" />,
   },
@@ -36,7 +36,7 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <CakeIcon className="h-4 w-4" />,
   },
   {
-    label: "Why $PAWSY",
+    label: "Why $PAWSY?",
     href: "/why",
     icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
   },
