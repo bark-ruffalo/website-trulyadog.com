@@ -133,10 +133,10 @@ export function Migrate() {
       <div className="col-span-7 flex flex-col gap-6">
         <h2 className="text-2xl text-white font-semibold mb-4">Migrate to $mPAWSY!</h2>
 
-        <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
+        <div className="p-8 bg-blue-500 bg-opacity-10 dark:bg-opacity-10 rounded-lg flex flex-col gap-6">
           <p className="text-white">
             $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem's profitability, and our future so that we
-            do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
+            do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group. This is a one-way street; you send $PAWSY and receive the new token that lacks the 1% Virtuals Protocol tax. The wallet might show a false positive warning. If that happens and you're reluctant, do it with one token first to understand the process.
           </p>
 
           <div className="flex flex-row gap-4">
