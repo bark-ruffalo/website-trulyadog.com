@@ -3,7 +3,7 @@
 import { Migrate } from "./_components/Migrate";
 import type { NextPage } from "next";
 
-const Staking: NextPage = () => {
+const MigratePage: NextPage = () => {
   return (
     <>
       <div className="flex items-center flex-col flex-grow">
@@ -17,4 +17,4 @@ const Staking: NextPage = () => {
   );
 };
 
-export default Staking;
+export default MigratePage;
