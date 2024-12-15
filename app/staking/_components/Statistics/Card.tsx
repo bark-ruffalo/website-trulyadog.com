@@ -17,7 +17,9 @@ export function Card({ cards }: CardProps) {
             className="flex flex-col justify-between items-start p-6 min-h-[120px] w-[300px] m-2 relative bg-base-200 dark:bg-white dark:bg-opacity-10 rounded-2xl shadow-md flex-shrink-0 sm:w-[350px] md:w-[450px]"
             key={index}
           >
-            <div className={`absolute inset-0 rounded-2xl z-0 ${bgClass} bg-opacity-10 dark:bg-opacity-20 blur-sm`}></div>
+            <div
+              className={`absolute inset-0 rounded-2xl z-0 ${bgClass} bg-opacity-10 dark:bg-opacity-20 blur-sm`}
+            ></div>
             <div className="relative z-10 text-base-content dark:text-white">
               <div className="text-sm font-semibold uppercase mb-1 leading-4">{card.title}</div>
               <div className="text-2xl font-light leading-4 pt-6">{card.value}</div>

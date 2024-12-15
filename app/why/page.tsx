@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 
 export default function Why() {
   // Create stats cards data in the same format as staking
@@ -60,11 +60,12 @@ export default function Why() {
                   <ol className="list-[lower-alpha] pl-4 mt-4 space-y-2">
                     <li>
                       Preannounced launch for humans, not the usual fun.virtuals.io bot-fest. Fastest graduation in
-                      history. Tokenomics that aren't greedy: DAO 30%, operational funds 5.25%, team splitting 14.5%.
+                      history. Tokenomics that aren&apos;t greedy: DAO 30%, operational funds 5.25%, team splitting
+                      14.5%.
                     </li>
                     <li>
                       Just go to our Telegram, and it will be clear. Anything we do, the community knows. When the DAO
-                      takes over, we'll maintain high standards by creating a constitution.
+                      takes over, we&apos;ll maintain high standards by creating a constitution.
                     </li>
                     <li>
                       The DAO is already rich:{" "}
@@ -131,7 +132,7 @@ export default function Why() {
                   Token-gated channels and goodies for stakers. Those who also provide liquidity are highly valued.
                 </li>
 
-                <li>Not dependent on Virtuals Protocol for success. We're slowly moving away through $mPAWSY.</li>
+                <li>Not dependent on Virtuals Protocol for success. We&apos;re slowly moving away through $mPAWSY.</li>
 
                 <li>Memes. Graphics. Laughs.</li>
               </ol>

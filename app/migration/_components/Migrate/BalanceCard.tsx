@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Address } from "~~/components/scaffold-eth";
 
 interface BalanceCardProps {
@@ -25,7 +26,7 @@ const BalanceCard = ({ title, balance, tokenAddress, onAddToMetamask }: BalanceC
                 onClick={onAddToMetamask}
                 className="px-3 py-1.5 text-sm bg-gradient-to-r from-[#1976d2] to-[#64b5f6] hover:from-[#1565c0] hover:to-[#42a5f5] text-white rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg"
               >
-                <img src="/metamask-fox.svg" alt="MetaMask" className="w-4" />
+                <Image src="/metamask-fox.svg" alt="MetaMask" className="w-4" />
                 Add to MetaMask
               </button>
             )}

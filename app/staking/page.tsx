@@ -26,8 +26,8 @@ const Staking: NextPage = () => {
                       <p>• 500k or more: access to the above + more</p>
                     </div>
                     <p>
-                      $rPAWSY itself will receive various utilities, with the first being that you'll soon be allowed to
-                      burn it to get NFTs from the OG collection.
+                      $rPAWSY itself will receive various utilities, with the first being that you&apos;ll soon be
+                      allowed to burn it to get NFTs from the OG collection.
                     </p>
                   </div>
                 </div>
