@@ -1,17 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import Image from "next/image";
 import BalanceCard from "./BalanceCard";
-import { formatEther, parseEther, formatUnits } from "viem";
+import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
 
-interface PoolDataProps {
-  poolId: bigint;
-  stakingToken: string;
-  lockPeriods: string[];
-  rewardRates: string[];
-  isActive: boolean;
-}
 export function Migrate() {
   const { address } = useAccount();
   const [pawsyAmount, setPawsyAmount] = useState<string>("0");
@@ -79,7 +73,7 @@ export function Migrate() {
       return;
     }
 
-    if (!allowance || pawsyAmount > allowance) {
+    if (!allowance || BigInt(pawsyAmount) > allowance) {
       notification.error("Token Migration: You should approve migrate amount to StakingVault.");
       return;
     }
@@ -108,15 +102,14 @@ export function Migrate() {
   function handlePawsyAmountChange(event: ChangeEvent<HTMLInputElement>): void {
     const value = event.target.value;
     setInputError("");
-    
+
     if (value === "" || /^\d*\.?\d*$/.test(value)) {
       setPawsyAmount(value);
-      
+
       const numValue = Number(value);
       if (pawsyBalance && numValue > Number(formatEther(pawsyBalance))) {
         setInputError("Amount exceeds balance");
-      }
-      else if (numValue < 0) {
+      } else if (numValue < 0) {
         setInputError("Amount must be positive");
       }
     }
@@ -135,8 +128,8 @@ export function Migrate() {
 
         <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
           <p className="text-white">
-            $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem's profitability, and our future so that we
-            do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
+            $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so that
+            we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
           </p>
 
           <div className="flex flex-row gap-4">
@@ -173,7 +166,7 @@ export function Migrate() {
               <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full relative">
                 <input
                   className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full ${
-                    inputError ? 'border-red-500' : ''
+                    inputError ? "border-red-500" : ""
                   }`}
                   type="text"
                   placeholder="Enter amount"
@@ -190,10 +183,8 @@ export function Migrate() {
                 </button>
               </div>
             </div>
-            
-            {inputError && (
-              <span className="text-red-500 text-sm mt-1">{inputError}</span>
-            )}
+
+            {inputError && <span className="text-red-500 text-sm mt-1">{inputError}</span>}
 
             {allowance?.toString() &&
               (parseEther(pawsyAmount || "0") > allowance || Number(pawsyAmount) === 0 ? (
@@ -222,7 +213,7 @@ export function Migrate() {
       </div>
 
       <div className="col-span-5 flex items-start justify-center">
-        <img src="/vote.png" className="w-full object-contain" alt="community vote" />
+        <Image src="/vote.png" alt="community vote" width={500} height={300} className="w-full object-contain" />
       </div>
     </div>
   );

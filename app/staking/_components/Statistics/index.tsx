@@ -1,10 +1,12 @@
 import { Card } from "./Card";
-import { formatEther } from "viem";
-import { useAccount } from "wagmi";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+
+// import { formatEther } from "viem";
+// import { useAccount } from "wagmi";
+
+// import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export function Statistics() {
-  const account = useAccount();
+  // const account = useAccount();
 
   // const { data: totalStaking } = useScaffoldReadContract({
   //   contractName: "StakingVault",

@@ -1,13 +1,14 @@
 import { StakingCard } from "./Card";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
-interface PoolDataProps {
-  poolId: bigint;
-  stakingToken: string;
-  lockPeriods: string[];
-  rewardRates: string[];
-  isActive: boolean;
-}
+// import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+
+// interface PoolDataProps {
+//   poolId: bigint;
+//   stakingToken: string;
+//   lockPeriods: string[];
+//   rewardRates: string[];
+//   isActive: boolean;
+// }
 
 const lockPeriods = [
   (50 * 24 * 60 * 60).toString(),

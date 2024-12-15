@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
-import { formatEther, parseEther } from "viem";
-import { useAccount } from "wagmi";
+import {
+  // useEffect,
+  useState,
+} from "react";
+// import { formatEther, parseEther } from "viem";
+// import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
-import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { calculateRewardRate, convertSecondsToDays, getPoolTokens, notification } from "~~/utils/scaffold-eth";
+// import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import {
+  calculateRewardRate,
+  convertSecondsToDays,
+  getPoolTokens, // notification
+} from "~~/utils/scaffold-eth";
 
 interface CardProps {
   poolId: bigint;
@@ -14,8 +21,8 @@ interface CardProps {
 }
 
 export function StakingCard({ item }: { item: CardProps }) {
-  const { address } = useAccount();
-  const [stakeAmount, setStakeAmount] = useState<bigint>(BigInt(0));
+  // const { address } = useAccount();
+  // const [stakeAmount, setStakeAmount] = useState<bigint>(BigInt(0));
   const [lockPeriodIndex, setLockPeriodIndex] = useState<number>(0);
 
   // const { data: tokenBalance, refetch: refetchTokenBalance } = useScaffoldReadContract({
