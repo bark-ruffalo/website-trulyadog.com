@@ -29,7 +29,9 @@ export function StakingCard({ item }: { item: CardProps }) {
     functionName: "allowance",
     args: [address, stakingVault?.address],
   });
-  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("RewardToken");
+  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract(
+    getPoolTokens(Number(item.poolId)),
+  );
   const { writeContractAsync: stake, isPending: isStakePending } = useScaffoldWriteContract("StakingVault");
 
   const onApprove = async (): Promise<void> => {

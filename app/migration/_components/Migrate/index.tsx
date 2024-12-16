@@ -116,7 +116,7 @@ export function Migrate() {
   }
 
   const handleMaxClick = () => {
-    if (!!!pawsyBalance) {
+    if (pawsyBalance) {
       setPawsyAmount(formatEther(pawsyBalance));
     }
   };
