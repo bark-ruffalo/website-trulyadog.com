@@ -8,7 +8,7 @@ import { notification } from "~~/utils/scaffold-eth";
 
 export function Migrate() {
   const { address } = useAccount();
-  const [pawsyAmount, setPawsyAmount] = useState<string>("0");
+  const [pawsyAmount, setPawsyAmount] = useState<string>("");
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
   const { data: pawsyContract } = useDeployedContractInfo("$PAWSY");
@@ -116,7 +116,7 @@ export function Migrate() {
   }
 
   const handleMaxClick = () => {
-    if (pawsyBalance) {
+    if (!!!pawsyBalance) {
       setPawsyAmount(formatEther(pawsyBalance));
     }
   };
