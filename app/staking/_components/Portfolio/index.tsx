@@ -1,25 +1,23 @@
-// import { PortfolioCard } from "./Card";
-// import { useAccount } from "wagmi";
+import { PortfolioCard } from "./Card";
+import { useAccount } from "wagmi";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
-// import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-
-// interface UserLockProps {
-//   lockId: bigint;
-//   amount: bigint;
-//   lockPeriod: bigint;
-//   unlockTime: bigint;
-//   lastClaimTime: bigint;
-//   poolId: bigint;
-//   isLocked: boolean;
-// }
+interface UserLockProps {
+  lockId: bigint;
+  amount: bigint;
+  lockPeriod: bigint;
+  unlockTime: bigint;
+  lastClaimTime: bigint;
+  poolId: bigint;
+  isLocked: boolean;
+}
 export function Portfolio() {
-  // const { address } = useAccount();
-  const stakeData: any[] = [];
-  // const { data: stakeData } = useScaffoldReadContract({
-  //   contractName: "StakingVault",
-  //   functionName: "getUserLocks",
-  //   args: [address],
-  // }) as unknown as { data: UserLockProps[] };
+  const { address } = useAccount();
+  const { data: stakeData } = useScaffoldReadContract({
+    contractName: "StakingVault",
+    functionName: "getUserLocks",
+    args: [address],
+  }) as unknown as { data: UserLockProps[] };
 
   return (
     <div className="m-1 grid gap-2">
@@ -31,9 +29,9 @@ export function Portfolio() {
             </div>
             <div className="flex justify-between items-stretch w-full h-full min-h-[180px]">
               <div className="flex flex-wrap w-full mt-0">
-                {/* {stakeData.map((item, index) => (
+                {stakeData.map((item, index) => (
                   <PortfolioCard item={item} key={index} />
-                ))} */}
+                ))}
               </div>
             </div>
           </div>

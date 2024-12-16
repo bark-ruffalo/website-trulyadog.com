@@ -11,28 +11,28 @@ export function Migrate() {
   const [pawsyAmount, setPawsyAmount] = useState<string>("0");
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
-  const { data: pawsyContract } = useDeployedContractInfo("PAWSY");
-  const { data: mPawsyContract } = useDeployedContractInfo("mPAWSY");
+  const { data: pawsyContract } = useDeployedContractInfo("$PAWSY");
+  const { data: mPawsyContract } = useDeployedContractInfo("$mPAWSY");
 
   const { data: pawsyBalance, refetch: refetchPawsyBalance } = useScaffoldReadContract({
-    contractName: "PAWSY",
+    contractName: "$PAWSY",
     functionName: "balanceOf",
     args: [address],
   }) as unknown as { data: bigint; refetch: () => Promise<any> };
 
   const { data: mPawsyBalance, refetch: refetchMPawsyBalance } = useScaffoldReadContract({
-    contractName: "mPAWSY",
+    contractName: "$mPAWSY",
     functionName: "balanceOf",
     args: [address],
   }) as unknown as { data: bigint; refetch: () => Promise<any> };
 
   const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
-    contractName: "PAWSY",
+    contractName: "$PAWSY",
     functionName: "allowance",
     args: [address, tokenMigrationContract?.address],
   });
 
-  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("PAWSY");
+  const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("$PAWSY");
   const { writeContractAsync: migrate, isPending: isMigratePending } = useScaffoldWriteContract("TokenMigration");
 
   const addTokenToMetamask = async (address: string, symbol: string) => {
@@ -187,7 +187,7 @@ export function Migrate() {
             {inputError && <span className="text-red-500 text-sm mt-1">{inputError}</span>}
 
             {allowance?.toString() &&
-              (parseEther(pawsyAmount || "0") > allowance || Number(pawsyAmount) === 0 ? (
+              (parseEther(pawsyAmount || "0") > allowance ? (
                 <button
                   className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
                   onClick={onApprove}
