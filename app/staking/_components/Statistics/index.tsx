@@ -30,7 +30,7 @@ export function Statistics() {
   const cards = [
     {
       title: "TOTAL VALUE LOCKED",
-      value: `${totalStaking ? formatEther(totalStaking) : 0}`,
+      value: `${totalStaking ? Number(formatEther(totalStaking)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'}`,
       className: "green",
     },
     {
