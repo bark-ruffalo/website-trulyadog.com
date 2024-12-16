@@ -15,7 +15,7 @@ interface CardProps {
 
 export function StakingCard({ item }: { item: CardProps }) {
   const { address } = useAccount();
-  const [stakeAmount, setStakeAmount] = useState<bigint>(BigInt(0));
+  const [stakeAmount, setStakeAmount] = useState<string>("");
   const [lockPeriodIndex, setLockPeriodIndex] = useState<number>(0);
 
   const { data: tokenBalance, refetch: refetchTokenBalance } = useScaffoldReadContract({
@@ -51,7 +51,7 @@ export function StakingCard({ item }: { item: CardProps }) {
       return;
     }
 
-    if (!allowance || stakeAmount > allowance) {
+    if (!allowance || BigInt(stakeAmount) > allowance) {
       notification.error("Staking Vault: You should approve stake amount to StakingVault.");
       return;
     }
@@ -70,7 +70,7 @@ export function StakingCard({ item }: { item: CardProps }) {
 
   useEffect(() => {
     if (tokenBalance && tokenBalance > 0) {
-      setStakeAmount(BigInt(formatEther(tokenBalance)));
+      setStakeAmount(formatEther(tokenBalance));
     }
   }, [tokenBalance]);
 
@@ -124,7 +124,7 @@ export function StakingCard({ item }: { item: CardProps }) {
               type="text"
               placeholder="500"
               value={stakeAmount.toString()}
-              onChange={e => setStakeAmount(BigInt(e.target.value))}
+              onChange={e => setStakeAmount(e.target.value)}
             />
             <span className="text-white/60">{getPoolTokens(Number(item.poolId))}</span>
           </div>
