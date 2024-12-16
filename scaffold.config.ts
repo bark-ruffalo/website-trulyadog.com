@@ -3,7 +3,6 @@ import * as chains from "viem/chains";
 export type ScaffoldConfig = {
   targetNetworks: readonly chains.Chain[];
   poolTokens: string[];
-  pawsyAddress: string;
   pawsyPrice: number;
   pollingInterval: number;
   alchemyApiKey: string;
@@ -17,7 +16,6 @@ const scaffoldConfig = {
 
   poolTokens: ["$PAWSY", "$mPAWSY", "$PAWSY/$VIRTUAL LP"],
 
-  pawsyAddress: "0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a",
   pawsyPrice: 0.001279,
 
   // The interval at which your front-end polls the RPC servers for new data
