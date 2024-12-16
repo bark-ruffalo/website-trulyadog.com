@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { formatEther, parseEther } from "viem";
-import { useAccount } from "wagmi";
-import { Address } from "~~/components/scaffold-eth";
-import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { calculateRewardRate, convertSecondsToDays } from "~~/utils/scaffold-eth";
+import { formatEther } from "viem";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { convertSecondsToDays } from "~~/utils/scaffold-eth";
 
 interface CardProps {
   lockId: bigint;
@@ -32,10 +29,10 @@ export function PortfolioCard({ item }: { item: CardProps }) {
         functionName: "unstake",
         args: [item.poolId, item.lockId],
       });
-      console.log("Stake successful!");
+      console.log("Unstake successful!");
       // Optionally reset stake amount or update state here
     } catch (error) {
-      console.error("Staking failed:", error);
+      console.error("Unstaking failed:", error);
     }
   };
 
@@ -52,7 +49,9 @@ export function PortfolioCard({ item }: { item: CardProps }) {
         </div>
         <div className="flex justify-between w-full">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Lock Period</span>
-          <span className="text-base-content dark:text-white font-light">{convertSecondsToDays(Number(item.lockPeriod))} Days</span>
+          <span className="text-base-content dark:text-white font-light">
+            {convertSecondsToDays(Number(item.lockPeriod))} Days
+          </span>
         </div>
         <div className="flex justify-between w-full">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Unlocked At</span>

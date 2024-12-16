@@ -1851,7 +1851,7 @@ const externalContracts = {
     },
   },
   8453: {
-    mPAWSY: {
+    $mPAWSY: {
       address: "0x1437819DF58Ad648e35ED4f6F642d992684B2004",
       abi: [
         { inputs: [], stateMutability: "nonpayable", type: "constructor" },
