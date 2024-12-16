@@ -38,7 +38,7 @@ export function StakingCard({ item }: { item: CardProps }) {
     try {
       await approve({
         functionName: "approve",
-        args: [stakingVault?.address, parseEther(stakeAmount.toString())],
+        args: [stakingVault?.address, parseEther(stakeAmount)],
       });
       console.log("Approval successful!");
       await refetchTokenAllowance();
@@ -53,7 +53,7 @@ export function StakingCard({ item }: { item: CardProps }) {
       return;
     }
 
-    if (!allowance || BigInt(stakeAmount) > allowance) {
+    if (!allowance || parseEther(stakeAmount) > allowance) {
       notification.error("Staking Vault: You should approve stake amount to StakingVault.");
       return;
     }
@@ -61,7 +61,7 @@ export function StakingCard({ item }: { item: CardProps }) {
     try {
       await stake({
         functionName: "stake",
-        args: [item.poolId, parseEther(stakeAmount.toString()), BigInt(item.lockPeriods[lockPeriodIndex])],
+        args: [item.poolId, parseEther(stakeAmount), BigInt(item.lockPeriods[lockPeriodIndex])],
       });
       console.log("Stake successful!");
       refetchTokenBalance();
@@ -125,7 +125,7 @@ export function StakingCard({ item }: { item: CardProps }) {
               className="bg-transparent border-none outline-none text-white px-2 w-3/4"
               type="text"
               placeholder="500"
-              value={stakeAmount.toString()}
+              value={stakeAmount}
               onChange={e => setStakeAmount(e.target.value)}
             />
             <span className="text-white/60">{getPoolTokens(Number(item.poolId))}</span>
@@ -133,7 +133,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         </div>
 
         {allowance?.toString() &&
-          (parseEther(stakeAmount.toString()) > allowance ? (
+          (parseEther(stakeAmount) > allowance ? (
             <button
               className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
               onClick={onApprove}

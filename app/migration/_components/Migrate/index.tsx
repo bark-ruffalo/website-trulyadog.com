@@ -59,7 +59,7 @@ export function Migrate() {
     try {
       await approve({
         functionName: "approve",
-        args: [tokenMigrationContract?.address, parseEther(pawsyAmount.toString())],
+        args: [tokenMigrationContract?.address, parseEther(pawsyAmount)],
       });
       console.log("Approval successful!");
       await refetchTokenAllowance();
@@ -81,7 +81,7 @@ export function Migrate() {
     try {
       await migrate({
         functionName: "migrateTokens",
-        args: [parseEther(pawsyAmount.toString())],
+        args: [parseEther(pawsyAmount)],
       });
       console.log("Stake successful!");
       await refetchMPawsyBalance();
