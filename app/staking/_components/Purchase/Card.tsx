@@ -25,7 +25,7 @@ export function StakingCard({ item }: { item: CardProps }) {
   });
   const { data: stakingVault } = useDeployedContractInfo("StakingVault");
   const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
-    contractName: "RewardToken",
+    contractName: getPoolTokens(Number(item.poolId)),
     functionName: "allowance",
     args: [address, stakingVault?.address],
   });
