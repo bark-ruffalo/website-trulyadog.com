@@ -124,7 +124,6 @@ export function StakingCard({ item }: { item: CardProps }) {
             <input
               className="bg-transparent border-none outline-none text-white px-2 w-3/4"
               type="text"
-              placeholder="500"
               value={stakeAmount}
               onChange={e => setStakeAmount(e.target.value)}
             />
