@@ -33,14 +33,24 @@ export function Statistics() {
       value: `${totalStaking ? Number(formatEther(totalStaking)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'}`,
       className: "green",
     },
+    // {
+    //   title: "TOTAL STAKERS",
+    //   value: `${totalUsers}`,
+    //   className: "green",
+    // },
+    // {
+    //   title: "REWARDS YOU CLAIMED",
+    //   value: `${totalRewards ? Number(formatEther(totalRewards)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'} ${rewardTokenSymbol}`,
+    //   className: "green",
+    // },
     {
-      title: "TOTAL STAKERS",
-      value: `${totalUsers}`,
+      title: "TO BE ADDED SOON",
+      value: `Ability to claim rewards`,
       className: "green",
     },
     {
-      title: "REWARDS YOU CLAIMED",
-      value: `${totalRewards ? Number(formatEther(totalRewards)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'} ${rewardTokenSymbol}`,
+      title: "TO BE ADDED SOON",
+      value: `Rewards Market page`,
       className: "green",
     },
   ];
