@@ -57,10 +57,10 @@ export function PortfolioCard({ item }: { item: CardProps }) {
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Unlocked At</span>
           <span className="text-base-content dark:text-white font-light">{unlockDateString}</span>
         </div>
-        <div className="flex justify-between w-full">
+        {/* <div className="flex justify-between w-full">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Last Claim Time</span>
           <span className="text-base-content dark:text-white font-light">{lastClaimDateString}</span>
-        </div>
+        </div> */}
         {/* <div className="flex justify-between w-full">
           <span className="text-[#b2bfce] font-light">Staking Token</span>
           <Address address={item.stakingToken} />
