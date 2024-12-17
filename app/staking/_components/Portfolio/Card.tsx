@@ -17,10 +17,10 @@ export function PortfolioCard({ item }: { item: CardProps }) {
 
   // Convert unlockTime and lastClaimTime to date strings
   const unlockDate = new Date(Number(item.unlockTime) * 1000); // Convert seconds to milliseconds
-  const lastClaimDate = new Date(Number(item.lastClaimTime) * 1000); // Convert seconds to milliseconds
+  // const lastClaimDate = new Date(Number(item.lastClaimTime) * 1000); // Convert seconds to milliseconds
 
   // Format the dates
-  const unlockDateString = unlockDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const unlockDateString = unlockDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   // const lastClaimDateString = lastClaimDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + " " + lastClaimDate.toLocaleTimeString();
 
   const onUnstake = async () => {
