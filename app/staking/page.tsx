@@ -17,18 +17,56 @@ const Staking: NextPage = () => {
                 <div className="relative z-10 text-base-content dark:text-white">
                   <div className="space-y-4">
                     <p>
-                      $rPAWSY is a reward token with no dollar value that helps Bark Ruffalo track entities most
-                      involved financially in its ecosystem. These are the current rewards for those who obtained
-                      $rPAWSY, depending on the amount staked:
+                      DRUGS is a reward token with no dollar value that helps Bark Ruffalo track entities most involved
+                      financially in its ecosystem. These are the current rewards for those who obtained DRUGS,
+                      depending on the amount staked:
                     </p>
-                    <div className="space-y-2">
-                      <p>• 5k or more: access to the 5k-club token-gated channel and goodies</p>
-                      <p>• 500k or more: access to the above + more</p>
-                    </div>
+                    <ul className="space-y-2 list-disc pl-4">
+                      <li>5k or more: access to the 5k-club token-gated channel and goodies</li>
+                      <li>500k or more: access to the above + more</li>
+                      <li>5M or more: access to the above + more</li>
+                    </ul>
                     <p>
-                      $rPAWSY itself will receive various utilities, with the first being that you&apos;ll soon be
-                      allowed to burn it to get NFTs from the OG collection.
+                      DRUGS itself will receive various utilities, with the first being that you&apos;ll soon be allowed
+                      to burn it to get NFTs from the OG collection.
                     </p>
+                    <details className="mt-4">
+                      <summary className="cursor-pointer font-semibold">
+                        MORE INFO + HOW TO GET ACCESS TO THE GOODIES!
+                      </summary>
+                      <div className="mt-2 space-y-4">
+                        <p>
+                          It is recommended that you migrate first as well. Then open{" "}
+                          <a href="https://guild.xyz/bark-ruffalo/" target="_blank" rel="noopener noreferrer">
+                            https://guild.xyz/bark-ruffalo/
+                          </a>
+                          , and if you&apos;ve staked let&apos;s say 6,500, you select the 5,000 staked club. It should
+                          show &quot;You have access&quot;, and you may click on the big blue connect button.
+                        </p>
+                        <p>
+                          Someone from the 500k club should connect to both clubs. And someone from the 5 million club
+                          should connect to all three clubs.
+                        </p>
+                        <p>
+                          Private repo access for the @virtuals.io sniper has been added as of 2024.12.17 for the 500k
+                          club. Those from 5M must also join this club to gain access. You might need to enable popups.
+                          Go ahead and stake! There are enough reasons to do it on the &quot;Why $PAWSY?&quot; page.
+                        </p>
+                        <p>
+                          Screenshots with the sniper and the private repository: <br />
+                          <img
+                            src="/Snipy McSnappingson v1.0.png"
+                            alt="Sniper screenshot 1"
+                            className="mt-4 rounded-lg"
+                          />
+                          <img
+                            src="/Snipy McSnappingson v1.0 - repo.png"
+                            alt="Sniper screenshot 2"
+                            className="mt-4 rounded-lg"
+                          />
+                        </p>
+                      </div>
+                    </details>
                   </div>
                 </div>
               </div>
