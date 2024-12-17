@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
@@ -76,6 +76,22 @@ export function StakingCard({ item }: { item: CardProps }) {
     }
   }, [tokenBalance]);
 
+  const handleMaxClick = () => {
+    if (tokenBalance) {
+      setStakeAmount(formatEther(tokenBalance));
+    } else {
+      setStakeAmount(formatEther(BigInt(0)));
+    }
+  };
+
+  function handleStakeAmountChange(event: ChangeEvent<HTMLInputElement>): void {
+    const value = event.target.value;
+
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setStakeAmount(value);
+    }
+  }
+
   return (
     <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
       <div className="text-base-content dark:text-white font-medium flex gap-2 items-center mb-3">
@@ -125,9 +141,15 @@ export function StakingCard({ item }: { item: CardProps }) {
               className="bg-transparent border-none outline-none text-white px-2 w-3/4"
               type="text"
               value={stakeAmount}
-              onChange={e => setStakeAmount(e.target.value)}
+              onChange={handleStakeAmountChange}
             />
-            <span className="text-white/60">{getPoolTokens(Number(item.poolId))}</span>
+            <button
+              onClick={handleMaxClick}
+              className="px-2 py-1 text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              disabled={isApprovePending || isStakePending}
+            >
+              MAX
+            </button>{" "}
           </div>
         </div>
 

@@ -4685,6 +4685,15 @@ jsonfile@^6.0.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+keccak-crypto@^3.1:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/keccak-crypto/-/keccak-crypto-3.1.4.tgz#121c081b45ad7965b571886e99980839944a3f2d"
+  integrity sha512-FaKeWvoyZ24A+dsiTlU0zEhfkeUcPt7iyqbw11NLx/AT1Lhu4MZZAkN6R8jhlT2ceRT4yDaua210V1AwSSvEKw==
+  dependencies:
+    node-addon-api "^2.0.0"
+    node-gyp-build "^4.2.0"
+    readable-stream "^3.6.0"
+
 keccak@^3.0.3:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/keccak/-/keccak-3.0.4.tgz#edc09b89e633c0549da444432ecf062ffadee86d"
