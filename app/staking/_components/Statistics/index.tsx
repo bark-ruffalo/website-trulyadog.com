@@ -39,8 +39,8 @@ export function Statistics() {
       className: "green",
     },
     {
-      title: "LIFETIME REWARDS",
-      value: `${totalRewards ? totalRewards : 0} ${rewardTokenSymbol}`,
+      title: "REWARDS YOU CLAIMED",
+      value: `${totalRewards ? Number(formatEther(totalRewards)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'} ${rewardTokenSymbol}`,
       className: "green",
     },
   ];
