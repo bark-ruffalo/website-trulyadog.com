@@ -1,6 +1,6 @@
 import { Card } from "./Card";
 import { formatEther } from "viem";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 export function Statistics() {
   // const account = useAccount();
@@ -9,6 +9,8 @@ export function Statistics() {
     contractName: "StakingVault",
     functionName: "getTotalStakedAmount",
   }) as { data: bigint };
+
+  const { writeContractAsync: claimReward, isPending: isClaimRewardPending } = useScaffoldWriteContract("StakingVault");
 
   // const { data: totalUsers } = useScaffoldReadContract({
   //   contractName: "StakingVault",
@@ -43,7 +45,7 @@ export function Statistics() {
     //   className: "green",
     // },
     {
-      title: "TO BE ADDED SOON",
+      title: "Claim Rewards",
       value: `Ability to claim rewards`,
       className: "green",
     },
