@@ -1,9 +1,10 @@
 import { Card } from "./Card";
 import { formatEther } from "viem";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useAccount } from "wagmi";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export function Statistics() {
-  // const account = useAccount();
+  const account = useAccount();
 
   const { data: totalStaking } = useScaffoldReadContract({
     contractName: "StakingVault",
@@ -15,16 +16,16 @@ export function Statistics() {
   //   functionName: "getTotalLockedUsers",
   // });
 
-  // const { data: totalRewards } = useScaffoldReadContract({
-  //   contractName: "StakingVault",
-  //   functionName: "getLifetimeRewards",
-  //   args: [account.address],
-  // });
+  const { data: totalRewards } = useScaffoldReadContract({
+    contractName: "StakingVault",
+    functionName: "getLifetimeRewards",
+    args: [account.address],
+  });
 
-  // const { data: rewardTokenSymbol } = useScaffoldReadContract({
-  //   contractName: "RewardToken",
-  //   functionName: "symbol",
-  // });
+  const { data: rewardTokenSymbol } = useScaffoldReadContract({
+    contractName: "RewardToken",
+    functionName: "symbol",
+  });
 
   const cards = [
     {
@@ -37,16 +38,16 @@ export function Statistics() {
     //   value: `${totalUsers}`,
     //   className: "green",
     // },
-    // {
-    //   title: "REWARDS YOU CLAIMED",
-    //   value: `${totalRewards ? Number(formatEther(totalRewards)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'} ${rewardTokenSymbol}`,
-    //   className: "green",
-    // },
     {
-      title: "Claim Rewards",
-      value: `Ability to claim rewards`,
+      title: "REWARDS YOU CLAIMED",
+      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(6) : "0.00"} ${rewardTokenSymbol}`,
       className: "green",
     },
+    // {
+    //   title: "Claim Rewards",
+    //   value: `Ability to claim rewards`,
+    //   className: "green",
+    // },
     {
       title: "TO BE ADDED SOON",
       value: `Rewards Market page`,
