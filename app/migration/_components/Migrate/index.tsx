@@ -124,98 +124,112 @@ export function Migrate() {
   };
 
   return (
-    <div className="m-1 grid grid-cols-12 gap-8 w-[90%]">
-      <div className="col-span-7 flex flex-col gap-6">
-        <h2 className="text-2xl text-white font-semibold mb-4">Migrate to $mPAWSY!</h2>
+    <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
+      <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+      <div className="relative z-10 w-full">
+        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
+          <div className="w-full lg:w-7/12">
+            <div className="flex flex-col gap-4 sm:gap-6">
+              <p className="text-white text-sm sm:text-base">
+                $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so
+                that we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
+              </p>
 
-        <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
-          <p className="text-white">
-            $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so that
-            we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
-          </p>
+              <div className="flex flex-col sm:flex-row gap-4 w-full">
+                <div className="w-full sm:w-1/2">
+                  <BalanceCard
+                    title="$PAWSY balance"
+                    balance={
+                      pawsyBalance
+                        ? Number(formatEther(pawsyBalance)).toLocaleString("en-US", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                        : "0"
+                    }
+                    tokenAddress={pawsyContract?.address}
+                  />
+                </div>
+                <div className="w-full sm:w-1/2">
+                  <BalanceCard
+                    title="$mPAWSY balance"
+                    balance={
+                      mPawsyBalance
+                        ? Number(formatEther(mPawsyBalance)).toLocaleString("en-US", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                        : "0"
+                    }
+                    tokenAddress={mPawsyContract?.address}
+                    onAddToMetamask={() => addTokenToMetamask(mPawsyContract?.address || "", "mPAWSY")}
+                  />
+                </div>
+              </div>
 
-          <div className="flex flex-row gap-4">
-            <BalanceCard
-              title="$PAWSY balance"
-              balance={
-                pawsyBalance
-                  ? Number(formatEther(pawsyBalance)).toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })
-                  : "0"
-              }
-              tokenAddress={pawsyContract?.address}
-              // onAddToMetamask={() => addTokenToMetamask(pawsyContract?.address || "", "PAWSY")}
-            />
-            <BalanceCard
-              title="$mPAWSY balance"
-              balance={
-                mPawsyBalance
-                  ? Number(formatEther(mPawsyBalance)).toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })
-                  : "0"
-              }
-              tokenAddress={mPawsyContract?.address}
-              onAddToMetamask={() => addTokenToMetamask(mPawsyContract?.address || "", "mPAWSY")}
-            />
-          </div>
+              <div className="flex flex-col gap-3 sm:gap-4 w-full border-t border-gray-300 dark:border-[#b2bfce] pt-3 sm:pt-4">
+                <div className="flex justify-between items-center gap-3 sm:gap-4 w-full">
+                  <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full relative">
+                    <input
+                      className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full text-sm sm:text-base ${
+                        inputError ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Enter amount"
+                      value={pawsyAmount}
+                      onChange={handlePawsyAmountChange}
+                      disabled={isApprovePending || isMigratePending}
+                    />
+                    <button
+                      onClick={handleMaxClick}
+                      className="px-2 py-1 text-xs sm:text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                      disabled={isApprovePending || isMigratePending}
+                    >
+                      MAX
+                    </button>
+                  </div>
+                </div>
 
-          <div className="flex flex-col gap-2 w-full border-t border-gray-300 dark:border-[#b2bfce] pt-2">
-            <div className="flex justify-between items-center gap-4 w-full">
-              <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full relative">
-                <input
-                  className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full ${
-                    inputError ? "border-red-500" : ""
-                  }`}
-                  type="text"
-                  placeholder="Enter amount"
-                  value={pawsyAmount}
-                  onChange={handlePawsyAmountChange}
-                  disabled={isApprovePending || isMigratePending}
-                />
-                <button
-                  onClick={handleMaxClick}
-                  className="px-2 py-1 text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                  disabled={isApprovePending || isMigratePending}
-                >
-                  MAX
-                </button>
+                {inputError && <span className="text-red-500 text-xs sm:text-sm mt-1">{inputError}</span>}
+
+                {allowance?.toString() &&
+                  (parseEther(pawsyAmount || "0") > allowance ? (
+                    <button
+                      className="flex justify-center items-center px-3 sm:px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl text-sm sm:text-base w-full sm:w-auto"
+                      onClick={onApprove}
+                      disabled={isApprovePending}
+                    >
+                      {isApprovePending ? (
+                        <span className="loading loading-spinner loading-sm"></span>
+                      ) : (
+                        "Approve in order to Migrate"
+                      )}
+                    </button>
+                  ) : (
+                    <button
+                      className="flex justify-center items-center px-3 sm:px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray text-sm sm:text-base w-full sm:w-auto"
+                      onClick={onMigrate}
+                      disabled={isMigratePending}
+                    >
+                      {isMigratePending ? <span className="loading loading-spinner loading-sm"></span> : "Migrate"}
+                    </button>
+                  ))}
               </div>
             </div>
+          </div>
 
-            {inputError && <span className="text-red-500 text-sm mt-1">{inputError}</span>}
-
-            {allowance?.toString() &&
-              (parseEther(pawsyAmount || "0") > allowance ? (
-                <button
-                  className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
-                  onClick={onApprove}
-                  disabled={isApprovePending}
-                >
-                  {isApprovePending ? (
-                    <span className="loading loading-spinner loading-sm"></span>
-                  ) : (
-                    "Approve in order to Migrate"
-                  )}
-                </button>
-              ) : (
-                <button
-                  className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
-                  onClick={onMigrate}
-                  disabled={isMigratePending}
-                >
-                  {isMigratePending ? <span className="loading loading-spinner loading-sm"></span> : "Migrate"}
-                </button>
-              ))}
+          <div className="w-full lg:w-5/12 flex items-start justify-center mt-4 lg:mt-0">
+            <div className="w-full max-w-[500px] rounded-lg overflow-hidden">
+              <Image
+                src="/vote.png"
+                alt="community vote"
+                width={500}
+                height={300}
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="col-span-5 flex items-start justify-center">
-        <Image src="/vote.png" alt="community vote" width={500} height={300} className="w-full object-contain" />
       </div>
     </div>
   );
