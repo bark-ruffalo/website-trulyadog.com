@@ -219,14 +219,20 @@ export function Migrate() {
           </div>
 
           <div className="w-full lg:w-5/12 flex items-start justify-center mt-4 lg:mt-0">
-            <div className="w-full max-w-[500px] rounded-lg overflow-hidden">
-              <Image
-                src="/vote.png"
-                alt="community vote"
-                width={500}
-                height={300}
-                className="w-full h-auto object-contain"
-              />
+            <div className="w-full max-w-[500px] flex flex-col gap-4">
+              <div className="rounded-lg overflow-hidden">
+                <Image
+                  src="/vote.png"
+                  alt="community vote"
+                  width={500}
+                  height={300}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <p className="text-white text-sm sm:text-base text-center">
+                The first 10 persons to migrate and stake more than 5 million get airdropped an NFT from the OG
+                collection. Thus, they can have two because they may also get one by trading staking rewards.
+              </p>
             </div>
           </div>
         </div>
