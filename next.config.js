@@ -1,6 +1,6 @@
 // @ts-check
 // @ts-ignore
-const { keccak256 } = require('keccak-crypto');
+const createKeccakHash = require('keccak-crypto');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -20,7 +20,8 @@ const nextConfig = {
     return config;
   },
   generateBuildId: async () => {
-    return keccak256('hello world').slice(0, 8)
+    createKeccakHash("keccak256").digest().toString("hex");
+    return createKeccakHash('keccak256').update('trulyadog').toString('hex')
   },
 };
 
