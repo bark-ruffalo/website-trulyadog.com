@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { NextPage } from "next";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const Collaborate: NextPage = () => {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
@@ -13,16 +14,43 @@ const Collaborate: NextPage = () => {
   const accordionItems = [
     {
       title: "We can help your AI agent launch!",
-      content: `If you have a serious project you want to launch on app.virtuals.io/prototypes or another AI Agent launchpad, we can help! First, contact nebu_human on Telegram and explain what you're doing. Then, if it makes sense (i.e., team funds shouldn't be more than 20%), you will pay 1 $ETH to our DAO address and plan the launch with us. You'll give us the deployer address so our 500k and 5M clubs whitelist it and participate in the bonding curve auction. These are not paper hands. Only those who agree to a minimum 1-week hold will get the deployer address information. Even more, some of us will add to the Uniswap liquidity pool. This way, instead of bots pumping and dumping your token, which happens right now in all auctions, you'll have some informed humans behind your project. We'll also promote you on our Telegram and X accounts.`,
+      content:
+        `If you have a serious project you want to launch on ` +
+        `<a href="https://app.virtuals.io/prototypes" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">app.virtuals.io/prototypes</a>` +
+        ` or another AI Agent launchpad, we can help! First, contact ` +
+        `<a href="https://t.me/nebu_human" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">@nebu_human</a>` +
+        ` on Telegram and explain what you're doing. Then, if it makes sense (i.e., team funds shouldn't be more than 20%), you will pay 1 $ETH to our DAO address and plan the launch with us. You'll give us the deployer address so our 500k and 5M clubs whitelist it and participate in the bonding curve auction. These are not paper hands. Only those who agree to a minimum 1-week hold will get the deployer address information. Even more, some of us will add to the Uniswap liquidity pool. This way, instead of bots pumping and dumping your token, which happens right now in all auctions, you'll have some informed humans behind your project. We'll also promote you on our Telegram and X accounts.`,
     },
     {
       title: "You can copy or build upon our open-source code!",
-      content: `On GitHub, we've open-sourced both our contracts and the UI. Any other crypto or AI Agent Project may use them; we just ask to consider airdropping our DAO address or our $PAWSY holders. We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
-      
+      content:
+        `<a href="https://github.com/bark-ruffalo" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">On GitHub</a>` +
+        `, we've open-sourced both our contracts and the UI. Any other crypto or AI Agent Project may use them; we just ask you to consider airdropping our DAO address or our stakers. We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
+        
 1. Staking vault: Stake and lock $PAWSY for various periods.
 2. Reward token: Only mintable by the staking vault; tracks user ecosystem contributions.
 3. Rewards market: Enables devs/DAO to create campaigns for token exchanges (e.g., reward tokens for NFTs).
 4. Token Migration: Facilitates migration from $PAWSY to $mPAWSY, a new token with enhanced features.`,
+    },
+    {
+      title: "Join our team!",
+      content: `We are looking for:
+
+• Anyone who can help us with marketing and is confident enough in their skills that he is willing to invest apriori into $PAWSY.
+
+• Programmers that care about AI agents or the EVM. We're doing interesting things; for example, we're now working on a provider to fetch prices IRL for stocks, ETFs, crypto + economic indices and events + summary info about crypto projects. Another example would be a meme generator involving Bark Ruffalo. On the EVM side, we're looking to automate a lot of rewards and income that the stakers will receive.
+
+• A moderator for our soon-to-be-launched Discord server.
+
+• People who understand how LLMs, datasets, embeddings, Eliza, etc., work to help us add more AI Agents into the Bark Ruffalo ecosystem.
+
+• People with a good understanding of scaling and hardening AI agents against hacks, uptime loss, etc.
+
+• Someone who can help us create a 3D model of Bark Ruffalo that we can use on Virtuals Protocol or TikTok to live stream.
+
+• Designers, meme creators, artists.
+
+• Anyone else who thinks they have something good to contribute to the ecosystem. We always prefer to work with people with something at stake; therefore, please consider first buying $PAWSY, then migrating, then staking. This also acts as a filter for us to understand that you're serious about participating. We're currently inundated with requests from marketers, fake influencers, etc., through Telegram and X.`,
     },
   ];
 
@@ -35,16 +63,37 @@ const Collaborate: NextPage = () => {
             <h1 className="text-4xl font-bold text-center mb-8 text-base-content dark:text-white">Collaborate</h1>
             <div className="space-y-4">
               {accordionItems.map((item, index) => (
-                <div key={index} className="collapse collapse-arrow bg-base-100 dark:bg-opacity-20">
-                  <input
-                    type="radio"
-                    name="accordion"
-                    checked={openAccordion === item.title}
-                    onChange={() => toggleAccordion(item.title)}
-                  />
-                  <div className="collapse-title text-xl font-medium">{item.title}</div>
-                  <div className="collapse-content">
-                    <p className="whitespace-pre-line">{item.content}</p>
+                <div
+                  key={index}
+                  className={`
+                    border-2 border-blue-500 dark:border-blue-400 rounded-xl overflow-hidden
+                    transition-all duration-200 ease-in-out
+                    hover:border-blue-600 dark:hover:border-blue-300
+                    ${openAccordion === item.title ? "bg-blue-500 bg-opacity-5 dark:bg-opacity-10" : "bg-base-100 dark:bg-opacity-20"}
+                  `}
+                >
+                  <button
+                    onClick={() => toggleAccordion(item.title)}
+                    className="w-full px-6 py-4 flex justify-between items-center cursor-pointer group"
+                  >
+                    <h3 className="text-xl font-semibold text-base-content dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors">
+                      {item.title}
+                    </h3>
+                    <ChevronDownIcon
+                      className={`h-6 w-6 text-blue-500 dark:text-blue-400 transition-transform duration-200
+                        ${openAccordion === item.title ? "rotate-180" : "rotate-0"}
+                      `}
+                    />
+                  </button>
+                  <div
+                    className={`px-6 overflow-hidden transition-all duration-200 ease-in-out
+                      ${openAccordion === item.title ? "max-h-[1000px] pb-6" : "max-h-0"}
+                    `}
+                  >
+                    <p
+                      className="text-base-content dark:text-white whitespace-pre-line"
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    ></p>
                   </div>
                 </div>
               ))}
