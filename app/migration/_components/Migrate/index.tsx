@@ -230,9 +230,17 @@ export function Migrate() {
                 />
               </div>
               <p className="text-white text-sm sm:text-base text-center">
-                The first 10 persons to migrate and stake more than 5 million get airdropped an NFT from the OG
-                collection. Thus, they can have two because they may also get one by trading staking rewards. This text
-                will disappear when ten persons have already done it.
+                The first 10 persons to migrate and stake more than 5 million get airdropped an NFT from the{" "}
+                <a
+                  href="https://opensea.io/collection/bark-ruffalo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline"
+                >
+                  OG collection
+                </a>
+                . Thus, they can have two because they may also get one by trading staking rewards. This text will
+                disappear when ten persons have already done it.
               </p>
             </div>
           </div>
