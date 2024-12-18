@@ -1,6 +1,6 @@
 import { Card } from "./Card";
 import { formatEther } from "viem";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export function Statistics() {
   // const account = useAccount();
