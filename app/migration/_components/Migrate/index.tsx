@@ -124,17 +124,17 @@ export function Migrate() {
   };
 
   return (
-    <div className="m-1 grid grid-cols-12 gap-8 w-[90%]">
-      <div className="col-span-7 flex flex-col gap-6">
-        <h2 className="text-2xl text-white font-semibold mb-4">Migrate to $mPAWSY!</h2>
+    <div className="m-1 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 w-full sm:w-[90%] px-2 sm:px-0">
+      <div className="col-span-1 lg:col-span-7 flex flex-col gap-4 sm:gap-6">
+        <h2 className="text-xl sm:text-2xl text-white font-semibold mb-2 sm:mb-4">Migrate to $mPAWSY!</h2>
 
-        <div className="p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-6">
-          <p className="text-white">
+        <div className="p-4 sm:p-8 bg-black bg-opacity-10 rounded-lg flex flex-col gap-4 sm:gap-6">
+          <p className="text-white text-sm sm:text-base">
             $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so that
             we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
           </p>
 
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <BalanceCard
               title="$PAWSY balance"
               balance={
@@ -146,7 +146,6 @@ export function Migrate() {
                   : "0"
               }
               tokenAddress={pawsyContract?.address}
-              // onAddToMetamask={() => addTokenToMetamask(pawsyContract?.address || "", "PAWSY")}
             />
             <BalanceCard
               title="$mPAWSY balance"
@@ -167,7 +166,7 @@ export function Migrate() {
             <div className="flex justify-between items-center gap-4 w-full">
               <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full relative">
                 <input
-                  className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full ${
+                  className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full text-sm sm:text-base ${
                     inputError ? "border-red-500" : ""
                   }`}
                   type="text"
@@ -191,7 +190,7 @@ export function Migrate() {
             {allowance?.toString() &&
               (parseEther(pawsyAmount || "0") > allowance ? (
                 <button
-                  className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
+                  className="flex justify-center items-center px-4 sm:px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl text-sm sm:text-base"
                   onClick={onApprove}
                   disabled={isApprovePending}
                 >
@@ -203,7 +202,7 @@ export function Migrate() {
                 </button>
               ) : (
                 <button
-                  className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
+                  className="flex justify-center items-center px-4 sm:px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray text-sm sm:text-base"
                   onClick={onMigrate}
                   disabled={isMigratePending}
                 >
@@ -214,8 +213,14 @@ export function Migrate() {
         </div>
       </div>
 
-      <div className="col-span-5 flex items-start justify-center">
-        <Image src="/vote.png" alt="community vote" width={500} height={300} className="w-full object-contain" />
+      <div className="col-span-1 lg:col-span-5 flex items-start justify-center">
+        <Image
+          src="/vote.png"
+          alt="community vote"
+          width={500}
+          height={300}
+          className="w-full object-contain rounded-lg"
+        />
       </div>
     </div>
   );
