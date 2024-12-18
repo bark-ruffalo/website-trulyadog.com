@@ -81,7 +81,7 @@ const Staking: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
+          <div className="flex w-full justify-center items-center mt-8 gap-6 sm:gap-12 flex-col">
             <Statistics />
             <Purchase />
             <Portfolio />
