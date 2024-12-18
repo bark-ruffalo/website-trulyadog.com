@@ -11,11 +11,6 @@ export function Statistics() {
     functionName: "getTotalStakedAmount",
   }) as { data: bigint };
 
-  // const { data: totalUsers } = useScaffoldReadContract({
-  //   contractName: "StakingVault",
-  //   functionName: "getTotalLockedUsers",
-  // });
-
   const { data: totalRewards } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getLifetimeRewards",
@@ -40,7 +35,7 @@ export function Statistics() {
     // },
     {
       title: "REWARDS YOU CLAIMED",
-      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(6) : "0.00"} ${rewardTokenSymbol}`,
+      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(6) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
       className: "green",
     },
     // {
