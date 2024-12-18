@@ -9,6 +9,7 @@ import {
   BugAntIcon,
   CakeIcon,
   CurrencyDollarIcon,
+  MapIcon,
   QuestionMarkCircleIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
@@ -40,6 +41,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Why $PAWSY?",
     href: "/why",
     icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Roadmap",
+    href: "/roadmap",
+    icon: <MapIcon className="h-4 w-4" />,
   },
   {
     label: "Collaborate",
