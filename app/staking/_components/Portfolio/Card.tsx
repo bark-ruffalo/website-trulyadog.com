@@ -17,11 +17,14 @@ export function PortfolioCard({ item }: { item: CardProps }) {
 
   // Convert unlockTime and lastClaimTime to date strings
   const unlockDate = new Date(Number(item.unlockTime) * 1000); // Convert seconds to milliseconds
-  // const lastClaimDate = new Date(Number(item.lastClaimTime) * 1000); // Convert seconds to milliseconds
+  const lastClaimDate = new Date(Number(item.lastClaimTime) * 1000); // Convert seconds to milliseconds
 
   // Format the dates
   const unlockDateString = unlockDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  // const lastClaimDateString = lastClaimDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + " " + lastClaimDate.toLocaleTimeString();
+  const lastClaimDateString =
+    lastClaimDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) +
+    " " +
+    lastClaimDate.toLocaleTimeString();
 
   const onUnstake = async () => {
     try {
@@ -57,10 +60,12 @@ export function PortfolioCard({ item }: { item: CardProps }) {
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Unlocked At</span>
           <span className="text-base-content dark:text-white font-light">{unlockDateString}</span>
         </div>
-        {/* <div className="flex justify-between w-full gap-8">
+        <div className="flex justify-between w-full gap-8">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Last Claim Time</span>
-          <span className="text-base-content dark:text-white font-light">{lastClaimDateString}</span>
-        </div> */}
+          <span className="text-base-content dark:text-white font-light">
+            {item.lastClaimTime > 0 ? lastClaimDateString : "Not claimed yet"}
+          </span>
+        </div>
         {/* <div className="flex justify-between w-full gap-8">
           <span className="text-[#b2bfce] font-light">Staking Token</span>
           <Address address={item.stakingToken} />
