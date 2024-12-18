@@ -157,6 +157,17 @@ export default function Why() {
                   <span className="text-xl">🤣</span> Memes. Graphics. Laughs.
                 </li>
               </ol>
+              <p className="mt-8">
+                See our footprint 🐾 by checking out our Linktree:{" "}
+                <a
+                  href="https://linktr.ee/TrulyADog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-500 hover:underline"
+                >
+                  linktr.ee/TrulyADog
+                </a>
+              </p>
             </div>
           </div>
         </div>
