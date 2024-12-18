@@ -93,13 +93,13 @@ export function StakingCard({ item }: { item: CardProps }) {
   }
 
   return (
-    <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
-      <div className="text-base-content dark:text-white font-medium flex gap-2 items-center mb-3">
-        <label className="text-base-content/70 dark:text-[#b2bfce] font-light mr-2">Lock Period:</label>
+    <div className="flex flex-col justify-between p-4 sm:p-5 min-h-[120px] w-full sm:max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative m-1 box-border">
+      <div className="text-base-content dark:text-white font-medium flex flex-wrap gap-2 items-center mb-3">
+        <label className="text-base-content/70 dark:text-[#b2bfce] font-light">Lock Period:</label>
         <select
           value={lockPeriodIndex}
           onChange={e => setLockPeriodIndex(Number(e.target.value))}
-          className="bg-base-100 border border-base-300 dark:border-[#e8effb33] rounded-xl p-1 text-base-content dark:text-white"
+          className="bg-base-100 border border-base-300 dark:border-[#e8effb33] rounded-xl p-1 text-sm sm:text-base text-base-content dark:text-white"
         >
           {item.lockPeriods.map((period, index) => (
             <option key={index} value={index}>
