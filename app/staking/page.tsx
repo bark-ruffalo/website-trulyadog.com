@@ -9,13 +9,13 @@ const Staking: NextPage = () => {
   return (
     <>
       <div className="flex items-center flex-col flex-grow">
-        <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-8 py-12">
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mb-10">
-            <div className="w-full max-w-[75%] relative">
-              <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl flex flex-col h-full relative">
+        <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
+          <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col sm:flex-row mb-6 sm:mb-10">
+            <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
+              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl flex flex-col h-full relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10 text-base-content dark:text-white">
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
                     <p>
                       DRUGS is a reward token with no dollar value that helps Bark Ruffalo track entities most involved
                       financially in its ecosystem. These are the current rewards for those who obtained DRUGS,
@@ -31,13 +31,18 @@ const Staking: NextPage = () => {
                       to burn it to get NFTs from the OG collection.
                     </p>
                     <details className="mt-4">
-                      <summary className="cursor-pointer font-semibold">
+                      <summary className="cursor-pointer font-semibold text-sm sm:text-base">
                         MORE INFO + HOW TO GET ACCESS TO THE GOODIES!
                       </summary>
-                      <div className="mt-2 space-y-4">
+                      <div className="mt-2 space-y-3 sm:space-y-4">
                         <p>
                           It is recommended that you migrate first as well. Then open{" "}
-                          <a href="https://guild.xyz/bark-ruffalo/" target="_blank" rel="noopener noreferrer">
+                          <a
+                            href="https://guild.xyz/bark-ruffalo/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                          >
                             https://guild.xyz/bark-ruffalo/
                           </a>
                           , and if you&apos;ve staked let&apos;s say 6,500, you select the 5,000 staked club. It should
@@ -57,12 +62,12 @@ const Staking: NextPage = () => {
                           <img
                             src="/Snipy McSnappingson v1.0.png"
                             alt="Sniper screenshot 1"
-                            className="mt-4 rounded-lg"
+                            className="mt-4 rounded-lg w-full sm:w-auto"
                           />
                           <img
                             src="/Snipy McSnappingson v1.0 - repo.png"
                             alt="Sniper screenshot 2"
-                            className="mt-4 rounded-lg"
+                            className="mt-4 rounded-lg w-full sm:w-auto"
                           />
                         </p>
                       </div>
@@ -72,13 +77,9 @@ const Staking: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row">
+          <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
             <Statistics />
-          </div>
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
             <Purchase />
-          </div>
-          <div className="flex w-full justify-center items-center gap-12 flex-col sm:flex-row mt-10">
             <Portfolio />
           </div>
         </div>
