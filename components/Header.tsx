@@ -10,6 +10,7 @@ import {
   CakeIcon,
   CurrencyDollarIcon,
   QuestionMarkCircleIcon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
@@ -39,6 +40,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Why $PAWSY?",
     href: "/why",
     icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Collaborate",
+    href: "/collaborate",
+    icon: <UsersIcon className="h-4 w-4" />,
   },
   // Only show Debug menu item in development
   ...(process.env.NODE_ENV !== "production"
