@@ -10,8 +10,6 @@ export function Statistics() {
     functionName: "getTotalStakedAmount",
   }) as { data: bigint };
 
-  const { writeContractAsync: claimReward, isPending: isClaimRewardPending } = useScaffoldWriteContract("StakingVault");
-
   // const { data: totalUsers } = useScaffoldReadContract({
   //   contractName: "StakingVault",
   //   functionName: "getTotalLockedUsers",
