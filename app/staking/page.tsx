@@ -10,8 +10,12 @@ const Staking: NextPage = () => {
     <>
       <div className="flex items-center flex-col flex-grow">
         <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
-          <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col sm:flex-row mb-6 sm:mb-10">
+          <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
             <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
+              <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
+                Stake and become part of the community!
+              </h1>
+
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl flex flex-col h-full relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10 text-base-content dark:text-white">
