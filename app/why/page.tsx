@@ -44,109 +44,119 @@ export default function Why() {
             ))}
           </div>
 
-          {/* Main content box - Updated to match staking style */}
+          {/* Main content box - Updated content with emojis */}
           <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
             <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
             <div className="relative z-10 text-base-content dark:text-white">
-              <ol className="space-y-8 list-decimal pl-4">
+              <ol className="space-y-8 list-none pl-4">
                 <li>
-                  We are creating an ecosystem and a community focused on making money. Employing AI agents for this
-                  purpose will be a primary objective, but we will do it all! Bark Ruffalo will be their top 🐶. Never
-                  mention to him that he looks like a 🐈!
+                  <span className="text-xl">✨</span> We are creating an ecosystem and a community focused on making
+                  money. Employing AI agents for this purpose will be a primary objective, but we will do it all! Bark
+                  Ruffalo will be their top 🐶. Never mention to him that he looks like a 🐈‍⬛!
                 </li>
 
                 <li>
-                  Transparency:
-                  <ol className="list-[lower-alpha] pl-4 mt-4 space-y-2">
+                  <span className="text-xl">🔍</span> Transparency:
+                  <ol className="list-none pl-4 mt-4 space-y-2">
                     <li>
-                      Preannounced launch for humans, not the usual fun.virtuals.io bot-fest. Fastest graduation in
-                      history. Tokenomics that aren&apos;t greedy: DAO 30%, operational funds 5.25%, team splitting
-                      14.5%.
+                      <span className="text-xl">🟢</span> Preannounced launch for humans, not the usual fuvirtuals.io
+                      bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO 30%, operational
+                      funds 5.25%, team splitting 14.5%.
                     </li>
                     <li>
-                      Just go to our Telegram, and it will be clear. Anything we do, the community knows. When the DAO
-                      takes over, we&apos;ll maintain high standards by creating a constitution.
+                      <span className="text-xl">🟢</span> Just go to our Telegram, and it will be clear. Anything we do,
+                      the community knows. When the DAO takes over, we&apos;ll maintain high standards by creating a
+                      constitution. We already have a stakers&apos; chat where decisions are taken.
                     </li>
                     <li>
-                      The DAO is already rich:{" "}
+                      <span className="text-xl">🟢</span> The DAO is already rich:{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1866198160252543321"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-green-500 hover:underline"
                       >
-                        https://x.com/TrulyADog/status/1866198160252543321
-                      </a>
+                        Proof
+                      </a>{" "}
+                      (old news; we now have more with the equivalent of 100 million $PAWSY).
                     </li>
                     <li>
-                      Open-source:{" "}
+                      <span className="text-xl">🟢</span> Open-source:{" "}
                       <a
                         href="https://github.com/bark-ruffalo"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-green-500 hover:underline"
                       >
-                        https://github.com/bark-ruffalo
+                        GitHub
                       </a>
+                      .
                     </li>
                     <li>
-                      All payments are accounted for, though we plan not to spend any $PAWSY until the market cap passes
-                      $9 million.
+                      <span className="text-xl">🟢</span> All payments are accounted for, though we plan not to spend
+                      any $PAWSY until the market cap passes $9 million.
                     </li>
                   </ol>
                 </li>
 
                 <li>
-                  Not just dreams: our AI Agents are actually intelligent. Examples:
-                  <ol className="list-[lower-alpha] pl-4 mt-4 space-y-2">
+                  <span className="text-xl">🧠</span> Not just dreams: our AI Agents are actually intelligent:
+                  <ol className="list-none pl-4 mt-4 space-y-2">
                     <li>
+                      <span className="text-xl">🟠</span>{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1867492287296811286"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-green-500 hover:underline"
                       >
-                        https://x.com/TrulyADog/status/1867492287296811286
+                        See Example 1
                       </a>
                     </li>
                     <li>
+                      <span className="text-xl">🟠</span>{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1864086810206310571"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-green-500 hover:underline"
                       >
-                        https://x.com/TrulyADog/status/1864086810206310571
+                        See Example 2
+                      </a>
+                    </li>
+                    <li>
+                      <span className="text-xl">🟠</span>{" "}
+                      <a
+                        href="https://x.com/TrulyADog/status/1869366748039799234"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-500 hover:underline"
+                      >
+                        See Example 3
                       </a>
                     </li>
                   </ol>
                 </li>
 
                 <li>
-                  The team members have already been financially independent for more than 5 years. We know how to
-                  succeed, which is more important in the long term than knowing the photo format for Instagram, which
-                  is the main strength of our competition.
+                  <span className="text-xl">💼</span> The team members have already been financially independent for
+                  more than 5 years. We know how to succeed, which is important in the long term.
                 </li>
 
                 <li>
-                  Token-gated channels and goodies for stakers. Those who also provide liquidity are highly valued.
+                  <span className="text-xl">🎁</span> Token-gated channels and goodies for stakers. Those who also
+                  provide liquidity are highly valued.
                 </li>
 
-                <li>Not dependent on Virtuals Protocol for success. We&apos;re slowly moving away through $mPAWSY.</li>
+                <li>
+                  <span className="text-xl">🛠️</span> Not dependent on Virtuals Protocol for success. We&apos;re slowly
+                  moving away through $mPAWSY.
+                </li>
 
-                <li>Memes. Graphics. Laughs.</li>
+                <li>
+                  <span className="text-xl">🤣</span> Memes. Graphics. Laughs.
+                </li>
               </ol>
-              <p className="mt-8">
-                See our footprint 🐾 by checking out our Linktree:{" "}
-                <a
-                  href="https://linktr.ee/TrulyADog"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-green-500 hover:underline"
-                >
-                  linktr.ee/TrulyADog
-                </a>
-              </p>
             </div>
           </div>
         </div>
