@@ -99,7 +99,7 @@ export function PortfolioCard({ item }: { item: CardProps }) {
         <div className="flex justify-between w-full gap-8">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Pending Rewards</span>
           <span className="text-base-content dark:text-white font-light">
-            {pendingRewards ? formatEther(pendingRewards) : "0"}
+            {pendingRewards ? Number(formatEther(pendingRewards)).toFixed(2) : "0"}
           </span>
         </div>
         <div className="flex justify-between w-full gap-8">

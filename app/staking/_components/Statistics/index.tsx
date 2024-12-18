@@ -35,7 +35,7 @@ export function Statistics() {
     // },
     {
       title: "REWARDS YOU CLAIMED",
-      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(6) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
+      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
       className: "green",
     },
     // {
