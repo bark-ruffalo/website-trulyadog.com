@@ -47,7 +47,7 @@ export function Purchase() {
   }) as unknown as { data: PoolDataProps[] };
 
   return (
-    <div className="m-1 grid gap-2">
+    <div className="w-full max-w-[95%] sm:max-w-[75%]">
       {poolData && poolData.length > 0 && (
         <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl flex flex-col h-full relative">
           <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
@@ -58,8 +58,8 @@ export function Purchase() {
                   Stake
                 </h2>
               </div>
-              <div className="flex justify-between items-stretch w-full h-full min-h-[180px]">
-                <div className="flex flex-wrap w-full mt-0">
+              <div className="flex justify-center items-stretch w-full h-full min-h-[180px]">
+                <div className="flex flex-wrap justify-center w-full mt-0 gap-4">
                   {poolData.map((item, index) => item.isActive && <StakingCard item={item} key={index} />)}
                 </div>
               </div>

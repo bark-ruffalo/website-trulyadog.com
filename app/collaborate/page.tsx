@@ -55,48 +55,55 @@ const Collaborate: NextPage = () => {
   ];
 
   return (
-    <div className="flex items-center flex-col flex-grow pt-10">
-      <div className="px-5 w-full max-w-[75%]">
-        <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-          <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-          <div className="relative z-10">
-            <h1 className="text-4xl font-bold text-center mb-8 text-base-content dark:text-white">Collaborate</h1>
-            <div className="space-y-4">
-              {accordionItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`
-                    border-2 border-blue-500 dark:border-blue-400 rounded-xl overflow-hidden
-                    transition-all duration-200 ease-in-out
-                    hover:border-blue-600 dark:hover:border-blue-300
-                    ${openAccordion === item.title ? "bg-blue-500 bg-opacity-5 dark:bg-opacity-10" : "bg-base-100 dark:bg-opacity-20"}
-                  `}
-                >
-                  <button
-                    onClick={() => toggleAccordion(item.title)}
-                    className="w-full px-6 py-4 flex justify-between items-center cursor-pointer group"
-                  >
-                    <h3 className="text-xl font-semibold text-base-content dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors">
-                      {item.title}
-                    </h3>
-                    <ChevronDownIcon
-                      className={`h-6 w-6 text-blue-500 dark:text-blue-400 transition-transform duration-200
-                        ${openAccordion === item.title ? "rotate-180" : "rotate-0"}
+    <div className="flex items-center flex-col flex-grow">
+      <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
+        <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
+          <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
+            <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
+              Collaborate
+            </h1>
+
+            <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
+              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+              <div className="relative z-10 w-full">
+                <div className="space-y-4 w-full">
+                  {accordionItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`
+                        border-2 border-blue-500 dark:border-blue-400 rounded-xl overflow-hidden
+                        transition-all duration-200 ease-in-out
+                        hover:border-blue-600 dark:hover:border-blue-300
+                        ${openAccordion === item.title ? "bg-blue-500 bg-opacity-5 dark:bg-opacity-10" : "bg-base-100 dark:bg-opacity-20"}
                       `}
-                    />
-                  </button>
-                  <div
-                    className={`px-6 overflow-hidden transition-all duration-200 ease-in-out
-                      ${openAccordion === item.title ? "max-h-[1000px] pb-6" : "max-h-0"}
-                    `}
-                  >
-                    <p
-                      className="text-base-content dark:text-white whitespace-pre-line"
-                      dangerouslySetInnerHTML={{ __html: item.content }}
-                    ></p>
-                  </div>
+                    >
+                      <button
+                        onClick={() => toggleAccordion(item.title)}
+                        className="w-full px-6 py-4 flex justify-between items-center cursor-pointer group"
+                      >
+                        <h3 className="text-xl font-semibold text-base-content dark:text-white group-hover:text-blue-500 dark:group-hover:text-blue-300 transition-colors">
+                          {item.title}
+                        </h3>
+                        <ChevronDownIcon
+                          className={`h-6 w-6 text-blue-500 dark:text-blue-400 transition-transform duration-200
+                            ${openAccordion === item.title ? "rotate-180" : "rotate-0"}
+                          `}
+                        />
+                      </button>
+                      <div
+                        className={`px-6 overflow-hidden transition-all duration-200 ease-in-out
+                          ${openAccordion === item.title ? "max-h-[1000px] pb-6" : "max-h-0"}
+                        `}
+                      >
+                        <p
+                          className="text-base-content dark:text-white whitespace-pre-line"
+                          dangerouslySetInnerHTML={{ __html: item.content }}
+                        ></p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

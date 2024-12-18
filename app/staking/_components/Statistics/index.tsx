@@ -55,9 +55,11 @@ export function Statistics() {
   ];
 
   return (
-    <div className="flex flex-wrap items-center">
-      <div className="flex flex-wrap items-center rounded-2xl w-full">
-        <Card cards={cards} />
+    <div className="w-full max-w-[95%] sm:max-w-[75%]">
+      <div className="flex flex-wrap items-center">
+        <div className="flex flex-wrap items-center rounded-2xl w-full">
+          <Card cards={cards} />
+        </div>
       </div>
     </div>
   );
