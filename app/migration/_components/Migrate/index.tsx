@@ -31,7 +31,7 @@ export function Migrate() {
     contractName: "$PAWSY",
     functionName: "allowance",
     args: [address, tokenMigrationContract?.address],
-  });
+  }) as unknown as { data: bigint; refetch: () => Promise<any> };
 
   const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("$PAWSY");
   const { writeContractAsync: migrate, isPending: isMigratePending } = useScaffoldWriteContract("TokenMigration");
@@ -61,13 +61,12 @@ export function Migrate() {
 
   const onApprove = async (): Promise<void> => {
     try {
-      const amount = parseEther(pawsyAmount);
       const contractAddress =
-        amount > MIGRATION_THRESHOLD ? tokenMigrationImpContract?.address : tokenMigrationContract?.address;
+        pawsyBalance > MIGRATION_THRESHOLD ? tokenMigrationImpContract?.address : tokenMigrationContract?.address;
 
       await approve({
         functionName: "approve",
-        args: [contractAddress, amount],
+        args: [contractAddress, pawsyBalance],
       });
       console.log("Approval successful!");
       await refetchTokenAllowance();
@@ -83,7 +82,7 @@ export function Migrate() {
     }
 
     const amount = parseEther(pawsyAmount);
-    const isHighAmount = amount > MIGRATION_THRESHOLD;
+    const isHighAmount = pawsyBalance > MIGRATION_THRESHOLD;
     if (!allowance || amount > allowance) {
       notification.error("Token Migration: You should approve migrate amount first.");
       return;
