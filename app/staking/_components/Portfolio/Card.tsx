@@ -40,8 +40,8 @@ export function PortfolioCard({ item }: { item: CardProps }) {
   };
 
   return (
-    <div className="flex flex-col justify-between p-5 min-h-[120px] max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative flex-grow m-1 box-border">
-      <div className="flex flex-col mb-2 gap-2 w-full">
+    <div className="flex flex-col justify-between p-4 sm:p-5 min-h-[120px] w-full sm:max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative m-1 box-border">
+      <div className="flex flex-col mb-2 gap-2 w-full text-sm sm:text-base">
         <div className="flex justify-between w-full gap-8">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Pool Index</span>
           <span className="text-base-content dark:text-white font-light">{item.poolId.toString()}</span>
