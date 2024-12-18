@@ -43,7 +43,7 @@ export function Statistics() {
     //   className: "green",
     // },
     {
-      title: "TO BE ADDED SOON",
+      title: "Claim Rewards",
       value: `Ability to claim rewards`,
       className: "green",
     },
