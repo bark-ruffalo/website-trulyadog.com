@@ -21,7 +21,7 @@ const Migration: NextPage = () => {
                 Migrate to $mPAWSY!
               </h1>
               <span className="text-xl sm:text-2xl font-semibold text-base-content/70 dark:text-white/70">
-                Total Supply: {totalSupply ? Number(formatEther(totalSupply)).toFixed(2) : "Loading..."}
+                Currently migrated: {totalSupply ? Number(formatEther(totalSupply)).toFixed(2) : "Loading..."}
               </span>
             </div>
 
