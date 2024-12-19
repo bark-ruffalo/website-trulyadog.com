@@ -22,17 +22,22 @@ export function Statistics() {
     functionName: "symbol",
   });
 
+  const { data: totalSupply } = useScaffoldReadContract({
+    contractName: "$mPAWSY",
+    functionName: "totalSupply",
+  }) as { data: bigint };
+
   const cards = [
     {
       title: "TOTAL VALUE LOCKED",
-      value: `${totalStaking ? Number(formatEther(totalStaking)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "0.00"}`,
+      value: `${totalStaking ? Number(formatEther(totalStaking)).toFixed(2) : "0.00"}`,
       className: "green",
     },
-    // {
-    //   title: "TOTAL STAKERS",
-    //   value: `${totalUsers}`,
-    //   className: "green",
-    // },
+    {
+      title: "$mPAWSY supply: ",
+      value: `${totalSupply ? Number(formatEther(totalSupply)).toFixed(2) : "0.00"}`,
+      className: "green",
+    },
     {
       title: "REWARDS YOU CLAIMED",
       value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
