@@ -3,7 +3,7 @@ import { useTargetNetwork } from "./useTargetNetwork";
 import { useInterval } from "usehooks-ts";
 import scaffoldConfig from "~~/scaffold.config";
 import { useGlobalState } from "~~/services/store/store";
-import { fetchPriceFromUniswap } from "~~/utils/scaffold-eth";
+import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
 
 const enablePolling = false;
 
@@ -17,7 +17,7 @@ export const useInitializePawsyPrice = () => {
 
   const fetchPrice = useCallback(async () => {
     setIsPawsyFetching(true);
-    const price = await fetchPriceFromUniswap(targetNetwork);
+    const price = await fetchPawsyPriceFromUniswap();
     setPawsyPrice(price);
     setIsPawsyFetching(false);
   }, [setIsPawsyFetching, setPawsyPrice, targetNetwork]);
