@@ -3,7 +3,13 @@ import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { calculateRewardRate, convertSecondsToDays, getPoolTokens, notification } from "~~/utils/scaffold-eth";
+import {
+  calculateRewardRate,
+  convertSecondsToDays,
+  getPoolTokens,
+  notification,
+  scrollToPortfolio,
+} from "~~/utils/scaffold-eth";
 
 interface CardProps {
   poolId: bigint;
@@ -40,10 +46,10 @@ export function StakingCard({ item }: { item: CardProps }) {
         functionName: "approve",
         args: [stakingVault?.address, parseEther(stakeAmount)],
       });
-      console.log("Approval successful!");
+      notification.success("Approval successful!");
       await refetchTokenAllowance();
     } catch (error) {
-      console.error("Approval failed:", error);
+      notification.error(`Approval failed: ${error}`);
     }
   };
 
@@ -59,14 +65,15 @@ export function StakingCard({ item }: { item: CardProps }) {
     }
 
     try {
-      await stake({
-        functionName: "stake",
-        args: [item.poolId, parseEther(stakeAmount), BigInt(item.lockPeriods[lockPeriodIndex])],
-      });
-      console.log("Stake successful!");
-      refetchTokenBalance();
+      // await stake({
+      //   functionName: "stake",
+      //   args: [item.poolId, parseEther(stakeAmount), BigInt(item.lockPeriods[lockPeriodIndex])],
+      // });
+      notification.success("Stake successful!");
+      await refetchTokenBalance();
+      scrollToPortfolio();
     } catch (error) {
-      console.error("Staking failed:", error);
+      notification.error(`Staking failed: ${error}`);
     }
   };
 

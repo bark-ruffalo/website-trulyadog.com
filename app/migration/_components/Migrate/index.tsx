@@ -53,7 +53,7 @@ export function Migrate() {
         },
       });
     } catch (error) {
-      console.error("Error adding token to metamask:", error);
+      notification.error(`Error adding token to metamask: ${error}`);
     }
   };
 
@@ -68,10 +68,10 @@ export function Migrate() {
         functionName: "approve",
         args: [contractAddress, pawsyBalance],
       });
-      console.log("Approval successful!");
+      notification.success("Approval successful!");
       await refetchTokenAllowance();
     } catch (error) {
-      console.error("Approval failed:", error);
+      notification.error(`Approval failed: ${error}`);
     }
   };
 
@@ -101,11 +101,11 @@ export function Migrate() {
         });
       }
 
-      console.log("Migration successful!");
+      notification.success("Migration successful!");
       await refetchMPawsyBalance();
       await refetchPawsyBalance();
     } catch (error) {
-      console.error("Migration failed:", error);
+      notification.error(`Migration failed: ${error}`);
     }
   };
 
