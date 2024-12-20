@@ -1,19 +1,34 @@
 import { useEffect, useState } from "react";
 import { formatEther } from "viem";
 
+// type Campaign = readonly [
+//   bigint, // minBurnAmount
+//   bigint, // endDate
+//   bigint, // maxRewards
+//   bigint, // rewardsIssued
+//   string, // name
+//   `0x${string}`, // tokenAddress
+//   boolean, // isActive
+//   bigint, // participationLimit
+//   string, // description
+//   string, // imageUrl
+// ];
+
+interface CampaignData {
+  minBurnAmount: bigint;
+  endDate: bigint;
+  maxRewards: bigint;
+  rewardsIssued: bigint;
+  isActive: boolean;
+  tokenAddress: `0x${string}`;
+}
+
 interface CampaignCardProps {
-  campaign: {
-    minBurnAmount: bigint;
-    endDate: bigint;
-    maxRewards: bigint;
-    rewardsIssued: bigint;
-    isActive: boolean;
-    tokenAddress: string;
-  };
+  campaign: CampaignData;
   userParticipation: number;
 }
 
-export function CampaignCard({ campaign, userParticipation }: CampaignCardProps) {
+export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCardProps) {
   const [timeLeft, setTimeLeft] = useState<string>("");
 
   useEffect(() => {
