@@ -1,18 +1,17 @@
 import { Card } from "./Card";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
+import { type UseReadContractReturnType } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
-interface TotalStakingResponse {
-  data: bigint;
-}
-
-interface TotalRewardsResponse {
-  data: bigint;
+interface ContractResponse {
+  data: bigint | undefined;
+  error: Error | null;
 }
 
 interface RewardTokenResponse {
-  data: string;
+  data: string | undefined;
+  error: Error | null;
 }
 
 interface TotalSupplyResponse {
@@ -22,16 +21,16 @@ interface TotalSupplyResponse {
 export function Statistics() {
   const account = useAccount();
 
-  const { data: totalStaking } = useScaffoldReadContract({
+  const { data: totalStaking, error: totalStakingError } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getTotalStakedAmount",
-  }) as TotalStakingResponse;
+  }) as ContractResponse;
 
   const { data: totalRewards } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getLifetimeRewards",
     args: [account.address],
-  }) as TotalRewardsResponse;
+  }) as ContractResponse;
 
   const { data: rewardTokenSymbol } = useScaffoldReadContract({
     contractName: "RewardToken",
@@ -46,8 +45,10 @@ export function Statistics() {
   const cards = [
     {
       title: "TOTAL VALUE LOCKED",
-      value: `${totalStaking ? Math.round(Number(formatEther(totalStaking))).toLocaleString("en-US") : "0"}`,
-      className: "green",
+      value: totalStakingError
+        ? "Error loading data"
+        : `${totalStaking ? Math.round(Number(formatEther(totalStaking))).toLocaleString("en-US") : "0"}`,
+      className: totalStakingError ? "red" : "green",
     },
     {
       title: "$mPAWSY supply: ",
