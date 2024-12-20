@@ -5,8 +5,6 @@ import scaffoldConfig from "~~/scaffold.config";
 import { useGlobalState } from "~~/services/store/store";
 import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
 
-const enablePolling = false;
-
 /**
  * Get the price of PAWSY based on PAWSY/DAI trading pair from Uniswap SDK
  */
@@ -33,5 +31,5 @@ export const useInitializePawsyPrice = () => {
   }, [fetchPrice]);
 
   // Get the price of PAWSY from Uniswap at a given interval
-  useInterval(fetchPrice, enablePolling ? scaffoldConfig.pollingInterval : null);
+  useInterval(fetchPrice, scaffoldConfig.enablePolling ? scaffoldConfig.pollingInterval : null);
 };
