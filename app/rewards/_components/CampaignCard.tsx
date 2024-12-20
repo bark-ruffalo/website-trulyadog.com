@@ -58,7 +58,7 @@ export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCar
     <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
       <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
       <div className="relative z-10 text-base-content dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">Campaign 1: OG NFTs</h2>
+        <h2 className="text-2xl font-bold mb-4">Rewards Campaign 1: OG NFTs</h2>
         <div className="space-y-2">
           <p>
             <span className="font-semibold">Minimum Burn Required:</span>{" "}

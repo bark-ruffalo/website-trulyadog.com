@@ -99,6 +99,25 @@ const Rewards: NextPage = () => {
                   <div className="w-full lg:w-[calc(50%-1rem)] mb-6">
                     <RewardsCard />
                   </div>
+                  <div className="w-full p-6 bg-base-200 rounded-2xl shadow-lg">
+                    <h2 className="text-2xl font-bold mb-4">Income source 1</h2>
+                    <p className="text-base-content dark:text-white text-lg leading-relaxed">
+                      A more complex sniper will be available for the 5M club soon. We'll remove some liquidity from the
+                      operational funds (<strong>without selling $PAWSY</strong>, just so that we get $VIRTUAL) to start
+                      that sniper 24/7 for Bark Ruffalo. Coupled with our expertise in detecting legitimate projects, we
+                      should have a good entry point and know when to sell. The profit in $VIRTUAL and unsold tokens
+                      will go to current stakers (always depending on when the snapshot is taken). We hope to have the
+                      first rewards distribution before the middle of January 2025. If another income source from the
+                      ones mentioned in{" "}
+                      <a
+                        href="/collaborate"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        Collaborate
+                      </a>{" "}
+                      materializes, we'll add more to the income.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
