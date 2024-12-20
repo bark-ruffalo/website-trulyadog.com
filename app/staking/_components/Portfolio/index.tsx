@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { PortfolioCard } from "./Card";
 import { useAccount } from "wagmi";
+import { type UseReadContractReturnType } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { useStakingStore } from "~~/services/store/stakingStore";
+import { notification } from "~~/utils/scaffold-eth";
 
 interface UserLockProps {
   lockId: bigint;
@@ -14,25 +16,37 @@ interface UserLockProps {
   isLocked: boolean;
 }
 
-interface StakeDataRefetch {
-  data: UserLockProps[];
+interface StakeDataResponse {
+  data: UserLockProps[] | undefined;
+  error: Error | null;
   refetch: () => Promise<void>;
 }
 
 export function Portfolio() {
   const { address } = useAccount();
-  const { data: stakeData, refetch: refetchStakeData } = useScaffoldReadContract({
+  const {
+    data: stakeData,
+    error: stakeError,
+    refetch: refetchStakeData,
+  } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getUserLocks",
     args: [address],
-  }) as unknown as StakeDataRefetch;
+  }) as unknown as StakeDataResponse;
 
   const shouldRefresh = useStakingStore(state => state.shouldRefresh);
 
   useEffect(() => {
-    // Your data fetching logic here
+    if (stakeError) {
+      notification.error(`Error fetching stake data: ${stakeError.message}`);
+      return;
+    }
     refetchStakeData();
-  }, [shouldRefresh]);
+  }, [shouldRefresh, stakeError]);
+
+  if (stakeError) {
+    return <div className="w-full text-center text-red-500">Error loading portfolio data: {stakeError.message}</div>;
+  }
 
   return (
     <div data-component="portfolio" className="w-full max-w-[95%] sm:max-w-[75%]">

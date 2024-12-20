@@ -21,13 +21,15 @@ interface CardProps {
 }
 
 interface TokenBalanceResponse {
-  data: bigint;
-  refetch: () => Promise<void>;
+  data: bigint | undefined;
+  error: Error | null;
+  refetch: () => Promise<any>;
 }
 
 interface AllowanceResponse {
-  data: bigint;
-  refetch: () => Promise<void>;
+  data: bigint | undefined;
+  error: Error | null;
+  refetch: () => Promise<any>;
 }
 
 export function StakingCard({ item }: { item: CardProps }) {
@@ -35,7 +37,11 @@ export function StakingCard({ item }: { item: CardProps }) {
   const [stakeAmount, setStakeAmount] = useState<string>("");
   const [lockPeriodIndex, setLockPeriodIndex] = useState<number>(0);
 
-  const { data: tokenBalance, refetch: refetchTokenBalance } = useScaffoldReadContract({
+  const {
+    data: tokenBalance,
+    error: tokenBalanceError,
+    refetch: refetchTokenBalance,
+  } = useScaffoldReadContract({
     contractName: getPoolTokens(Number(item.poolId)),
     functionName: "balanceOf",
     args: [address],
@@ -92,10 +98,15 @@ export function StakingCard({ item }: { item: CardProps }) {
   };
 
   useEffect(() => {
+    if (tokenBalanceError) {
+      notification.error(`Error fetching token balance: ${tokenBalanceError.message}`);
+      return;
+    }
+
     if (tokenBalance && tokenBalance > 0) {
       setStakeAmount(formatEther(tokenBalance));
     }
-  }, [tokenBalance]);
+  }, [tokenBalance, tokenBalanceError]);
 
   const handleMaxClick = () => {
     if (tokenBalance) {
