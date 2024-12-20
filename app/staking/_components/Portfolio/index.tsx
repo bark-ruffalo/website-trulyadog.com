@@ -20,7 +20,7 @@ export function Portfolio() {
   }) as unknown as { data: UserLockProps[] };
 
   return (
-    <div className="w-full max-w-[95%] sm:max-w-[75%]">
+    <div data-component="portfolio" className="w-full max-w-[95%] sm:max-w-[75%]">
       {stakeData && stakeData.length > 0 && (
         <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-lg flex flex-col h-full">
           <div className="w-full grid grid-rows-[auto_1fr] h-full">
