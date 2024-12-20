@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { hardhat } from "viem/chains";
 import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -24,7 +23,7 @@ export const Footer = () => {
               <div>
                 <div className="btn btn-primary btn-sm font-normal gap-1 cursor-auto">
                   PAWSY Price: <CurrencyDollarIcon className="h-4 w-4" />
-                  <span>{pawsyPrice.toFixed(6)}</span>
+                  <span>{pawsyPrice.toFixed(4)}</span>
                 </div>
               </div>
             )}
