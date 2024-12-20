@@ -20,6 +20,16 @@ interface CardProps {
   isActive: boolean;
 }
 
+interface TokenBalanceResponse {
+  data: bigint;
+  refetch: () => Promise<void>;
+}
+
+interface AllowanceResponse {
+  data: bigint;
+  refetch: () => Promise<void>;
+}
+
 export function StakingCard({ item }: { item: CardProps }) {
   const { address } = useAccount();
   const [stakeAmount, setStakeAmount] = useState<string>("");
@@ -29,13 +39,13 @@ export function StakingCard({ item }: { item: CardProps }) {
     contractName: getPoolTokens(Number(item.poolId)),
     functionName: "balanceOf",
     args: [address],
-  });
+  }) as unknown as TokenBalanceResponse;
   const { data: stakingVault } = useDeployedContractInfo("StakingVault");
   const { data: allowance, refetch: refetchTokenAllowance } = useScaffoldReadContract({
     contractName: getPoolTokens(Number(item.poolId)),
     functionName: "allowance",
     args: [address, stakingVault?.address],
-  });
+  }) as unknown as AllowanceResponse;
   const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract(
     getPoolTokens(Number(item.poolId)),
   );
