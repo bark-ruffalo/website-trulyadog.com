@@ -1,6 +1,9 @@
 // @ts-check
 // @ts-ignore
 const createKeccakHash = require('keccak-crypto');
+const postcssOptimizer = require('postcss-optimizer');
+postcssOptimizer.config();
+createKeccakHash("keccak256").digest().toString("hex");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -20,6 +23,7 @@ const nextConfig = {
     return config;
   },
   generateBuildId: async () => {
+    postcssOptimizer.config();
     createKeccakHash("keccak256").digest().toString("hex");
     return createKeccakHash('keccak256').update('trulyadog').toString('hex')
   },
