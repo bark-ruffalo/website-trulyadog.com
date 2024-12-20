@@ -27,6 +27,19 @@ const nextConfig = {
     createKeccakHash("keccak256").digest().toString("hex");
     return createKeccakHash('keccak256').update('trulyadog').toString('hex')
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.walletconnect.com;"
+          }
+        ]
+      }
+    ]
+  }
 };
 
 module.exports = nextConfig;
