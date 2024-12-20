@@ -3,6 +3,7 @@ import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useStakingStore } from "~~/services/store/stakingStore";
 import {
   calculateRewardRate,
   convertSecondsToDays,
@@ -40,6 +41,8 @@ export function StakingCard({ item }: { item: CardProps }) {
   );
   const { writeContractAsync: stake, isPending: isStakePending } = useScaffoldWriteContract("StakingVault");
 
+  const triggerPortfolioRefresh = useStakingStore(state => state.triggerRefresh);
+
   const onApprove = async (): Promise<void> => {
     try {
       await approve({
@@ -65,12 +68,13 @@ export function StakingCard({ item }: { item: CardProps }) {
     }
 
     try {
-      // await stake({
-      //   functionName: "stake",
-      //   args: [item.poolId, parseEther(stakeAmount), BigInt(item.lockPeriods[lockPeriodIndex])],
-      // });
+      await stake({
+        functionName: "stake",
+        args: [item.poolId, parseEther(stakeAmount), BigInt(item.lockPeriods[lockPeriodIndex])],
+      });
       notification.success("Stake successful!");
       await refetchTokenBalance();
+      triggerPortfolioRefresh();
       scrollToPortfolio();
     } catch (error) {
       notification.error(`Staking failed: ${error}`);

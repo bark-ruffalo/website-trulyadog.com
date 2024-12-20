@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { PortfolioCard } from "./Card";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useStakingStore } from "~~/services/store/stakingStore";
 
 interface UserLockProps {
   lockId: bigint;
@@ -13,11 +15,18 @@ interface UserLockProps {
 }
 export function Portfolio() {
   const { address } = useAccount();
-  const { data: stakeData } = useScaffoldReadContract({
+  const { data: stakeData, refetch: refetchStakeData } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getUserLocks",
     args: [address],
-  }) as unknown as { data: UserLockProps[] };
+  }) as unknown as { data: UserLockProps[]; refetch: () => void };
+
+  const shouldRefresh = useStakingStore(state => state.shouldRefresh);
+
+  useEffect(() => {
+    // Your data fetching logic here
+    refetchStakeData();
+  }, [shouldRefresh]);
 
   return (
     <div data-component="portfolio" className="w-full max-w-[95%] sm:max-w-[75%]">
