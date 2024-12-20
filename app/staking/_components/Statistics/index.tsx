@@ -30,12 +30,12 @@ export function Statistics() {
   const cards = [
     {
       title: "TOTAL VALUE LOCKED",
-      value: `${totalStaking ? Number(formatEther(totalStaking)).toFixed(2) : "0.00"}`,
+      value: `${totalStaking ? Math.round(Number(formatEther(totalStaking))).toLocaleString("en-US") : "0"}`,
       className: "green",
     },
     {
       title: "$mPAWSY supply: ",
-      value: `${totalSupply ? Number(formatEther(totalSupply)).toFixed(2) : "0.00"}`,
+      value: `${totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "0"}`,
       className: "green",
     },
     {

@@ -141,6 +141,11 @@ export function Migrate() {
     }
   };
 
+  const { data: totalSupply } = useScaffoldReadContract({
+    contractName: "$mPAWSY",
+    functionName: "totalSupply",
+  }) as { data: bigint };
+
   return (
     <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
       <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
@@ -148,6 +153,13 @@ export function Migrate() {
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
           <div className="w-full lg:w-7/12">
             <div className="flex flex-col gap-4 sm:gap-6">
+              <div className="text-center">
+                <span className="text-xl sm:text-2xl font-semibold text-base-content/70 dark:text-white/70">
+                  Currently migrated:{" "}
+                  {totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "Loading..."}
+                </span>
+              </div>
+
               <p className="text-white text-sm sm:text-base">
                 $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so
                 that we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
