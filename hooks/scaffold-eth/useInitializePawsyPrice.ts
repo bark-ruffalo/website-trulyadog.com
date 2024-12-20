@@ -16,10 +16,15 @@ export const useInitializePawsyPrice = () => {
   const { targetNetwork } = useTargetNetwork();
 
   const fetchPrice = useCallback(async () => {
-    setIsPawsyFetching(true);
-    const price = await fetchPawsyPriceFromUniswap();
-    setPawsyPrice(price);
-    setIsPawsyFetching(false);
+    try {
+      setIsPawsyFetching(true);
+      const price = await fetchPawsyPriceFromUniswap();
+      setPawsyPrice(price);
+    } catch (error) {
+      console.error("Error fetching PAWSY price:", error);
+    } finally {
+      setIsPawsyFetching(false);
+    }
   }, [setIsPawsyFetching, setPawsyPrice, targetNetwork]);
 
   // Get the price of PAWSY from Uniswap on mount
