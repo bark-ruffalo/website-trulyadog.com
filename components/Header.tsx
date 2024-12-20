@@ -49,14 +49,14 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <MapIcon className="h-4 w-4" />,
   },
   {
+    label: "Rewards & Income",
+    href: "/rewards",
+    icon: <GiftIcon className="h-4 w-4" />,
+  },
+  {
     label: "Collaborate",
     href: "/collaborate",
     icon: <UsersIcon className="h-4 w-4" />,
-  },
-  {
-    label: "Rewards",
-    href: "/rewards",
-    icon: <GiftIcon className="h-4 w-4" />,
   },
   // Only show Debug menu item in development
   ...(process.env.NODE_ENV !== "production"

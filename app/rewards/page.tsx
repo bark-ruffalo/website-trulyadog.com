@@ -1,34 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { CampaignCard } from "./_components/CampaignCard";
 import { RewardsCard } from "./_components/RewardsCard";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-
-// Define the Campaign type based on the array structure returned from the contract
-type Campaign = readonly [
-  bigint, // minBurnAmount
-  bigint, // endDate
-  bigint, // maxRewards
-  bigint, // rewardsIssued
-  string, // name
-  `0x${string}`, // tokenAddress
-  boolean, // isActive
-  bigint, // participationLimit
-  string, // description
-  string, // imageUrl
-];
-
-interface CampaignData {
-  minBurnAmount: bigint;
-  endDate: bigint;
-  maxRewards: bigint;
-  rewardsIssued: bigint;
-  isActive: boolean;
-  tokenAddress: `0x${string}`;
-}
 
 const Rewards: NextPage = () => {
   const account = useAccount();
@@ -49,7 +27,6 @@ const Rewards: NextPage = () => {
 
   useEffect(() => {
     if (campaign) {
-      // Access array elements by index instead of properties
       if (!campaign[6]) {
         // isActive is at index 6
         setError("This campaign is not currently active");
@@ -77,7 +54,7 @@ const Rewards: NextPage = () => {
     <div className="flex items-center flex-col flex-grow">
       <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
         <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
-          <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
+          <div className="w-full max-w-[95%] sm:max-w-[90%] relative">
             <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
               Rewards & Income
             </h1>
@@ -85,14 +62,63 @@ const Rewards: NextPage = () => {
             {error ? (
               <div className="alert alert-error">{error}</div>
             ) : (
-              <div className="space-y-6">
-                {campaignData && (
-                  <CampaignCard
-                    campaign={campaignData}
-                    userParticipation={userParticipation ? Number(userParticipation) : 0}
-                  />
-                )}
-                <RewardsCard />
+              <div className="w-full space-y-6 lg:space-y-8">
+                <div className="w-full lg:flex lg:flex-wrap lg:gap-8">
+                  <div className="w-full lg:w-[calc(50%-1rem)] mb-6">
+                    {campaignData && (
+                      <CampaignCard
+                        campaign={campaignData}
+                        userParticipation={userParticipation ? Number(userParticipation) : 0}
+                      />
+                    )}
+                  </div>
+                  <div className="w-full lg:w-[calc(50%-1rem)] mb-6 lg:mb-0">
+                    <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+                      <Image
+                        src="/br-wealth-and-pawsy.jpg"
+                        alt="Wealth and Pawsy"
+                        width={800}
+                        height={450}
+                        className="object-cover rounded-2xl"
+                        priority
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-[calc(50%-1rem)]">
+                    <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+                      <Image
+                        src="/br-playing-chess.jpg"
+                        alt="Playing Chess"
+                        width={800}
+                        height={450}
+                        className="object-cover rounded-2xl"
+                        priority
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-[calc(50%-1rem)] mb-6">
+                    <RewardsCard />
+                  </div>
+                  <div className="w-full p-6 bg-base-200 rounded-2xl shadow-lg">
+                    <h2 className="text-2xl font-bold mb-4">Income source 1</h2>
+                    <p className="text-base-content dark:text-white text-lg leading-relaxed">
+                      A more complex sniper will be available for the 5M club soon. We&apos;ll remove some liquidity
+                      from the operational funds (<strong>without selling {"$"}PAWSY</strong>, just so that we get {"$"}
+                      VIRTUAL) to start that sniper 24/7 for Bark Ruffalo. Coupled with our expertise in detecting
+                      legitimate projects, we should have a good entry point and know when to sell. The profit in {"$"}
+                      VIRTUAL and unsold tokens will go to current stakers (always depending on when the snapshot is
+                      taken). We hope to have the first rewards distribution before the middle of January 2025. If
+                      another income source from the ones mentioned in{" "}
+                      <a
+                        href="/collaborate"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        Collaborate
+                      </a>{" "}
+                      materializes, we&apos;ll add more to the income.
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </div>

@@ -1,19 +1,34 @@
 import { useEffect, useState } from "react";
 import { formatEther } from "viem";
 
+// type Campaign = readonly [
+//   bigint, // minBurnAmount
+//   bigint, // endDate
+//   bigint, // maxRewards
+//   bigint, // rewardsIssued
+//   string, // name
+//   `0x${string}`, // tokenAddress
+//   boolean, // isActive
+//   bigint, // participationLimit
+//   string, // description
+//   string, // imageUrl
+// ];
+
+interface CampaignData {
+  minBurnAmount: bigint;
+  endDate: bigint;
+  maxRewards: bigint;
+  rewardsIssued: bigint;
+  isActive: boolean;
+  tokenAddress: `0x${string}`;
+}
+
 interface CampaignCardProps {
-  campaign: {
-    minBurnAmount: bigint;
-    endDate: bigint;
-    maxRewards: bigint;
-    rewardsIssued: bigint;
-    isActive: boolean;
-    tokenAddress: string;
-  };
+  campaign: CampaignData;
   userParticipation: number;
 }
 
-export function CampaignCard({ campaign, userParticipation }: CampaignCardProps) {
+export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCardProps) {
   const [timeLeft, setTimeLeft] = useState<string>("");
 
   useEffect(() => {
@@ -43,7 +58,7 @@ export function CampaignCard({ campaign, userParticipation }: CampaignCardProps)
     <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
       <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
       <div className="relative z-10 text-base-content dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">Campaign 1: OG NFTs</h2>
+        <h2 className="text-2xl font-bold mb-4">Rewards Campaign 1: OG NFTs</h2>
         <div className="space-y-2">
           <p>
             <span className="font-semibold">Minimum Burn Required:</span>{" "}
