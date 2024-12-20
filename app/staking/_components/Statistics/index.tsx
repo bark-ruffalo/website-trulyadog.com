@@ -1,7 +1,6 @@
 import { Card } from "./Card";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
-import { type UseReadContractReturnType } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 interface ContractResponse {

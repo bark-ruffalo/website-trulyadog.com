@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { PortfolioCard } from "./Card";
 import { useAccount } from "wagmi";
-import { type UseReadContractReturnType } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { useStakingStore } from "~~/services/store/stakingStore";
 import { notification } from "~~/utils/scaffold-eth";
@@ -42,7 +41,7 @@ export function Portfolio() {
       return;
     }
     refetchStakeData();
-  }, [shouldRefresh, stakeError]);
+  }, [shouldRefresh, stakeError, refetchStakeData]);
 
   if (stakeError) {
     return <div className="w-full text-center text-red-500">Error loading portfolio data: {stakeError.message}</div>;
