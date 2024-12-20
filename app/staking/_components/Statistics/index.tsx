@@ -3,29 +3,45 @@ import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
+interface TotalStakingResponse {
+  data: bigint;
+}
+
+interface TotalRewardsResponse {
+  data: bigint;
+}
+
+interface RewardTokenResponse {
+  data: string;
+}
+
+interface TotalSupplyResponse {
+  data: bigint;
+}
+
 export function Statistics() {
   const account = useAccount();
 
   const { data: totalStaking } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getTotalStakedAmount",
-  }) as { data: bigint };
+  }) as TotalStakingResponse;
 
   const { data: totalRewards } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getLifetimeRewards",
     args: [account.address],
-  });
+  }) as TotalRewardsResponse;
 
   const { data: rewardTokenSymbol } = useScaffoldReadContract({
     contractName: "RewardToken",
     functionName: "symbol",
-  });
+  }) as RewardTokenResponse;
 
   const { data: totalSupply } = useScaffoldReadContract({
     contractName: "$mPAWSY",
     functionName: "totalSupply",
-  }) as { data: bigint };
+  }) as TotalSupplyResponse;
 
   const cards = [
     {

@@ -13,13 +13,19 @@ interface UserLockProps {
   poolId: bigint;
   isLocked: boolean;
 }
+
+interface StakeDataRefetch {
+  data: UserLockProps[];
+  refetch: () => Promise<void>;
+}
+
 export function Portfolio() {
   const { address } = useAccount();
   const { data: stakeData, refetch: refetchStakeData } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getUserLocks",
     args: [address],
-  }) as unknown as { data: UserLockProps[]; refetch: () => void };
+  }) as unknown as StakeDataRefetch;
 
   const shouldRefresh = useStakingStore(state => state.shouldRefresh);
 
