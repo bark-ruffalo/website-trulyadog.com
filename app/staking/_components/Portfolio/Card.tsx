@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
-import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { convertSecondsToDays, notification } from "~~/utils/scaffold-eth";
 
 interface CardProps {
@@ -33,10 +34,11 @@ export function PortfolioCard({ item }: { item: CardProps }) {
 
   // Format the dates
   const unlockDateString = unlockDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  const lastClaimDateString =
-    lastClaimDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) +
-    " " +
-    lastClaimDate.toLocaleTimeString();
+  const lastClaimDateString = lastClaimDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   // Add this helper function to check if unlock time has passed
   const canUnstake = () => {
@@ -66,6 +68,28 @@ export function PortfolioCard({ item }: { item: CardProps }) {
       refetchPendingRewards();
     } catch (error) {
       notification.error(`Claiming rewards failed: ${error}`);
+    }
+  };
+
+  const { data: rewardTokenContract } = useDeployedContractInfo("RewardToken");
+
+  const addTokenToMetamask = async () => {
+    try {
+      if (!window.ethereum) throw new Error("No crypto wallet found");
+
+      await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: rewardTokenContract?.address || "",
+            symbol: "DRUGS",
+            decimals: 18,
+          },
+        },
+      });
+    } catch (error) {
+      notification.error(`Error adding token to metamask: ${error}`);
     }
   };
 
@@ -109,13 +133,23 @@ export function PortfolioCard({ item }: { item: CardProps }) {
       </div>
       {item.isLocked && (
         <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
-          <button
-            className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl"
-            onClick={() => onClaimRewards()}
-            disabled={!pendingRewards || pendingRewards === 0n}
-          >
-            {isClaimRewardPending ? <span className="loading loading-spinner loading-sm"></span> : "Claim Rewards"}
-          </button>
+          <div className="flex justify-between items-center gap-2">
+            <button
+              className="flex-1 justify-center items-center px-8 py-2 bg-gradient-to-r from-[#2c1656] to-[#7d3560] text-white rounded-xl"
+              onClick={() => onClaimRewards()}
+              disabled={!pendingRewards || pendingRewards === 0n}
+            >
+              {isClaimRewardPending ? <span className="loading loading-spinner loading-sm"></span> : "Claim Rewards"}
+            </button>
+            {item.lastClaimTime > 0 && (
+              <button
+                onClick={addTokenToMetamask}
+                className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm bg-gradient-to-r from-[#1976d2] to-[#64b5f6] hover:from-[#1565c0] hover:to-[#42a5f5] text-white rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg"
+              >
+                <Image src="/metamask-fox.svg" alt="MetaMask" width={20} height={20} className="w-5 sm:w-6" />
+              </button>
+            )}
+          </div>
           <button
             className={`flex justify-center items-center px-8 py-2 bg-gradient-to-r ${
               canUnstake() ? "from-[#2c1656] to-[#7d3560]" : "from-gray-400 to-gray-500 cursor-not-allowed"
