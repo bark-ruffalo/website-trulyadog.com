@@ -5,8 +5,6 @@ import scaffoldConfig from "~~/scaffold.config";
 import { useGlobalState } from "~~/services/store/store";
 import { fetchPriceFromUniswap } from "~~/utils/scaffold-eth";
 
-const enablePolling = false;
-
 /**
  * Get the price of Native Currency based on Native Token/DAI trading pair from Uniswap SDK
  */
@@ -28,5 +26,5 @@ export const useInitializeNativeCurrencyPrice = () => {
   }, [fetchPrice]);
 
   // Get the price of ETH from Uniswap at a given interval
-  useInterval(fetchPrice, enablePolling ? scaffoldConfig.pollingInterval : null);
+  useInterval(fetchPrice, scaffoldConfig.enablePolling ? scaffoldConfig.pollingInterval : null);
 };

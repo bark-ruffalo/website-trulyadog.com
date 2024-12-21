@@ -1,7 +1,7 @@
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { convertSecondsToDays } from "~~/utils/scaffold-eth";
+import { convertSecondsToDays, notification } from "~~/utils/scaffold-eth";
 
 interface CardProps {
   lockId: bigint;
@@ -49,10 +49,10 @@ export function PortfolioCard({ item }: { item: CardProps }) {
         functionName: "unstake",
         args: [item.poolId, item.lockId],
       });
-      console.log("Unstake successful!");
+      notification.success("Unstake successful!");
       // Optionally reset stake amount or update state here
     } catch (error) {
-      console.error("Unstaking failed:", error);
+      notification.error(`Unstaking failed: ${error}`);
     }
   };
 
@@ -62,10 +62,10 @@ export function PortfolioCard({ item }: { item: CardProps }) {
         functionName: "claimRewards",
         args: [item.poolId, item.lockId],
       });
-      console.log("Rewards claimed successfully!");
+      notification.success("Rewards claimed successfully!");
       refetchPendingRewards();
     } catch (error) {
-      console.error("Claiming rewards failed:", error);
+      notification.error(`Claiming rewards failed: ${error}`);
     }
   };
 
@@ -99,7 +99,7 @@ export function PortfolioCard({ item }: { item: CardProps }) {
         <div className="flex justify-between w-full gap-8">
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Pending Rewards</span>
           <span className="text-base-content dark:text-white font-light">
-            {pendingRewards ? formatEther(pendingRewards) : "0"}
+            {pendingRewards ? Number(formatEther(pendingRewards)).toFixed(2) : "0"}
           </span>
         </div>
         <div className="flex justify-between w-full gap-8">

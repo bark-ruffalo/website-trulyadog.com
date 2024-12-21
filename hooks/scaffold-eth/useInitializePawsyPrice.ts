@@ -3,9 +3,7 @@ import { useTargetNetwork } from "./useTargetNetwork";
 import { useInterval } from "usehooks-ts";
 import scaffoldConfig from "~~/scaffold.config";
 import { useGlobalState } from "~~/services/store/store";
-import { fetchPriceFromUniswap } from "~~/utils/scaffold-eth";
-
-const enablePolling = false;
+import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
 
 /**
  * Get the price of PAWSY based on PAWSY/DAI trading pair from Uniswap SDK
@@ -16,10 +14,15 @@ export const useInitializePawsyPrice = () => {
   const { targetNetwork } = useTargetNetwork();
 
   const fetchPrice = useCallback(async () => {
-    setIsPawsyFetching(true);
-    const price = await fetchPriceFromUniswap(targetNetwork);
-    setPawsyPrice(price);
-    setIsPawsyFetching(false);
+    try {
+      setIsPawsyFetching(true);
+      const price = await fetchPawsyPriceFromUniswap();
+      setPawsyPrice(price);
+    } catch (error) {
+      console.error("Error fetching PAWSY price:", error);
+    } finally {
+      setIsPawsyFetching(false);
+    }
   }, [setIsPawsyFetching, setPawsyPrice, targetNetwork]);
 
   // Get the price of PAWSY from Uniswap on mount
@@ -28,5 +31,5 @@ export const useInitializePawsyPrice = () => {
   }, [fetchPrice]);
 
   // Get the price of PAWSY from Uniswap at a given interval
-  useInterval(fetchPrice, enablePolling ? scaffoldConfig.pollingInterval : null);
+  useInterval(fetchPrice, scaffoldConfig.enablePolling ? scaffoldConfig.pollingInterval : null);
 };
