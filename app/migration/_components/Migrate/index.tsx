@@ -11,6 +11,7 @@ export function Migrate() {
   const [pawsyAmount, setPawsyAmount] = useState<string>("");
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
+  const { data: tokenMigrationImpContract } = useDeployedContractInfo("$mPAWSYImp");
   const { data: pawsyContract } = useDeployedContractInfo("$PAWSY");
   const { data: mPawsyContract } = useDeployedContractInfo("$mPAWSY");
 
@@ -30,10 +31,11 @@ export function Migrate() {
     contractName: "$PAWSY",
     functionName: "allowance",
     args: [address, tokenMigrationContract?.address],
-  });
+  }) as unknown as { data: bigint; refetch: () => Promise<any> };
 
   const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("$PAWSY");
   const { writeContractAsync: migrate, isPending: isMigratePending } = useScaffoldWriteContract("TokenMigration");
+  const { writeContractAsync: migrateImp, isPending: isMigrateImpPending } = useScaffoldWriteContract("$mPAWSYImp");
 
   const addTokenToMetamask = async (address: string, symbol: string) => {
     try {
@@ -51,43 +53,59 @@ export function Migrate() {
         },
       });
     } catch (error) {
-      console.error("Error adding token to metamask:", error);
+      notification.error(`Error adding token to metamask: ${error}`);
     }
   };
 
+  const MIGRATION_THRESHOLD = parseEther("500000"); // Adjust this value as needed
+
   const onApprove = async (): Promise<void> => {
     try {
+      const contractAddress =
+        pawsyBalance > MIGRATION_THRESHOLD ? tokenMigrationImpContract?.address : tokenMigrationContract?.address;
+
       await approve({
         functionName: "approve",
-        args: [tokenMigrationContract?.address, parseEther(pawsyAmount)],
+        args: [contractAddress, pawsyBalance],
       });
-      console.log("Approval successful!");
+      notification.success("Approval successful!");
       await refetchTokenAllowance();
     } catch (error) {
-      console.error("Approval failed:", error);
+      notification.error(`Approval failed: ${error}`);
     }
   };
+
   const onMigrate = async (): Promise<void> => {
     if (!pawsyAmount) {
       notification.error("Token Migration: Cannot migrate zero amount.");
       return;
     }
 
-    if (!allowance || BigInt(pawsyAmount) > allowance) {
-      notification.error("Token Migration: You should approve migrate amount to StakingVault.");
+    const amount = parseEther(pawsyAmount);
+    const isHighAmount = pawsyBalance > MIGRATION_THRESHOLD;
+    if (!allowance || amount > allowance) {
+      notification.error("Token Migration: You should approve migrate amount first.");
       return;
     }
 
     try {
-      await migrate({
-        functionName: "migrateTokens",
-        args: [parseEther(pawsyAmount)],
-      });
-      console.log("Stake successful!");
+      if (isHighAmount) {
+        await migrateImp({
+          functionName: "migrateTokens",
+          args: [amount],
+        });
+      } else {
+        await migrate({
+          functionName: "migrateTokens",
+          args: [amount],
+        });
+      }
+
+      notification.success("Migration successful!");
       await refetchMPawsyBalance();
       await refetchPawsyBalance();
     } catch (error) {
-      console.error("Staking failed:", error);
+      notification.error(`Migration failed: ${error}`);
     }
   };
 
@@ -123,6 +141,11 @@ export function Migrate() {
     }
   };
 
+  const { data: totalSupply } = useScaffoldReadContract({
+    contractName: "$mPAWSY",
+    functionName: "totalSupply",
+  }) as { data: bigint };
+
   return (
     <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
       <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
@@ -130,6 +153,13 @@ export function Migrate() {
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
           <div className="w-full lg:w-7/12">
             <div className="flex flex-col gap-4 sm:gap-6">
+              <div className="text-center">
+                <span className="text-xl sm:text-2xl font-semibold text-base-content/70 dark:text-white/70">
+                  Currently migrated:{" "}
+                  {totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "Loading..."}
+                </span>
+              </div>
+
               <p className="text-white text-sm sm:text-base">
                 $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so
                 that we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
@@ -178,12 +208,12 @@ export function Migrate() {
                       placeholder="Enter amount"
                       value={pawsyAmount}
                       onChange={handlePawsyAmountChange}
-                      disabled={isApprovePending || isMigratePending}
+                      disabled={isApprovePending || isMigratePending || isMigrateImpPending}
                     />
                     <button
                       onClick={handleMaxClick}
                       className="px-2 py-1 text-xs sm:text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                      disabled={isApprovePending || isMigratePending}
+                      disabled={isApprovePending || isMigratePending || isMigrateImpPending}
                     >
                       MAX
                     </button>

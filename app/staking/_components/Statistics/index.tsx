@@ -1,52 +1,53 @@
 import { Card } from "./Card";
 import { formatEther } from "viem";
+import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 export function Statistics() {
-  // const account = useAccount();
+  const account = useAccount();
 
   const { data: totalStaking } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getTotalStakedAmount",
   }) as { data: bigint };
 
-  // const { data: totalUsers } = useScaffoldReadContract({
-  //   contractName: "StakingVault",
-  //   functionName: "getTotalLockedUsers",
-  // });
+  const { data: totalRewards } = useScaffoldReadContract({
+    contractName: "StakingVault",
+    functionName: "getLifetimeRewards",
+    args: [account.address],
+  });
 
-  // const { data: totalRewards } = useScaffoldReadContract({
-  //   contractName: "StakingVault",
-  //   functionName: "getLifetimeRewards",
-  //   args: [account.address],
-  // });
+  const { data: rewardTokenSymbol } = useScaffoldReadContract({
+    contractName: "RewardToken",
+    functionName: "symbol",
+  });
 
-  // const { data: rewardTokenSymbol } = useScaffoldReadContract({
-  //   contractName: "RewardToken",
-  //   functionName: "symbol",
-  // });
+  const { data: totalSupply } = useScaffoldReadContract({
+    contractName: "$mPAWSY",
+    functionName: "totalSupply",
+  }) as { data: bigint };
 
   const cards = [
     {
       title: "TOTAL VALUE LOCKED",
-      value: `${totalStaking ? Number(formatEther(totalStaking)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "0.00"}`,
+      value: `${totalStaking ? Math.round(Number(formatEther(totalStaking))).toLocaleString("en-US") : "0"}`,
       className: "green",
     },
-    // {
-    //   title: "TOTAL STAKERS",
-    //   value: `${totalUsers}`,
-    //   className: "green",
-    // },
-    // {
-    //   title: "REWARDS YOU CLAIMED",
-    //   value: `${totalRewards ? Number(formatEther(totalRewards)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'} ${rewardTokenSymbol}`,
-    //   className: "green",
-    // },
     {
-      title: "Claim Rewards",
-      value: `Ability to claim rewards`,
+      title: "$mPAWSY supply: ",
+      value: `${totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "0"}`,
       className: "green",
     },
+    {
+      title: "REWARDS YOU CLAIMED",
+      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
+      className: "green",
+    },
+    // {
+    //   title: "Claim Rewards",
+    //   value: `Ability to claim rewards`,
+    //   className: "green",
+    // },
     {
       title: "TO BE ADDED SOON",
       value: `Rewards Market page`,

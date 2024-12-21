@@ -9,6 +9,7 @@ import {
   BugAntIcon,
   CakeIcon,
   CurrencyDollarIcon,
+  GiftIcon,
   MapIcon,
   QuestionMarkCircleIcon,
   UsersIcon,
@@ -46,6 +47,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Roadmap",
     href: "/roadmap",
     icon: <MapIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Rewards & Income",
+    href: "/rewards",
+    icon: <GiftIcon className="h-4 w-4" />,
   },
   {
     label: "Collaborate",

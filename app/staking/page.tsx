@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Portfolio } from "./_components/Portfolio";
 import { Purchase } from "./_components/Purchase";
 import { Statistics } from "./_components/Statistics";
@@ -63,14 +64,18 @@ const Staking: NextPage = () => {
                         </p>
                         <p>
                           Screenshots with the sniper and the private repository: <br />
-                          <img
+                          <Image
                             src="/Snipy McSnappingson v1.0.png"
                             alt="Sniper screenshot 1"
+                            width={800}
+                            height={450}
                             className="mt-4 rounded-lg w-full sm:w-auto"
                           />
-                          <img
+                          <Image
                             src="/Snipy McSnappingson v1.0 - repo.png"
                             alt="Sniper screenshot 2"
+                            width={800}
+                            height={450}
                             className="mt-4 rounded-lg w-full sm:w-auto"
                           />
                         </p>
