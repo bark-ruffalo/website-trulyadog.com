@@ -130,7 +130,6 @@ const Roadmap: NextPage = () => {
                     Phase 3: Alpha Unleashed 💎
                   </h2>
                   <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>🎯 Launch proprietary AI frameworks and modules</li>
                     <li>🎯 Implement DAO governance system</li>
                     <li>🎯 Create automated income distribution</li>
                     <li>
@@ -141,6 +140,10 @@ const Roadmap: NextPage = () => {
                       🎯 Create the Bark Ruffalo foundation and cross our presence into the traditional financial system
                     </li>
                     <li>🎯 Establish even more revenue streams from AI services</li>
+                    <li>
+                      🎯 Be known for being a large collaborator in the open-source community for AI agents, but also
+                      own and rent proprietary software.
+                    </li>
                     <li>🎯 Be known for Bark Ruffalo being the most intelligent and knowledgeable AI agent</li>
                     <li>🎯 Scale ecosystem to support 100k+ users</li>
                   </ul>
