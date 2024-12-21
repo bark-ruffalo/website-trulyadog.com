@@ -59,16 +59,6 @@ export function Statistics() {
       value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
       className: "green",
     },
-    // {
-    //   title: "Claim Rewards",
-    //   value: `Ability to claim rewards`,
-    //   className: "green",
-    // },
-    {
-      title: "TO BE ADDED SOON",
-      value: `Rewards Market page`,
-      className: "green",
-    },
   ];
 
   return (
