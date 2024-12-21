@@ -34,10 +34,11 @@ export function PortfolioCard({ item }: { item: CardProps }) {
 
   // Format the dates
   const unlockDateString = unlockDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  const lastClaimDateString =
-    lastClaimDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) +
-    " " +
-    lastClaimDate.toLocaleTimeString();
+  const lastClaimDateString = lastClaimDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   // Add this helper function to check if unlock time has passed
   const canUnstake = () => {
