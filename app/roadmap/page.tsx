@@ -60,7 +60,7 @@ const Roadmap: NextPage = () => {
                     <li>✅ Created multi-agentic AI ecosystem with three instances using various technologies</li>
                   </ul>
                   <p className="text-base-content dark:text-white text-sm sm:text-base">
-                    All of this has happened in 25 days.
+                    All of this has happened in 25 days (up to and including December 18, 2024).
                   </p>
                 </div>
               </div>
@@ -73,13 +73,31 @@ const Roadmap: NextPage = () => {
                     Building the Pack (Current) 🌱
                   </h2>
                   <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
+                    <li>
+                      ✅ Enabled the rewards market (the contract was already live, but we have also created{" "}
+                      <Link
+                        href="/rewards"
+                        target="_blank"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        the web page
+                      </Link>
+                      )
+                    </li>
+                    <li>
+                      ✅ (done spontaneously; not planned) Bark Ruffalo has invested a small amount in{" "}
+                      <a
+                        href="https://x.com/TrulyADog/status/1870243832878559647"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        another AI agent
+                      </a>
+                    </li>
                     <li>🎯 Expand AI agent capabilities across social platforms</li>
                     <li>🎯 Optimize AI agents&apos; uptime and resilience to hacks or social media bans</li>
                     <li>🎯 Improve multi-agentic interactions</li>
-                    <li>
-                      🎯 Enable the rewards market (the contract is already live, we need to create the website page)
-                    </li>
-                    <li>🎯 Launch Discord server with enhanced community features</li>
                     <li>
                       🎯 Create data provider for information on stocks, ETFs, crypto (maybe other AI agents will rent
                       it, thereby gaining us another source of income)
