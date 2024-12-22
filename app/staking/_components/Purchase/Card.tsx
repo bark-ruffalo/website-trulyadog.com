@@ -73,27 +73,29 @@ export function StakingCard({ item }: { item: CardProps }) {
   };
 
   const onStake = async (): Promise<void> => {
-    if (!stakeAmount) {
+    if (!stakeAmount || Number(stakeAmount) === 0) {
       notification.error("Staking Vault: Cannot stake zero amount.");
       return;
     }
 
-    if (!allowance || parseEther(stakeAmount) > allowance) {
-      notification.error("Staking Vault: You should approve stake amount to StakingVault.");
-      return;
-    }
-
     try {
+      const parsedAmount = parseEther(stakeAmount);
+      if (!allowance || parsedAmount > allowance) {
+        notification.error("Staking Vault: You should approve stake amount to StakingVault.");
+        return;
+      }
+
       await stake({
         functionName: "stake",
-        args: [item.poolId, parseEther(stakeAmount), BigInt(item.lockPeriods[lockPeriodIndex])],
+        args: [item.poolId, parsedAmount, BigInt(item.lockPeriods[lockPeriodIndex])],
       });
       notification.success("Stake successful!");
       await refetchTokenBalance();
       triggerPortfolioRefresh();
       scrollToPortfolio();
     } catch (error) {
-      notification.error(`Staking failed: ${error}`);
+      console.error("Staking failed:", error);
+      notification.error(`Staking failed: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 
@@ -119,8 +121,10 @@ export function StakingCard({ item }: { item: CardProps }) {
   function handleStakeAmountChange(event: ChangeEvent<HTMLInputElement>): void {
     const value = event.target.value;
 
-    if (value === "" || /^\d*\.?\d*$/.test(value)) {
-      setStakeAmount(value);
+    if (value === "" || /^\d*\.?\d{0,18}$/.test(value)) {
+      if (value.split(".").length <= 2) {
+        setStakeAmount(value);
+      }
     }
   }
 
