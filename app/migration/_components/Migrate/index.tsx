@@ -68,26 +68,29 @@ export function Migrate() {
     }
   };
   const onMigrate = async (): Promise<void> => {
-    if (!pawsyAmount) {
+    if (!pawsyAmount || Number(pawsyAmount) === 0) {
       notification.error("Token Migration: Cannot migrate zero amount.");
       return;
     }
 
-    if (!allowance || BigInt(pawsyAmount) > allowance) {
-      notification.error("Token Migration: You should approve migrate amount to StakingVault.");
-      return;
-    }
-
     try {
+      const parsedAmount = parseEther(pawsyAmount);
+      if (!allowance || parsedAmount > allowance) {
+        notification.error("Token Migration: You should approve migrate amount to StakingVault.");
+        return;
+      }
+
       await migrate({
         functionName: "migrateTokens",
-        args: [parseEther(pawsyAmount)],
+        args: [parsedAmount],
       });
-      console.log("Stake successful!");
+      console.log("Migration successful!");
       await refetchMPawsyBalance();
       await refetchPawsyBalance();
+      notification.success("Migration completed successfully!");
     } catch (error) {
-      console.error("Staking failed:", error);
+      console.error("Migration failed:", error);
+      notification.error(`Migration failed: ${error instanceof Error ? error.message : "Unknown error"}`);
     }
   };
 
@@ -103,14 +106,18 @@ export function Migrate() {
     const value = event.target.value;
     setInputError("");
 
-    if (value === "" || /^\d*\.?\d*$/.test(value)) {
-      setPawsyAmount(value);
+    if (value === "" || /^\d*\.?\d{0,18}$/.test(value)) {
+      if (value.split(".").length <= 2) {
+        setPawsyAmount(value);
 
-      const numValue = Number(value);
-      if (pawsyBalance && numValue > Number(formatEther(pawsyBalance))) {
-        setInputError("Amount exceeds balance");
-      } else if (numValue < 0) {
-        setInputError("Amount must be positive");
+        if (value !== "") {
+          const numValue = Number(value);
+          if (pawsyBalance && numValue > Number(formatEther(pawsyBalance))) {
+            setInputError("Amount exceeds balance");
+          } else if (numValue < 0) {
+            setInputError("Amount must be positive");
+          }
+        }
       }
     }
   }
