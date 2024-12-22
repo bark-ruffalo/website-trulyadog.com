@@ -11,7 +11,6 @@ export function Migrate() {
   const [pawsyAmount, setPawsyAmount] = useState<string>("");
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
-  const { data: tokenMigrationImpContract } = useDeployedContractInfo("$mPAWSYImp");
   const { data: pawsyContract } = useDeployedContractInfo("$PAWSY");
   const { data: mPawsyContract } = useDeployedContractInfo("$mPAWSY");
 
@@ -35,7 +34,6 @@ export function Migrate() {
 
   const { writeContractAsync: approve, isPending: isApprovePending } = useScaffoldWriteContract("$PAWSY");
   const { writeContractAsync: migrate, isPending: isMigratePending } = useScaffoldWriteContract("TokenMigration");
-  const { writeContractAsync: migrateImp, isPending: isMigrateImpPending } = useScaffoldWriteContract("$mPAWSYImp");
 
   const addTokenToMetamask = async (address: string, symbol: string) => {
     try {
@@ -57,16 +55,11 @@ export function Migrate() {
     }
   };
 
-  const MIGRATION_THRESHOLD = parseEther("500000"); // Adjust this value as needed
-
   const onApprove = async (): Promise<void> => {
     try {
-      const contractAddress =
-        pawsyBalance > MIGRATION_THRESHOLD ? tokenMigrationImpContract?.address : tokenMigrationContract?.address;
-
       await approve({
         functionName: "approve",
-        args: [contractAddress, pawsyBalance],
+        args: [tokenMigrationContract?.address, parseEther(pawsyAmount)],
       });
       notification.success("Approval successful!");
       await refetchTokenAllowance();
@@ -74,38 +67,27 @@ export function Migrate() {
       notification.error(`Approval failed: ${error}`);
     }
   };
-
   const onMigrate = async (): Promise<void> => {
     if (!pawsyAmount) {
       notification.error("Token Migration: Cannot migrate zero amount.");
       return;
     }
 
-    const amount = parseEther(pawsyAmount);
-    const isHighAmount = pawsyBalance > MIGRATION_THRESHOLD;
-    if (!allowance || amount > allowance) {
-      notification.error("Token Migration: You should approve migrate amount first.");
+    if (!allowance || BigInt(pawsyAmount) > allowance) {
+      notification.error("Token Migration: You should approve migrate amount to StakingVault.");
       return;
     }
 
     try {
-      if (isHighAmount) {
-        await migrateImp({
-          functionName: "migrateTokens",
-          args: [amount],
-        });
-      } else {
-        await migrate({
-          functionName: "migrateTokens",
-          args: [amount],
-        });
-      }
-
-      notification.success("Migration successful!");
+      await migrate({
+        functionName: "migrateTokens",
+        args: [parseEther(pawsyAmount)],
+      });
+      console.log("Stake successful!");
       await refetchMPawsyBalance();
       await refetchPawsyBalance();
     } catch (error) {
-      notification.error(`Migration failed: ${error}`);
+      console.error("Staking failed:", error);
     }
   };
 
@@ -208,12 +190,12 @@ export function Migrate() {
                       placeholder="Enter amount"
                       value={pawsyAmount}
                       onChange={handlePawsyAmountChange}
-                      disabled={isApprovePending || isMigratePending || isMigrateImpPending}
+                      disabled={isApprovePending || isMigratePending}
                     />
                     <button
                       onClick={handleMaxClick}
                       className="px-2 py-1 text-xs sm:text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                      disabled={isApprovePending || isMigratePending || isMigrateImpPending}
+                      disabled={isApprovePending || isMigratePending}
                     >
                       MAX
                     </button>
