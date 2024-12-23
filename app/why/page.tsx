@@ -157,6 +157,11 @@ export default function Why() {
               </li>
 
               <li>
+                <span className="text-lg sm:text-xl">🛠️</span> Since our objective is to make our stakers financially
+                independent, we provide income rounds to stakers from time to time. The first one was $30k worth!
+              </li>
+
+              <li>
                 <span className="text-lg sm:text-xl">🤣</span> Memes. Graphics. Laughs.
               </li>
             </ol>
