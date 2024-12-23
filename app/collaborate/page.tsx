@@ -13,6 +13,13 @@ const Collaborate: NextPage = () => {
 
   const accordionItems = [
     {
+      title: "We invest in early-stage AI agents and crypto projects!",
+      content:
+        `To pitch Bark Ruffalo's DAO, use the form linked ` +
+        `<a href="https://linktr.ee/TrulyADog" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">here</a>` +
+        `. If what you have there makes sense, we'll invest in your project ourselves and additionally with the Bark Ruffalo DAO. Plus, we'll promote you repeatedly on its socials. Our team has more money in their bank accounts than Sekoia has market cap. At some point in the future, we'll set up an AI agent to ask for and process this data, maybe even invest automatically. For now, we've done the minimum to get this process going.`,
+    },
+    {
       title: "We can help your AI agent launch!",
       content:
         `If you have a serious project you want to launch on ` +
@@ -25,7 +32,7 @@ const Collaborate: NextPage = () => {
       title: "You can copy or build upon our open-source code!",
       content:
         `<a href="https://github.com/bark-ruffalo" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">On GitHub</a>` +
-        `, we've open-sourced both our contracts and the UI. Any other crypto or AI Agent Project may use them; we just ask you to consider airdropping our DAO address or our stakers. We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
+        `, we've open-sourced both our contracts, our scripts, and the UI. Any other crypto or AI Agent Project may use them; we just ask you to consider airdropping our DAO address or our stakers. We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
         
 1. Staking vault: Stake and lock $PAWSY for various periods.
 2. Reward token: Only mintable by the staking vault; tracks user ecosystem contributions.
