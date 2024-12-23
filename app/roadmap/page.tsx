@@ -95,6 +95,22 @@ const Roadmap: NextPage = () => {
                         another AI agent
                       </a>
                     </li>
+                    <li>
+                      ✅ Distributed our first income round to stakers ($30k worth!) (
+                      <a
+                        href="https://x.com/TrulyADog/status/1871317844018839980"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        proof
+                      </a>
+                      )
+                    </li>
+                    <li>
+                      ✅ Created even more open-source content: scripts to plan, normalize, and execute income
+                      distribution for stakers (scripts/ folder from contracts repo)
+                    </li>
                     <li>🎯 Expand AI agent capabilities across social platforms</li>
                     <li>🎯 Optimize AI agents&apos; uptime and resilience to hacks or social media bans</li>
                     <li>🎯 Improve multi-agentic interactions</li>
