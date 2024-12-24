@@ -16,6 +16,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import { useActiveStakedBalance } from "~~/hooks/useActiveStakedBalance"; 
+import { useAccount } from "wagmi";
 
 type HeaderMenuLink = {
   label: string;
@@ -31,7 +33,7 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "$mPAWSY",
     href: "/migration",
-    icon: <CurrencyDollarIcon className="h-4 w-4" />,
+    icon: <CurrencyDollarIcon className="h-4 w-4" /> ,
   },
   {
     label: "Stake",
@@ -72,10 +74,25 @@ export const menuLinks: HeaderMenuLink[] = [
 
 export const HeaderMenuLinks = () => {
   const pathname = usePathname();
+  const { address } = useAccount();
+  const { activeStakedBalance } = useActiveStakedBalance(address); 
+
+  
+  const extendedMenuLinks = [
+    ...menuLinks,
+    ...(activeStakedBalance >= 5000
+      ? [
+          {
+            label: "🤫📄",
+            href: "/secret",
+          },
+        ]
+      : []),
+  ];
 
   return (
     <>
-      {menuLinks.map(({ label, href, icon }) => {
+      {extendedMenuLinks.map(({ label, href, icon }) => {
         const isActive = pathname === href;
         return (
           <li key={href}>
