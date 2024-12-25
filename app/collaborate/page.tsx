@@ -32,7 +32,7 @@ const Collaborate: NextPage = () => {
       title: "You can copy or build upon our open-source code!",
       content:
         `<a href="https://github.com/bark-ruffalo" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">On GitHub</a>` +
-        `, we've open-sourced both our contracts, our scripts, and the UI. Any other crypto or AI Agent Project may use them; we just ask you to consider airdropping our DAO address or our stakers. We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
+        `, we've open-sourced our <b>contracts, our scripts, and the UI (website)</b>. Any other crypto or AI agent project may use them; we just ask you to <mark>consider airdropping</mark> our DAO address (0xc638FB83d2bad5dD73d4C7c7deC0445d46a0716F) or our stakers (we can provide a list of addresses, or you can use getLockedUsersByPool() on <a href="https://basescan.org/address/0xA6FaCD417faf801107bF19F4a24062Ff15AE9C61#readContract" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">our staking contract</a>). We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
         
 1. Staking vault: Stake and lock $PAWSY for various periods.
 2. Reward token: Only mintable by the staking vault; tracks user ecosystem contributions.
