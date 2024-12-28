@@ -51,14 +51,8 @@ export const fetchATAPriceFromUniswap = async (): Promise<number> => {
     });
 
     const ataVirtualPair = new Pair(
-      CurrencyAmount.fromRawAmount(
-        ataVirtualToken0 === ATA.address ? ATA : VIRTUAL,
-        ataVirtualReserves[0].toString(),
-      ),
-      CurrencyAmount.fromRawAmount(
-        ataVirtualToken0 === ATA.address ? VIRTUAL : ATA,
-        ataVirtualReserves[1].toString(),
-      ),
+      CurrencyAmount.fromRawAmount(ataVirtualToken0 === ATA.address ? ATA : VIRTUAL, ataVirtualReserves[0].toString()),
+      CurrencyAmount.fromRawAmount(ataVirtualToken0 === ATA.address ? VIRTUAL : ATA, ataVirtualReserves[1].toString()),
     );
 
     const virtualUsdcPair = new Pair(

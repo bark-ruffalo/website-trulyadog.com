@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { NotionRenderer } from 'react-notion';
+import React, { useEffect, useState } from "react";
+import { NotionRenderer } from "react-notion";
 
 const About = () => {
   const [notionData, setNotionData] = useState(null);
@@ -10,13 +10,11 @@ const About = () => {
   useEffect(() => {
     const fetchNotionData = async () => {
       try {
-        const res = await fetch(
-          'https://notion-api.splitbee.io/v1/page/16905e31cf9680cd8d3ef40e05643d81'
-        );
+        const res = await fetch("https://notion-api.splitbee.io/v1/page/16905e31cf9680cd8d3ef40e05643d81");
         const data = await res.json();
         setNotionData(data);
       } catch (error) {
-        console.error('Error fetching Notion data:', error);
+        console.error("Error fetching Notion data:", error);
       } finally {
         setLoading(false);
       }
@@ -28,22 +26,22 @@ const About = () => {
   return (
     <div>
       <h1>About</h1>
-    <div style={styles.container}>
-      {loading && <p>Loading...</p>}
-      {notionData && <NotionRenderer blockMap={notionData} />}
-    </div>
+      <div style={styles.container}>
+        {loading && <p>Loading...</p>}
+        {notionData && <NotionRenderer blockMap={notionData} />}
+      </div>
     </div>
   );
 };
 
 const styles = {
   container: {
-    padding: '20px',
-    maxWidth: '1000px',
-    margin: '0 auto',
+    padding: "20px",
+    maxWidth: "1000px",
+    margin: "0 auto",
 
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    borderRadius: "8px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   },
 };
 

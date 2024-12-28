@@ -13,8 +13,8 @@ const Collaborate: NextPage = () => {
 
   const accordionItems = [
     {
-  "title": "Be Part of Our Journey!",
-  "content": `We are paving the future of marketing and are seeking passionate individuals to join us. Here’s who we’re looking for:
+      title: "Be Part of Our Journey!",
+      content: `We are paving the future of marketing and are seeking passionate individuals to join us. Here’s who we’re looking for:
 
 • Marketing Specialists
 • Developers and Engineers
@@ -30,7 +30,7 @@ We prefer to work with individuals who are genuinely invested in the success of 
 Reach out to us on Telegram or at atavirtuals@gmail.com
 
 Let’s build the future of $ATA together!`,
-}
+    },
   ];
 
   return (
