@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   Bars3Icon,
   BugAntIcon,
-  // CakeIcon, // CurrencyDollarIcon,
+  CurrencyDollarIcon, // CakeIcon, // CurrencyDollarIcon,
   // // GiftIcon,
   // // MapIcon,
   // QuestionMarkCircleIcon,
@@ -27,11 +27,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Home",
     href: "/",
   },
-  // {
-  //   label: "Buy $ATA",
-  //   href: "/migration",
-  //   icon: <CurrencyDollarIcon className="h-4 w-4" />,
-  // },
+  {
+    label: "$ATA",
+    href: "/swap",
+    icon: <CurrencyDollarIcon className="h-4 w-4" />,
+  },
   {
     label: "Stake",
     href: "/staking",

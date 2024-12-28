@@ -24,19 +24,19 @@ const About: NextPage = () => {
 
   const benefits = [
     {
-      icon: "💎",
-      title: "Staking Rewards",
-      description: "Earn rewards through our $ATA token staking program",
+      icon: "💰",
+      title: "Revenue Sharing",
+      description: "Earn passive income from AI-generated affiliate sales by staking $ATA tokens",
     },
     {
-      icon: "📈",
-      title: "Commission Sharing",
-      description: "Participate in our revolutionary commission sharing system",
+      icon: "🚀",
+      title: "Early Access",
+      description: "Be first to experience new features and platform updates",
     },
     {
-      icon: "🔑",
-      title: "Platform Access",
-      description: "Get exclusive access to cutting-edge AI marketing tools",
+      icon: "🎯",
+      title: "Performance Analytics",
+      description: "Track your earnings and staking rewards in real-time",
     },
   ];
 
@@ -122,8 +122,8 @@ const About: NextPage = () => {
                 <div className="relative z-10">
                   <h2 className="text-2xl font-bold mb-4 text-base-content dark:text-white">Our Vision</h2>
                   <p className="text-base-content dark:text-white/90">
-                    A future where digital marketing is more efficient, transparent, and rewarding for everyone
-                    involved.
+                    To become the global standard in marketing by transforming the industry through AI-powered
+                    recommendations and blockchain transparency.
                   </p>
                 </div>
               </div>

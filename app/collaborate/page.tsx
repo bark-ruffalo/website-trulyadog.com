@@ -12,7 +12,7 @@ const Collaborate: NextPage = () => {
     {
       icon: "💻",
       title: "Developers and Engineers",
-      description: "Build and improve our platform&apos;s technical infrastructure",
+      description: "Build and improve our platform's technical infrastructure",
     },
     {
       icon: "🤖",
