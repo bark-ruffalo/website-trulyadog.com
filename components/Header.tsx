@@ -7,11 +7,11 @@ import { usePathname } from "next/navigation";
 import {
   Bars3Icon,
   BugAntIcon,
-  CakeIcon, // CurrencyDollarIcon,
-  // GiftIcon,
-  // MapIcon,
-  QuestionMarkCircleIcon,
-  UsersIcon,
+  // CakeIcon, // CurrencyDollarIcon,
+  // // GiftIcon,
+  // // MapIcon,
+  // QuestionMarkCircleIcon,
+  // UsersIcon,
 } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
@@ -35,12 +35,12 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Stake",
     href: "/staking",
-    icon: <CakeIcon className="h-4 w-4" />,
+    //icon: <CakeIcon className="h-4 w-4" />,
   },
   {
     label: "About",
     href: "/about",
-    icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
+    //icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
   },
   // {
   //   label: "Roadmap",
@@ -55,7 +55,7 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Collaborate",
     href: "/collaborate",
-    icon: <UsersIcon className="h-4 w-4" />,
+    //icon: <UsersIcon className="h-4 w-4" />,
   },
   // Only show Debug menu item in development
   ...(process.env.NODE_ENV !== "production"

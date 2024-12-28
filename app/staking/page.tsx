@@ -67,7 +67,7 @@ const Staking: NextPage = () => {
             {/* Stats Preview */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
-                { label: "APY", value: "Coming Soon", icon: "📊" },
+                { label: "ATA Analytics", value: "Coming Soon", icon: "📊" },
                 { label: "Total Value Locked", value: "Coming Soon", icon: "🔒" },
                 { label: "Active Stakers", value: "Coming Soon", icon: "👥" },
               ].map((stat, index) => (

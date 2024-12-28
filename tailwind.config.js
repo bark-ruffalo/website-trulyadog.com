@@ -21,7 +21,7 @@ module.exports = {
           "accent-content": "#ffffff",
 
           // Background hierarchy
-          "base-100": "#1a1a1a",
+          "base-100": "#2d3436",
           "base-200": "#2d3436",
           "base-300": "#121212",
           "base-content": "#ffffff",
