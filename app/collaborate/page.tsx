@@ -3,55 +3,154 @@
 import type { NextPage } from "next";
 
 const Collaborate: NextPage = () => {
-  const content = `
-    We are paving the future of marketing and are seeking passionate individuals to join us. Here’s who we’re looking for:
+  const roles = [
+    {
+      icon: "🎯",
+      title: "Marketing Specialists",
+      description: "Help shape our marketing strategies and grow our community"
+    },
+    {
+      icon: "💻",
+      title: "Developers and Engineers",
+      description: "Build and improve our platform's technical infrastructure"
+    },
+    {
+      icon: "🤖",
+      title: "AI Enthusiasts",
+      description: "Contribute to our AI-driven marketing solutions"
+    },
+    {
+      icon: "🔒",
+      title: "Security Experts",
+      description: "Ensure platform security and scalability"
+    },
+    {
+      icon: "🎨",
+      title: "Creative Talent",
+      description: "Design and create engaging content for our community"
+    },
+    {
+      icon: "✨",
+      title: "Other Contributors",
+      description: "Bring your unique skills to help grow the ecosystem"
+    }
+  ];
 
-    • Marketing Specialists
-    • Developers and Engineers
-    • AI Enthusiasts
-    • Scalability and Security Experts
-    • Creative Talent
-    • Other Contributors
+  const steps = [
+    {
+      number: "01",
+      title: "Purchase $ATA",
+      description: "Join our ecosystem by acquiring $ATA tokens"
+    },
+    {
+      number: "02",
+      title: "Migrate & Stake",
+      description: "Stake your tokens to earn rewards (coming soon)",
+      comingSoon: true
+    }
+  ];
 
-    We prefer to work with individuals who are genuinely invested in the success of the project. As a sign of commitment, we encourage you to:
-    1. Purchase $ATA.
-    2. Migrate and stake your tokens (coming soon).
-
-    Reach out to us on Telegram or at atavirtuals@gmail.com
-
-    Let’s build the future of $ATA together!
-  `;
+  const contacts = [
+    {
+      icon: "📱",
+      platform: "Telegram",
+      link: "t.me/OfficialATACommunity",
+      label: "Join our Telegram"
+    },
+    {
+      icon: "✉️",
+      platform: "Email",
+      link: "mailto:atavirtuals@gmail.com",
+      label: "Send us an email"
+    }
+  ];
 
   return (
     <div className="flex items-center flex-col flex-grow">
       <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
         <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
-          <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
-            <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
-              Collaborate
-            </h1>
+          <div className="w-full max-w-[95%] sm:max-w-[75%] relative space-y-8">
+            {/* Hero Section */}
+            <div className="text-center mb-12">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-base-content dark:text-white">
+                Collaborate With Us
+              </h1>
+              <p className="text-xl sm:text-2xl text-base-content/80 dark:text-white/80 max-w-3xl mx-auto">
+                Join us in building the future of digital marketing through AI and blockchain technology
+              </p>
+            </div>
 
-            <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
-              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-              <div className="relative z-10 w-full">
-                <div className="space-y-4 w-full">
-                  <div
-                    className={`
-                      border-2 border-blue-500 dark:border-blue-400 rounded-xl overflow-hidden
-                      bg-blue-500 bg-opacity-5 dark:bg-opacity-10
-                      p-6
-                    `}
-                  >
-                    <h3 className="text-xl font-semibold text-base-content dark:text-white">
-                      Be Part of Our Journey!
-                    </h3>
-                    <p
-                      className="text-base-content dark:text-white whitespace-pre-line mt-4"
-                      dangerouslySetInnerHTML={{ __html: content }}
-                    ></p>
+            {/* Roles Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {roles.map((role, index) => (
+                <div 
+                  key={index}
+                  className="p-6 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative hover:bg-opacity-100 transition-all duration-300 group"
+                >
+                  <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm group-hover:bg-opacity-20"></div>
+                  <div className="relative z-10">
+                    <div className="text-4xl mb-4">{role.icon}</div>
+                    <h3 className="text-xl font-bold mb-2 text-base-content dark:text-white">{role.title}</h3>
+                    <p className="text-base-content/80 dark:text-white/80">{role.description}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Steps Section */}
+            <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative mt-12">
+              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-bold mb-8 text-base-content dark:text-white text-center">Get Started</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {steps.map((step, index) => (
+                    <div key={index} className="flex items-start gap-4 p-4 rounded-xl hover:bg-blue-500/5 transition-colors">
+                      <div className="text-3xl font-bold text-blue-500/50 dark:text-blue-400/50">{step.number}</div>
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2 text-base-content dark:text-white flex items-center gap-2">
+                          {step.title}
+                          {step.comingSoon && (
+                            <span className="text-xs font-normal px-2 py-1 bg-blue-500/10 rounded-full">Coming Soon</span>
+                          )}
+                        </h3>
+                        <p className="text-base-content/80 dark:text-white/80">{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+            </div>
+
+            {/* Contact Section */}
+            <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative mt-12">
+              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-bold mb-8 text-base-content dark:text-white text-center">Get in Touch</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                  {contacts.map((contact, index) => (
+                    <a
+                      key={index}
+                      href={contact.platform === "Email" ? contact.link : `https://${contact.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 p-4 rounded-xl hover:bg-blue-500/5 transition-all duration-300 group"
+                    >
+                      <div className="text-3xl group-hover:scale-110 transition-transform">{contact.icon}</div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-base-content dark:text-white">{contact.platform}</h3>
+                        <p className="text-base-content/80 dark:text-white/80">{contact.label}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Final CTA */}
+            <div className="text-center mt-12">
+              <p className="text-xl text-base-content/80 dark:text-white/80">
+                Let's build the future of $ATA together!
+              </p>
             </div>
           </div>
         </div>
