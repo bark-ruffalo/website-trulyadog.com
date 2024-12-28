@@ -7,47 +7,47 @@ const Collaborate: NextPage = () => {
     {
       icon: "🎯",
       title: "Marketing Specialists",
-      description: "Help shape our marketing strategies and grow our community"
+      description: "Help shape our marketing strategies and grow our community",
     },
     {
       icon: "💻",
       title: "Developers and Engineers",
-      description: "Build and improve our platform's technical infrastructure"
+      description: "Build and improve our platform's technical infrastructure",
     },
     {
       icon: "🤖",
       title: "AI Enthusiasts",
-      description: "Contribute to our AI-driven marketing solutions"
+      description: "Contribute to our AI-driven marketing solutions",
     },
     {
       icon: "🔒",
       title: "Security Experts",
-      description: "Ensure platform security and scalability"
+      description: "Ensure platform security and scalability",
     },
     {
       icon: "🎨",
       title: "Creative Talent",
-      description: "Design and create engaging content for our community"
+      description: "Design and create engaging content for our community",
     },
     {
       icon: "✨",
       title: "Other Contributors",
-      description: "Bring your unique skills to help grow the ecosystem"
-    }
+      description: "Bring your unique skills to help grow the ecosystem",
+    },
   ];
 
   const steps = [
     {
       number: "01",
       title: "Purchase $ATA",
-      description: "Join our ecosystem by acquiring $ATA tokens"
+      description: "Join our ecosystem by acquiring $ATA tokens",
     },
     {
       number: "02",
       title: "Migrate & Stake",
       description: "Stake your tokens to earn rewards (coming soon)",
-      comingSoon: true
-    }
+      comingSoon: true,
+    },
   ];
 
   const contacts = [
@@ -55,14 +55,14 @@ const Collaborate: NextPage = () => {
       icon: "📱",
       platform: "Telegram",
       link: "t.me/OfficialATACommunity",
-      label: "Join our Telegram"
+      label: "Join our Telegram",
     },
     {
       icon: "✉️",
       platform: "Email",
       link: "mailto:atavirtuals@gmail.com",
-      label: "Send us an email"
-    }
+      label: "Send us an email",
+    },
   ];
 
   return (
@@ -83,7 +83,7 @@ const Collaborate: NextPage = () => {
             {/* Roles Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {roles.map((role, index) => (
-                <div 
+                <div
                   key={index}
                   className="p-6 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative hover:bg-opacity-100 transition-all duration-300 group"
                 >
@@ -104,13 +104,18 @@ const Collaborate: NextPage = () => {
                 <h2 className="text-2xl font-bold mb-8 text-base-content dark:text-white text-center">Get Started</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {steps.map((step, index) => (
-                    <div key={index} className="flex items-start gap-4 p-4 rounded-xl hover:bg-blue-500/5 transition-colors">
+                    <div
+                      key={index}
+                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-blue-500/5 transition-colors"
+                    >
                       <div className="text-3xl font-bold text-blue-500/50 dark:text-blue-400/50">{step.number}</div>
                       <div>
                         <h3 className="text-lg font-semibold mb-2 text-base-content dark:text-white flex items-center gap-2">
                           {step.title}
                           {step.comingSoon && (
-                            <span className="text-xs font-normal px-2 py-1 bg-blue-500/10 rounded-full">Coming Soon</span>
+                            <span className="text-xs font-normal px-2 py-1 bg-blue-500/10 rounded-full">
+                              Coming Soon
+                            </span>
                           )}
                         </h3>
                         <p className="text-base-content/80 dark:text-white/80">{step.description}</p>

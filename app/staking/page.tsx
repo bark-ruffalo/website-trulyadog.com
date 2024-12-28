@@ -7,18 +7,18 @@ const Staking: NextPage = () => {
     {
       icon: "💎",
       title: "Token Staking",
-      description: "Stake your ATA tokens to earn rewards and participate in governance"
+      description: "Stake your ATA tokens to earn rewards and participate in governance",
     },
     {
       icon: "📈",
       title: "Profit Sharing",
-      description: "Earn a share of platform revenues through staking rewards"
+      description: "Earn a share of platform revenues through staking rewards",
     },
     {
       icon: "🏛️",
       title: "Governance",
-      description: "Participate in key platform decisions and shape the future of ATA"
-    }
+      description: "Participate in key platform decisions and shape the future of ATA",
+    },
   ];
 
   return (
@@ -28,9 +28,7 @@ const Staking: NextPage = () => {
           <div className="w-full max-w-[95%] sm:max-w-[75%] relative space-y-12">
             {/* Hero Section */}
             <div className="text-center">
-              <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-base-content dark:text-white">
-                Stake and Earn
-              </h1>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-base-content dark:text-white">Stake and Earn</h1>
               <p className="text-xl sm:text-2xl text-base-content/80 dark:text-white/80 max-w-3xl mx-auto">
                 Join our community of stakers and shape the future of digital marketing
               </p>
@@ -52,7 +50,7 @@ const Staking: NextPage = () => {
             {/* Features Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {features.map((feature, index) => (
-                <div 
+                <div
                   key={index}
                   className="p-6 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative hover:bg-opacity-100 transition-all duration-300 group"
                 >
@@ -71,9 +69,12 @@ const Staking: NextPage = () => {
               {[
                 { label: "APY", value: "Coming Soon", icon: "📊" },
                 { label: "Total Value Locked", value: "Coming Soon", icon: "🔒" },
-                { label: "Active Stakers", value: "Coming Soon", icon: "👥" }
+                { label: "Active Stakers", value: "Coming Soon", icon: "👥" },
               ].map((stat, index) => (
-                <div key={index} className="p-6 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative group">
+                <div
+                  key={index}
+                  className="p-6 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative group"
+                >
                   <div className="absolute inset-0 rounded-2xl z-0 bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 blur-sm"></div>
                   <div className="relative z-10 text-center">
                     <div className="text-3xl mb-2">{stat.icon}</div>
@@ -99,8 +100,17 @@ const Staking: NextPage = () => {
                   className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-500 to-cyan-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
                 >
                   Join Our Telegram
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-2"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </a>
               </div>
