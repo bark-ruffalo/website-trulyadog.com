@@ -1,14 +1,14 @@
 "use client";
 
-import { ArrowsRightLeftIcon, WalletIcon } from "@heroicons/react/24/outline";
 import type { NextPage } from "next";
+import { ArrowsRightLeftIcon, WalletIcon } from "@heroicons/react/24/outline";
 
 const ATA_TOKEN_ADDRESS = "0xb18c609796848C723eAcaDC0BE5b71Ceb2289a48";
 
 const SwapPage: NextPage = () => {
   const handleSwapClick = () => {
     const uniswapURL = `https://app.uniswap.org/swap?outputCurrency=${ATA_TOKEN_ADDRESS}&chain=base`;
-    window.open(uniswapURL, '_blank');
+    window.open(uniswapURL, "_blank");
   };
 
   return (
@@ -55,11 +55,10 @@ const SwapPage: NextPage = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-4">
                   <WalletIcon className="h-12 w-12 text-base-content/60 dark:text-white/60" />
-                  <h2 className="text-2xl font-bold text-base-content dark:text-white">
-                    Direct Swap
-                  </h2>
+                  <h2 className="text-2xl font-bold text-base-content dark:text-white">Direct Swap</h2>
                   <p className="text-base-content/80 dark:text-white/80 max-w-md">
-                    Soon you&apos;ll be able to swap for ATA tokens directly through our website from your connected wallet.
+                    Soon you&apos;ll be able to swap for ATA tokens directly through our website from your connected
+                    wallet.
                   </p>
                 </div>
               </div>

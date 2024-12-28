@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import type { NextPage } from "next";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const Collaborate: NextPage = () => {
   const roles = [
@@ -41,6 +43,7 @@ const Collaborate: NextPage = () => {
       number: "01",
       title: "Purchase $ATA",
       description: "Join our ecosystem by acquiring $ATA tokens",
+      link: "/swap",
     },
     {
       number: "02",
@@ -49,6 +52,27 @@ const Collaborate: NextPage = () => {
       comingSoon: true,
     },
   ];
+
+  const StepContent = ({ step }: { step: (typeof steps)[0] }) => (
+    <div className="flex items-start gap-4">
+      <div className="text-3xl font-bold text-blue-500/50 dark:text-blue-400/50">{step.number}</div>
+      <div className="flex-1">
+        <h3 className="text-lg font-semibold mb-2 text-base-content dark:text-white flex items-center gap-2">
+          {step.title}
+          {step.comingSoon && (
+            <span className="text-xs font-normal px-2 py-1 bg-blue-500/10 rounded-full">Coming Soon</span>
+          )}
+        </h3>
+        <p className="text-base-content/80 dark:text-white/80">{step.description}</p>
+        {step.link && (
+          <div className="flex items-center gap-2 text-blue-500 dark:text-blue-400 font-semibold mt-2">
+            Get $ATA now
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
 
   const contacts = [
     {
@@ -103,25 +127,21 @@ const Collaborate: NextPage = () => {
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold mb-8 text-base-content dark:text-white text-center">Get Started</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {steps.map((step, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-blue-500/5 transition-colors"
-                    >
-                      <div className="text-3xl font-bold text-blue-500/50 dark:text-blue-400/50">{step.number}</div>
-                      <div>
-                        <h3 className="text-lg font-semibold mb-2 text-base-content dark:text-white flex items-center gap-2">
-                          {step.title}
-                          {step.comingSoon && (
-                            <span className="text-xs font-normal px-2 py-1 bg-blue-500/10 rounded-full">
-                              Coming Soon
-                            </span>
-                          )}
-                        </h3>
-                        <p className="text-base-content/80 dark:text-white/80">{step.description}</p>
+                  {steps.map((step, index) =>
+                    step.link ? (
+                      <Link
+                        key={index}
+                        href={step.link}
+                        className="p-4 rounded-xl hover:bg-blue-500/5 transition-colors cursor-pointer group"
+                      >
+                        <StepContent step={step} />
+                      </Link>
+                    ) : (
+                      <div key={index} className="p-4 rounded-xl hover:bg-blue-500/5 transition-colors">
+                        <StepContent step={step} />
                       </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
                 </div>
               </div>
             </div>
