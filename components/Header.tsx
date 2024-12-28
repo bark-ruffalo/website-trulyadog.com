@@ -8,9 +8,9 @@ import {
   Bars3Icon,
   BugAntIcon,
   CakeIcon,
-  CurrencyDollarIcon,
-  GiftIcon,
-  MapIcon,
+  // CurrencyDollarIcon,
+  // GiftIcon,
+  // MapIcon,
   QuestionMarkCircleIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
