@@ -16,14 +16,14 @@ type GlobalState = {
     price: number;
     isFetching: boolean;
   };
-  pawsy: {
+  ata: {
     price: number;
     isFetching: boolean;
   };
   setNativeCurrencyPrice: (newNativeCurrencyPriceState: number) => void;
-  setPawsyPrice: (newPawsyPriceState: number) => void;
+  setATAPrice: (newATAPriceState: number) => void;
   setIsNativeCurrencyFetching: (newIsNativeCurrencyFetching: boolean) => void;
-  setIsPawsyFetching: (newIsPawsyFetching: boolean) => void;
+  setIsATAFetching: (newIsATAFetching: boolean) => void;
   targetNetwork: ChainWithAttributes;
   setTargetNetwork: (newTargetNetwork: ChainWithAttributes) => void;
 };
@@ -33,16 +33,16 @@ export const useGlobalState = create<GlobalState>(set => ({
     price: 0,
     isFetching: true,
   },
-  pawsy: {
+  ata: {
     price: 0,
     isFetching: true,
   },
   setNativeCurrencyPrice: (newValue: number): void =>
     set(state => ({ nativeCurrency: { ...state.nativeCurrency, price: newValue } })),
-  setPawsyPrice: (newValue: number): void => set(state => ({ pawsy: { ...state.pawsy, price: newValue } })),
+  setATAPrice: (newValue: number): void => set(state => ({ ata: { ...state.ata, price: newValue } })),
   setIsNativeCurrencyFetching: (newValue: boolean): void =>
     set(state => ({ nativeCurrency: { ...state.nativeCurrency, isFetching: newValue } })),
-  setIsPawsyFetching: (newValue: boolean): void => set(state => ({ pawsy: { ...state.pawsy, isFetching: newValue } })),
+  setIsATAFetching: (newValue: boolean): void => set(state => ({ ata: { ...state.ata, isFetching: newValue } })),
   targetNetwork: scaffoldConfig.targetNetworks[0],
   setTargetNetwork: (newTargetNetwork: ChainWithAttributes) => set(() => ({ targetNetwork: newTargetNetwork })),
 }));

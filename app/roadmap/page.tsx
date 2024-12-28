@@ -10,11 +10,11 @@ const Roadmap: NextPage = () => {
         <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
           <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
             <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
-              Bark Ruffalo Ecosystem: The Path to Multi-Agentic Dominance
+              ATA Roadmap Coming Soon...
             </h1>
 
-            <div className="space-y-8">
-              {/* Achievements Section */}
+            {/* <div className="space-y-8">
+              {/* Achievements Section 
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-green-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -65,7 +65,7 @@ const Roadmap: NextPage = () => {
                 </div>
               </div>
 
-              {/* Building the Pack Section */}
+              {/* Building the Pack Section 
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -127,7 +127,7 @@ const Roadmap: NextPage = () => {
                 </div>
               </div>
 
-              {/* Phase 2 Section */}
+              {/* Phase 2 Section 
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-purple-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -156,7 +156,7 @@ const Roadmap: NextPage = () => {
                 </div>
               </div>
 
-              {/* Phase 3 Section */}
+              {/* Phase 3 Section 
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-yellow-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -184,7 +184,7 @@ const Roadmap: NextPage = () => {
                 </div>
               </div>
 
-              {/* Important Notes Section */}
+              {/* Important Notes Section
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-red-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -201,7 +201,7 @@ const Roadmap: NextPage = () => {
                 </div>
               </div>
 
-              {/* Core Principles Section */}
+              {/* Core Principles Section
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-indigo-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -219,7 +219,7 @@ const Roadmap: NextPage = () => {
                 </div>
               </div>
 
-              {/* Remember Section */}
+              {/* Remember Section 
               <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-pink-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10">
@@ -267,7 +267,7 @@ const Roadmap: NextPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

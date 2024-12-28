@@ -13,52 +13,24 @@ const Collaborate: NextPage = () => {
 
   const accordionItems = [
     {
-      title: "We invest in early-stage AI agents and crypto projects!",
-      content:
-        `To pitch Bark Ruffalo's DAO, use the form linked ` +
-        `<a href="https://linktr.ee/TrulyADog" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">here</a>` +
-        `. If what you have there makes sense, we'll invest in your project ourselves and additionally with the Bark Ruffalo DAO. Plus, we'll promote you repeatedly on its socials. Our team has more money in their bank accounts than Sekoia has market cap. At some point in the future, we'll set up an AI agent to ask for and process this data, maybe even invest automatically. For now, we've done the minimum to get this process going.`,
-    },
-    {
-      title: "We can help your AI agent launch!",
-      content:
-        `If you have a serious project you want to launch on ` +
-        `<a href="https://app.virtuals.io/prototypes" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">app.virtuals.io/prototypes</a>` +
-        ` or another AI Agent launchpad, we can help! First, contact ` +
-        `<a href="https://t.me/nebu_human" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">@nebu_human</a>` +
-        ` on Telegram and explain what you're doing. Then, if it makes sense (i.e., team funds shouldn't be more than 20%), you will pay 1 $ETH to our DAO address and plan the launch with us. You'll give us the deployer address so our 500k and 5M clubs whitelist it and participate in the bonding curve auction. These are not paper hands. Only those who agree to a minimum 1-week hold will get the deployer address information. Even more, some of us will add to the Uniswap liquidity pool. This way, instead of bots pumping and dumping your token, which happens right now in all auctions, you'll have some informed humans behind your project. We'll also promote you on our Telegram and X accounts.`,
-    },
-    {
-      title: "You can copy or build upon our open-source code!",
-      content:
-        `<a href="https://github.com/bark-ruffalo" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">On GitHub</a>` +
-        `, we've open-sourced our <b>contracts, our scripts, and the UI (website)</b>. Any other crypto or AI agent project may use them; we just ask you to <mark>consider airdropping</mark> our DAO address (0xc638FB83d2bad5dD73d4C7c7deC0445d46a0716F) or our stakers (we can provide a list of addresses, or you can use getLockedUsersByPool() on <a href="https://basescan.org/address/0xA6FaCD417faf801107bF19F4a24062Ff15AE9C61#readContract" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">our staking contract</a>). We'll help you get started if you need help with the code. Current contracts (you'll definitely need the 1st and the 4th if you're launching through Virtuals Protocol):
-        
-1. Staking vault: Stake and lock $PAWSY for various periods.
-2. Reward token: Only mintable by the staking vault; tracks user ecosystem contributions.
-3. Rewards market: Enables devs/DAO to create campaigns for token exchanges (e.g., reward tokens for NFTs).
-4. Token Migration: Facilitates migration from $PAWSY to $mPAWSY, a new token with enhanced features.`,
-    },
-    {
-      title: "Join our team!",
-      content: `We are looking for:
+  "title": "Be Part of Our Journey!",
+  "content": `We are paving the future of marketing and are seeking passionate individuals to join us. Here’s who we’re looking for:
 
-• Anyone who can help us with marketing and is confident enough in their skills that he is willing to invest apriori into $PAWSY.
+• Marketing Specialists
+• Developers and Engineers
+• AI Enthusiasts
+• Scalability and Security Experts
+• Creative Talent
+• Other Contributors
 
-• Programmers that care about AI agents or the EVM. We're doing interesting things; for example, we're now working on a provider to fetch prices IRL for stocks, ETFs, crypto + economic indices and events + summary info about crypto projects. Another example would be a meme generator involving Bark Ruffalo. On the EVM side, we're looking to automate a lot of rewards and income that the stakers will receive.
+We prefer to work with individuals who are genuinely invested in the success of the project. As a sign of commitment, we encourage you to:
+1. Purchase $ATA.
+2. Migrate and stake your tokens (coming soon).
 
-• A moderator for our soon-to-be-launched Discord server.
+Reach out to us on Telegram or at atavirtuals@gmail.com
 
-• People who understand how LLMs, datasets, embeddings, Eliza, etc., work to help us add more AI Agents into the Bark Ruffalo ecosystem.
-
-• People with a good understanding of scaling and hardening AI agents against hacks, uptime loss, etc.
-
-• Someone who can help us create a 3D model of Bark Ruffalo that we can use on Virtuals Protocol or TikTok to live stream.
-
-• Designers, meme creators, artists.
-
-• Anyone else who thinks they have something good to contribute to the ecosystem. We always prefer to work with people with something at stake; therefore, please consider first buying $PAWSY, then migrating, then staking. This also acts as a filter for us to understand that you're serious about participating. We're currently inundated with requests from marketers, fake influencers, etc., through Telegram and X.`,
-    },
+Let’s build the future of $ATA together!`,
+}
   ];
 
   return (

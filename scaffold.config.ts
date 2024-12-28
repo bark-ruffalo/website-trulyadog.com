@@ -3,7 +3,7 @@ import * as chains from "viem/chains";
 export type ScaffoldConfig = {
   targetNetworks: readonly chains.Chain[];
   poolTokens: string[];
-  pawsyPrice: number;
+  ataPrice: number;
   pollingInterval: number;
   enablePolling: boolean;
   alchemyApiKey: string;
@@ -15,9 +15,9 @@ const scaffoldConfig = {
   // The networks on which your DApp is live
   targetNetworks: [chains.base],
 
-  poolTokens: ["$PAWSY", "$mPAWSY", "$PAWSY/$VIRTUAL LP"],
+  poolTokens: ["$ATA"],
 
-  pawsyPrice: 0.001479,
+  ataPrice: 0.001479,
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect if you only target the local network (default is 4000)
@@ -34,7 +34,7 @@ const scaffoldConfig = {
   // You can get your own at https://cloud.walletconnect.com
   // It's recommended to store it in an env variable:
   // .env.local for local testing, and in the Vercel/system env config for live apps.
-  walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "3a8170812b534d0ff9d794f19a901d64",
+  walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "f6493edc1ea4d2880e268fd74d80b1ad",
 
   // Only show the Burner Wallet when running on hardhat network
   onlyLocalBurnerWallet: true,

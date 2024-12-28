@@ -1,5 +1,5 @@
 export * from "./fetchPriceFromUniswap";
-export * from "./fetchPawsyPriceFromUniswap";
+export * from "./fetchATAPriceFromUniswap";
 export * from "./networks";
 export * from "./notification";
 export * from "./block";

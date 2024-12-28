@@ -15,8 +15,8 @@ const Home: NextPage = () => {
         {/* Overlay content */}
         <div className="relative z-10 px-5 text-center">
           <h1 className="font-fantasy mt-64">
-            <span className="block text-white text-3xl sm:text-6xl mb-2 text-shadow">Welcome!</span>
-            <span className="block text-white text-4xl sm:text-8xl font-bold text-shadow">$PAWSY {">"} Bitcoin</span>
+            <span className="block text-white text-4xl sm:text-8xl font-bold text-shadow">ATA</span>
+            <span className="block text-white text-4xl sm:text-8xl  text-shadow">The Future in Marketing</span>
           </h1>
         </div>
       </div>

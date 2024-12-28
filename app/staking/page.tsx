@@ -14,10 +14,13 @@ const Staking: NextPage = () => {
           <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
             <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
               <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
-                Stake and become part of the community!
+                Stake and become part of the community! 
               </h1>
+              <div className="text-5xl sm:text-6xl font-extrabold text-center text-blue-500 dark:text-blue-400">
+                Coming Soon
+              </div>
 
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl flex flex-col h-full relative">
+              {/* <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl flex flex-col h-full relative">
                 <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
                 <div className="relative z-10 text-base-content dark:text-white">
                   <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
@@ -83,14 +86,14 @@ const Staking: NextPage = () => {
                     </details>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
-          <div className="flex w-full justify-center items-center mt-8 gap-6 sm:gap-12 flex-col">
+          {/* <div className="flex w-full justify-center items-center mt-8 gap-6 sm:gap-12 flex-col">
             <Statistics />
             <Purchase />
             <Portfolio />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

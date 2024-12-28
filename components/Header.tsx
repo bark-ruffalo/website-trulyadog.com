@@ -28,31 +28,31 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Home",
     href: "/",
   },
-  {
-    label: "$mPAWSY",
-    href: "/migration",
-    icon: <CurrencyDollarIcon className="h-4 w-4" />,
-  },
+  // {
+  //   label: "Buy $ATA",
+  //   href: "/migration",
+  //   icon: <CurrencyDollarIcon className="h-4 w-4" />,
+  // },
   {
     label: "Stake",
     href: "/staking",
     icon: <CakeIcon className="h-4 w-4" />,
   },
   {
-    label: "Why $PAWSY?",
-    href: "/why",
+    label: "About",
+    href: "/about",
     icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
   },
-  {
-    label: "Roadmap",
-    href: "/roadmap",
-    icon: <MapIcon className="h-4 w-4" />,
-  },
-  {
-    label: "Rewards & Income",
-    href: "/rewards",
-    icon: <GiftIcon className="h-4 w-4" />,
-  },
+  // {
+  //   label: "Roadmap",
+  //   href: "/roadmap",
+  //   icon: <MapIcon className="h-4 w-4" />,
+  // },
+  // {
+  //   label: "Rewards & Income",
+  //   href: "/rewards",
+  //   icon: <GiftIcon className="h-4 w-4" />,
+  // },
   {
     label: "Collaborate",
     href: "/collaborate",
@@ -137,8 +137,8 @@ export const Header = () => {
             <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.jpg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Bark Ruffalo</span>
-            <span className="text-xs">Trulyadog</span>
+            <span className="font-bold leading-tight">ATA</span>
+            <span className="text-xs">Affiliate Targeting AI</span>
           </div>
         </Link>
         <ul className="hidden 2xl:flex 2xl:flex-nowrap menu menu-horizontal px-1 gap-2">
