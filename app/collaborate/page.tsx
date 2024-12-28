@@ -12,7 +12,7 @@ const Collaborate: NextPage = () => {
     {
       icon: "💻",
       title: "Developers and Engineers",
-      description: "Build and improve our platform's technical infrastructure",
+      description: "Build and improve our platform&apos;s technical infrastructure",
     },
     {
       icon: "🤖",
@@ -45,7 +45,7 @@ const Collaborate: NextPage = () => {
     {
       number: "02",
       title: "Migrate & Stake",
-      description: "Stake your tokens to earn rewards (coming soon)",
+      description: "Stake your tokens to earn rewards",
       comingSoon: true,
     },
   ];
@@ -76,7 +76,7 @@ const Collaborate: NextPage = () => {
                 Collaborate With Us
               </h1>
               <p className="text-xl sm:text-2xl text-base-content/80 dark:text-white/80 max-w-3xl mx-auto">
-                Join us in building the future of digital marketing through AI and blockchain technology
+                Join us in shaping the future of digital marketing
               </p>
             </div>
 
@@ -87,7 +87,7 @@ const Collaborate: NextPage = () => {
                   key={index}
                   className="p-6 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative hover:bg-opacity-100 transition-all duration-300 group"
                 >
-                  <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm group-hover:bg-opacity-20"></div>
+                  <div className="absolute inset-0 rounded-2xl z-0 bg-indigo-500 bg-opacity-10 dark:bg-opacity-20 blur-sm group-hover:bg-opacity-20" />
                   <div className="relative z-10">
                     <div className="text-4xl mb-4">{role.icon}</div>
                     <h3 className="text-xl font-bold mb-2 text-base-content dark:text-white">{role.title}</h3>
@@ -98,8 +98,8 @@ const Collaborate: NextPage = () => {
             </div>
 
             {/* Steps Section */}
-            <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative mt-12">
-              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+            <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
+              <div className="absolute inset-0 rounded-2xl z-0 bg-indigo-500 bg-opacity-10 dark:bg-opacity-20 blur-sm" />
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold mb-8 text-base-content dark:text-white text-center">Get Started</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -127,8 +127,8 @@ const Collaborate: NextPage = () => {
             </div>
 
             {/* Contact Section */}
-            <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative mt-12">
-              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+            <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
+              <div className="absolute inset-0 rounded-2xl z-0 bg-indigo-500 bg-opacity-10 dark:bg-opacity-20 blur-sm" />
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold mb-8 text-base-content dark:text-white text-center">Get in Touch</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
@@ -154,7 +154,7 @@ const Collaborate: NextPage = () => {
             {/* Final CTA */}
             <div className="text-center mt-12">
               <p className="text-xl text-base-content/80 dark:text-white/80">
-                Let's build the future of $ATA together!
+                Let&apos;s build the future of $ATA together!
               </p>
             </div>
           </div>
