@@ -8,7 +8,11 @@ export const useActiveStakedBalance = (address: string | undefined) => {
   });
 
   return {
+<<<<<<< HEAD:packages/nextjs/hooks/useActiveStakedBalance.ts
     activeStakedBalance: data ? Number(data) : 0,
+=======
+    activeStakedBalance: data ? Number(data) : 0, 
+>>>>>>> main:hooks/useActiveStakedBalance.ts
     error,
   };
 };
