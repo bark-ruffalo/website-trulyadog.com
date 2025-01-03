@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchTotalDaoFunds } from "../../utils/scaffold-eth/fetchTotalDaoFunds";
 
 export default function Why() {
-  const [daoFunds, setDaoFunds] = useState<string>("$xxx,xxx.yy");
+  const [daoFunds, setDaoFunds] = useState<string>("-");
 
   useEffect(() => {
     const updateDaoFunds = async () => {
