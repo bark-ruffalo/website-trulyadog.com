@@ -17,12 +17,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
-<<<<<<< HEAD:packages/nextjs/components/Header.tsx
 import { useActiveStakedBalance } from "~~/hooks/useActiveStakedBalance";
-=======
-import { useActiveStakedBalance } from "~~/hooks/useActiveStakedBalance"; 
-import { useAccount } from "wagmi";
->>>>>>> main:components/Header.tsx
 
 type HeaderMenuLink = {
   label: string;
@@ -38,7 +33,7 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "$mPAWSY",
     href: "/migration",
-    icon: <CurrencyDollarIcon className="h-4 w-4" /> ,
+    icon: <CurrencyDollarIcon className="h-4 w-4" />,
   },
   {
     label: "Stake",
@@ -80,14 +75,8 @@ export const menuLinks: HeaderMenuLink[] = [
 export const HeaderMenuLinks = () => {
   const pathname = usePathname();
   const { address } = useAccount();
-<<<<<<< HEAD:packages/nextjs/components/Header.tsx
   const { activeStakedBalance } = useActiveStakedBalance(address);
 
-=======
-  const { activeStakedBalance } = useActiveStakedBalance(address); 
-
-  
->>>>>>> main:components/Header.tsx
   const extendedMenuLinks = [
     ...menuLinks,
     ...(activeStakedBalance >= 5000
