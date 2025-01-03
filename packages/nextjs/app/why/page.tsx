@@ -1,21 +1,46 @@
-// import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
+import { fetchTotalDaoFunds } from "../../utils/scaffold-eth/fetchTotalDaoFunds";
 
 export default function Why() {
+  const [daoFunds, setDaoFunds] = useState<string>("-");
+
+  useEffect(() => {
+    const updateDaoFunds = async () => {
+      try {
+        const { totalUsd } = await fetchTotalDaoFunds();
+        setDaoFunds(
+          new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(totalUsd),
+        );
+      } catch (error) {
+        console.error("Error fetching DAO funds:", error);
+      }
+    };
+
+    updateDaoFunds();
+  }, []);
+
   // Create stats cards data in the same format as staking
   const statsCards = [
     {
       title: "DAO ALLOCATION",
-      value: "30%",
-      className: "green",
-    },
-    {
-      title: "OPERATIONAL FUNDS",
-      value: "5.25%",
+      value: "35.25%",
       className: "green",
     },
     {
       title: "TEAM FUNDS",
       value: "14.5%",
+      className: "green",
+    },
+    {
+      title: "CURRENT DAO FUNDS",
+      value: daoFunds,
       className: "green",
     },
   ];
@@ -63,8 +88,8 @@ export default function Why() {
                 <ol className="list-none pl-2 sm:pl-4 mt-3 sm:mt-4 space-y-2">
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Preannounced launch for humans, not the usual
-                    fuvirtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO 30%,
-                    operational funds 5.25%, team splitting 14.5%.
+                    fuvirtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO
+                    35.25%, team splitting 14.5%.
                   </li>
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Just go to our Telegram, and it will be clear.
