@@ -1,62 +1,143 @@
+import { useEffect, useState } from "react";
 import { Card } from "./Card";
-import { formatEther } from "viem";
-import { useAccount } from "wagmi";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { formatEther, parseAbi } from "viem";
+import { useAccount, useConfig, useReadContracts } from "wagmi";
+import { readContract } from "wagmi/actions";
+import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
+import { fetchVirtualPriceFromUniswap } from "~~/utils/scaffold-eth/fetchVirtualPriceFromUniswap";
 
-interface ContractResponse {
-  data: bigint | undefined;
-  error: Error | null;
-}
-
-interface RewardTokenResponse {
-  data: string | undefined;
-  error: Error | null;
-}
-
-interface TotalSupplyResponse {
-  data: bigint;
-}
+const LP_ADDRESS = "0x96FC64caE162C1Cb288791280c3Eff2255c330a8";
+const LP_ABI = [
+  "function getReserves() external view returns (uint112, uint112, uint32)",
+  "function totalSupply() external view returns (uint256)",
+] as const;
 
 export function Statistics() {
   const account = useAccount();
+  const config = useConfig();
+  const [tvl, setTvl] = useState("-");
+  const [lpPrice, setLpPrice] = useState(0);
 
-  const { data: totalStaking, error: totalStakingError } = useScaffoldReadContract({
+  const { data: lpData } = useReadContracts({
+    contracts: [
+      {
+        address: LP_ADDRESS,
+        abi: parseAbi(LP_ABI),
+        functionName: "getReserves",
+      },
+      {
+        address: LP_ADDRESS,
+        abi: parseAbi(LP_ABI),
+        functionName: "totalSupply",
+      },
+    ],
+  });
+
+  const { data: pools } = useScaffoldReadContract({
     contractName: "StakingVault",
-    functionName: "getTotalStakedAmount",
-  }) as ContractResponse;
+    functionName: "getPools",
+  });
 
+  const { data: vault } = useScaffoldContract({ contractName: "StakingVault" });
   const { data: totalRewards } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getLifetimeRewards",
     args: [account.address],
-  }) as ContractResponse;
+  });
 
   const { data: rewardTokenSymbol } = useScaffoldReadContract({
     contractName: "RewardToken",
     functionName: "symbol",
-  }) as RewardTokenResponse;
+  });
 
   const { data: totalSupply } = useScaffoldReadContract({
     contractName: "$mPAWSY",
     functionName: "totalSupply",
-  }) as TotalSupplyResponse;
+  });
+
+  const { data: PAWSY } = useScaffoldContract({ contractName: "$PAWSY" });
+  const { data: mPAWSY } = useScaffoldContract({ contractName: "$mPAWSY" });
+  const { data: PAWSY_VIRTUAL_LP } = useScaffoldContract({ contractName: "$PAWSY/$VIRTUAL LP" });
+
+  useEffect(() => {
+    async function calculateLPPrice() {
+      if (!lpData?.[0] || !lpData?.[1]) return;
+
+      try {
+        const [reserves, totalSupply] = lpData;
+        const [pawsyPrice, virtualPrice] = await Promise.all([
+          fetchPawsyPriceFromUniswap(),
+          fetchVirtualPriceFromUniswap(),
+        ]);
+
+        const pawsyReserve = Number(formatEther(reserves.result?.[1] ?? 0n));
+        const virtualReserve = Number(formatEther(reserves.result?.[0] ?? 0n));
+        const totalLpSupply = Number(formatEther(totalSupply.result ?? 0n));
+
+        const totalValue = pawsyReserve * pawsyPrice + virtualReserve * virtualPrice;
+        setLpPrice(totalValue / totalLpSupply);
+      } catch (error) {
+        console.error("Error calculating LP price:", error);
+        setLpPrice(0);
+      }
+    }
+
+    calculateLPPrice();
+  }, [lpData]);
+
+  useEffect(() => {
+    async function calculateTVL() {
+      if (!pools || !vault?.address || !vault?.abi) return;
+
+      try {
+        const pawsyPrice = await fetchPawsyPriceFromUniswap();
+        const stakingAmounts = await Promise.all(
+          pools.map((_, i) =>
+            readContract(config, {
+              address: vault.address,
+              abi: vault.abi,
+              functionName: "getStakingAmountByPool",
+              args: [BigInt(i)],
+            }),
+          ),
+        );
+
+        const totalTVL = pools.reduce((acc, pool, i) => {
+          const tokenPrice = pool.stakingToken === PAWSY_VIRTUAL_LP?.address ? lpPrice : pawsyPrice;
+          const poolTVL = Number(formatEther(stakingAmounts[i])) * tokenPrice;
+          return acc + poolTVL / pawsyPrice;
+        }, 0);
+
+        setTvl(
+          totalTVL.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }) + " PAWSY",
+        );
+      } catch (error) {
+        console.error("Error calculating TVL:", error);
+        setTvl("Error");
+      }
+    }
+
+    calculateTVL();
+  }, [pools, vault, config, lpPrice, PAWSY, mPAWSY, PAWSY_VIRTUAL_LP]);
 
   const cards = [
     {
       title: "TOTAL VALUE LOCKED",
-      value: totalStakingError
-        ? "Error loading data"
-        : `${totalStaking ? Math.round(Number(formatEther(totalStaking))).toLocaleString("en-US") : "0"}`,
-      className: totalStakingError ? "red" : "green",
+      value: tvl,
+      className: tvl === "Error" ? "red" : "green",
     },
     {
       title: "$mPAWSY supply: ",
-      value: `${totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "0"}`,
+      value: totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "0",
       className: "green",
     },
     {
       title: "REWARDS YOU CLAIMED",
-      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ? rewardTokenSymbol : ""}`,
+      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
       className: "green",
     },
   ];
