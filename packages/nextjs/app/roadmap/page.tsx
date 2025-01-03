@@ -72,6 +72,18 @@ const Roadmap: NextPage = () => {
                   <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
                     Building the Pack (Current) 🌱
                   </h2>
+                  <p className="text-base-content dark:text-white text-sm sm:text-base mb-4">
+                    Please, first read this{" "}
+                    <a
+                      href="https://x.com/TrulyADog/status/1875102445744889913"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                    >
+                      Twitter post
+                    </a>{" "}
+                    . It contains our short-term objectives.
+                  </p>
                   <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
                     <li>
                       ✅ Enabled the rewards market (the contract was already live, but we have also created{" "}
@@ -111,6 +123,9 @@ const Roadmap: NextPage = () => {
                       ✅ Created even more open-source content: scripts to plan, normalize, and execute income
                       distribution for stakers (scripts/ folder from contracts repo)
                     </li>
+                    <li>✅ Hired more developers accross multiple programming languages</li>
+                    <li>🎯 Improve the ability of the DAO to generate income both passively and actively</li>
+                    <li>🎯 Add multiple high-utility AI agents to the Bark Ruffalo ecosystem</li>
                     <li>🎯 Expand AI agent capabilities across social platforms</li>
                     <li>🎯 Optimize AI agents&apos; uptime and resilience to hacks or social media bans</li>
                     <li>🎯 Improve multi-agentic interactions</li>
