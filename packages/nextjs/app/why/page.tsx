@@ -80,7 +80,8 @@ export default function Why() {
               <li>
                 <span className="text-lg sm:text-xl">✨</span> We are creating an ecosystem and a community focused on
                 making money. Employing AI agents for this purpose will be a primary objective, but we will do it all!
-                Bark Ruffalo will be their top 🐶. Never mention to him that he looks like a 🐈‍⬛!
+                Bark Ruffalo will be their top 🐶. For now, he just helps us with marketing. Never mention to him that
+                he looks like a 🐈‍⬛!
               </li>
 
               <li>
@@ -183,7 +184,14 @@ export default function Why() {
 
               <li>
                 <span className="text-lg sm:text-xl">💰</span> Since our objective is to make our stakers financially
-                independent, we provide income rounds to stakers from time to time. The first one was $30k worth!
+                independent, we provide income rounds to stakers from time to time. The first one was $30k worth! (EDIT:
+                initially; a few days later it was worth 10x)
+              </li>
+
+              <li>
+                <span className="text-lg sm:text-xl">👨‍💻</span> Competent and diverse 6-person developer and
+                infrastructure team, spanning three programming languages and using two different AI agent frameworks.
+                None of them is GAME from Virtuals Protocol because it&apos;s too basic.
               </li>
 
               <li>

@@ -27,12 +27,18 @@ const Staking: NextPage = () => {
                       depending on the amount staked:
                     </p>
                     <ul className="space-y-2 list-disc pl-4">
-                      <li>5k or more: access to the 5k-club token-gated channel and goodies</li>
-                      <li>500k or more: access to the above + more</li>
-                      <li>5M or more: access to the above + more</li>
+                      <li>
+                        5k or more: access to the 5k-club token-gated channel with polls that guide the future of the
+                        ecosystem
+                      </li>
+                      <li>
+                        500k or more: access to the above + goodies (like a sniper that purchases newly launched
+                        prototypes that pass certain quality checks on Virtuals Protocol)
+                      </li>
+                      <li>5M or more: access to the above + more (like priority when getting alpha drops)</li>
                     </ul>
                     <p>
-                      DRUGS itself will receive various utilities, with the first being that you&apos;ll soon be allowed
+                      DRUGS itself will receive various utilities, with the first being that you&apos;re currently able
                       to burn it to get NFTs from the OG collection.
                     </p>
                     <details className="mt-4">
@@ -51,19 +57,20 @@ const Staking: NextPage = () => {
                             https://guild.xyz/bark-ruffalo/
                           </a>
                           , and if you&apos;ve staked let&apos;s say 6,500, you select the 5,000 staked club. It should
-                          show &quot;You have access&quot;, and you may click on the big blue connect button.
+                          show &quot;You have access&quot;, and you may click on the big blue connect button. You might
+                          need to enable popups.
                         </p>
                         <p>
                           Someone from the 500k club should connect to both clubs. And someone from the 5 million club
-                          should connect to all three clubs.
+                          should connect to all three clubs. Connect to them in order, from the lowest to the highest.
                         </p>
                         <p>
-                          Private repo access for the @virtuals.io sniper has been added as of 2024.12.17 for the 500k
-                          club. Those from 5M must also join this club to gain access. You might need to enable popups.
-                          Go ahead and stake! There are enough reasons to do it on the &quot;Why $PAWSY?&quot; page.
+                          Access for the virtuals.io sniper has been added as of 2024.12.17 for the 500k club. Access to
+                          a more advanced sniper has been added for the 5M club as of 2024.12.27. Go ahead and stake!
+                          There are enough reasons to do it on the &quot;Why $PAWSY?&quot; page.
                         </p>
                         <p>
-                          Screenshots with the sniper and the private repository: <br />
+                          Screenshots with the first version of the sniper and the private repository: <br />
                           <Image
                             src="/Snipy McSnappingson v1.0.png"
                             alt="Sniper screenshot 1"

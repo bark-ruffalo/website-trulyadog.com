@@ -102,7 +102,7 @@ const Rewards: NextPage = () => {
                   <div className="w-full p-6 bg-base-200 rounded-2xl shadow-lg">
                     <h2 className="text-2xl font-bold mb-4">Income source 1</h2>
                     <p className="text-base-content dark:text-white text-lg leading-relaxed">
-                      A more complex sniper will be available for the 5M club soon. We&apos;ve removed some liquidity
+                      A more complex sniper has been made available to the 5M club. We&apos;ve removed some liquidity
                       from the operational funds (<strong>without selling {"$"}PAWSY</strong>, just so that we get {"$"}
                       VIRTUAL) to start that sniper 24/7 for Bark Ruffalo. Coupled with our expertise in detecting
                       legitimate projects, we should have a good entry point and know when to sell. The profit in {"$"}
@@ -116,7 +116,26 @@ const Rewards: NextPage = () => {
                       >
                         first income distribution round
                       </a>
-                      , which was worth $30k. If another income source from the ones mentioned in{" "}
+                      , which was worth $30k. For those who held, a few days later it was worth 10x. Here&apos;s{" "}
+                      <a
+                        href="https://x.com/motleyjunks/status/1875144894320443756"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        a report from a happy DAO member
+                      </a>
+                      . Here&apos;s{" "}
+                      <a
+                        href="https://x.com/TrulyADog/status/1875244208195563569"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        another report
+                      </a>{" "}
+                      of someone who even donated back to the DAO because he was grateful. How many crypto projects do
+                      you know where this happens? If another income source from the ones mentioned in{" "}
                       <a
                         href="/collaborate"
                         className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
@@ -124,7 +143,9 @@ const Rewards: NextPage = () => {
                         Collaborate
                       </a>{" "}
                       materializes, we&apos;ll add more to the next income round. We hope for round 2 to be sooner than
-                      you expect! Our objective is to make our stakers financially independent.
+                      you expect! Our objective is to make our stakers financially independent. At least the first ~1000
+                      that went with ~500k staked. For the others, this should still be a great passive income
+                      opportunity.
                     </p>
                   </div>
                 </div>

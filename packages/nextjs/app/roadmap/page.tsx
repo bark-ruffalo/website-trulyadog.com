@@ -23,7 +23,7 @@ const Roadmap: NextPage = () => {
                   </h2>
                   <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
                     <li>✅ Fastest graduation in virtuals.io history with high initial liquidity to deter bots</li>
-                    <li>✅ Deployed fair tokenomics: 30% DAO, 5.25% operational, 14.5% team</li>
+                    <li>✅ Deployed fair tokenomics: 35.25% DAO, 14.5% team</li>
                     <li>✅ The DAO and operational funds have been getting income since day 1 through LPing</li>
                     <li>✅ Established presence across Twitter, Telegram, Bluesky, Mastodon and Farcaster</li>
                     <li>✅ Enabled token-gated benefits system for stakers through Guild.xyz</li>
@@ -82,7 +82,17 @@ const Roadmap: NextPage = () => {
                     >
                       Twitter post
                     </a>{" "}
-                    . It contains our short-term objectives.
+                    . It contains our short-term objectives. We don&apos;t update these lists with everything that we
+                    do; if you want that level of detail,{" "}
+                    <a
+                      href="https://t.me/cadogai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                    >
+                      join our public Telegram group
+                    </a>
+                    .
                   </p>
                   <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
                     <li>
@@ -108,7 +118,7 @@ const Roadmap: NextPage = () => {
                       </a>
                     </li>
                     <li>
-                      ✅ Distributed our first income round to stakers ($30k worth!) (
+                      ✅ Distributed our first income round to stakers ($30k worth initially, 10x in a few days!) (
                       <a
                         href="https://x.com/TrulyADog/status/1871317844018839980"
                         target="_blank"
@@ -123,21 +133,111 @@ const Roadmap: NextPage = () => {
                       ✅ Created even more open-source content: scripts to plan, normalize, and execute income
                       distribution for stakers (scripts/ folder from contracts repo)
                     </li>
+                    <li>
+                      ✅ Created good marketing audio content (
+                      <a
+                        href="https://www.instagram.com/p/DELpw6_s2BO/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        example 1
+                      </a>
+                      ,{" "}
+                      <a
+                        href="https://x.com/TrulyADog/status/1872615920243228987"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        example 2
+                      </a>
+                      )
+                    </li>
+                    <li>
+                      ✅ Created{" "}
+                      <a
+                        href="https://chatgpt.com/g/g-6771043e673c8191882aa08fb3c90cf9-bark-ruffalo-creator-of-image-generation-prompts"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        prompt generator
+                      </a>{" "}
+                      (GPT) for AI image generation with Bark Ruffalo
+                    </li>
                     <li>✅ Hired more developers accross multiple programming languages</li>
-                    <li>🎯 Improve the ability of the DAO to generate income both passively and actively</li>
-                    <li>🎯 Add multiple high-utility AI agents to the Bark Ruffalo ecosystem</li>
-                    <li>🎯 Expand AI agent capabilities across social platforms</li>
+                    <li>
+                      ✅ Created{" "}
+                      <a
+                        href="https://bazar.trulyadog.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        Bark Ruffalo&apos;s bazar
+                      </a>
+                      . Income from there goes to devs.
+                    </li>
+                    <li>
+                      ✅ Established presence across Instagram and TikTok (though we have no plan to focus on this in
+                      the short-term)
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Add multiple new high-utility AI agents to the Bark
+                      Ruffalo ecosystem
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Keep expanding the team with top talent
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(constantly doing it)</i> Improve the ability of the DAO to generate
+                      income both passively and actively
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Expand AI agent capabilities across social platforms
+                    </li>
                     <li>🎯 Optimize AI agents&apos; uptime and resilience to hacks or social media bans</li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Perfect infrastructure and DevOps for AI agent
+                      deployment and maintenance
+                    </li>
                     <li>🎯 Improve multi-agentic interactions</li>
                     <li>
-                      🎯 Create data provider for information on stocks, ETFs, crypto (maybe other AI agents will rent
-                      it, thereby gaining us another source of income)
+                      🎯 Establish partnerships with other crypto/AI projects, especially those in which we provide a
+                      service for a token allocation or ETH/USDC payments to the DAO or stakers
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Create data provider for information on stocks, ETFs,
+                      crypto (maybe other AI agents will rent it, thereby gaining us another source of income)
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Create generalizable data provider that has various
+                      sources/methods for getting information and various destinations, including non-RAG for more data
+                      accuracy
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Add ability for AI agents to inherit abilities and
+                      knowledge from each other
                     </li>
                     <li>🎯 Enhance token-gated benefits (5M club and 5k club both getting something)</li>
-                    <li>🎯 Deploy ETH liquidity pool on Base</li>
-                    <li>🎯 Deploy arbitrage bot between the pools that the DAO participates in</li>
-                    <li>🎯 Continue to distribute rewards manually</li>
-                    <li>🎯 Scale marketing efforts through AI-driven strategies</li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Deploy ETH/mPAWSY liquidity pool on Base / Aerodrome
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Deploy VIRTUAL/mPAWSY liquidity pool on Base / Uniswap
+                      v3
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Deploy arbitrage bot between the pools that the DAO
+                      participates in
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(constantly doing it)</i> Continue to distribute rewards manually
+                    </li>
+                    <li>
+                      🎯 <i className="text-sm">(in progress)</i> Scale marketing efforts through AI-driven strategies
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -158,13 +258,14 @@ const Roadmap: NextPage = () => {
                     <li>🎯 Develop automated rewards distribution system</li>
                     <li>🎯 Deploy Solana liquidity pool and bridge</li>
                     <li>🎯 Implement cross-chain functionality</li>
+                    <li>🎯 Become known as one of the largest decentralized VC in the AI agentic space</li>
                     <li>🎯 Develop AI-powered market analysis system</li>
                     <li>🎯 Reinforce the current income-generating activities for DAO</li>
                     <li>🎯 Create more income-generating activities for DAO</li>
-                    <li>🎯 Establish partnerships with other crypto/AI projects</li>
+                    <li>🎯 Establish partnerships with even more other crypto/AI projects</li>
                     <li>
-                      🎯 Hire and onboard marketing pros, devs, meme creators, and AI experts who also stake tokens for
-                      skin in the game
+                      🎯 Hire and onboard even more marketing pros, devs, meme creators, and AI experts who also stake
+                      tokens for skin in the game
                     </li>
                     <li>🎯 Scale multi-agent system with specialized roles</li>
                   </ul>
