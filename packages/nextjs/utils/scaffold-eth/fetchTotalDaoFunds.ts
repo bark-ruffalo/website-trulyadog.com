@@ -120,9 +120,7 @@ export const fetchTotalDaoFunds = async (): Promise<{ totalUsd: number; breakdow
       }
 
       const value = Number(formatUnits(balance, token.decimals)) * price;
-      if (value > 0) {
-        breakdown[token.symbol] = value;
-      }
+      breakdown[token.symbol] = value;
     }
 
     console.log(breakdown);

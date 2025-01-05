@@ -1,7 +1,8 @@
 import { fetchPawsyPriceFromUniswap } from "./fetchPawsyPriceFromUniswap";
 import { fetchVirtualPriceFromUniswap } from "./fetchVirtualPriceFromUniswap";
 import { formatEther } from "viem";
-import { Config, readContract } from "wagmi/actions";
+import type { Config } from "wagmi";
+import { readContract } from "wagmi/actions";
 
 export interface Pool {
   stakingToken: string;
@@ -79,7 +80,7 @@ export async function calculateTVL(
   // Calculate total TVL in PAWSY
   const totalTVL = pools.reduce((acc, pool, i) => {
     const tokenPrice = pool.stakingToken === pawsyVirtualLpAddress ? lpPrice : pawsyPrice;
-    const poolTVL = Number(formatEther(stakingAmounts[i])) * tokenPrice;
+    const poolTVL = Number(formatEther(BigInt(stakingAmounts[i] as string))) * tokenPrice;
     return acc + poolTVL / pawsyPrice;
   }, 0);
 

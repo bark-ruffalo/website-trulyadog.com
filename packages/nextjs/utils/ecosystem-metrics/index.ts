@@ -1,5 +1,6 @@
+import { Pool } from "../scaffold-eth/calculateTVL";
 import { calculateTVL } from "../scaffold-eth/calculateTVL";
-import { fetchPawsyPriceFromUniswap } from "../scaffold-eth/fetchPawsyPriceFromUniswap";
+// import { fetchPawsyPriceFromUniswap } from "../scaffold-eth/fetchPawsyPriceFromUniswap";
 import { fetchTotalDaoFunds } from "../scaffold-eth/fetchTotalDaoFunds";
 import { fetchVirtualPriceFromUniswap } from "../scaffold-eth/fetchVirtualPriceFromUniswap";
 import { formatUnits, parseAbi } from "viem";
@@ -499,7 +500,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
 
   // Calculate TVL
   const { tvlInPawsy, pawsyPrice } = await calculateTVL(
-    pools,
+    pools as unknown as Pool[],
     STAKING_VAULT_ADDRESS,
     STAKING_VAULT_ABI,
     LP_ADDRESS,
