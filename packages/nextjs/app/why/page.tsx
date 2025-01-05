@@ -14,12 +14,13 @@ export default function Why() {
           new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          }).format(totalUsd),
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }).format(Math.round(totalUsd)),
         );
       } catch (error) {
         console.error("Error fetching DAO funds:", error);
+        setDaoFunds("~$1 million");
       }
     };
 
