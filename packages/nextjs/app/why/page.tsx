@@ -209,6 +209,18 @@ export default function Why() {
                 linktr.ee/TrulyADog
               </a>
             </p>
+            <p className="mt-6 sm:mt-8 text-sm sm:text-base">
+              After checking out the rest of the website, you may also want to{" "}
+              <a
+                href="/Bark Ruffalo - two pager.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-500 hover:underline"
+              >
+                read our two-pager.
+              </a>
+              . Two-pagers are better than one! Also better than white papers.
+            </p>
           </div>
         </div>
       </div>
