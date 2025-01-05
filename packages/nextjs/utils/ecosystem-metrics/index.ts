@@ -547,15 +547,13 @@ The total market cap of $PAWSY is $${(metrics.pawsyMarketCap / 1_000_000).toFixe
 
 The DAO holds $${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ${Object.keys(metrics.daoFunds.breakdown).join(", ")}
 
-There are 4 AI agents in the ecosystem:
+There are 3 public AI agents in the ecosystem:
 
 * Bark Ruffalo | ONLINE | goal: promote BR ecosystem (@TrulyADog on X, @BarkRuffalo_bot on Telegram)
 
 * The Great Pupdini | ONLINE | goal: promote BR ecosystem, help by answering questions in the Telegram public group (@TheGreatPupdini on X, @TheGreatPupdini_bot on Telegram)
 
-* The Alpha Doggo | ONLINE | goal: promote BR ecosystem, help with tech support for the sniper in the private groups (@TheAlphaDoggo on X, @TheAlphaDoggo_bot on Telegram)
-
-* Shill 1 | ONLINE | goal: secret, yet obvious (for now, it's best to not reveal the account)`;
+* The Alpha Doggo | ONLINE | goal: promote BR ecosystem, help with tech support for the sniper in the private groups (@TheAlphaDoggo on X, @TheAlphaDoggo_bot on Telegram)`;
 
   return text;
 }

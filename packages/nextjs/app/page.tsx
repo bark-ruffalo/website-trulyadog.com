@@ -6,7 +6,6 @@ import type { NextPage } from "next";
 const Home: NextPage = () => {
   const [showMetrics, setShowMetrics] = useState(false);
   const [metrics, setMetrics] = useState<string>("");
-  const [links, setLinks] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -14,13 +13,12 @@ const Home: NextPage = () => {
     const loadMetrics = async () => {
       try {
         const response = await fetch("/api/transparency");
-        const text = await response.text();
+        let text = await response.text();
+        // add links for telegram agents
+        text = text.replace(/@(\w+_bot)/g, '<a href="https://t.me/$1" target="_blank">@$1</a>');
+        // add links for X (Twitter) accounts
+        text = text.replace(/(?<!@\w+)@(\w+)(?!_bot)/g, '<a href="https://x.com/$1" target="_blank">@$1</a>');
         setMetrics(text);
-
-        // Extract links from text
-        const linkRegex = /@\w+|https?:\/\/[^\s)]+/g;
-        const matches = text.match(linkRegex) || [];
-        setLinks(matches);
       } catch (error) {
         console.error("Error loading metrics:", error);
       }
@@ -32,17 +30,12 @@ const Home: NextPage = () => {
   const handleVideoEnded = () => {
     if (!videoRef.current) return;
 
-    if (videoRef.current.dataset.playCount === undefined) {
-      videoRef.current.dataset.playCount = "1";
-      videoRef.current.play();
-    } else {
-      setShowMetrics(true);
-      if (videoRef.current && contentRef.current) {
-        videoRef.current.style.transform = "translateX(-100%)";
-        videoRef.current.style.transition = "transform 1s ease-out";
-        contentRef.current.style.transform = "translateX(-200%)";
-        contentRef.current.style.transition = "transform 1s ease-out";
-      }
+    setShowMetrics(true);
+    if (videoRef.current && contentRef.current) {
+      videoRef.current.style.transform = "translateX(-100%)";
+      videoRef.current.style.transition = "transform 1s ease-out";
+      contentRef.current.style.transform = "translateX(-200%)";
+      contentRef.current.style.transition = "transform 1s ease-out";
     }
   };
 
@@ -79,33 +72,10 @@ const Home: NextPage = () => {
             }}
           >
             <div className="max-w-4xl mx-auto">
-              <pre className="whitespace-pre-wrap text-base-content dark:text-white font-mono text-sm sm:text-base">
-                {metrics}
-              </pre>
-
-              {links.length > 0 && (
-                <div className="mt-8">
-                  <h2 className="text-xl font-bold mb-4 text-base-content dark:text-white">Links mentioned:</h2>
-                  <ul className="space-y-2">
-                    {links.map((link, index) => (
-                      <li key={index}>
-                        {link.startsWith("@") ? (
-                          <span className="text-blue-500">{link}</span>
-                        ) : (
-                          <a
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-500 hover:underline"
-                          >
-                            {link}
-                          </a>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <div
+                className="whitespace-pre-wrap text-base-content dark:text-white font-mono text-sm sm:text-base [&_a]:text-blue-500 [&_a]:hover:text-blue-600 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300"
+                dangerouslySetInnerHTML={{ __html: metrics }}
+              />
             </div>
           </div>
         )}
