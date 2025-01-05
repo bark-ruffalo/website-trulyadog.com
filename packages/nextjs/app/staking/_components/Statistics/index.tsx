@@ -109,12 +109,7 @@ export function Statistics() {
           return acc + poolTVL / pawsyPrice;
         }, 0);
 
-        setTvl(
-          totalTVL.toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          }) + " PAWSY",
-        );
+        setTvl(Math.round(totalTVL).toLocaleString("en-US") + " $PAWSY");
       } catch (error) {
         console.error("Error calculating TVL:", error);
         setTvl("Error");
