@@ -104,7 +104,7 @@ export default function Why() {
                       href="https://x.com/TrulyADog/status/1866198160252543321"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-500 hover:underline"
+                      className="text-green-700 dark:text-green-500 hover:underline"
                     >
                       Proof
                     </a>{" "}
@@ -116,7 +116,7 @@ export default function Why() {
                       href="https://github.com/bark-ruffalo"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-500 hover:underline"
+                      className="text-green-700 dark:text-green-500 hover:underline"
                     >
                       GitHub
                     </a>
@@ -138,7 +138,7 @@ export default function Why() {
                       href="https://x.com/TrulyADog/status/1867492287296811286"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-500 hover:underline"
+                      className="text-green-700 dark:text-green-500 hover:underline"
                     >
                       See Example 1
                     </a>
@@ -149,7 +149,7 @@ export default function Why() {
                       href="https://x.com/TrulyADog/status/1864086810206310571"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-500 hover:underline"
+                      className="text-green-700 dark:text-green-500 hover:underline"
                     >
                       See Example 2
                     </a>
@@ -160,7 +160,7 @@ export default function Why() {
                       href="https://x.com/TrulyADog/status/1869366748039799234"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-500 hover:underline"
+                      className="text-green-700 dark:text-green-500 hover:underline"
                     >
                       See Example 3
                     </a>
@@ -205,7 +205,7 @@ export default function Why() {
                 href="https://linktr.ee/TrulyADog"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-green-500 hover:underline"
+                className="text-green-700 dark:text-green-500 hover:underline"
               >
                 linktr.ee/TrulyADog
               </a>
@@ -216,7 +216,7 @@ export default function Why() {
                 href="/Bark Ruffalo - two pager.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-green-500 hover:underline"
+                className="text-green-700 dark:text-green-500 hover:underline"
               >
                 read our two-pager.
               </a>

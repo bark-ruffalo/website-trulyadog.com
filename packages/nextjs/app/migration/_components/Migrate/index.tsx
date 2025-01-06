@@ -136,7 +136,7 @@ export function Migrate() {
   }) as { data: bigint };
 
   return (
-    <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
+    <div className="p-4 sm:p-8 bg-base-200 bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
       <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
       <div className="relative z-10 w-full">
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
@@ -149,7 +149,7 @@ export function Migrate() {
                 </span>
               </div>
 
-              <p className="text-white text-sm sm:text-base">
+              <p className="text-sm sm:text-base">
                 $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so
                 that we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
               </p>
@@ -248,7 +248,7 @@ export function Migrate() {
                   className="w-full h-auto object-contain"
                 />
               </div>
-              <p className="text-white text-sm sm:text-base text-center">
+              <p className="text-sm sm:text-base text-center">
                 The first 10 persons to migrate and stake more than 5 million get airdropped an NFT from the{" "}
                 <a
                   href="https://opensea.io/collection/bark-ruffalo/"

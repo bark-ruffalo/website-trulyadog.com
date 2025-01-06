@@ -18,7 +18,7 @@ const BalanceCard = ({ title, balance, tokenAddress, onAddToMetamask }: BalanceC
         {tokenAddress && (
           <>
             <div className="flex items-center justify-between mt-auto pt-3 sm:pt-4 border-t border-gray-700">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-700 dark:text-gray-400">
                 <span>Token:</span>
                 <Address address={tokenAddress} />
               </div>
