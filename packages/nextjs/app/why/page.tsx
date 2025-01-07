@@ -235,6 +235,55 @@ export default function Why() {
               </a>
               . Two-pagers are better than one! Also better than white papers.
             </p>
+
+            <p className="mt-6 sm:mt-8 text-sm sm:text-base">
+              You can buy $PAWSY on{" "}
+              <a
+                href="https://matcha.xyz/tokens/base/0x29e39327b5b1e500b87fc0fcae3856cd8f96ed2a?sellChain=8453&sellAddress=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 dark:text-green-500 hover:underline"
+              >
+                Matcha
+              </a>
+              ,{" "}
+              <a
+                href="https://kyberswap.com/swap/base/eth-to-pawsy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 dark:text-green-500 hover:underline"
+              >
+                KyberSwap
+              </a>
+              ,{" "}
+              <a
+                href="https://swap.cow.fi/#/8453/swap/WETH/PAWSY"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 dark:text-green-500 hover:underline"
+              >
+                CowSwap
+              </a>
+              ,{" "}
+              <a
+                href="https://app.virtuals.io/virtuals/5801"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 dark:text-green-500 hover:underline"
+              >
+                Virtuals Protocol
+              </a>
+              , or{" "}
+              <a
+                href="https://app.uniswap.org/swap?chain=base&inputCurrency=NATIVE&outputCurrency=0x29e39327b5b1e500b87fc0fcae3856cd8f96ed2a"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-700 dark:text-green-500 hover:underline"
+              >
+                Uniswap
+              </a>
+              .
+            </p>
           </div>
         </div>
       </div>
