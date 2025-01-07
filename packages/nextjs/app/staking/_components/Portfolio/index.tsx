@@ -31,9 +31,8 @@ export function Portfolio() {
   } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getUserLocks",
-    args: [address],
-    enabled: isConnected && !!address,
-  }) as unknown as StakeDataResponse;
+    args: [address || undefined],
+  });
 
   const shouldRefresh = useStakingStore(state => state.shouldRefresh);
 
