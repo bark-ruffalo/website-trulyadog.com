@@ -79,10 +79,30 @@ export default function Why() {
           <div className="relative z-10 text-base-content dark:text-white">
             <ol className="space-y-6 sm:space-y-8 list-none pl-2 sm:pl-4">
               <li>
-                <span className="text-lg sm:text-xl">✨</span> We are creating an ecosystem and a community focused on
-                making money. Employing AI agents for this purpose will be a primary objective, but we will do it all!
-                Bark Ruffalo will be their top 🐶. For now, he just helps us with marketing. Never mention to him that
-                he looks like a 🐈‍⬛!
+                <span className="text-lg sm:text-xl">✨</span>We created an ecosystem focused on making money for its
+                stakers. Passive income.{" "}
+                <a
+                  href="https://x.com/motleyjunks/status/1875144894320443756"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-700 dark:text-green-500 hover:underline"
+                >
+                  Proof of success.
+                </a>{" "}
+                Employing AI agents for this purpose is a primary objective, but we also intertwine traditional methods
+                (LPing, investing in AI infra, giving software that gives an edge in the markets to stakers, etc.)! Bark
+                Ruffalo is the top 🐶 of our current public agents. His current goal is marketing. Never mention to him
+                that he looks like a 🐈‍⬛! Other agents with different skills and goals that we have in private
+                development will join him soon. Our community stands strong behind us (
+                <a
+                  href="https://x.com/TrulyADog/status/1875244208195563569"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-700 dark:text-green-500 hover:underline"
+                >
+                  example
+                </a>
+                ).
               </li>
 
               <li>
@@ -90,25 +110,17 @@ export default function Why() {
                 <ol className="list-none pl-2 sm:pl-4 mt-3 sm:mt-4 space-y-2">
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Preannounced launch for humans, not the usual
-                    fuvirtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO
-                    35.25%, team splitting 14.5%.
+                    virtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO 35.25%,
+                    team splitting 14.5%.
                   </li>
                   <li>
-                    <span className="text-lg sm:text-xl">🟢</span> Just go to our Telegram, and it will be clear.
-                    Anything we do, the community knows. When the DAO takes over, we&apos;ll maintain high standards by
-                    creating a constitution. We already have a stakers&apos; chat where decisions are taken.
+                    <span className="text-lg sm:text-xl">🟢</span> Just go to our Telegram, and it will be clear
+                    (#transparency topic). Anything we do, the community knows. When the DAO takes over, we&apos;ll
+                    maintain high standards by creating a constitution. We have a stakers&apos; chat where decisions are
+                    taken.
                   </li>
                   <li>
-                    <span className="text-lg sm:text-xl">🟢</span> The DAO is already rich:{" "}
-                    <a
-                      href="https://x.com/TrulyADog/status/1866198160252543321"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-green-700 dark:text-green-500 hover:underline"
-                    >
-                      Proof
-                    </a>{" "}
-                    (old news; we now have more with the equivalent of 100 million $PAWSY).
+                    <span className="text-lg sm:text-xl">🟢</span> The DAO is already rich.
                   </li>
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Open-source:{" "}
@@ -124,7 +136,7 @@ export default function Why() {
                   </li>
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> All payments are accounted for, though we plan not to
-                    spend any $PAWSY until the market cap passes $9 million.
+                    spend any $PAWSY until the market cap surpasses $9 million.
                   </li>
                 </ol>
               </li>
@@ -169,7 +181,7 @@ export default function Why() {
               </li>
 
               <li>
-                <span className="text-lg sm:text-xl">💼</span> The team members have already been financially
+                <span className="text-lg sm:text-xl">💼</span> The two core team members have already been financially
                 independent for more than 5 years. We know how to succeed, which is important in the long term.
               </li>
 
@@ -180,19 +192,20 @@ export default function Why() {
 
               <li>
                 <span className="text-lg sm:text-xl">🛠️</span> Not dependent on Virtuals Protocol for success.
-                We&apos;re slowly moving away through $mPAWSY.
+                We&apos;re slowly moving away through $mPAWSY, and we&apos;ve already move on to better technologies
+                (Rig, Eliza).
               </li>
 
               <li>
                 <span className="text-lg sm:text-xl">💰</span> Since our objective is to make our stakers financially
-                independent, we provide income rounds to stakers from time to time. The first one was $30k worth! (EDIT:
-                initially; a few days later it was worth 10x)
+                independent, we provide them with income rounds from time to time. The first one was $30k worth! (EDIT:
+                initially; a few days later it had 10x)
               </li>
 
               <li>
                 <span className="text-lg sm:text-xl">👨‍💻</span> Competent and diverse 6-person developer and
                 infrastructure team, spanning three programming languages and using two different AI agent frameworks.
-                None of them is GAME from Virtuals Protocol because it&apos;s too basic.
+                Current assignments (some overlap): 5x AI team, 1x infra/devops, 1x goodies, 1x web3, 1x marketing.
               </li>
 
               <li>
