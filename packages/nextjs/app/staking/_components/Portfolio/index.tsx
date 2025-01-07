@@ -22,7 +22,8 @@ interface StakeDataResponse {
 }
 
 export function Portfolio() {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
+
   const {
     data: stakeData,
     error: stakeError,
@@ -31,6 +32,7 @@ export function Portfolio() {
     contractName: "StakingVault",
     functionName: "getUserLocks",
     args: [address],
+    enabled: isConnected && !!address,
   }) as unknown as StakeDataResponse;
 
   const shouldRefresh = useStakingStore(state => state.shouldRefresh);
@@ -42,6 +44,14 @@ export function Portfolio() {
     }
     refetchStakeData();
   }, [shouldRefresh, stakeError, refetchStakeData]);
+
+  if (!isConnected) {
+    return (
+      <div className="w-full text-center text-base-content dark:text-white">
+        Please connect your wallet to view your portfolio
+      </div>
+    );
+  }
 
   if (stakeError) {
     return <div className="w-full text-center text-red-500">Error loading portfolio data: {stakeError.message}</div>;
