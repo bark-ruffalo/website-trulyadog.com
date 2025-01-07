@@ -5,22 +5,6 @@ import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { useStakingStore } from "~~/services/store/stakingStore";
 import { notification } from "~~/utils/scaffold-eth";
 
-interface UserLockProps {
-  lockId: bigint;
-  amount: bigint;
-  lockPeriod: bigint;
-  unlockTime: bigint;
-  lastClaimTime: bigint;
-  poolId: bigint;
-  isLocked: boolean;
-}
-
-interface StakeDataResponse {
-  data: UserLockProps[] | undefined;
-  error: Error | null;
-  refetch: () => Promise<void>;
-}
-
 export function Portfolio() {
   const { address, isConnected } = useAccount();
 
