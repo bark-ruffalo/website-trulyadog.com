@@ -539,7 +539,7 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
   const timeZone = "UTC";
 
   const text = `Bark Ruffalo ecosystem metrics for ${formattedDate}, ${formattedTime} ${timeZone}:
-- Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, $ETH $${Math.round(metrics.ethPrice).toLocaleString()}, $VIRTUAL $${metrics.virtualPrice.toFixed(2)}, $PAWSY $${metrics.pawsyPrice.toFixed(4)}.
+- Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(metrics.ethPrice).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${metrics.pawsyPrice.toFixed(4)}.
 - On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} staked, and ${Math.round(metrics.totalMigrated).toLocaleString()} migrated $PAWSY. Total number of stakers is ${metrics.totalStakers}.
 - The total market cap of $PAWSY is $${(metrics.pawsyMarketCap / 1_000_000).toFixed(2)} million with a current supply of ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. The real market cap of BR that includes the additional $mPAWSY supply is $${(metrics.realMarketCap / 1_000_000).toFixed(2)} million.
 - The DAO holds $${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ${Object.keys(metrics.daoFunds.breakdown).join(", ")}
