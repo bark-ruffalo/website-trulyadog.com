@@ -16,8 +16,11 @@ const Home: NextPage = () => {
         let text = await response.text();
         // add links for telegram agents
         text = text.replace(/@(\w+_bot)/g, '<a href="https://t.me/$1" target="_blank">@$1</a>');
-        // add links for X (Twitter) accounts
-        text = text.replace(/(?<!@\w+)@(\w+)(?!_bot)/g, '<a href="https://x.com/$1" target="_blank">@$1</a>');
+        // add links for X (Twitter) accounts - exclude matches inside existing <a> tags
+        text = text.replace(
+          /(?<!<a[^>]*>[^<]*)(?<!@\w+)@(\w+)(?!_bot)(?![^<]*<\/a>)/g,
+          '<a href="https://x.com/$1" target="_blank">@$1</a>',
+        );
         setMetrics(text);
       } catch (error) {
         console.error("Error loading metrics:", error);
