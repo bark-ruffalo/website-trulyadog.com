@@ -186,6 +186,11 @@ export default function Why() {
               </li>
 
               <li>
+                <span className="text-lg sm:text-xl">🔒</span> All developers funds in the Bark Ruffalo ecosystem are
+                either providing liquidity, or migrated to $mPAWSY and staked. Infinite trust in what we&apos;re doing.
+              </li>
+
+              <li>
                 <span className="text-lg sm:text-xl">🎁</span> Token-gated channels and goodies for stakers. Those who
                 also provide liquidity are highly valued.
               </li>
