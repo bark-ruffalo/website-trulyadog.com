@@ -22,9 +22,23 @@ const Staking: NextPage = () => {
                 <div className="relative z-10 text-base-content dark:text-white">
                   <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
                     <p>
-                      DRUGS is a reward token with no dollar value that helps Bark Ruffalo track entities most involved
-                      financially in its ecosystem. These are the current rewards for those who obtained DRUGS,
-                      depending on the amount staked:
+                      The primary purpose of staking is to participate in our income rounds. We do not preannounce them;
+                      we just take a snapshot of the stakers and start sending. The current annualized APY for those who
+                      participated in round 1 is 102.93%. More about how it works in{" "}
+                      <a
+                        href="https://x.com/TrulyADog/status/1877740433284935863"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        this tweet
+                      </a>
+                      .
+                    </p>
+                    <p>
+                      But there&apos;s more! DRUGS is a reward token with no dollar value that helps Bark Ruffalo track
+                      entities most involved financially in its ecosystem. These are the current rewards for those who
+                      obtained DRUGS, depending on the amount staked:
                     </p>
                     <ul className="space-y-2 list-disc pl-4">
                       <li>
