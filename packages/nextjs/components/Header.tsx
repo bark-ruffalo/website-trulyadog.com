@@ -13,6 +13,7 @@ import {
   GiftIcon,
   MapIcon,
   QuestionMarkCircleIcon,
+  UserGroupIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
@@ -59,6 +60,11 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Collaborate",
     href: "/collaborate",
     icon: <UsersIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Team",
+    href: "/team",
+    icon: <UserGroupIcon className="h-4 w-4" />,
   },
   // Only show Debug menu item in development
   ...(process.env.NODE_ENV !== "production"
