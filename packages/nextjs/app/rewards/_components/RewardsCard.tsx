@@ -8,6 +8,7 @@ export function RewardsCard() {
   const account = useAccount();
   const [burnAmount, setBurnAmount] = useState<string>("25000");
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState<number>(25000);
 
   const { data: rewardBalance } = useScaffoldReadContract({
     contractName: "RewardToken",
@@ -93,11 +94,10 @@ export function RewardsCard() {
             </label>
             <input
               type="number"
+              value={inputValue}
+              readOnly
               className="input input-bordered w-full"
-              value={burnAmount}
-              onChange={e => setBurnAmount(e.target.value)}
               placeholder="Enter amount to burn"
-              defaultValue="25000"
             />
           </div>
 
