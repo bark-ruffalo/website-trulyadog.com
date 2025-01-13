@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ClaimedRewards } from "./_components/ClaimedRewards";
 import { Portfolio } from "./_components/Portfolio";
 import { Purchase } from "./_components/Purchase";
 import { Statistics } from "./_components/Statistics";
@@ -110,6 +111,7 @@ const Staking: NextPage = () => {
           <div className="flex w-full justify-center items-center mt-8 gap-6 sm:gap-12 flex-col">
             <Statistics />
             <Purchase />
+            <ClaimedRewards />
             <Portfolio />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Card } from "./Card";
 import { formatEther, parseAbi } from "viem";
-import { useAccount, useConfig, useReadContracts } from "wagmi";
+import { useConfig, useReadContracts } from "wagmi";
 import { readContract } from "wagmi/actions";
 import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { withCache } from "~~/utils/cache";
@@ -15,7 +15,6 @@ const LP_ABI = [
 ] as const;
 
 export function Statistics() {
-  const account = useAccount();
   const config = useConfig();
   const [tvl, setTvl] = useState("-");
   const [lpPrice, setLpPrice] = useState(0);
@@ -42,20 +41,15 @@ export function Statistics() {
   });
 
   const { data: vault } = useScaffoldContract({ contractName: "StakingVault" });
-  const { data: totalRewards } = useScaffoldReadContract({
-    contractName: "StakingVault",
-    functionName: "getLifetimeRewards",
-    args: [account.address],
-  });
-
-  const { data: rewardTokenSymbol } = useScaffoldReadContract({
-    contractName: "RewardToken",
-    functionName: "symbol",
-  });
 
   const { data: totalSupply } = useScaffoldReadContract({
     contractName: "$mPAWSY",
     functionName: "totalSupply",
+  });
+
+  const { data: totalStakers } = useScaffoldReadContract({
+    contractName: "StakingVault",
+    functionName: "getTotalLockedUsers",
   });
 
   const { data: PAWSY } = useScaffoldContract({ contractName: "$PAWSY" });
@@ -79,14 +73,12 @@ export function Statistics() {
         className: "green",
       },
       {
-        title: "REWARDS YOU CLAIMED",
-        value: isLoading
-          ? "Loading..."
-          : `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
+        title: "STAKERS",
+        value: isLoading ? "Loading..." : totalStakers ? totalStakers.toString() : "0",
         className: "green",
       },
     ],
-    [tvl, totalSupply, totalRewards, rewardTokenSymbol, isLoading],
+    [tvl, totalSupply, totalStakers, isLoading],
   );
 
   useEffect(() => {
