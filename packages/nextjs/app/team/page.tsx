@@ -155,19 +155,19 @@ export default function TeamPage() {
 
             <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
               <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 {teamMembers.map(member => (
                   <div
                     key={member.id}
-                    className="bg-base-100 dark:bg-base-300 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
+                    className="bg-base-100 dark:bg-base-300 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
                   >
-                    <div className="w-48 h-48 mx-auto mb-6 relative rounded-full overflow-hidden border-4 border-primary/20">
+                    <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-4 sm:mb-6 relative rounded-full overflow-hidden border-4 border-primary/20">
                       <Image
                         src={member.imageUrl}
                         alt={member.name}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
                       />
                     </div>
                     <h2 className="text-xl font-bold text-center text-base-content dark:text-white mb-2">

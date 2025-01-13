@@ -6,9 +6,9 @@ import { notification } from "~~/utils/scaffold-eth";
 
 export function RewardsCard() {
   const account = useAccount();
-  const [burnAmount, setBurnAmount] = useState<string>("25000");
+  const [burnAmount] = useState<string>("25000");
   const [error, setError] = useState<string | null>(null);
-  const [inputValue, setInputValue] = useState<number>(25000);
+  const [inputValue] = useState<number>(25000);
 
   const { data: rewardBalance } = useScaffoldReadContract({
     contractName: "RewardToken",
