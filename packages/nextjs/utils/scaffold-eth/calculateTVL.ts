@@ -90,7 +90,7 @@ export async function calculateTVL(
 
     const tvlInPawsy = pools.reduce((acc, pool, i) => {
       const tokenPrice = pool.stakingToken === PAWSY_VIRTUAL_LP?.address ? lpPrice : pawsyPrice;
-      const poolTVL = Number(formatEther(stakingAmounts[i])) * tokenPrice;
+      const poolTVL = Number(formatEther(stakingAmounts[i] as bigint)) * tokenPrice;
       return acc + poolTVL / pawsyPrice;
     }, 0);
 

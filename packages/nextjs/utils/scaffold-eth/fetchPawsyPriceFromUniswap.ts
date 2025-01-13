@@ -3,7 +3,6 @@ import { createRpcConfig } from "../common/rpc";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
 import { Address, createPublicClient, parseAbi } from "viem";
-import { base } from "viem/chains";
 
 const publicClient = createPublicClient(createRpcConfig());
 
@@ -11,7 +10,7 @@ const ABI = parseAbi([
   "function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)",
   "function token0() external view returns (address)",
   "function token1() external view returns (address)",
-]) as const;
+]);
 
 export const fetchPawsyPriceFromUniswap = async (): Promise<number> => {
   const cacheKey = "pawsy-price";
