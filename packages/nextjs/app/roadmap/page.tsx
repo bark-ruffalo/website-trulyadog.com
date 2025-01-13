@@ -184,6 +184,10 @@ const Roadmap: NextPage = () => {
                       the short-term)
                     </li>
                     <li>
+                      ✅ Created a private API that can deliver econ & crypto data (other types on demand), perfectly
+                      formated and delivered to AI agents in such a way to minimze token usage
+                    </li>
+                    <li>
                       🎯 <i className="text-sm">(in progress)</i> Add multiple new high-utility AI agents to the Bark
                       Ruffalo ecosystem
                     </li>

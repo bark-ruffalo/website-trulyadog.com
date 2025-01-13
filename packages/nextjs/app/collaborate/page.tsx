@@ -64,6 +64,12 @@ const Collaborate: NextPage = () => {
 
 • Anyone else who thinks they have something good to contribute to the ecosystem. We always prefer to work with people with something at stake; therefore, please consider first buying $PAWSY, then migrating, then staking. This also acts as a filter for us to understand that you're serious about participating. We're currently inundated with requests from marketers, fake influencers, etc., through Telegram and X.`,
     },
+    {
+      title: "Buy access to our knowledge API!",
+      content: `We created a private API that can deliver econ & crypto data (other types on demand, with no extra fee) specifically formatted for AI agents to consume the most info with a minimum amount of tokens. We also provide a way to feed it properly when/where it's needed.
+
+        On top of having our agents use it, we rent access to other projects, including other multi-agentic ecosystems. In the first month, setup + access 11 ETH; in the subsequent months, volume-based access at most 0.5 ETH. The first month is much more expensive than subsequent months because clients can get the ideas, run with them, and rewrite whatever code is missing. If any AI agent project wants it, let's discuss it! <a href="https://t.me/nebu_human" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">nebu_human</a> or <a href="https://t.me/BatataKawaii" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline">BatataKawaii</a> on Telegram.`,
+    },
   ];
 
   return (
