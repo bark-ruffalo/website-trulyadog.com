@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card } from "./Card";
 import { formatEther, parseAbi } from "viem";
 import { useAccount, useConfig, useReadContracts } from "wagmi";
@@ -18,7 +18,8 @@ export function Statistics() {
   const account = useAccount();
   const config = useConfig();
   const [tvl, setTvl] = useState("-");
-  const [lpPrice] = useState(0);
+  const [lpPrice, setLpPrice] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { data: lpData } = useReadContracts({
     contracts: [
@@ -61,29 +62,65 @@ export function Statistics() {
   const { data: mPAWSY } = useScaffoldContract({ contractName: "$mPAWSY" });
   const { data: PAWSY_VIRTUAL_LP } = useScaffoldContract({ contractName: "$PAWSY/$VIRTUAL LP" });
 
+  const cards = useMemo(
+    () => [
+      {
+        title: "TOTAL VALUE LOCKED",
+        value: isLoading ? "Loading..." : tvl,
+        className: tvl === "Error" ? "red" : "green",
+      },
+      {
+        title: "$mPAWSY supply: ",
+        value: isLoading
+          ? "Loading..."
+          : totalSupply
+            ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US")
+            : "0",
+        className: "green",
+      },
+      {
+        title: "REWARDS YOU CLAIMED",
+        value: isLoading
+          ? "Loading..."
+          : `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
+        className: "green",
+      },
+    ],
+    [tvl, totalSupply, totalRewards, rewardTokenSymbol, isLoading],
+  );
+
   useEffect(() => {
     async function calculateLPPrice() {
-      return withCache("lp-price", async () => {
-        if (!lpData?.[0] || !lpData?.[1]) return 0;
+      try {
+        setIsLoading(true);
+        const price = await withCache("lp-price", async () => {
+          if (!lpData?.[0] || !lpData?.[1]) return 0;
 
-        try {
-          const [reserves, totalSupply] = lpData;
-          const [pawsyPrice, virtualPrice] = await Promise.all([
-            fetchPawsyPriceFromUniswap(),
-            fetchVirtualPriceFromUniswap(),
-          ]);
+          try {
+            const [reserves, totalSupply] = lpData;
+            const [pawsyPrice, virtualPrice] = await Promise.all([
+              fetchPawsyPriceFromUniswap(),
+              fetchVirtualPriceFromUniswap(),
+            ]);
 
-          const pawsyReserve = Number(formatEther(reserves.result?.[1] ?? 0n));
-          const virtualReserve = Number(formatEther(reserves.result?.[0] ?? 0n));
-          const totalLpSupply = Number(formatEther(totalSupply.result ?? 0n));
+            const pawsyReserve = Number(formatEther(reserves.result?.[1] ?? 0n));
+            const virtualReserve = Number(formatEther(reserves.result?.[0] ?? 0n));
+            const totalLpSupply = Number(formatEther(totalSupply.result ?? 0n));
 
-          const totalValue = pawsyReserve * pawsyPrice + virtualReserve * virtualPrice;
-          return totalValue / totalLpSupply;
-        } catch (error) {
-          console.error("Error calculating LP price:", error);
-          return 0;
-        }
-      });
+            const totalValue = pawsyReserve * pawsyPrice + virtualReserve * virtualPrice;
+            return totalValue / totalLpSupply;
+          } catch (error) {
+            console.error("Error calculating LP price:", error);
+            return 0;
+          }
+        });
+        setLpPrice(price);
+      } catch (error) {
+        console.error("Error calculating LP price:", error);
+        setLpPrice(0);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     calculateLPPrice();
@@ -121,24 +158,6 @@ export function Statistics() {
 
     calculateTVL();
   }, [pools, vault, config, lpPrice, PAWSY, mPAWSY, PAWSY_VIRTUAL_LP]);
-
-  const cards = [
-    {
-      title: "TOTAL VALUE LOCKED",
-      value: tvl,
-      className: tvl === "Error" ? "red" : "green",
-    },
-    {
-      title: "$mPAWSY supply: ",
-      value: totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "0",
-      className: "green",
-    },
-    {
-      title: "REWARDS YOU CLAIMED",
-      value: `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
-      className: "green",
-    },
-  ];
 
   return (
     <div className="w-full max-w-[95%] sm:max-w-[75%]">

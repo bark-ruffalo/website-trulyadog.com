@@ -1,23 +1,11 @@
 import { DEFAULT_CACHE_VALUES, updatePriceCache, withCache } from "../cache";
-import { getAlchemyHttpUrl } from "./networks";
+import { createRpcConfig } from "../common/rpc";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
-import { Address, createPublicClient, fallback, http, parseAbi } from "viem";
+import { Address, createPublicClient, parseAbi } from "viem";
 import { base } from "viem/chains";
 
-const RPC_ENDPOINTS: readonly string[] = [
-  "https://base-rpc.publicnode.com",
-  "https://base.drpc.org",
-  "https://base-pokt.nodies.app",
-] as const;
-
-const alchemyHttpUrl = getAlchemyHttpUrl(base.id);
-const rpcFallbacks = [...(alchemyHttpUrl ? [http(alchemyHttpUrl)] : []), ...RPC_ENDPOINTS.map(url => http(url))];
-
-const publicClient = createPublicClient({
-  chain: base,
-  transport: fallback(rpcFallbacks),
-});
+const publicClient = createPublicClient(createRpcConfig());
 
 const ABI = parseAbi([
   "function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)",

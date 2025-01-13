@@ -1,25 +1,15 @@
-import { updatePriceCache, withCache } from "../cache";
-import { DEFAULT_CACHE_VALUES } from "../cache";
+import { DEFAULT_CACHE_VALUES, updateHoldersCache, updatePriceCache, withCache } from "../cache";
+import { RPC_ENDPOINTS, createRpcConfig } from "../common/rpc";
 import { Pool } from "../scaffold-eth/calculateTVL";
 import { calculateTVL } from "../scaffold-eth/calculateTVL";
-// import { fetchPawsyPriceFromUniswap } from "../scaffold-eth/fetchPawsyPriceFromUniswap";
 import { fetchTotalDaoFunds } from "../scaffold-eth/fetchTotalDaoFunds";
 import { fetchVirtualPriceFromUniswap } from "../scaffold-eth/fetchVirtualPriceFromUniswap";
+import { createPublicClient, http } from "viem";
 import { formatUnits, parseAbi } from "viem";
-import { createPublicClient, fallback, http } from "viem";
 import { base } from "viem/chains";
 import { createConfig } from "wagmi";
 
-const RPC_ENDPOINTS: readonly string[] = [
-  "https://base-rpc.publicnode.com",
-  "https://base.drpc.org",
-  "https://base-pokt.nodies.app",
-] as const;
-
-const publicClient = createPublicClient({
-  transport: fallback(RPC_ENDPOINTS.map(url => http(url))),
-  chain: base,
-});
+const publicClient = createPublicClient(createRpcConfig());
 
 const wagmiConfig = createConfig({
   chains: [base],
@@ -516,26 +506,31 @@ async function fetchCoinGeckoPrice(id: string): Promise<number> {
     return price;
   } catch (error) {
     console.error(`Error fetching ${id} price from CoinGecko:`, error);
-    const defaultValue = DEFAULT_CACHE_VALUES[id as keyof CacheValues];
-    if (typeof defaultValue === "object" && "price" in defaultValue) {
-      return defaultValue.price;
+    // Only get price for tokens that have a numeric value
+    if (id === "bitcoin" || id === "ethereum" || id === "virtual" || id === "pawsy") {
+      return DEFAULT_CACHE_VALUES[id].value;
     }
     return 0;
   }
 }
 
 async function retryContractCall<T>(fn: () => Promise<T>, fallbackValue: T): Promise<T> {
+  let lastError: Error | null = null;
+
   for (let i = 0; i < RPC_ENDPOINTS.length; i++) {
     try {
       return await fn();
     } catch (error) {
-      console.warn(`RPC attempt ${i + 1} failed:`, error);
-      if (i === RPC_ENDPOINTS.length - 1) {
-        console.error("All RPC endpoints failed");
-        return fallbackValue;
+      lastError = error as Error;
+      console.warn(`RPC attempt ${i + 1}/${RPC_ENDPOINTS.length} failed:`, error);
+      if (i < RPC_ENDPOINTS.length - 1) {
+        // Wait a bit before retrying
+        await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
       }
     }
   }
+
+  console.error("All RPC endpoints failed. Last error:", lastError);
   return fallbackValue;
 }
 
@@ -614,11 +609,9 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       async () =>
         calculateTVL(
           pools as unknown as Pool[],
-          STAKING_VAULT_ADDRESS,
-          STAKING_VAULT_ABI,
-          LP_ADDRESS,
-          LP_ADDRESS,
+          { address: STAKING_VAULT_ADDRESS, abi: STAKING_VAULT_ABI },
           wagmiConfig,
+          { address: LP_ADDRESS },
         ),
       { tvlInPawsy: 0, pawsyPrice: 0, lpPrice: 0 },
     );
@@ -634,13 +627,9 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
 
     const virtualPrice = await fetchVirtualPriceFromUniswap().catch(error => {
       console.error("Failed to fetch VIRTUAL price from Uniswap:", error);
-      const cachedPrice = getLastKnownPrice("virtual");
-      if (cachedPrice !== null) {
-        console.log("Using cached VIRTUAL price:", cachedPrice);
-        return cachedPrice;
-      }
-      console.log("Using default VIRTUAL price:", DEFAULT_CACHE_VALUES.virtual.price);
-      return DEFAULT_CACHE_VALUES.virtual.price;
+      const defaultPrice = DEFAULT_CACHE_VALUES.virtual.value;
+      console.log("Using default VIRTUAL price:", defaultPrice);
+      return defaultPrice;
     });
 
     return {

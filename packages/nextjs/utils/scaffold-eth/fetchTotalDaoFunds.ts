@@ -1,26 +1,14 @@
-import { DEFAULT_CACHE_VALUES, getLastKnownPrice, updatePriceCache, withCache } from "../cache";
+import { DEFAULT_CACHE_VALUES, withCache } from "../cache";
+import { RPC_ENDPOINTS } from "../common/rpc";
 import { fetchPawsyPriceFromUniswap } from "./fetchPawsyPriceFromUniswap";
 import { fetchVirtualPriceFromUniswap } from "./fetchVirtualPriceFromUniswap";
 import { formatUnits } from "viem";
 import { createPublicClient, fallback, http, parseAbi } from "viem";
-
-const RPC_ENDPOINTS: readonly string[] = [
-  "https://base-rpc.publicnode.com",
-  "https://base.drpc.org",
-  "https://base-pokt.nodies.app",
-] as const;
+import { base } from "viem/chains";
 
 const publicClient = createPublicClient({
-  transport: fallback(RPC_ENDPOINTS.map(url => http(url))),
-  chain: {
-    id: 8453,
-    name: "Base",
-    network: "base",
-    nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
-    rpcUrls: {
-      default: { http: RPC_ENDPOINTS },
-    },
-  },
+  transport: fallback(RPC_ENDPOINTS.map(endpoint => http(endpoint))),
+  chain: base,
 });
 
 const DAO_ADDRESS = "0xc638FB83d2bad5dD73d4C7c7deC0445d46a0716F" as const;
@@ -70,8 +58,8 @@ async function fetchPriceFromCoinMarketCap(cmcId: string): Promise<number> {
 
     const data = await response.json();
     return data.data[cmcId]?.quote?.USD?.price ?? DEFAULT_CACHE_VALUES.ethereum.value;
-  } catch (error) {
-    if (error.name === "AbortError") {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === "AbortError") {
       console.warn("CoinMarketCap request timed out");
     } else {
       console.warn("Error fetching price from CoinMarketCap:", error);
@@ -114,28 +102,8 @@ const LP_ABI = [
 
 const ERC20_ABI = ["function balanceOf(address) external view returns (uint256)"] as const;
 
-export interface EcosystemMetrics {
-  timestamp: string;
-  btcPrice: number;
-  ethPrice: number;
-  virtualPrice: number;
-  pawsyPrice: number;
-  totalStaked: number;
-  totalMigrated: number;
-  totalStakers: number;
-  pawsyTotalSupply: number;
-  pawsyHolders: number;
-  pawsyMarketCap: number;
-  realMarketCap: number;
-  daoFunds: {
-    totalUsd: number;
-    breakdown: { [key: string]: number };
-  };
-  tvl: number;
-}
-
-export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
-  const cacheKey = "ecosystem-metrics";
+export async function fetchTotalDaoFunds(): Promise<{ totalUsd: number; breakdown: { [key: string]: number } }> {
+  const cacheKey = "dao-funds";
 
   return withCache(cacheKey, async () => {
     try {
@@ -143,32 +111,22 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
 
       // Fetch ETH balance and price
       const ethBalance = await publicClient.getBalance({ address: DAO_ADDRESS });
-      let ethPrice = getLastKnownPrice("ethereum") ?? 0;
+      let ethPrice = 0;
 
+      // Try CoinGecko first
+      try {
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
+        if (response.ok) {
+          const data = await response.json();
+          ethPrice = data.ethereum?.usd ?? 0;
+        }
+      } catch (error) {
+        console.warn("Error fetching ETH price from CoinGecko:", error);
+      }
+
+      // Fallback to CoinMarketCap if CoinGecko failed
       if (!ethPrice) {
-        // Try CoinGecko first
-        try {
-          const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
-          if (response.ok) {
-            const data = await response.json();
-            ethPrice = data.ethereum?.usd ?? 0;
-            if (ethPrice) {
-              updatePriceCache("ethereum", ethPrice, "CoinGecko API");
-            }
-          }
-        } catch (error) {
-          console.warn("Error fetching ETH price from CoinGecko:", error);
-        }
-
-        // Fallback to CoinMarketCap if CoinGecko failed
-        if (!ethPrice) {
-          const cmcPrice = await fetchPriceFromCoinMarketCap(CMC_IDS.ethereum);
-          if (cmcPrice) {
-            console.log("Using ETH price from CoinMarketCap:", cmcPrice);
-            ethPrice = cmcPrice;
-            updatePriceCache("ethereum", cmcPrice, "CoinMarketCap API");
-          }
-        }
+        ethPrice = await fetchPriceFromCoinMarketCap(CMC_IDS.ethereum);
       }
 
       const ethValue = Number(formatUnits(ethBalance, 18)) * ethPrice;
@@ -221,22 +179,11 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
             args: [DAO_ADDRESS],
           })) + (token.symbol === "mPAWSY" ? 80_000_000n * 10n ** 18n : 0n);
 
-        let price = token.symbol === "USDC" ? 1 : (getLastKnownPrice(token.symbol.toLowerCase()) ?? 0);
+        let price = token.symbol === "USDC" ? 1 : 0;
 
         if (price === 0 && "getPriceFunction" in token) {
           try {
             price = await token.getPriceFunction();
-            if (price) {
-              updatePriceCache(
-                token.symbol.toLowerCase(),
-                price,
-                token.symbol === "PAWSY"
-                  ? "Uniswap V2 Pool"
-                  : token.symbol === "VIRTUAL"
-                    ? "Virtual LP Pool"
-                    : "On-chain Data",
-              );
-            }
           } catch (error) {
             console.warn(`Error fetching ${token.symbol} price:`, error);
           }
@@ -261,27 +208,12 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       console.log("Total DAO funds:", breakdown);
 
       return {
-        timestamp: new Date().toISOString(),
-        btcPrice: 0,
-        ethPrice: ethPrice ?? DEFAULT_CACHE_VALUES.ethereum.value,
-        virtualPrice: virtualPrice ?? DEFAULT_CACHE_VALUES.virtual.value,
-        pawsyPrice: pawsyPrice ?? DEFAULT_CACHE_VALUES.pawsy.value,
-        totalStaked: 0,
-        totalMigrated: 0,
-        totalStakers: 0,
-        pawsyTotalSupply: 0,
-        pawsyHolders: 0,
-        pawsyMarketCap: 0,
-        realMarketCap: 0,
-        daoFunds: {
-          totalUsd,
-          breakdown,
-        },
-        tvl: 0,
+        totalUsd,
+        breakdown,
       };
     } catch (error) {
       console.error("Error fetching DAO funds:", error);
-      return DEFAULT_CACHE_VALUES["ecosystem-metrics"].daoFunds;
+      throw error;
     }
   });
 }
