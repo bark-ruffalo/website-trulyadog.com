@@ -4,6 +4,7 @@ import { formatEther, parseAbi } from "viem";
 import { useAccount, useConfig, useReadContracts } from "wagmi";
 import { readContract } from "wagmi/actions";
 import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { withCache } from "~~/utils/cache";
 import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
 import { fetchVirtualPriceFromUniswap } from "~~/utils/scaffold-eth/fetchVirtualPriceFromUniswap";
 
@@ -17,7 +18,7 @@ export function Statistics() {
   const account = useAccount();
   const config = useConfig();
   const [tvl, setTvl] = useState("-");
-  const [lpPrice, setLpPrice] = useState(0);
+  const [lpPrice] = useState(0);
 
   const { data: lpData } = useReadContracts({
     contracts: [
@@ -62,25 +63,27 @@ export function Statistics() {
 
   useEffect(() => {
     async function calculateLPPrice() {
-      if (!lpData?.[0] || !lpData?.[1]) return;
+      return withCache("lp-price", async () => {
+        if (!lpData?.[0] || !lpData?.[1]) return 0;
 
-      try {
-        const [reserves, totalSupply] = lpData;
-        const [pawsyPrice, virtualPrice] = await Promise.all([
-          fetchPawsyPriceFromUniswap(),
-          fetchVirtualPriceFromUniswap(),
-        ]);
+        try {
+          const [reserves, totalSupply] = lpData;
+          const [pawsyPrice, virtualPrice] = await Promise.all([
+            fetchPawsyPriceFromUniswap(),
+            fetchVirtualPriceFromUniswap(),
+          ]);
 
-        const pawsyReserve = Number(formatEther(reserves.result?.[1] ?? 0n));
-        const virtualReserve = Number(formatEther(reserves.result?.[0] ?? 0n));
-        const totalLpSupply = Number(formatEther(totalSupply.result ?? 0n));
+          const pawsyReserve = Number(formatEther(reserves.result?.[1] ?? 0n));
+          const virtualReserve = Number(formatEther(reserves.result?.[0] ?? 0n));
+          const totalLpSupply = Number(formatEther(totalSupply.result ?? 0n));
 
-        const totalValue = pawsyReserve * pawsyPrice + virtualReserve * virtualPrice;
-        setLpPrice(totalValue / totalLpSupply);
-      } catch (error) {
-        console.error("Error calculating LP price:", error);
-        setLpPrice(0);
-      }
+          const totalValue = pawsyReserve * pawsyPrice + virtualReserve * virtualPrice;
+          return totalValue / totalLpSupply;
+        } catch (error) {
+          console.error("Error calculating LP price:", error);
+          return 0;
+        }
+      });
     }
 
     calculateLPPrice();

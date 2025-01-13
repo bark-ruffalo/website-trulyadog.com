@@ -1,11 +1,19 @@
+import { DEFAULT_CACHE_VALUES, updatePriceCache, withCache } from "../cache";
 import { getAlchemyHttpUrl } from "./networks";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
 import { Address, createPublicClient, fallback, http, parseAbi } from "viem";
 import { base } from "viem/chains";
 
+const RPC_ENDPOINTS: readonly string[] = [
+  "https://base-rpc.publicnode.com",
+  "https://base.drpc.org",
+  "https://base-pokt.nodies.app",
+] as const;
+
 const alchemyHttpUrl = getAlchemyHttpUrl(base.id);
-const rpcFallbacks = alchemyHttpUrl ? [http(alchemyHttpUrl), http()] : [http()];
+const rpcFallbacks = [...(alchemyHttpUrl ? [http(alchemyHttpUrl)] : []), ...RPC_ENDPOINTS.map(url => http(url))];
+
 const publicClient = createPublicClient({
   chain: base,
   transport: fallback(rpcFallbacks),
@@ -15,43 +23,49 @@ const ABI = parseAbi([
   "function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)",
   "function token0() external view returns (address)",
   "function token1() external view returns (address)",
-]);
+]) as const;
 
 export const fetchVirtualPriceFromUniswap = async (): Promise<number> => {
-  try {
-    const VIRTUAL = new Token(8453, "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b", 18);
-    const USDC = new Token(8453, "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", 6);
+  const cacheKey = "virtual-price";
 
-    const virtualUsdcPairAddress = Pair.getAddress(VIRTUAL, USDC) as Address;
+  return withCache(cacheKey, async () => {
+    try {
+      const VIRTUAL = new Token(8453, "0x0b3e328455c4059EEb9e3f84b5543F74E24e7E1b", 18);
+      const USDC = new Token(8453, "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", 6);
 
-    const virtualUsdcReserves = await publicClient.readContract({
-      address: virtualUsdcPairAddress,
-      abi: ABI,
-      functionName: "getReserves",
-    });
+      const virtualUsdcPairAddress = Pair.getAddress(VIRTUAL, USDC) as Address;
 
-    const virtualUsdcToken0 = await publicClient.readContract({
-      address: virtualUsdcPairAddress,
-      abi: ABI,
-      functionName: "token0",
-    });
+      const [virtualUsdcReserves, virtualUsdcToken0] = await Promise.all([
+        publicClient.readContract({
+          address: virtualUsdcPairAddress,
+          abi: ABI,
+          functionName: "getReserves",
+        }),
+        publicClient.readContract({
+          address: virtualUsdcPairAddress,
+          abi: ABI,
+          functionName: "token0",
+        }),
+      ]);
 
-    const virtualUsdcPair = new Pair(
-      CurrencyAmount.fromRawAmount(
-        virtualUsdcToken0 === VIRTUAL.address ? VIRTUAL : USDC,
-        virtualUsdcReserves[0].toString(),
-      ),
-      CurrencyAmount.fromRawAmount(
-        virtualUsdcToken0 === VIRTUAL.address ? USDC : VIRTUAL,
-        virtualUsdcReserves[1].toString(),
-      ),
-    );
+      const virtualUsdcPair = new Pair(
+        CurrencyAmount.fromRawAmount(
+          virtualUsdcToken0 === VIRTUAL.address ? VIRTUAL : USDC,
+          virtualUsdcReserves[0].toString(),
+        ),
+        CurrencyAmount.fromRawAmount(
+          virtualUsdcToken0 === VIRTUAL.address ? USDC : VIRTUAL,
+          virtualUsdcReserves[1].toString(),
+        ),
+      );
 
-    const route = new Route([virtualUsdcPair], VIRTUAL, USDC);
-    const price = parseFloat(route.midPrice.toSignificant(6));
-    return price;
-  } catch (error) {
-    console.error(`Error fetching VIRTUAL price in USDC from Uniswap on Base: `, error);
-    return 0;
-  }
+      const route = new Route([virtualUsdcPair], VIRTUAL, USDC);
+      const price = parseFloat(route.midPrice.toSignificant(6));
+      updatePriceCache("virtual", price, "Uniswap V2 Pool");
+      return price;
+    } catch (error) {
+      console.error("Error fetching VIRTUAL price from Uniswap:", error);
+      return DEFAULT_CACHE_VALUES.virtual.value;
+    }
+  });
 };

@@ -1,3 +1,5 @@
+import { updatePriceCache, withCache } from "../cache";
+import { DEFAULT_CACHE_VALUES } from "../cache";
 import { Pool } from "../scaffold-eth/calculateTVL";
 import { calculateTVL } from "../scaffold-eth/calculateTVL";
 // import { fetchPawsyPriceFromUniswap } from "../scaffold-eth/fetchPawsyPriceFromUniswap";
@@ -8,8 +10,14 @@ import { createPublicClient, fallback, http } from "viem";
 import { base } from "viem/chains";
 import { createConfig } from "wagmi";
 
+const RPC_ENDPOINTS: readonly string[] = [
+  "https://base-rpc.publicnode.com",
+  "https://base.drpc.org",
+  "https://base-pokt.nodies.app",
+] as const;
+
 const publicClient = createPublicClient({
-  transport: fallback([http("https://base.llamarpc.com")]),
+  transport: fallback(RPC_ENDPOINTS.map(url => http(url))),
   chain: base,
 });
 
@@ -20,9 +28,9 @@ const wagmiConfig = createConfig({
   },
 });
 
-const STAKING_VAULT_ADDRESS = "0xA6FaCD417faf801107bF19F4a24062Ff15AE9C61";
-const PAWSY_ADDRESS = "0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a";
-const MPAWSY_ADDRESS = "0x1437819DF58Ad648e35ED4f6F642d992684B2004";
+const STAKING_VAULT_ADDRESS = "0xA6FaCD417faf801107bF19F4a24062Ff15AE9C61" as const;
+const PAWSY_ADDRESS = "0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a" as const;
+const MPAWSY_ADDRESS = "0x1437819DF58Ad648e35ED4f6F642d992684B2004" as const;
 const LP_ADDRESS = "0x96FC64caE162C1Cb288791280c3Eff2255c330a8";
 
 const STAKING_VAULT_ABI = [
@@ -405,6 +413,132 @@ const ERC20_ABI = parseAbi([
   "function balanceOf(address) external view returns (uint256)",
 ]);
 
+async function fetchWithRetry(url: string, options: RequestInit & { maxRetries?: number } = {}): Promise<Response> {
+  const { maxRetries = 3, ...fetchOptions } = options;
+  let lastError: Error | null = null;
+
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // Increase timeout to 10 seconds
+
+      const response = await fetch(url, {
+        ...fetchOptions,
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (response.ok) return response;
+      lastError = new Error(`HTTP error! status: ${response.status}`);
+    } catch (error) {
+      lastError = error as Error;
+      console.warn(`Retry ${i + 1}/${maxRetries} failed:`, error);
+      if (i < maxRetries - 1) {
+        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1))); // Longer backoff
+      }
+    }
+  }
+
+  throw lastError;
+}
+
+const HAS_BASESCAN_PRO = false; // Set to true if you have Basescan Pro access
+
+async function fetchPawsyHolders(): Promise<number> {
+  const cacheKey = "pawsyHolders";
+
+  return withCache(cacheKey, async () => {
+    // If no pro access, return default value
+    if (!HAS_BASESCAN_PRO) {
+      console.log("Basescan Pro access not available, using default holders count");
+      return DEFAULT_CACHE_VALUES.pawsyHolders.value;
+    }
+
+    try {
+      const BASESCAN_API_KEY = process.env.BASESCAN_API_KEY;
+      const BASESCAN_API_URL = "https://api.basescan.org/api";
+
+      if (!BASESCAN_API_KEY) {
+        console.warn("BASESCAN_API_KEY not found, using default holders count");
+        return DEFAULT_CACHE_VALUES.pawsyHolders.value;
+      }
+
+      const response = await fetchWithRetry(
+        `${BASESCAN_API_URL}?module=token&action=tokenholderlist&contractaddress=${PAWSY_ADDRESS}&apikey=${BASESCAN_API_KEY}`,
+        {
+          maxRetries: 3,
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
+
+      const data = await response.json();
+
+      if (data.status === "1" && Array.isArray(data.result)) {
+        console.log(
+          `PAWSY Holders:\n` +
+            `  Count: ${data.result.length}\n` +
+            `  Source: Basescan API\n` +
+            `  Time: ${new Date().toISOString()}`,
+        );
+        const holders = data.result.length;
+        updateHoldersCache("pawsyHolders", holders, "Basescan API");
+        return holders;
+      }
+
+      console.warn("Invalid response format from Basescan API:", data);
+      return DEFAULT_CACHE_VALUES.pawsyHolders.value;
+    } catch (error) {
+      console.error("Error fetching PAWSY holders, using default count:", error);
+      return DEFAULT_CACHE_VALUES.pawsyHolders.value;
+    }
+  });
+}
+
+async function fetchCoinGeckoPrice(id: string): Promise<number> {
+  try {
+    const COINGECKO_API_URL = process.env.NEXT_PUBLIC_COINGECKO_API_URL || "https://api.coingecko.com/api/v3";
+
+    const response = await fetchWithRetry(`${COINGECKO_API_URL}/simple/price?ids=${id}&vs_currencies=usd`, {
+      maxRetries: 3,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    const data = await response.json();
+    const price = data[id]?.usd ?? 0;
+    if (price) {
+      updatePriceCache(id, price, "CoinGecko");
+    }
+    return price;
+  } catch (error) {
+    console.error(`Error fetching ${id} price from CoinGecko:`, error);
+    const defaultValue = DEFAULT_CACHE_VALUES[id as keyof CacheValues];
+    if (typeof defaultValue === "object" && "price" in defaultValue) {
+      return defaultValue.price;
+    }
+    return 0;
+  }
+}
+
+async function retryContractCall<T>(fn: () => Promise<T>, fallbackValue: T): Promise<T> {
+  for (let i = 0; i < RPC_ENDPOINTS.length; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      console.warn(`RPC attempt ${i + 1} failed:`, error);
+      if (i === RPC_ENDPOINTS.length - 1) {
+        console.error("All RPC endpoints failed");
+        return fallbackValue;
+      }
+    }
+  }
+  return fallbackValue;
+}
+
 export interface EcosystemMetrics {
   timestamp: string;
   btcPrice: number;
@@ -422,114 +556,110 @@ export interface EcosystemMetrics {
     totalUsd: number;
     breakdown: { [key: string]: number };
   };
-}
-
-async function fetchPawsyHolders(): Promise<number> {
-  try {
-    const BASESCAN_API_KEY = process.env.NEXT_PUBLIC_BASESCAN_API_KEY;
-    if (!BASESCAN_API_KEY) {
-      console.warn("NEXT_PUBLIC_BASESCAN_API_KEY not found, using fallback holder count");
-      return 16193;
-    }
-
-    const response = await fetch(
-      `https://api.basescan.org/api?module=token&action=tokenholderlist&contractaddress=${PAWSY_ADDRESS}&apikey=${BASESCAN_API_KEY}`,
-    );
-    const data = await response.json();
-
-    if (data.status === "1" && Array.isArray(data.result)) {
-      return data.result.length;
-    }
-
-    console.warn("Invalid response from Basescan API, using fallback holder count");
-    return 16193;
-  } catch (error) {
-    console.error("Error fetching PAWSY holders:", error);
-    return 16193;
-  }
-}
-
-async function fetchCoinGeckoPrice(id: string): Promise<number> {
-  try {
-    const COINGECKO_API_KEY = process.env.COINGECKO_API_KEY;
-    if (!COINGECKO_API_KEY) {
-      throw new Error("COINGECKO_API_KEY not found in environment variables");
-    }
-
-    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`, {
-      headers: {
-        "x-cg-demo-api-key": COINGECKO_API_KEY,
-      },
-    });
-    const data = await response.json();
-    return data[id].usd;
-  } catch (error) {
-    console.error(`Error fetching ${id} price:`, error);
-    return 0;
-  }
+  tvl: number;
 }
 
 export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
-  // Get prices
-  const [btcPrice, ethPrice] = await Promise.all([fetchCoinGeckoPrice("bitcoin"), fetchCoinGeckoPrice("ethereum")]);
+  const cacheKey = "ecosystem-metrics";
 
-  // Get staking data
-  const [totalStakers, totalMigrated, pawsyTotalSupply, pawsyHolders, pools] = await Promise.all([
-    publicClient.readContract({
-      address: STAKING_VAULT_ADDRESS,
-      abi: STAKING_VAULT_ABI,
-      functionName: "getTotalLockedUsers",
-    }),
-    publicClient.readContract({
-      address: MPAWSY_ADDRESS,
-      abi: ERC20_ABI,
-      functionName: "totalSupply",
-    }),
-    publicClient.readContract({
-      address: PAWSY_ADDRESS,
-      abi: ERC20_ABI,
-      functionName: "totalSupply",
-    }),
-    fetchPawsyHolders(),
-    publicClient.readContract({
-      address: STAKING_VAULT_ADDRESS,
-      abi: STAKING_VAULT_ABI,
-      functionName: "getPools",
-    }),
-  ]);
+  return withCache(cacheKey, async () => {
+    // Get prices
+    const [btcPrice, ethPrice] = await Promise.all([fetchCoinGeckoPrice("bitcoin"), fetchCoinGeckoPrice("ethereum")]);
 
-  // Calculate TVL
-  const { tvlInPawsy, pawsyPrice } = await calculateTVL(
-    pools as unknown as Pool[],
-    STAKING_VAULT_ADDRESS,
-    STAKING_VAULT_ABI,
-    LP_ADDRESS,
-    LP_ADDRESS,
-    wagmiConfig,
-  );
+    // Get staking data with better error handling
+    const contractData = await Promise.all([
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: STAKING_VAULT_ADDRESS,
+            abi: STAKING_VAULT_ABI,
+            functionName: "getTotalLockedUsers",
+          }),
+        BigInt(0),
+      ),
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: MPAWSY_ADDRESS,
+            abi: ERC20_ABI,
+            functionName: "totalSupply",
+          }),
+        BigInt(0),
+      ),
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: PAWSY_ADDRESS,
+            abi: ERC20_ABI,
+            functionName: "totalSupply",
+          }),
+        BigInt(0),
+      ),
+      fetchPawsyHolders(),
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: STAKING_VAULT_ADDRESS,
+            abi: STAKING_VAULT_ABI,
+            functionName: "getPools",
+          }),
+        [],
+      ),
+    ]);
 
-  // Calculate market caps
-  const pawsyMarketCap = Number(formatUnits(pawsyTotalSupply, 18)) * pawsyPrice;
-  const realMarketCap = pawsyMarketCap * 1.1; // Includes mPAWSY value
+    const [totalStakers, totalMigrated, pawsyTotalSupply, pawsyHolders, pools] = contractData;
 
-  // Get DAO funds
-  const daoFunds = await fetchTotalDaoFunds();
+    // Calculate TVL with error handling
+    const tvlData = await retryContractCall(
+      async () =>
+        calculateTVL(
+          pools as unknown as Pool[],
+          STAKING_VAULT_ADDRESS,
+          STAKING_VAULT_ABI,
+          LP_ADDRESS,
+          LP_ADDRESS,
+          wagmiConfig,
+        ),
+      { tvlInPawsy: 0, pawsyPrice: 0, lpPrice: 0 },
+    );
 
-  return {
-    timestamp: new Date().toISOString(),
-    btcPrice,
-    ethPrice,
-    virtualPrice: await fetchVirtualPriceFromUniswap(),
-    pawsyPrice,
-    totalStaked: tvlInPawsy,
-    totalMigrated: Number(formatUnits(totalMigrated, 18)),
-    totalStakers: Number(totalStakers),
-    pawsyTotalSupply: Number(formatUnits(pawsyTotalSupply, 18)),
-    pawsyHolders,
-    pawsyMarketCap,
-    realMarketCap,
-    daoFunds,
-  };
+    const { tvlInPawsy, pawsyPrice } = tvlData;
+
+    // Calculate market caps
+    const pawsyMarketCap = Number(formatUnits(pawsyTotalSupply, 18)) * pawsyPrice;
+    const realMarketCap = pawsyMarketCap * 1.1; // Includes mPAWSY value
+
+    // Get DAO funds with error handling
+    const daoFunds = await retryContractCall(() => fetchTotalDaoFunds(), { totalUsd: 0, breakdown: {} });
+
+    const virtualPrice = await fetchVirtualPriceFromUniswap().catch(error => {
+      console.error("Failed to fetch VIRTUAL price from Uniswap:", error);
+      const cachedPrice = getLastKnownPrice("virtual");
+      if (cachedPrice !== null) {
+        console.log("Using cached VIRTUAL price:", cachedPrice);
+        return cachedPrice;
+      }
+      console.log("Using default VIRTUAL price:", DEFAULT_CACHE_VALUES.virtual.price);
+      return DEFAULT_CACHE_VALUES.virtual.price;
+    });
+
+    return {
+      timestamp: new Date().toISOString(),
+      btcPrice: btcPrice ?? DEFAULT_CACHE_VALUES.bitcoin.value,
+      ethPrice: ethPrice ?? DEFAULT_CACHE_VALUES.ethereum.value,
+      virtualPrice: virtualPrice ?? DEFAULT_CACHE_VALUES.virtual.value,
+      pawsyPrice: pawsyPrice ?? DEFAULT_CACHE_VALUES.pawsy.value,
+      totalStaked: tvlInPawsy,
+      totalMigrated: Number(formatUnits(totalMigrated, 18)),
+      totalStakers: Number(totalStakers),
+      pawsyTotalSupply: Number(formatUnits(pawsyTotalSupply, 18)),
+      pawsyHolders,
+      pawsyMarketCap,
+      realMarketCap,
+      daoFunds,
+      tvl: tvlInPawsy * pawsyPrice,
+    };
+  });
 }
 
 export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
