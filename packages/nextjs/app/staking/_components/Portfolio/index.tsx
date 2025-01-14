@@ -6,7 +6,7 @@ import { useStakingStore } from "~~/services/store/stakingStore";
 import { notification } from "~~/utils/scaffold-eth";
 
 export function Portfolio() {
-  const { address, isConnected } = useAccount();
+  const account = useAccount();
 
   const {
     data: stakeData,
@@ -15,7 +15,7 @@ export function Portfolio() {
   } = useScaffoldReadContract({
     contractName: "StakingVault",
     functionName: "getUserLocks",
-    args: [address || undefined],
+    args: [account.address],
   });
 
   const shouldRefresh = useStakingStore(state => state.shouldRefresh);
@@ -25,10 +25,12 @@ export function Portfolio() {
       notification.error(`Error fetching stake data: ${stakeError.message}`);
       return;
     }
-    refetchStakeData();
-  }, [shouldRefresh, stakeError, refetchStakeData]);
+    if (account.isConnected) {
+      refetchStakeData();
+    }
+  }, [shouldRefresh, stakeError, refetchStakeData, account.isConnected]);
 
-  if (!isConnected) {
+  if (!account.isConnected) {
     return (
       <div className="w-full text-center text-base-content dark:text-white">
         Please connect your wallet to view your portfolio
@@ -46,7 +48,7 @@ export function Portfolio() {
         <div className="p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-lg flex flex-col h-full">
           <div className="w-full grid grid-rows-[auto_1fr] h-full">
             <div className="flex items-center mb-2">
-              <h2 className="mr-10 text-white whitespace-nowrap font-semibold uppercase">My Portfolio</h2>
+              <h2 className="mr-10 text-white whitespace-nowrap font-semibold">My Portfolio</h2>
             </div>
             <div className="flex justify-center items-stretch w-full h-full min-h-[180px]">
               <div className="flex flex-wrap justify-center w-full mt-0 gap-4">

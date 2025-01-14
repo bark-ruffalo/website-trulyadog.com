@@ -59,12 +59,12 @@ export function Statistics() {
   const cards = useMemo(
     () => [
       {
-        title: "TOTAL VALUE LOCKED",
+        title: "Total Value Locked",
         value: isLoading ? "Loading..." : tvl,
         className: tvl === "Error" ? "red" : "green",
       },
       {
-        title: "$mPAWSY supply: ",
+        title: "$mPAWSY Supply",
         value: isLoading
           ? "Loading..."
           : totalSupply
@@ -73,7 +73,7 @@ export function Statistics() {
         className: "green",
       },
       {
-        title: "STAKERS",
+        title: "Stakers",
         value: isLoading ? "Loading..." : totalStakers ? totalStakers.toString() : "0",
         className: "green",
       },

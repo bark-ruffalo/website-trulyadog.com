@@ -24,8 +24,9 @@ const Staking: NextPage = () => {
                   <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
                     <p>
                       The primary purpose of staking is to participate in our income rounds. We do not preannounce them;
-                      we just take a snapshot of the stakers and start sending. The current annualized APY for those who
-                      participated in round 1 is 102.93%. More about how it works in{" "}
+                      we simply take a snapshot of the stakers and start sending. Our first income distribution was on
+                      2025-12-23 and amounted to more than double the staked amount in dollar terms. More about how it
+                      works in{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1877740433284935863"
                         target="_blank"
@@ -34,28 +35,35 @@ const Staking: NextPage = () => {
                       >
                         this tweet
                       </a>
-                      .
+                      . Future distributions may differ in size; investors shouldn&apos;t assume 100%+ yields happening
+                      every time. We plan to do multiple rounds a year, amounts can vary.
                     </p>
                     <p>
                       But there&apos;s more! DRUGS is a reward token with no dollar value that helps Bark Ruffalo track
-                      entities most involved financially in its ecosystem. These are the current rewards for those who
-                      obtained DRUGS, depending on the amount staked:
+                      entities most involved financially in its ecosystem.
                     </p>
-                    <ul className="space-y-2 list-disc pl-4">
-                      <li>
-                        5k or more: access to the 5k-club token-gated channel with polls that guide the future of the
-                        ecosystem
-                      </li>
-                      <li>
-                        500k or more: access to the above + goodies (like a sniper that purchases newly launched
-                        prototypes that pass certain quality checks on Virtuals Protocol)
-                      </li>
-                      <li>5M or more: access to the above + more (like priority when getting alpha drops)</li>
-                    </ul>
-                    <p>
-                      DRUGS itself will receive various utilities, with the first being that you&apos;re currently able
-                      to burn it to get NFTs from the OG collection.
-                    </p>
+                    <details className="mt-4">
+                      <summary className="cursor-pointer font-semibold text-sm sm:text-base">
+                        These are the current rewards for those who obtained DRUGS, depending on the amount staked:
+                      </summary>
+                      <div className="mt-2 space-y-3 sm:space-y-4">
+                        <ul className="space-y-2 list-disc pl-4">
+                          <li>
+                            5k or more: access to the 5k-club token-gated channel with polls that guide the future of
+                            the ecosystem
+                          </li>
+                          <li>
+                            500k or more: access to the above + goodies (like a sniper that purchases newly launched
+                            prototypes that pass certain quality checks on Virtuals Protocol)
+                          </li>
+                          <li>5M or more: access to the above + more (like priority when getting alpha drops)</li>
+                        </ul>
+                        <p>
+                          DRUGS itself will receive various utilities, with the first being that you&apos;re currently
+                          able to burn it to get NFTs from the OG collection.
+                        </p>
+                      </div>
+                    </details>
                     <details className="mt-4">
                       <summary className="cursor-pointer font-semibold text-sm sm:text-base">
                         MORE INFO + HOW TO GET ACCESS TO THE GOODIES!

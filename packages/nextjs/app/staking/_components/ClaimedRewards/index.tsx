@@ -2,6 +2,7 @@ import { Card } from "../Statistics/Card";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { getUserPayout } from "~~/utils/common/sir";
 
 export function ClaimedRewards() {
   const account = useAccount();
@@ -18,7 +19,12 @@ export function ClaimedRewards() {
 
   const cards = [
     {
-      title: "REWARDS YOU CLAIMED",
+      title: "If You Staked $10,000",
+      value: `so far you earned ${getUserPayout(10000)}`,
+      className: "green",
+    },
+    {
+      title: "Rewards You Claimed",
       value: isLoading
         ? "Loading..."
         : `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
