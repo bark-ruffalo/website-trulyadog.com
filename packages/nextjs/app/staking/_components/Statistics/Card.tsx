@@ -21,10 +21,10 @@ export function Card({ cards }: CardProps) {
               className={`absolute inset-0 rounded-2xl z-0 ${bgClass} bg-opacity-10 dark:bg-opacity-20 blur-sm`}
             ></div>
             <div className="relative z-10 text-base-content dark:text-white w-full">
-              <div className="text-sm font-semibold uppercase mb-1 leading-4 text-center">{card.title}</div>
+              <div className="text-sm font-semibold mb-1 leading-4 text-center">{card.title}</div>
               <div
-                className={`text-base sm:text-lg font-light leading-5 pt-6 text-center ${
-                  card.value.length > 10 ? "text-sm sm:text-base" : "text-xl sm:text-2xl"
+                className={`text-sm sm:text-base font-light leading-5 pt-6 text-center ${
+                  card.value.length > 10 ? "text-xs sm:text-sm" : "text-base sm:text-lg"
                 }`}
               >
                 {card.value}

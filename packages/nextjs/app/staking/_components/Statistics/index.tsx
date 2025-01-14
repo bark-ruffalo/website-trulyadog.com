@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Card } from "./Card";
 import { formatEther, parseAbi } from "viem";
-import { useConfig, useReadContracts } from "wagmi";
+import { useAccount, useConfig, useReadContracts } from "wagmi";
 import { readContract } from "wagmi/actions";
 import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { withCache } from "~~/utils/cache";
+import { getUserPayout } from "~~/utils/common/sir";
 import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
 import { fetchVirtualPriceFromUniswap } from "~~/utils/scaffold-eth/fetchVirtualPriceFromUniswap";
 
@@ -16,6 +17,7 @@ const LP_ABI = [
 
 export function Statistics() {
   const config = useConfig();
+  const account = useAccount();
   const [tvl, setTvl] = useState("-");
   const [lpPrice, setLpPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,6 +58,17 @@ export function Statistics() {
   const { data: mPAWSY } = useScaffoldContract({ contractName: "$mPAWSY" });
   const { data: PAWSY_VIRTUAL_LP } = useScaffoldContract({ contractName: "$PAWSY/$VIRTUAL LP" });
 
+  const { data: totalRewards, isLoading: rewardsLoading } = useScaffoldReadContract({
+    contractName: "StakingVault",
+    functionName: "getLifetimeRewards",
+    args: [account.address],
+  });
+
+  const { data: rewardTokenSymbol } = useScaffoldReadContract({
+    contractName: "RewardToken",
+    functionName: "symbol",
+  });
+
   const cards = useMemo(
     () => [
       {
@@ -77,8 +90,20 @@ export function Statistics() {
         value: isLoading ? "Loading..." : totalStakers ? totalStakers.toString() : "0",
         className: "green",
       },
+      {
+        title: "If You Staked $10,000",
+        value: `so far you earned ${getUserPayout(10000)}`,
+        className: "green",
+      },
+      {
+        title: "Rewards You Claimed",
+        value: rewardsLoading
+          ? "Loading..."
+          : `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
+        className: "green",
+      },
     ],
-    [tvl, totalSupply, totalStakers, isLoading],
+    [tvl, totalSupply, totalStakers, isLoading, totalRewards, rewardsLoading, rewardTokenSymbol],
   );
 
   useEffect(() => {
