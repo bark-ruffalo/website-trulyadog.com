@@ -174,7 +174,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         <div className="flex justify-between items-center gap-4 w-full">
           <div className="flex justify-between items-center bg-base-100 border border-[#e8effb33] rounded-lg p-2 w-full">
             <input
-              className="bg-transparent border-none outline-none text-white px-2 w-3/4"
+              className="bg-transparent border-none outline-none text-base-content dark:text-white px-2 w-3/4"
               type="text"
               value={stakeAmount}
               onChange={handleStakeAmountChange}
