@@ -2,11 +2,12 @@
 module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./utils/**/*.{js,ts,jsx,tsx}"],
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("tailwindcss-animate")],
   darkTheme: "dark",
   darkMode: "class",
   // DaisyUI theme colors
   daisyui: {
+    base: false,
     themes: [
       {
         light: {
@@ -22,8 +23,38 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        main: 'var(--main)',
+        overlay: 'var(--overlay)',
+        bg: 'var(--bg)',
+        bw: 'var(--bw)',
+        blank: 'var(--blank)',
+        text: 'var(--text)',
+        mtext: 'var(--mtext)',
+        border: 'var(--border)',
+        ring: 'var(--ring)',
+        ringOffset: 'var(--ring-offset)',
+
+        secondaryBlack: '#212121',
+      },
+      borderRadius: {
+        base: 'var(--border-radius)'
+      },
       boxShadow: {
-        center: "0 0 12px -2px rgb(0 0 0 / 0.05)",
+        shadow: 'var(--shadow)'
+      },
+      translate: {
+        boxShadowX: '4px',
+        boxShadowY: '4px',
+        reverseBoxShadowX: '-4px',
+        reverseBoxShadowY: '-4px',
+      },
+      fontWeight: {
+        base: '500',
+        heading: '700',
+      },
+      fontFamily: {
+        sans: ['var(--font-dm-sans)', 'sans-serif'],
       },
       animation: {
         "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",

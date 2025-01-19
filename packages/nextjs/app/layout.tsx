@@ -1,4 +1,5 @@
 import "@rainbow-me/rainbowkit/styles.css";
+import { DM_Sans } from "next/font/google"
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
@@ -10,9 +11,16 @@ export const metadata = getMetadata({
   description: "Definitely not a cat, and definitely not an AI agent.",
 });
 
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "700"],
+  variable: "--font-dm-sans",
+});
+
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html suppressHydrationWarning>
+    <html suppressHydrationWarning className={dmSans.className}>
       <body>
         <ThemeProvider>
           <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
