@@ -37,6 +37,7 @@ const Staking: NextPage = () => {
                     . Future distributions may differ in size; investors shouldn&apos;t assume 100%+ yields happening
                     every time. We plan to do multiple rounds a year; amounts can vary.
                   </p>
+
                   <details className="mt-4">
                     <summary className="cursor-pointer font-semibold text-sm sm:text-base">
                       But there&apos;s more! These are the current ADDITIONAL rewards, depending on the amount staked:
@@ -83,6 +84,7 @@ const Staking: NextPage = () => {
                       </p>
                     </div>
                   </details>
+
                   <details className="mt-4">
                     <summary className="cursor-pointer font-semibold text-sm sm:text-base">
                       MORE INFO + HOW TO GET ACCESS TO THE GOODIES!
@@ -113,18 +115,6 @@ const Staking: NextPage = () => {
                       </p>
                       <p>
                         Screenshots with the first version of the sniper and the private repository: <br />
-                        EDIT: Note that the current version has A LOT more filters. How do we get good ideas for
-                        filters? A secret is checking out what the{" "}
-                        <a
-                          href="https://x.com/proof_of_chad"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                        >
-                          Proof-of-Chad team
-                        </a>{" "}
-                        has been up to! 🤫
-                        <br />
                         <Image
                           src="/Snipy McSnappingson v1.0.png"
                           alt="Sniper screenshot 1"
