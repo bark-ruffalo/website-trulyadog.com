@@ -51,6 +51,7 @@ const Roadmap: NextPage = () => {
           text: "Expand into other social platforms", completed: false, subitems: [
             { text: "Reddit", completed: false },
             { text: "TikTok (Pending Ban)", completed: false },
+            { text: "Facebook/Instagram", completed: false },
             { text: "Discord/Telegram", completed: false },
           ]
         },
