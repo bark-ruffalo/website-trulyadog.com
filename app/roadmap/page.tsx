@@ -36,26 +36,38 @@ const Roadmap: NextPage = () => {
       timeline: "Q1 2024",
       status: "In Progress",
       progress: 56,
-      description: "Building and testing core AI agent architecture",
+      description: "Building and testing core AI agent architecture focused on social commerce. Developing a fleet of specialized AI agents across various niches (beauty, tech, fitness) that provide personalized product recommendations while generating affiliate revenue. Establishing natural engagement patterns and building a proven track record of conversions.",
       items: [
-        { text: "Design modular agent architecture for conversation and product recommendations", completed: true },
-        { text: "Deploy 5 commercial niche agents and 1 self-marketing agent for testing", completed: true },
+        { 
+          text: "Design modular agent architecture for conversation and product recommendations", 
+          completed: true 
+        },
+        { 
+          text: "Deploy 5 commercial niche agents and 1 self-marketing agent for testing", 
+          completed: true 
+        },
         {
-          text: "Expand development team:", completed: true, subitems: [
+          text: "Expand development team:", 
+          completed: true, 
+          subitems: [
             { text: "Project Manager for coordination and delivery", completed: true },
             { text: "2x Full-Stack Engineers for infrastructure and frontend development", completed: true },
             { text: "Prompt Engineer for agent optimization", completed: true },
           ]
         },
         {
-          text: "Expand into other social platforms", completed: false, subitems: [
+          text: "Expand into other social platforms", 
+          completed: false, 
+          subitems: [
             { text: "Reddit", completed: false },
             { text: "TikTok (Pending Ban)", completed: false },
-            { text: "Facebook/Instagram", completed: false },
             { text: "Discord/Telegram", completed: false },
           ]
         },
-        { text: "Implement comprehensive analytics tracking system", completed: false },
+        { 
+          text: "Implement comprehensive analytics tracking system", 
+          completed: false 
+        },
       ]
     },
     "2a": {
@@ -63,7 +75,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1-Q2 2024",
       status: "Upcoming",
       progress: 0,
-      description: "Developing scalable technical infrastructure",
+      description: "Developing scalable technical infrastructure to support enterprise-grade deployment of AI agents. Building robust backend systems and APIs that will form the foundation of the B2B SaaS platform, enabling seamless integration and management of custom AI agents for business clients.",
       items: [
         { text: "Build containerized architecture with automated deployment", completed: false },
         { text: "Create scalable database and S3 integration", completed: false },
@@ -76,7 +88,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1-Q2 2024",
       status: "Parallel Development",
       progress: 0,
-      description: "Implementing staking mechanics and commission tracking",
+      description: "Implementing comprehensive staking mechanics and commission tracking systems that enable token holders to earn a share of ecosystem revenues, including affiliate commissions and platform fees. Creating transparent and automated distribution mechanisms for reward allocation across multiple revenue streams.",
       items: [
         { text: "Deploy smart contracts for token staking and rewards", completed: false },
         { text: "Build commission tracking and distribution system", completed: false },
@@ -89,7 +101,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1-Q2 2024",
       status: "Planned",
       progress: 0,
-      description: "Building brand awareness and market presence",
+      description: "Building brand awareness and market presence through strategic community engagement and partnerships. Focusing on establishing ATA as a leader in AI social commerce while educating potential enterprise clients about the platform's capabilities and benefits.",
       items: [
         { text: "Community AMAs and Twitter Spaces", completed: false },
         { text: "Strategic partnership development", completed: false },
@@ -102,7 +114,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q2-Q3 2024",
       status: "Planned",
       progress: 0,
-      description: "Creating comprehensive management dashboard and configuration tools",
+      description: "Launching the comprehensive B2B SaaS platform that enables enterprises to create, deploy, and manage their own customized AI agents. The platform includes advanced brand voice control, product catalog management, and detailed performance analytics. Companies can streamline their social commerce presence through an intuitive interface while maintaining full control over their AI agents' engagement strategies and product recommendations. Platform subscription revenue integrates with the established commission-sharing infrastructure, expanding the ecosystem's revenue streams. This enterprise-grade solution targets the multi-billion dollar intersection of social commerce, affiliate marketing, and B2B SaaS markets.",
       items: [
         { text: "Implement user authentication and agent management", completed: false },
         { text: "Build product catalog and configuration interface", completed: false },
