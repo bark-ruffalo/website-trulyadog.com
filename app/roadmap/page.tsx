@@ -3,12 +3,36 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 
+interface SubItem {
+  text: string;
+  completed: boolean;
+}
+
+interface RoadmapItem {
+  text: string;
+  completed: boolean;
+  subitems?: SubItem[];
+}
+
+interface Phase {
+  title: string;
+  timeline: string;
+  status: string;
+  progress: number;
+  description: string;
+  items: RoadmapItem[];
+}
+
+interface Phases {
+  [key: string]: Phase;
+}
+
 const Roadmap: NextPage = () => {
   type PhaseKey = "1" | "2a" | "2b" | "2c" | "3";
   const [activePhase, setActivePhase] = useState<PhaseKey>("1");
   const [isPhase2Expanded, setIsPhase2Expanded] = useState(false);
 
-  const phases = {
+  const phases: Phases = {
     "1": {
       title: "Phase 1: Agent Development",
       timeline: "Q1 2024",
