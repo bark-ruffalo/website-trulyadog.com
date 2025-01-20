@@ -42,11 +42,10 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/about",
     //icon: <QuestionMarkCircleIcon className="h-4 w-4" />,
   },
-  // {
-  //   label: "Roadmap",
-  //   href: "/roadmap",
-  //   icon: <MapIcon className="h-4 w-4" />,
-  // },
+  {
+    label: "Roadmap",
+    href: "/roadmap",
+  },
   // {
   //   label: "Rewards & Income",
   //   href: "/rewards",
