@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import type { NextPage } from "next";
 import { useState } from "react";
@@ -28,7 +28,6 @@ interface Phases {
 }
 
 const Roadmap: NextPage = () => {
-  type PhaseKey = "1" | "2a" | "2b" | "2c" | "3";
   const [activePhase2, setActivePhase2] = useState<"2a" | "2b" | "2c">("2a");
 
   const phases: Phases = {
