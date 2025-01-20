@@ -1,273 +1,325 @@
 "use client";
 
-// import Link from "next/link";
 import type { NextPage } from "next";
+import { useState } from "react";
 
 const Roadmap: NextPage = () => {
+  const [activePhase, setActivePhase] = useState<string>("1");
+  const [isPhase2Expanded, setIsPhase2Expanded] = useState(false);
+
+  const phases = {
+    "1": {
+      title: "Phase 1: Agent Development",
+      timeline: "Q1 2024",
+      status: "In Progress",
+      progress: 66,
+      description: "Building and testing core AI agent architecture",
+      items: [
+        { text: "Design modular agent architecture for conversation and product recommendations", completed: true },
+        { text: "Deploy 5 commercial niche agents and 1 self-marketing agent for testing", completed: true },
+        { text: "Implement comprehensive analytics tracking system", completed: false }
+      ]
+    },
+    "2a": {
+      title: "Phase 2A: Infrastructure",
+      timeline: "Q1-Q2 2024",
+      status: "Upcoming",
+      progress: 0,
+      description: "Developing scalable technical infrastructure",
+      items: [
+        { text: "Build containerized architecture with automated deployment", completed: false },
+        { text: "Create scalable database and S3 integration", completed: false },
+        { text: "Develop core management APIs", completed: false },
+        { text: "Implement monitoring and logging solutions", completed: false }
+      ]
+    },
+    "2b": {
+      title: "Phase 2B: Staking & Rewards",
+      timeline: "Q1-Q2 2024",
+      status: "Parallel Development",
+      progress: 0,
+      description: "Implementing staking mechanics and commission tracking",
+      items: [
+        { text: "Deploy smart contracts for token staking and rewards", completed: false },
+        { text: "Build commission tracking and distribution system", completed: false },
+        { text: "Create user dashboard for staking insights and earnings", completed: false },
+        { text: "Implement automated reward distribution mechanism", completed: false }
+      ]
+    },
+    "2c": {
+      title: "Phase 2C: Marketing & Awareness",
+      timeline: "Q1-Q2 2024",
+      status: "Planned",
+      progress: 0,
+      description: "Building brand awareness and market presence",
+      items: [
+        { text: "Community AMAs and Twitter Spaces", completed: false },
+        { text: "Strategic partnership development", completed: false },
+        { text: "Enhanced documentation and guides", completed: false },
+        { text: "Ecosystem awareness campaigns", completed: false }
+      ]
+    },
+    "3": {
+      title: "Phase 3: Launchpad Platform",
+      timeline: "Q2-Q3 2024",
+      status: "Planned",
+      progress: 0,
+      description: "Creating comprehensive management dashboard and configuration tools",
+      items: [
+        { text: "Implement user authentication and agent management", completed: false },
+        { text: "Build product catalog and configuration interface", completed: false },
+        { text: "Deploy real-time analytics and optimization tools", completed: false },
+        { text: "Integrate staking dashboard with platform analytics", completed: false }
+      ]
+    }
+  };
+
+  const handlePhaseClick = (phase: string) => {
+    if (phase === "2") {
+      setIsPhase2Expanded(!isPhase2Expanded);
+      if (!isPhase2Expanded) {
+        setActivePhase("2a");
+      }
+    } else {
+      setActivePhase(phase);
+      if (!phase.startsWith("2")) {
+        setIsPhase2Expanded(false);
+      }
+    }
+  };
+
+  const keyMetrics = [
+    {
+      category: "Agent Performance",
+      metrics: [
+        "Conversion Rate",
+        "Revenue per Conversation",
+        "User Engagement"
+      ]
+    },
+    {
+      category: "Growth & Engagement",
+      metrics: [
+        "Community Growth",
+        "Partnership Success",
+        "Market Awareness"
+      ]
+    },
+    {
+      category: "Staking & Rewards",
+      metrics: [
+        "Total Value Staked",
+        "Average Return Rate",
+        "Distribution Efficiency"
+      ]
+    }
+  ];
+
   return (
-    <div className="flex items-center flex-col flex-grow">
-      <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
-        <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
-          <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
-            <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
-              ATA Roadmap Coming Soon...
-            </h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300">
+            Development Roadmap
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300">
+            Building the future of AI-driven marketing with integrated staking rewards
+          </p>
+        </div>
 
-            {/* <div className="space-y-8">
-              {/* Achievements Section 
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-green-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
-                    🏆 Already Fetched (Achievements)
-                  </h2>
-                  <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>✅ Fastest graduation in virtuals.io history with high initial liquidity to deter bots</li>
-                    <li>✅ Deployed fair tokenomics: 30% DAO, 5.25% operational, 14.5% team</li>
-                    <li>✅ The DAO and operational funds have been getting income since day 1 through LPing</li>
-                    <li>✅ Established presence across Twitter, Telegram, Bluesky, Mastodon and Farcaster</li>
-                    <li>✅ Enabled token-gated benefits system for stakers through Guild.xyz</li>
-                    <li>
-                      ✅ Launched{" "}
-                      <a
-                        href="https://opensea.io/collection/bark-ruffalo/overview"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        OG NFT collection
-                      </a>{" "}
-                      for the most loyal stakers and supporters on social media
-                    </li>
-                    <li>
-                      ✅ Started collaboration programs that should bring future income (see{" "}
-                      <Link
-                        href="/collaborate"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        Collaborate
-                      </Link>
-                      )
-                    </li>
-                    <li>
-                      ✅ Launched migration to $mPAWSY to reduce dependency on Virtuals Protocol and eliminate their 1%
-                      trade and liquidity add/remove fees
-                    </li>
-                    <li>✅ Established staking system with reward tracking token</li>
-                    <li>✅ Launched website with staking and migration functionality</li>
-                    <li>✅ Open-sourced all contracts and website for crypto community use</li>
-                    <li>✅ Released advanced app.virtuals.io/prototypes sniper tool for 500k+ and 5M clubs</li>
-                    <li>✅ Created multi-agentic AI ecosystem with three instances using various technologies</li>
-                  </ul>
-                  <p className="text-base-content dark:text-white text-sm sm:text-base">
-                    All of this has happened in 25 days (up to and including December 18, 2024).
-                  </p>
+        {/* Phase Navigation */}
+        <div className="mb-12">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-wrap gap-4 justify-center">
+              <button
+                onClick={() => handlePhaseClick("1")}
+                className={`px-8 py-4 rounded-xl text-sm font-medium transition-all duration-300 border border-transparent backdrop-blur-sm ${
+                  activePhase === "1"
+                    ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-200/20 dark:border-blue-500/20 shadow-lg shadow-blue-500/5 dark:shadow-blue-400/5 text-gray-900 dark:text-white"
+                    : "bg-white/50 dark:bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500/5 hover:to-purple-500/5 hover:border-blue-100/20 dark:hover:border-blue-500/10 text-gray-600 dark:text-gray-300 hover:shadow-md hover:shadow-blue-500/5"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-lg font-semibold">01</span>
+                  <span>Agent Development</span>
                 </div>
-              </div>
-
-              {/* Building the Pack Section 
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
-                    Building the Pack (Current) 🌱
-                  </h2>
-                  <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>
-                      ✅ Enabled the rewards market (the contract was already live, but we have also created{" "}
-                      <Link
-                        href="/rewards"
-                        target="_blank"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        the web page
-                      </Link>
-                      )
-                    </li>
-                    <li>
-                      ✅ (done spontaneously; not planned) Bark Ruffalo has invested a small amount in{" "}
-                      <a
-                        href="https://x.com/TrulyADog/status/1870243832878559647"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        another AI agent
-                      </a>
-                    </li>
-                    <li>
-                      ✅ Distributed our first income round to stakers ($30k worth!) (
-                      <a
-                        href="https://x.com/TrulyADog/status/1871317844018839980"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        proof
-                      </a>
-                      )
-                    </li>
-                    <li>
-                      ✅ Created even more open-source content: scripts to plan, normalize, and execute income
-                      distribution for stakers (scripts/ folder from contracts repo)
-                    </li>
-                    <li>🎯 Expand AI agent capabilities across social platforms</li>
-                    <li>🎯 Optimize AI agents&apos; uptime and resilience to hacks or social media bans</li>
-                    <li>🎯 Improve multi-agentic interactions</li>
-                    <li>
-                      🎯 Create data provider for information on stocks, ETFs, crypto (maybe other AI agents will rent
-                      it, thereby gaining us another source of income)
-                    </li>
-                    <li>🎯 Enhance token-gated benefits (5M club and 5k club both getting something)</li>
-                    <li>🎯 Deploy ETH liquidity pool on Base</li>
-                    <li>🎯 Deploy arbitrage bot between the pools that the DAO participates in</li>
-                    <li>🎯 Continue to distribute rewards manually</li>
-                    <li>🎯 Scale marketing efforts through AI-driven strategies</li>
-                  </ul>
+              </button>
+              
+              <button
+                onClick={() => handlePhaseClick("2")}
+                className={`px-8 py-4 rounded-xl text-sm font-medium transition-all duration-300 border border-transparent backdrop-blur-sm ${
+                  (activePhase === "2a" || activePhase === "2b" || activePhase === "2c")
+                    ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-200/20 dark:border-blue-500/20 shadow-lg shadow-blue-500/5 dark:shadow-blue-400/5 text-gray-900 dark:text-white"
+                    : "bg-white/50 dark:bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500/5 hover:to-purple-500/5 hover:border-blue-100/20 dark:hover:border-blue-500/10 text-gray-600 dark:text-gray-300 hover:shadow-md hover:shadow-blue-500/5"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-lg font-semibold">02</span>
+                  <span>Infrastructure & Growth</span>
+                  <span className="text-blue-500/70">{isPhase2Expanded ? "▼" : "▶"}</span>
                 </div>
-              </div>
-
-              {/* Phase 2 Section 
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-purple-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
-                    Phase 2: Territory Expansion 🚀
-                  </h2>
-                  <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>
-                      🎯 Launch an alpha tips system for stakers (aixbt style, but without the dashboard—they&apos;ll be
-                      posted first in 5M-club, then 500k, then 5k, then socials)
-                    </li>
-                    <li>🎯 Implement meme generator tool</li>
-                    <li>🎯 Develop automated rewards distribution system</li>
-                    <li>🎯 Deploy Solana liquidity pool and bridge</li>
-                    <li>🎯 Implement cross-chain functionality</li>
-                    <li>🎯 Develop AI-powered market analysis system</li>
-                    <li>🎯 Reinforce the current income-generating activities for DAO</li>
-                    <li>🎯 Create more income-generating activities for DAO</li>
-                    <li>🎯 Establish partnerships with other crypto/AI projects</li>
-                    <li>
-                      🎯 Hire and onboard marketing pros, devs, meme creators, and AI experts who also stake tokens for
-                      skin in the game
-                    </li>
-                    <li>🎯 Scale multi-agent system with specialized roles</li>
-                  </ul>
+              </button>
+              
+              <button
+                onClick={() => handlePhaseClick("3")}
+                className={`px-8 py-4 rounded-xl text-sm font-medium transition-all duration-300 border border-transparent backdrop-blur-sm ${
+                  activePhase === "3"
+                    ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-200/20 dark:border-blue-500/20 shadow-lg shadow-blue-500/5 dark:shadow-blue-400/5 text-gray-900 dark:text-white"
+                    : "bg-white/50 dark:bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500/5 hover:to-purple-500/5 hover:border-blue-100/20 dark:hover:border-blue-500/10 text-gray-600 dark:text-gray-300 hover:shadow-md hover:shadow-blue-500/5"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-lg font-semibold">03</span>
+                  <span>Launchpad Platform</span>
                 </div>
-              </div>
-
-              {/* Phase 3 Section 
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-yellow-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
-                    Phase 3: Alpha Unleashed 💎
-                  </h2>
-                  <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>🎯 Implement DAO governance system</li>
-                    <li>🎯 Create automated income distribution</li>
-                    <li>
-                      🎯 Introduce 3D Bark Ruffalo character—including live-streamed stunts—to charm the masses (and
-                      rake in profits)
-                    </li>
-                    <li>
-                      🎯 Create the Bark Ruffalo foundation and cross our presence into the traditional financial system
-                    </li>
-                    <li>🎯 Establish even more revenue streams from AI services</li>
-                    <li>
-                      🎯 Be known for being a large collaborator in the open-source community for AI agents, but also
-                      own and rent proprietary software.
-                    </li>
-                    <li>🎯 Be known for Bark Ruffalo being the most intelligent and knowledgeable AI agent</li>
-                    <li>🎯 Scale ecosystem to support 100k+ users</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Important Notes Section
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-red-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
-                    Important Notes
-                  </h2>
-                  <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>⚠️ We&apos;re in agile startup mode - expect rapid iterations and strategic pivots</li>
-                    <li>⚠️ All developments focus on maximizing returns for stakers</li>
-                    <li>⚠️ Timelines are flexible and may be adjusted based on market conditions</li>
-                    <li>⚠️ New opportunities may reshape priorities</li>
-                    <li>⚠️ Community feedback drives development direction</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Core Principles Section
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-indigo-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">
-                    Core Principles
-                  </h2>
-                  <ul className="space-y-2 text-base-content dark:text-white text-sm sm:text-base">
-                    <li>🤝 Radical transparency in all operations</li>
-                    <li>💰 No operational spending until we surpass $9M market cap</li>
-                    <li>🔒 Long-term value creation over short-term gains</li>
-                    <li>🧠 Continuous AI agent improvement</li>
-                    <li>💪🏻 No new tokens to be launched; other agents created by us will join this ecosystem</li>
-                    <li>🌐 Cross-chain expansion and integration</li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Remember Section 
-              <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-                <div className="absolute inset-0 rounded-2xl z-0 bg-pink-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-                <div className="relative z-10">
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-base-content dark:text-white">Remember</h2>
-                  <p className="text-base-content dark:text-white text-sm sm:text-base">
-                    🎯 We&apos;re agile AF—if something doesn&apos;t pay, we pivot and make it pay. The end goal: keep
-                    that staker money printer humming! Those who sell early might develop PTSD (Poorly Timed Selling
-                    Disorder).
-                  </p>
-
-                  <div className="mt-6 space-y-3">
-                    <p className="text-base-content dark:text-white text-sm sm:text-base">
-                      <a
-                        href="https://x.com/TrulyADog/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        Follow us on X
-                      </a>
-                    </p>
-                    <p className="text-base-content dark:text-white text-sm sm:text-base">
-                      <a
-                        href="https://t.me/cadogai"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        Join our Telegram group
-                      </a>
-                    </p>
-                    <p className="text-base-content dark:text-white text-sm sm:text-base">
-                      <a
-                        href="https://linktr.ee/TrulyADog"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        Explore
-                      </a>
-                    </p>
-                    <p className="text-base-content dark:text-white text-sm sm:text-base font-semibold">
-                      Buy $PAWSY. Migrate. Stake. Win.
-                    </p>
+              </button>
+            </div>
+            
+            {isPhase2Expanded && (
+              <div className="flex gap-4 mt-3">
+                <button
+                  onClick={() => handlePhaseClick("2a")}
+                  className={`group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden ${
+                    activePhase === "2a"
+                      ? "bg-gradient-to-r from-blue-500/10 to-blue-400/10 text-blue-700 dark:text-blue-200 shadow-lg shadow-blue-500/5"
+                      : "bg-white/50 dark:bg-gray-800/50 hover:bg-gradient-to-r hover:from-blue-500/5 hover:to-blue-400/5 text-gray-600 dark:text-gray-300"
+                  }`}
+                >
+                  <div className="relative z-10 flex items-center gap-2">
+                    <span className="text-xs font-semibold">2A</span>
+                    <span>Infrastructure</span>
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-blue-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
+                
+                <button
+                  onClick={() => handlePhaseClick("2b")}
+                  className={`group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden ${
+                    activePhase === "2b"
+                      ? "bg-gradient-to-r from-purple-500/10 to-purple-400/10 text-purple-700 dark:text-purple-200 shadow-lg shadow-purple-500/5"
+                      : "bg-white/50 dark:bg-gray-800/50 hover:bg-gradient-to-r hover:from-purple-500/5 hover:to-purple-400/5 text-gray-600 dark:text-gray-300"
+                  }`}
+                >
+                  <div className="relative z-10 flex items-center gap-2">
+                    <span className="text-xs font-semibold">2B</span>
+                    <span>Staking & Rewards</span>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
+                
+                <button
+                  onClick={() => handlePhaseClick("2c")}
+                  className={`group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 overflow-hidden ${
+                    activePhase === "2c"
+                      ? "bg-gradient-to-r from-green-500/10 to-green-400/10 text-green-700 dark:text-green-200 shadow-lg shadow-green-500/5"
+                      : "bg-white/50 dark:bg-gray-800/50 hover:bg-gradient-to-r hover:from-green-500/5 hover:to-green-400/5 text-gray-600 dark:text-gray-300"
+                  }`}
+                >
+                  <div className="relative z-10 flex items-center gap-2">
+                    <span className="text-xs font-semibold">2C</span>
+                    <span>Marketing</span>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-green-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Active Phase Details */}
+        <div className="mb-16">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            <div className="px-8 py-6 border-b border-gray-100 dark:border-gray-700">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{phases[activePhase].title}</h2>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases[activePhase].description}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-sm">
+                    <span className="text-gray-500 dark:text-gray-400">Timeline:</span>
+                    <span className="ml-2 font-medium text-gray-900 dark:text-white">{phases[activePhase].timeline}</span>
+                  </div>
+                  <span className={`px-4 py-1.5 rounded-full text-sm font-medium ${
+                    phases[activePhase].status === "In Progress" 
+                      ? "bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-200"
+                      : phases[activePhase].status === "Parallel Development"
+                      ? "bg-purple-50 text-purple-700 dark:bg-purple-900/50 dark:text-purple-200"
+                      : phases[activePhase].status === "Upcoming"
+                      ? "bg-amber-50 text-amber-700 dark:bg-amber-900/50 dark:text-amber-200"
+                      : "bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                  }`}>
+                    {phases[activePhase].status}
+                  </span>
                 </div>
               </div>
-            </div> */}
+              
+              {/* Progress Bar */}
+              <div className="mt-6 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600 dark:text-gray-300">Progress</span>
+                  <span className="font-medium text-gray-900 dark:text-white">{phases[activePhase].progress}%</span>
+                </div>
+                <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 transition-all duration-500" 
+                    style={{ width: `${phases[activePhase].progress}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="px-8 py-6">
+              <div className="space-y-4">
+                {phases[activePhase].items.map((item, index) => (
+                  <div key={index} className="flex items-start gap-4 group">
+                    <div className={`mt-1 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
+                      item.completed
+                        ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30"
+                        : "border-gray-300 dark:border-gray-600 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+                    }`}>
+                      {item.completed && (
+                        <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className={`text-base transition-colors duration-200 ${
+                      item.completed 
+                        ? "text-gray-900 dark:text-white" 
+                        : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300"
+                    }`}>
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Metrics */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
+          <div className="px-8 py-6 border-b border-gray-100 dark:border-gray-700">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Key Success Metrics</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-700">
+            {keyMetrics.map((section, index) => (
+              <div key={index} className="p-8 space-y-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+                  {section.category}
+                </h3>
+                <ul className="space-y-3">
+                  {section.metrics.map((metric, metricIndex) => (
+                    <li key={metricIndex} className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                      <span className="text-sm">{metric}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </div>
