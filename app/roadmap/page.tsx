@@ -4,7 +4,8 @@ import type { NextPage } from "next";
 import { useState } from "react";
 
 const Roadmap: NextPage = () => {
-  const [activePhase, setActivePhase] = useState<string>("1");
+  type PhaseKey = "1" | "2a" | "2b" | "2c" | "3";
+  const [activePhase, setActivePhase] = useState<PhaseKey>("1");
   const [isPhase2Expanded, setIsPhase2Expanded] = useState(false);
 
   const phases = {
@@ -12,12 +13,22 @@ const Roadmap: NextPage = () => {
       title: "Phase 1: Agent Development",
       timeline: "Q1 2024",
       status: "In Progress",
-      progress: 66,
+      progress: 56,
       description: "Building and testing core AI agent architecture",
       items: [
         { text: "Design modular agent architecture for conversation and product recommendations", completed: true },
         { text: "Deploy 5 commercial niche agents and 1 self-marketing agent for testing", completed: true },
-        { text: "Implement comprehensive analytics tracking system", completed: false }
+        { text: "Expand development team:", completed: true, subitems: [
+          { text: "Project Manager for coordination and delivery", completed: true },
+          { text: "2x Full-Stack Engineers for infrastructure and frontend development", completed: true },
+          { text: "Prompt Engineer for agent optimization", completed: true },
+        ]},
+        { text: "Expand into other social platforms", completed: false, subitems: [
+          { text: "Reddit", completed: false },
+          { text: "TikTok (Pending Ban)", completed: false },
+          { text: "Discord/Telegram", completed: false },
+        ]},
+        { text: "Implement comprehensive analytics tracking system", completed: false },
       ]
     },
     "2a": {
@@ -74,7 +85,7 @@ const Roadmap: NextPage = () => {
     }
   };
 
-  const handlePhaseClick = (phase: string) => {
+  const handlePhaseClick = (phase: PhaseKey | "2") => {
     if (phase === "2") {
       setIsPhase2Expanded(!isPhase2Expanded);
       if (!isPhase2Expanded) {
@@ -108,13 +119,12 @@ const Roadmap: NextPage = () => {
     {
       category: "Staking & Rewards",
       metrics: [
-        "Total Value Staked",
+        "Total Value Locked",
         "Average Return Rate",
         "Distribution Efficiency"
       ]
     }
   ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -273,25 +283,53 @@ const Roadmap: NextPage = () => {
             <div className="px-8 py-6">
               <div className="space-y-4">
                 {phases[activePhase].items.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4 group">
-                    <div className={`mt-1 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
-                      item.completed
-                        ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30"
-                        : "border-gray-300 dark:border-gray-600 group-hover:border-gray-400 dark:group-hover:border-gray-500"
-                    }`}>
-                      {item.completed && (
-                        <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
+                  <div key={index} className="space-y-2">
+                    <div className="flex items-start gap-4 group">
+                      <div className={`mt-1 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
+                        item.completed
+                          ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30"
+                          : "border-gray-300 dark:border-gray-600 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+                      }`}>
+                        {item.completed && (
+                          <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span className={`text-base transition-colors duration-200 ${
+                        item.completed 
+                          ? "text-gray-900 dark:text-white" 
+                          : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300"
+                      }`}>
+                        {item.text}
+                      </span>
                     </div>
-                    <span className={`text-base transition-colors duration-200 ${
-                      item.completed 
-                        ? "text-gray-900 dark:text-white" 
-                        : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300"
-                    }`}>
-                      {item.text}
-                    </span>
+                    {item.subitems && (
+                      <div className="ml-9 space-y-2">
+                        {item.subitems.map((subitem, subIndex) => (
+                          <div key={subIndex} className="flex items-start gap-4 group">
+                            <div className={`mt-1 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors duration-200 ${
+                              subitem.completed
+                                ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30"
+                                : "border-gray-300 dark:border-gray-600 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+                            }`}>
+                              {subitem.completed && (
+                                <svg className="w-2 h-2 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span className={`text-sm transition-colors duration-200 ${
+                              subitem.completed 
+                                ? "text-gray-900 dark:text-white" 
+                                : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300"
+                            }`}>
+                              {subitem.text}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
