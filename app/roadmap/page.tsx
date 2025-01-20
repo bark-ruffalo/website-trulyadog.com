@@ -135,7 +135,7 @@ const Roadmap: NextPage = () => {
     {
       category: "Staking & Rewards",
       metrics: [
-        "Total Value Staked",
+        "Total Value Locked",
         "Average Return Rate",
         "Distribution Efficiency"
       ]
