@@ -20,6 +20,7 @@ interface Phase {
   status: string;
   progress: number;
   description: string;
+  shortDescription: string;
   items: RoadmapItem[];
 }
 
@@ -36,6 +37,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1 2024",
       status: "In Progress",
       progress: 56,
+      shortDescription: "Building AI agents for social commerce across multiple niches (beauty, tech, fitness). Focused on natural engagement and affiliate revenue generation.",
       description: "Building and testing core AI agent architecture focused on social commerce. Developing a fleet of specialized AI agents across various niches (beauty, tech, fitness) that provide personalized product recommendations while generating affiliate revenue. Establishing natural engagement patterns and building a proven track record of conversions.",
       items: [
         { 
@@ -75,6 +77,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1-Q2 2024",
       status: "Upcoming",
       progress: 0,
+      shortDescription: "Developing scalable infrastructure and APIs for enterprise-grade AI agent deployment and management.",
       description: "Developing scalable technical infrastructure to support enterprise-grade deployment of AI agents. Building robust backend systems and APIs that will form the foundation of the B2B SaaS platform, enabling seamless integration and management of custom AI agents for business clients.",
       items: [
         { text: "Build containerized architecture with automated deployment", completed: false },
@@ -88,6 +91,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1-Q2 2024",
       status: "Parallel Development",
       progress: 0,
+      shortDescription: "Building staking system for revenue sharing across affiliate commissions and platform fees.",
       description: "Implementing comprehensive staking mechanics and commission tracking systems that enable token holders to earn a share of ecosystem revenues, including affiliate commissions and platform fees. Creating transparent and automated distribution mechanisms for reward allocation across multiple revenue streams.",
       items: [
         { text: "Deploy smart contracts for token staking and rewards", completed: false },
@@ -101,6 +105,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q1-Q2 2024",
       status: "Planned",
       progress: 0,
+      shortDescription: "Building brand presence and awareness through community engagement and strategic partnerships.",
       description: "Building brand awareness and market presence through strategic community engagement and partnerships. Focusing on establishing ATA as a leader in AI social commerce while educating potential enterprise clients about the platform's capabilities and benefits.",
       items: [
         { text: "Community AMAs and Twitter Spaces", completed: false },
@@ -114,6 +119,7 @@ const Roadmap: NextPage = () => {
       timeline: "Q2-Q3 2024",
       status: "Planned",
       progress: 0,
+      shortDescription: "Enterprise platform for custom AI agent creation and management. Features include brand control, analytics, and integrated revenue sharing.",
       description: "Launching the comprehensive B2B SaaS platform that enables enterprises to create, deploy, and manage their own customized AI agents. The platform includes advanced brand voice control, product catalog management, and detailed performance analytics. Companies can streamline their social commerce presence through an intuitive interface while maintaining full control over their AI agents' engagement strategies and product recommendations. Platform subscription revenue integrates with the established commission-sharing infrastructure, expanding the ecosystem's revenue streams. This enterprise-grade solution targets the multi-billion dollar intersection of social commerce, affiliate marketing, and B2B SaaS markets.",
       items: [
         { text: "Implement user authentication and agent management", completed: false },
@@ -175,7 +181,15 @@ const Roadmap: NextPage = () => {
               <div className="flex flex-col gap-4">
                 <div>
                   <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">{phases["1"].title}</h2>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases["1"].description}</p>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases["1"].shortDescription}</p>
+                  <details className="mt-2">
+                    <summary className="text-sm font-medium text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-800 dark:hover:text-blue-300">
+                      Show more details
+                    </summary>
+                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+                      {phases["1"].description}
+                    </p>
+                  </details>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="text-sm">
@@ -308,7 +322,15 @@ const Roadmap: NextPage = () => {
               <div className="space-y-4">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{phases[activePhase2].title}</h3>
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases[activePhase2].description}</p>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases[activePhase2].shortDescription}</p>
+                  <details className="mt-2">
+                    <summary className="text-sm font-medium text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-800 dark:hover:text-blue-300">
+                      Show more details
+                    </summary>
+                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+                      {phases[activePhase2].description}
+                    </p>
+                  </details>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="text-sm">
@@ -379,7 +401,15 @@ const Roadmap: NextPage = () => {
       <div className="flex flex-col gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">{phases["3"].title}</h2>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases["3"].description}</p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{phases["3"].shortDescription}</p>
+          <details className="mt-2">
+            <summary className="text-sm font-medium text-blue-600 dark:text-blue-400 cursor-pointer hover:text-blue-800 dark:hover:text-blue-300">
+              Show more details
+            </summary>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+              {phases["3"].description}
+            </p>
+          </details>
         </div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="text-sm">
