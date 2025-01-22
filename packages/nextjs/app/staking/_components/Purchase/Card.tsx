@@ -139,7 +139,7 @@ export function StakingCard({ item }: { item: CardProps }) {
           {getPoolTokens(Number(item.poolId))}
           <Badge className="absolute top-2 right-2" variant={item.isActive ? "default" : "neutral"}>
             {calculateRewardRate(
-              Number(item.rewardRates[lockPeriodIndex]),
+              Number(item.rewardRates[lockPeriodIndex]) / (item.poolId === 2n ? 66 : 1),
               Number(item.lockPeriods[lockPeriodIndex]),
             ).toFixed(2)}{" "}
             % APY
