@@ -162,7 +162,7 @@ export function StakingCard({ item }: { item: CardProps }) {
           <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Reward APY</span>
           <span className="text-base-content dark:text-white font-light">
             {calculateRewardRate(
-              Number(item.rewardRates[lockPeriodIndex]),
+              Number(item.rewardRates[lockPeriodIndex]) / (item.poolId === 2n ? 66 : 1),
               Number(item.lockPeriods[lockPeriodIndex]),
             ).toFixed(2)}{" "}
             %
