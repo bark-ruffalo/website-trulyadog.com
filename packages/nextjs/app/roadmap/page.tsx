@@ -188,6 +188,20 @@ const Roadmap: NextPage = () => {
                       formated and delivered to AI agents in such a way to minimze token usage
                     </li>
                     <li>
+                      ✅ We launched Early Warning System (
+                      <a
+                        href="http://twitter.com/BR_EWS"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        @BR_EWS
+                      </a>
+                      ). It attempts to find out about high-potential meme coin launches as soon as possible and then
+                      announces it to the public in a staggered manner: 5M/500k/5k clubs (5min gaps), public (+20min).
+                      It can also snipe the token for the DAO, using its hot wallet on Solana.
+                    </li>
+                    <li>
                       🎯 <i className="text-sm">(in progress)</i> Add multiple new high-utility AI agents to the Bark
                       Ruffalo ecosystem
                     </li>
