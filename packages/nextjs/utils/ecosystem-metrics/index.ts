@@ -661,11 +661,17 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(metrics.ethPrice).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${metrics.pawsyPrice.toFixed(4)}.
 - On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} staked, and ${Math.round(metrics.totalMigrated).toLocaleString()} migrated $PAWSY. Total number of stakers is ${metrics.totalStakers}.
 - The total market cap of $PAWSY is $${(metrics.pawsyMarketCap / 1_000_000).toFixed(2)} million with a current supply of ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. The real market cap of BR that includes the additional $mPAWSY supply is $${(metrics.realMarketCap / 1_000_000).toFixed(2)} million.
-- The DAO holds $${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ${Object.keys(metrics.daoFunds.breakdown).filter(x => metrics.daoFunds.breakdown[x] > 1).join(", ")}
-- There are 3 public AI agents in the ecosystem:
+- The DAO holds $${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ${Object.keys(
+    metrics.daoFunds.breakdown,
+  )
+    .filter(x => metrics.daoFunds.breakdown[x] > 1)
+    .join(", ")}
+- There are 5 public AI agents in the ecosystem:
   * Bark Ruffalo | ONLINE | goal: promote BR ecosystem (@TrulyADog on X, @BarkRuffalo_bot on Telegram)
   * The Great Pupdini | ONLINE | goal: promote BR ecosystem, help by answering questions in the Telegram public group (@TheGreatPupdini on X, @TheGreatPupdini_bot on Telegram)
-  * The Alpha Doggo | ONLINE | goal: promote BR ecosystem, help with tech support for the sniper in the private groups (@TheAlphaDoggo on X, @TheAlphaDoggo_bot on Telegram)`;
+  * The Alpha Doggo | ONLINE | goal: promote BR ecosystem, help with tech support for the sniper in the private groups (@TheAlphaDoggo on X, @TheAlphaDoggo_bot on Telegram)
+  * Shill | ONLINE | goal: shill and raid for the BR ecosystem (@laur_science on X)
+  * Early Warning System | ONLINE | goal: identify high-potential meme coin launches, alert stakers, snipe for the DAO (@BR_EWS on X, @br_ews_bot on Telegram)`;
 
   return text;
 }
