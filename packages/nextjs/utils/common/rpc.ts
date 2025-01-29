@@ -3,7 +3,7 @@ import { fallback, http } from "viem";
 import { base } from "viem/chains";
 
 // Get Base RPC URL from environment variable, fallback to public RPC endpoints
-const baseRpcUrl = process.env.BASESCAN_RPC;
+const baseRpcUrl = process.env.BASE_RPC;
 
 export const RPC_ENDPOINTS = [
   ...(baseRpcUrl ? [baseRpcUrl] : []),
