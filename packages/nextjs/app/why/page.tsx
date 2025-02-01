@@ -1,33 +1,109 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchTotalDaoFunds } from "../../utils/scaffold-eth/fetchTotalDaoFunds";
 
 export default function Why() {
-  const [daoFunds, setDaoFunds] = useState<string>("-");
+  const [displayValue, setDisplayValue] = useState(0);
+  const [error, setError] = useState(false);
+  const animationRef = useRef<number>();
+  const currentValueRef = useRef(0);
+  const startTimeRef = useRef(0);
+  const durationRef = useRef(4000);
+  const pulseStartTimeRef = useRef(0);
+
+  const updateValue = (value: number) => {
+    currentValueRef.current = value;
+    setDisplayValue(value);
+  };
 
   useEffect(() => {
-    const updateDaoFunds = async () => {
-      try {
-        const { totalUsd } = await fetchTotalDaoFunds();
-        setDaoFunds(
-          new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-          }).format(Math.round(totalUsd)),
-        );
-      } catch (error) {
-        console.error("Error fetching DAO funds:", error);
-        setDaoFunds("~$1 million");
+    startTimeRef.current = performance.now();
+    pulseStartTimeRef.current = performance.now();
+
+    const initialAnimate = (now: number) => {
+      const elapsed = now - startTimeRef.current;
+      const progress = Math.min(elapsed / 4000, 1);
+
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      const initialTarget = 320000;
+      const value = easedProgress * initialTarget;
+      updateValue(Math.round(value));
+
+      if (progress < 1) {
+        animationRef.current = requestAnimationFrame(initialAnimate);
+      } else {
+        animationRef.current = requestAnimationFrame(pulseAnimation);
       }
     };
 
-    updateDaoFunds();
+    const pulseAnimation = () => {
+      const time = performance.now() - pulseStartTimeRef.current;
+      const wave1 = Math.sin(time / 800) * 2000;
+      const wave2 = Math.sin(time / 1200) * 1000;
+      const pulseValue = 320000 + wave1 + wave2;
+      updateValue(Math.round(pulseValue));
+      animationRef.current = requestAnimationFrame(pulseAnimation);
+    };
+
+    animationRef.current = requestAnimationFrame(initialAnimate);
+
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
   }, []);
 
-  // Create stats cards data in the same format as staking
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { totalUsd } = await fetchTotalDaoFunds();
+        startTransitionToRealValue(totalUsd);
+      } catch (error) {
+        console.error("Error fetching DAO funds:", error);
+        startTransitionToRealValue(1000000);
+        setError(true);
+      }
+    };
+
+    const startTransitionToRealValue = (target: number) => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+
+      const startValue = currentValueRef.current;
+      startTimeRef.current = performance.now();
+
+      const difference = Math.abs(target - startValue);
+      durationRef.current = Math.max(1000, Math.min(difference / 400, 4000));
+
+      const animateToRealValue = (now: number) => {
+        const elapsed = now - startTimeRef.current;
+        const progress = Math.min(elapsed / durationRef.current, 1);
+
+        const easedProgress = 1 - Math.pow(1 - progress, 2);
+
+        const current = startValue + (target - startValue) * easedProgress;
+        updateValue(Math.round(current));
+
+        if (progress < 1) {
+          animationRef.current = requestAnimationFrame(animateToRealValue);
+        }
+      };
+
+      animationRef.current = requestAnimationFrame(animateToRealValue);
+    };
+
+    fetchData();
+  }, []);
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
   const statsCards = [
     {
       title: "DAO ALLOCATION",
@@ -41,7 +117,7 @@ export default function Why() {
     },
     {
       title: "CURRENT DAO FUNDS",
-      value: daoFunds,
+      value: error ? "~$1 million" : formatCurrency(displayValue),
       className: "green",
     },
   ];
@@ -107,7 +183,7 @@ export default function Why() {
 
               <li>
                 <span className="text-lg sm:text-xl">🔍</span> Transparency:
-                <ol className="list-none pl-2 sm:pl-4 mt-3 sm:mt-4 space-y-2">
+                <ol className="list-none pl极2 sm:pl-4 mt-3 sm:mt-4 space-y-2">
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Preannounced launch for humans, not the usual
                     virtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO 35.25%,
@@ -125,7 +201,7 @@ export default function Why() {
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Open-source:{" "}
                     <a
-                      href="https://github.com/bark-ruffalo"
+                      href="极ithub.com/bark-ruffalo"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-700 dark:text-green-500 hover:underline"
