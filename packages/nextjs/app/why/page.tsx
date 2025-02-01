@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { fetchTotalDaoFunds } from "../../utils/scaffold-eth/fetchTotalDaoFunds";
 
 export default function Why() {
   const [displayValue, setDisplayValue] = useState(0);
@@ -57,8 +56,9 @@ export default function Why() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { totalUsd } = await fetchTotalDaoFunds();
-        startTransitionToRealValue(totalUsd);
+        const response = await fetch("/api/dao-funds");
+        const data = await response.json();
+        startTransitionToRealValue(data.totalUsd);
       } catch (error) {
         console.error("Error fetching DAO funds:", error);
         startTransitionToRealValue(1000000);
