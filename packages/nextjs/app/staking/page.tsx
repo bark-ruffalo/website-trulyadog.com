@@ -93,6 +93,18 @@ const Staking: NextPage = () => {
                         </p>
                         <p>
                           Screenshots with the first version of the sniper and the private repository: <br />
+                          EDIT: Note that the current version has A LOT more filters. How do we get good ideas for
+                          filters? A secret is checking out what{" "}
+                          <a
+                            href="https://www.proof-of-chad.fun"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                          >
+                            proof-of-chad.fun
+                          </a>{" "}
+                          has been up to! 🤫
+                          <br />
                           <Image
                             src="/Snipy McSnappingson v1.0.png"
                             alt="Sniper screenshot 1"
