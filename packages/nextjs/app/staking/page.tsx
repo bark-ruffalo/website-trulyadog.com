@@ -18,8 +18,9 @@ const Staking: NextPage = () => {
                 Stake and become part of the community!
               </h1>
 
-              <Card className="bg-bw">
-                <CardContent>
+              <Card className="relative overflow-hidden">
+                <div className="absolute inset-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
+                <CardContent className="relative z-10 space-y-3 sm:space-y-4 text-sm sm:text-base">
                   <p>
                     The primary purpose of staking is to participate in our income rounds. We do not preannounce them;
                     we simply take a snapshot of the stakers and start sending. Our first income distribution was on
@@ -92,6 +93,18 @@ const Staking: NextPage = () => {
                       </p>
                       <p>
                         Screenshots with the first version of the sniper and the private repository: <br />
+                        EDIT: Note that the current version has A LOT more filters. How do we get good ideas for
+                        filters? A secret is checking out what{" "}
+                        <a
+                          href="https://www.proof-of-chad.fun"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                        >
+                          proof-of-chad.fun
+                        </a>{" "}
+                        has been up to! 🤫
+                        <br />
                         <Image
                           src="/Snipy McSnappingson v1.0.png"
                           alt="Sniper screenshot 1"
