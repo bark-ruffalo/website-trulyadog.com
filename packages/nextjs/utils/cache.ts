@@ -1,8 +1,6 @@
-// General purpose cache
 export const cache = new Map<string, { data: any; timestamp: number }>();
-export const CACHE_DURATION = 4 * 60 * 1000; // 4 minutes in milliseconds
+export const CACHE_DURATION = 4 * 60 * 1000;
 
-// Type definitions for cache values
 export interface CacheEntry<T> {
   value: T;
   timestamp: number;
@@ -15,13 +13,11 @@ interface DaoFunds {
 }
 
 type CacheValues = {
-  // Token prices
   ethereum: CacheEntry<number>;
   bitcoin: CacheEntry<number>;
   virtual: CacheEntry<number>;
   pawsy: CacheEntry<number>;
 
-  // Ecosystem metrics
   totalStaked: CacheEntry<number>;
   totalMigrated: CacheEntry<number>;
   totalStakers: CacheEntry<number>;
@@ -33,15 +29,12 @@ type CacheValues = {
   tvl: CacheEntry<number>;
 };
 
-// Consolidated default values for all cached data
 export const DEFAULT_CACHE_VALUES: CacheValues = {
-  // Token prices
   ethereum: { value: 3500, timestamp: 0, source: "initial" },
   bitcoin: { value: 65000, timestamp: 0, source: "initial" },
   virtual: { value: 0.12, timestamp: 0, source: "initial" },
   pawsy: { value: 0.00023, timestamp: 0, source: "initial" },
 
-  // Ecosystem metrics
   totalStaked: { value: 450000000, timestamp: 0, source: "initial" },
   totalMigrated: { value: 80000000, timestamp: 0, source: "initial" },
   totalStakers: { value: 16193, timestamp: 0, source: "initial" },
@@ -65,14 +58,13 @@ export const DEFAULT_CACHE_VALUES: CacheValues = {
   tvl: { value: 103500, timestamp: 0, source: "contract" },
 };
 
-// Initialize price cache with default values
 export const priceCache: Record<string, CacheEntry<number>> = Object.fromEntries(
   Object.entries(DEFAULT_CACHE_VALUES)
     .filter(([key]) => ["ethereum", "bitcoin", "virtual", "pawsy"].includes(key))
     .map(([key, value]) => [key, value as CacheEntry<number>]),
 );
 
-export function withCache<T>(key: string, fetchFn: () => Promise<T>): Promise<T> {
+export async function withCache<T>(key: string, fetchFn: () => Promise<T>): Promise<T> {
   const cached = cache.get(key);
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     const age = Math.round((Date.now() - cached.timestamp) / 1000);
@@ -82,12 +74,11 @@ export function withCache<T>(key: string, fetchFn: () => Promise<T>): Promise<T>
   }
 
   console.log(`Cache miss for ${key}, fetching fresh data`);
-  return fetchFn().then(data => {
-    const timestamp = Date.now();
-    cache.set(key, { data, timestamp });
-    console.log(`Updated cache for ${key} at ${new Date(timestamp).toISOString()}`);
-    return data;
-  });
+  const data = await fetchFn();
+  const timestamp = Date.now();
+  cache.set(key, { data, timestamp });
+  console.log(`Updated cache for ${key} at ${new Date(timestamp).toISOString()}`);
+  return data;
 }
 
 export function updatePriceCache(symbol: string, price: number, source: string): void {
