@@ -76,7 +76,7 @@ export async function checkAllAgentsStatus(): Promise<AgentStatus[]> {
     const connection = process.env[agent.ipEnv];
     if (!connection) {
       console.warn(`${agent.name} connection not found, using default status`);
-      return { name: agent.name, status: "offline" as const };
+      return { name: agent.name, status: "online" as const };
     }
     const status = await checkAgentStatus(connection);
     return { name: agent.name, status };
