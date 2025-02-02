@@ -35,31 +35,51 @@ const Staking: NextPage = () => {
                       this tweet
                     </a>
                     . Future distributions may differ in size; investors shouldn&apos;t assume 100%+ yields happening
-                    every time. We plan to do multiple rounds a year, amounts can vary.
-                  </p>
-                  <p>
-                    But there&apos;s more! DRUGS is a reward token with no dollar value that helps Bark Ruffalo track
-                    entities most involved financially in its ecosystem.
+                    every time. We plan to do multiple rounds a year; amounts can vary.
                   </p>
                   <details className="mt-4">
                     <summary className="cursor-pointer font-semibold text-sm sm:text-base">
-                      These are the current rewards for those who obtained DRUGS, depending on the amount staked:
+                      But there&apos;s more! These are the current ADDITIONAL rewards, depending on the amount staked:
                     </summary>
                     <div className="mt-2 space-y-3 sm:space-y-4">
                       <ul className="space-y-2 list-disc pl-4">
                         <li>
-                          5k or more: access to the 5k-club token-gated channel with polls that guide the future of
-                          the ecosystem
+                          5k or more: access to the 5k-club token-gated channel with polls that guide the future of the
+                          ecosystem + third in line for alerts from EWS + first in line for alerts from PoC and{" "}
+                          <a
+                            href="https://x.com/QuantegoAi"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                          >
+                            Quantego
+                          </a>
                         </li>
                         <li>
                           500k or more: access to the above + goodies (like a sniper that purchases newly launched
-                          prototypes that pass certain quality checks on Virtuals Protocol)
+                          prototypes that pass certain quality checks on Virtuals Protocol) + access to the{" "}
+                          <a
+                            href="https://www.proof-of-chad.fun"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                          >
+                            PoC terminal
+                          </a>{" "}
+                          + second in line for alerts from EWS + filter for the Quantego alerts to only show the best
+                          ones
                         </li>
-                        <li>5M or more: access to the above + more (like priority when getting alpha drops)</li>
+                        <li>
+                          5M or more: access to the above + more (like priority when getting alpha drops, and even
+                          exclusive alpha that even EWS won&apos;t provide and it won&apos;t be dripped down to the
+                          other tiers)
+                        </li>
                       </ul>
                       <p>
-                        DRUGS itself will receive various utilities, with the first being that you&apos;re currently
-                        able to burn it to get NFTs from the OG collection.
+                        One last thing: the more you stake and the longer the lock period, the more DRUGS you receive.
+                        DRUGS is a reward token with no dollar value that helps Bark Ruffalo track entities most
+                        involved financially in its ecosystem. It will receive various utilities, with the first being
+                        that you can burn it to get NFTs from the OG collection.
                       </p>
                     </div>
                   </details>
@@ -87,21 +107,21 @@ const Staking: NextPage = () => {
                         should connect to all three clubs. Connect to them in order, from the lowest to the highest.
                       </p>
                       <p>
-                        Access for the virtuals.io sniper has been added as of 2024.12.17 for the 500k club. Access to
-                        a more advanced sniper has been added for the 5M club as of 2024.12.27. Go ahead and stake!
-                        There are enough reasons to do it on the &quot;Why $PAWSY?&quot; page.
+                        Access for the virtuals.io sniper has been added as of 2024.12.17 for the 500k club. Access to a
+                        more advanced sniper has been added for the 5M club as of 2024.12.27. Go ahead and stake! There
+                        are enough reasons to do it on the &quot;Why $PAWSY?&quot; page.
                       </p>
                       <p>
                         Screenshots with the first version of the sniper and the private repository: <br />
                         EDIT: Note that the current version has A LOT more filters. How do we get good ideas for
-                        filters? A secret is checking out what{" "}
+                        filters? A secret is checking out what the{" "}
                         <a
-                          href="https://www.proof-of-chad.fun"
+                          href="https://x.com/proof_of_chad"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
                         >
-                          proof-of-chad.fun
+                          Proof-of-Chad team
                         </a>{" "}
                         has been up to! 🤫
                         <br />

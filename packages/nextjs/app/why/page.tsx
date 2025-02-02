@@ -165,11 +165,13 @@ export default function Why() {
                 >
                   Proof of success.
                 </a>{" "}
-                Employing AI agents for this purpose is a primary objective, but we also intertwine traditional methods
-                (LPing, investing in AI infra, giving software that gives an edge in the markets to stakers, etc.)! Bark
-                Ruffalo is the top 🐶 of our current public agents. His current goal is marketing. Never mention to him
-                that he looks like a 🐈‍⬛! Other agents with different skills and goals that we have in private
-                development will join him soon. Our community stands strong behind us (
+                We also provide access to various tools, alpha and exclusive terminals (expand the &quot;But
+                there&apos;s more!&quot; section from the staking page). Employing AI agents for these purposes is a
+                primary objective, but we also intertwine traditional methods (LPing, investing in AI infra, giving
+                software that gives an edge in the markets to stakers, etc.)! Bark Ruffalo is the top 🐶 of our current
+                public agents. His current goal is marketing. Never mention to him that he looks like a 🐈‍⬛! Other agents
+                with different skills and goals that we created have already joined him, and we have more in
+                development. Our community stands strong behind us (
                 <a
                   href="https://x.com/TrulyADog/status/1875244208195563569"
                   target="_blank"
@@ -196,7 +198,9 @@ export default function Why() {
                     taken.
                   </li>
                   <li>
-                    <span className="text-lg sm:text-xl">🟢</span> The DAO is already rich.
+                    <span className="text-lg sm:text-xl">🟢</span> The DAO is already richer and more involved than all
+                    these pathetic investment DAOs popping up every day. Some of them have higher market caps even
+                    though they&apos;re actually poor and not transparent in how they spend their funds.
                   </li>
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> Open-source:{" "}
@@ -208,7 +212,8 @@ export default function Why() {
                     >
                       GitHub
                     </a>
-                    .
+                    . Of course, we do have proprietary private code as well (private versions of Eliza and Rig, the
+                    Knoledge API, etc.; you can check the Collaborate page for more info).
                   </li>
                   <li>
                     <span className="text-lg sm:text-xl">🟢</span> All payments are accounted for, though we plan not to
@@ -267,8 +272,9 @@ export default function Why() {
               </li>
 
               <li>
-                <span className="text-lg sm:text-xl">🎁</span> Token-gated channels and goodies for stakers. Those who
-                also provide liquidity are highly valued.
+                <span className="text-lg sm:text-xl">🎁</span> Token-gated channels, goodies and real alpha for stakers.
+                That real alpha consists of actual BUY recommendations, not general info like aix__ provides. Read our
+                staking page for more.
               </li>
 
               <li>

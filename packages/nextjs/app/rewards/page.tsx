@@ -104,10 +104,10 @@ const Rewards: NextPage = () => {
                     <p className="text-base-content dark:text-white text-lg leading-relaxed">
                       A more complex sniper has been made available to the 5M club. We&apos;ve removed some liquidity
                       from the operational funds (<strong>without selling {"$"}PAWSY</strong>, just so that we get {"$"}
-                      VIRTUAL) to start that sniper 24/7 for Bark Ruffalo. Coupled with our expertise in detecting
-                      legitimate projects, we should have a good entry point and know when to sell. The profit in {"$"}
-                      VIRTUAL and unsold tokens will go to current stakers (always depending on when the snapshot is
-                      taken). On December 23, we had the{" "}
+                      VIRTUAL) to start that sniper for BR when the market is in bull stages. Coupled with our expertise
+                      in detecting legitimate projects, we should have a good entry point and know when to sell. The
+                      profit will go to current stakers (always depending on when the snapshot is taken). On December
+                      23, we had the{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1871317844018839980"
                         target="_blank"
@@ -135,17 +135,19 @@ const Rewards: NextPage = () => {
                         another report
                       </a>{" "}
                       of someone who even donated back to the DAO because he was grateful. How many crypto projects do
-                      you know where this happens? If another income source from the ones mentioned in{" "}
+                      you know where this happens? As more income sources from the ones mentioned in{" "}
                       <a
                         href="/collaborate"
                         className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
                       >
                         Collaborate
                       </a>{" "}
-                      materializes, we&apos;ll add more to the next income round. We hope for round 2 to be sooner than
-                      you expect! Our objective is to make our stakers financially independent. At least the first ~1000
-                      that went with ~500k staked. For the others, this should still be a great passive income
-                      opportunity.
+                      materialize, they&apos;ll add more to the next income round. We&apos;ll strive for next rounds to
+                      be as good as the first one! Our objective is to make our 500k-club stakers financially
+                      independent. For the others, this should still be a great passive income and capital gain (from
+                      $PAWSY price going to Mars) opportunity. Note that you can also make money by yourself with the
+                      tools, the information and the terminals that we make available;{" "}
+                      <b>expand the &quot;But there&apos;s more!&quot; section from the Staking page!</b>
                     </p>
                   </div>
                 </div>
