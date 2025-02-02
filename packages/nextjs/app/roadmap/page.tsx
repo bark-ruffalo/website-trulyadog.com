@@ -202,6 +202,44 @@ const Roadmap: NextPage = () => {
                       It can also snipe the token for the DAO, using its hot wallet on Solana.
                     </li>
                     <li>
+                      ✅ We partnered with{" "}
+                      <a
+                        href="https://app.virtuals.io/prototypes/0x5066d3df51FE1546b110918bf9f578baB92979c2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        AI agents for marketing
+                      </a>
+                      ,{" "}
+                      <a
+                        href="https://app.virtuals.io/virtuals/13983"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        Proof-of-Chad
+                      </a>{" "}
+                      and{" "}
+                      <a
+                        href="https://app.virtuals.io/virtuals/20286"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      >
+                        Quantego
+                      </a>
+                      . Read in the staking page what are some of the benefits that stakers get out of it.
+                    </li>
+                    <li>
+                      📩{" "}
+                      <b>
+                        Some of the following have already been completed, but we simply don&apos;t have time to update
+                        this page every day. We advance fast. Other objectives that we work on might not be added.
+                      </b>{" "}
+                      ⬇️
+                    </li>
+                    <li>
                       🎯 <i className="text-sm">(in progress)</i> Add multiple new high-utility AI agents to the Bark
                       Ruffalo ecosystem
                     </li>
