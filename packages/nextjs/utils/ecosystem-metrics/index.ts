@@ -4,6 +4,7 @@ import { Pool } from "../scaffold-eth/calculateTVL";
 import { calculateTVL } from "../scaffold-eth/calculateTVL";
 import { fetchTotalDaoFunds } from "../scaffold-eth/fetchTotalDaoFunds";
 import { fetchVirtualPriceFromUniswap } from "../scaffold-eth/fetchVirtualPriceFromUniswap";
+import net from "net";
 import { createPublicClient, http } from "viem";
 import { formatUnits, parseAbi } from "viem";
 import { base } from "viem/chains";
@@ -534,6 +535,95 @@ async function retryContractCall<T>(fn: () => Promise<T>, fallbackValue: T): Pro
   return fallbackValue;
 }
 
+const AI_AGENTS = [
+  {
+    name: "Bark Ruffalo",
+    handle: "@TrulyADog",
+    telegramHandle: "@BarkRuffalo_bot",
+    ipEnv: "BARKRUFFALO_IP",
+    goal: "promote BR ecosystem",
+  },
+  {
+    name: "The Great Pupdini",
+    handle: "@TheGreatPupdini",
+    telegramHandle: "@TheGreatPupdini_bot",
+    ipEnv: "PUPDINI_IP",
+    goal: "promote BR ecosystem, help by answering questions in the Telegram public group",
+  },
+  {
+    name: "The Alpha Doggo",
+    handle: "@TheAlphaDoggo",
+    telegramHandle: "@TheAlphaDoggo_bot",
+    ipEnv: "ALPHADOGGO_IP",
+    goal: "promote BR ecosystem, help with tech support for the sniper in the private groups",
+  },
+  {
+    name: "Shill",
+    handle: "@laur_science",
+    ipEnv: "SHILL_IP",
+    goal: "shill and raid for the BR ecosystem",
+  },
+  {
+    name: "Early Warning System",
+    handle: "@BR_EWS",
+    telegramHandle: "@br_ews_bot",
+    ipEnv: "EWS_IP",
+    goal: "identify high-potential meme coin launches, alert stakers, snipe for the DAO",
+  },
+] as const;
+
+interface AgentStatus {
+  name: string;
+  status: "online" | "offline";
+}
+
+async function checkAgentStatus(connection: string): Promise<"online" | "offline"> {
+  const [ip, portStr] = connection.split(":");
+  const port = parseInt(portStr || "65311");
+
+  if (ip === "1.3.3.7") {
+    return "online";
+  }
+
+  return new Promise(resolve => {
+    const socket = new net.Socket();
+    const timeout = 2000;
+
+    socket.setTimeout(timeout);
+
+    socket.on("connect", () => {
+      socket.destroy();
+      resolve("online");
+    });
+
+    socket.on("timeout", () => {
+      socket.destroy();
+      resolve("offline");
+    });
+
+    socket.on("error", () => {
+      socket.destroy();
+      resolve("offline");
+    });
+
+    socket.connect(port, ip);
+  });
+}
+
+async function checkAllAgentsStatus(): Promise<AgentStatus[]> {
+  const statusChecks = AI_AGENTS.map(async agent => {
+    const connection = process.env[agent.ipEnv];
+    if (!connection) {
+      console.warn(`${agent.name} connection not found, using default status`);
+      return { name: agent.name, status: "offline" };
+    }
+    const status = await checkAgentStatus(connection);
+    return { name: agent.name, status };
+  });
+
+  return Promise.all(statusChecks);
+}
+
 export interface EcosystemMetrics {
   timestamp: string;
   btcPrice: number;
@@ -547,6 +637,7 @@ export interface EcosystemMetrics {
   pawsyHolders: number;
   pawsyMarketCap: number;
   realMarketCap: number;
+  agentStatuses: AgentStatus[];
   daoFunds: {
     totalUsd: number;
     breakdown: { [key: string]: number };
@@ -632,6 +723,8 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       return defaultPrice;
     });
 
+    const agentStatuses = await checkAllAgentsStatus();
+
     return {
       timestamp: new Date().toISOString(),
       btcPrice: btcPrice ?? DEFAULT_CACHE_VALUES.bitcoin.value,
@@ -645,6 +738,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       pawsyHolders,
       pawsyMarketCap,
       realMarketCap,
+      agentStatuses,
       daoFunds,
       tvl: tvlInPawsy * pawsyPrice,
     };
@@ -665,6 +759,14 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
     )
     .join("\n");
 
+  const agentsSection = AI_AGENTS.map(agent => {
+    const status = metrics.agentStatuses.find(s => s.name === agent.name)?.status || "offline";
+    const xHandle = "handle" in agent ? `${agent.handle} on X` : null;
+    const telegramHandle = "telegramHandle" in agent ? `${agent.telegramHandle} on Telegram` : null;
+    const handles = [xHandle, telegramHandle].filter(Boolean).join(", ");
+    return `  * ${agent.name} | ${status.toUpperCase()} | goal: ${agent.goal} (${handles})`;
+  }).join("\n");
+
   const text = `Bark Ruffalo ecosystem metrics for ${formattedDate}, ${formattedTime} ${timeZone}:
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(metrics.ethPrice).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${metrics.pawsyPrice.toFixed(4)}.
 - On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} staked, and ${Math.round(metrics.totalMigrated).toLocaleString()} migrated $PAWSY. Total number of stakers is ${metrics.totalStakers}.
@@ -672,12 +774,8 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
 - The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, LPs, VIRTUAL, PAWSY, mPAWSY, POC, MAR, QTG.
 ${lpBreakdown}
 - The DAO sniping address holds: VIRTUAL, MAR.
-- There are 5 public AI agents in the ecosystem:
-  * Bark Ruffalo | ONLINE | goal: promote BR ecosystem (@TrulyADog on X, @BarkRuffalo_bot on Telegram)
-  * The Great Pupdini | ONLINE | goal: promote BR ecosystem, help by answering questions in the Telegram public group (@TheGreatPupdini on X, @TheGreatPupdini_bot on Telegram)
-  * The Alpha Doggo | ONLINE | goal: promote BR ecosystem, help with tech support for the sniper in the private groups (@TheAlphaDoggo on X, @TheAlphaDoggo_bot on Telegram)
-  * Shill | ONLINE | goal: shill and raid for the BR ecosystem (@laur_science on X)
-  * Early Warning System | ONLINE | goal: identify high-potential meme coin launches, alert stakers, snipe for the DAO (@BR_EWS on X, @br_ews_bot on Telegram)`;
+- There are ${AI_AGENTS.length} public AI agents in the ecosystem:
+${agentsSection}`;
 
   return text;
 }
