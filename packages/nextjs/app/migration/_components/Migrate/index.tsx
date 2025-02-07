@@ -151,7 +151,16 @@ export function Migrate() {
 
               <p className="text-sm sm:text-base">
                 $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so
-                that we do not depend on Virtuals Protocol. Read the screenshot how it started in our Telegram group.
+                that we do not depend on Virtuals Protocol. It&apos;s{" "}
+                <a
+                  href="https://aerodrome.finance/swap?from=0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b&to=0x1437819df58ad648e35ed4f6f642d992684b2004&chain0=8453&chain1=8453"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                >
+                  trading at the same price
+                </a>{" "}
+                as $PAWSY. Read the screenshot how it started in our Telegram group.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full">
