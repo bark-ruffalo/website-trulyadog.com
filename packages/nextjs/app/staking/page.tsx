@@ -22,10 +22,11 @@ const Staking: NextPage = () => {
                 <div className="relative z-10 text-base-content dark:text-white">
                   <div className="space-y-3 sm:space-y-4 text-sm sm:text-base">
                     <p>
-                      The primary purpose of staking is to participate in our income rounds. We do not preannounce them;
-                      we simply take a snapshot of the stakers and start sending. Our first income distribution was on
-                      2025-12-23 and amounted to more than double the staked amount in dollar terms. More about how it
-                      works in{" "}
+                      The primary purpose of staking PAWSY, mPAWSY (migrated PAWSY) or the LP token is to receive income
+                      rounds and increase the probability of capital gain (more tokens locked = less selling pressure).
+                      Income rounds are not preannounced; we simply take a snapshot of the stakers and start sending.
+                      Our first income distribution was on 2024-12-23 and amounted to more than double the staked amount
+                      in dollar terms. More about how it works in{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1877740433284935863"
                         target="_blank"
