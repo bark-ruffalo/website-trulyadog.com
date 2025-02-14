@@ -26,7 +26,8 @@ const Staking: NextPage = () => {
                       rounds and increase the probability of capital gain (more tokens locked = less selling pressure).
                       Income rounds are not preannounced; we simply take a snapshot of the stakers and start sending.
                       Our first income distribution was on 2024-12-23 and amounted to more than double the staked amount
-                      in dollar terms. More about how it works in{" "}
+                      in dollar terms. The second one started on February 13, 2025 and it will last up to 10 days,
+                      therefore staking will always be the better option. More about how it works in{" "}
                       <a
                         href="https://x.com/TrulyADog/status/1877740433284935863"
                         target="_blank"

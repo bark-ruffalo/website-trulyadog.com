@@ -135,18 +135,18 @@ const Rewards: NextPage = () => {
                         another report
                       </a>{" "}
                       of someone who even donated back to the DAO because he was grateful. How many crypto projects do
-                      you know where this happens? As more income sources from the ones mentioned in{" "}
+                      you know where this happens? The second income round is done in stages, with the first one having
+                      happened on February 13, 2025. As more income sources from the ones mentioned in{" "}
                       <a
                         href="/collaborate"
                         className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
                       >
                         Collaborate
                       </a>{" "}
-                      materialize, they&apos;ll add more to the next income round. We&apos;ll strive for next rounds to
-                      be as good as the first one! Our objective is to make our 500k-club stakers financially
-                      independent. For the others, this should still be a great passive income and capital gain (from
-                      $PAWSY price going to Mars) opportunity. Note that you can also make money by yourself with the
-                      tools, the information and the terminals that we make available;{" "}
+                      materialize, they&apos;ll add more to the next income rounds. Our objective is to make our
+                      500k-club stakers financially independent. For the others, this should still be a great passive
+                      income and capital gain (from $PAWSY price going to Mars) opportunity. Note that you can also make
+                      money by yourself with the tools, the information and the terminals that we make available;{" "}
                       <b>expand the &quot;But there&apos;s more!&quot; section from the Staking page!</b>
                     </p>
                   </div>

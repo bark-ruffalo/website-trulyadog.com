@@ -285,8 +285,10 @@ export default function Why() {
 
               <li>
                 <span className="text-lg sm:text-xl">💰</span> Since our objective is to make our stakers financially
-                independent, we provide them with income rounds from time to time. The first one was $30k worth! (EDIT:
-                initially; a few days later it had 10x)
+                independent, we provide them with income rounds from time to time. The first one was $30k worth, and a
+                few days later it had 10x. The second one started on February 2, 2025 and it&apos;ll have a two or more
+                snapshots in order to deliver more than $50k worth. And so on, we won&apos;t edit these pages for every
+                income round.
               </li>
 
               <li>
