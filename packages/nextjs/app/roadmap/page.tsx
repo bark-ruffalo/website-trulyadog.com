@@ -220,17 +220,10 @@ const Roadmap: NextPage = () => {
                       >
                         Proof-of-Chad
                       </a>{" "}
-                      and{" "}
-                      <a
-                        href="https://app.virtuals.io/virtuals/20286"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                      >
-                        Quantego
-                      </a>
-                      . Read in the staking page what are some of the benefits that stakers get out of it.
+                      and others (for alpha alerts). Read in the staking page what are some of the benefits that stakers
+                      get out of it.
                     </li>
+                    <li>✅ Distributed two more income rounds to stakers.</li>
                     <li>
                       📩{" "}
                       <b>
@@ -312,7 +305,7 @@ const Roadmap: NextPage = () => {
                     </li>
                     <li>🎯 Implement meme generator tool</li>
                     <li>🎯 Develop automated rewards distribution system</li>
-                    <li>🎯 Deploy Solana liquidity pool and bridge</li>
+                    <li>🎯 Deploy liquidity pool on Solana</li>
                     <li>🎯 Implement cross-chain functionality</li>
                     <li>🎯 Become known as one of the largest decentralized VC in the AI agentic space</li>
                     <li>🎯 Develop AI-powered market analysis system</li>

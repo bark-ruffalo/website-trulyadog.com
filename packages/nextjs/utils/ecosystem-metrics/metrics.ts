@@ -162,9 +162,9 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
   ).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. The real market cap of BR that includes the additional $mPAWSY supply is $${(
     metrics.realMarketCap / 1_000_000
   ).toFixed(2)} million.
-- The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, LPs, VIRTUAL, PAWSY, mPAWSY, POC, MAR, QTG.
+- The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, LPs, VIRTUAL, mPAWSY, POC, MAR.
 ${lpBreakdown}
-- The DAO sniping address holds: VIRTUAL, MAR.
-- There are ${AI_AGENTS.length} public AI agents in the ecosystem:
+- The DAO sniping addresses hold: SOL, ETH, VIRTUAL, MAR.
+- There are ${AI_AGENTS.length} PUBLIC AI agents in the ecosystem (and many PRIVATE ones being added for shilling/marketing):
 ${agentsSection}`;
 }

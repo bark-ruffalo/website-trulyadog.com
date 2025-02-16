@@ -22,7 +22,6 @@ const Home: NextPage = () => {
         const tokenLinks: { [key: string]: string } = {
           POC: "https://app.virtuals.io/virtuals/13983",
           MAR: "https://app.virtuals.io/prototypes/0x5066d3df51FE1546b110918bf9f578baB92979c2",
-          QTG: "https://app.virtuals.io/virtuals/20286",
         };
 
         // Replace token names with links (only first occurrence)

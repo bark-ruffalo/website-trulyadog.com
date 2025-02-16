@@ -135,8 +135,10 @@ const Rewards: NextPage = () => {
                         another report
                       </a>{" "}
                       of someone who even donated back to the DAO because he was grateful. How many crypto projects do
-                      you know where this happens? The second income round is done in stages, with the first one having
-                      happened on February 13, 2025. As more income sources from the ones mentioned in{" "}
+                      you know where this happens? The second income round is done in stages, with the first part having
+                      happened on 2025-02-13, followed by another two days later (together worth more than $50k). The
+                      third part will be the most epic we&apos;ve done so far. As more income sources from the ones
+                      mentioned in{" "}
                       <a
                         href="/collaborate"
                         className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"

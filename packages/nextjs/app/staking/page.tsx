@@ -47,15 +47,8 @@ const Staking: NextPage = () => {
                         <ul className="space-y-2 list-disc pl-4">
                           <li>
                             5k or more: access to the 5k-club token-gated channel with polls that guide the future of
-                            the ecosystem + third in line for alerts from EWS + first in line for alerts from PoC and{" "}
-                            <a
-                              href="https://x.com/QuantegoAi"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                            >
-                              Quantego
-                            </a>
+                            the ecosystem + third in line for alerts from EWS + first in line for alerts from PoC and
+                            other partners of ours.
                           </li>
                           <li>
                             500k or more: access to the above + goodies (like a sniper that purchases newly launched
@@ -68,8 +61,8 @@ const Staking: NextPage = () => {
                             >
                               PoC terminal
                             </a>{" "}
-                            + second in line for alerts from EWS + filter for the Quantego alerts to only show the best
-                            ones
+                            + second in line for alerts from EWS + filter for the alpha alerts from partners to only
+                            show the best ones
                           </li>
                           <li>
                             5M or more: access to the above + more (like priority when getting alpha drops, and even
