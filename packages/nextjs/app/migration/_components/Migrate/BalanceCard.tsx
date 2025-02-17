@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Address } from "~~/components/scaffold-eth";
+import { Button } from "~~/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "~~/components/ui/card";
 
 interface BalanceCardProps {
   title: string;
@@ -10,34 +12,33 @@ interface BalanceCardProps {
 
 const BalanceCard = ({ title, balance, tokenAddress, onAddToMetamask }: BalanceCardProps) => {
   return (
-    <div className="flex-1 bg-black bg-opacity-25 rounded-lg p-4 sm:p-6 hover:bg-opacity-30 transition-all duration-200">
-      <div className="flex flex-col gap-3 sm:gap-4">
-        <h3 className="text-white text-base sm:text-lg font-medium">{title}</h3>
-        <p className="text-2xl sm:text-3xl text-white font-bold">{balance}</p>
+    <Card className="h-full bg-card/95 hover:bg-card/100 transition-all duration-200">
+      <CardHeader>
+        <CardTitle className="text-base sm:text-lg">{title}</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-3 sm:gap-4">
+        <p className="text-2xl sm:text-3xl font-bold">{balance}</p>
 
         {tokenAddress && (
           <>
-            <div className="flex items-center justify-between mt-auto pt-3 sm:pt-4 border-t border-gray-700">
-              <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-700 dark:text-gray-400">
+            <div className="flex items-center justify-between mt-auto pt-3 sm:pt-4 border-t border-border">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
                 <span>Token:</span>
                 <Address address={tokenAddress} />
               </div>
             </div>
-            <div className="flex items-center justify-between mt-auto pt-3 sm:pt-4 border-gray-700">
+            <div className="flex items-center justify-between mt-auto pt-3 sm:pt-4">
               {onAddToMetamask && (
-                <button
-                  onClick={onAddToMetamask}
-                  className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm bg-gradient-to-r from-[#1976d2] to-[#64b5f6] hover:from-[#1565c0] hover:to-[#42a5f5] text-white rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg"
-                >
+                <Button onClick={onAddToMetamask} size="sm" className="flex items-center gap-2">
                   <Image src="/metamask-fox.svg" alt="MetaMask" width={20} height={20} className="w-5 sm:w-6" />
                   Add to MetaMask
-                </button>
+                </Button>
               )}
             </div>
           </>
         )}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

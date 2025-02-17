@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
+import { Alert, AlertDescription } from "~~/components/ui/alert";
+import { Button } from "~~/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "~~/components/ui/card";
+import { Input } from "~~/components/ui/input";
+import { Label } from "~~/components/ui/label";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
 
@@ -73,51 +79,52 @@ export function RewardsCard() {
   const needsApproval = !allowance || (burnAmount && parseEther(burnAmount) > allowance);
 
   return (
-    <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-      <div className="absolute inset-0 rounded-2xl z-0 bg-green-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-      <div className="relative z-10 text-base-content dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">Your DRUGS Balance</h2>
-        <p className="text-xl mb-4">
-          {rewardBalance
-            ? Number(formatEther(rewardBalance)).toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })
-            : "0.00"}{" "}
-          DRUGS
-        </p>
+    <Card>
+      <CardHeader>
+        <CardTitle>Your DRUGS Balance</CardTitle>
+      </CardHeader>
+      <CardContent className="relative">
+        <div className="absolute inset-0 rounded-lg z-0 bg-primary/5 blur-sm" />
+        <div className="relative z-10 space-y-4">
+          <p className="text-xl">
+            {rewardBalance
+              ? Number(formatEther(rewardBalance)).toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+              : "0.00"}{" "}
+            DRUGS
+          </p>
 
-        <div className="space-y-4">
-          <div>
-            <label className="label">
-              <span className="label-text text-base-content dark:text-white">Amount to Burn</span>
-            </label>
-            <input
-              type="number"
-              value={inputValue}
-              readOnly
-              className="input input-bordered w-full"
-              placeholder="Enter amount to burn"
-            />
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="burnAmount">Amount to Burn</Label>
+              <Input id="burnAmount" type="number" value={inputValue} readOnly placeholder="Enter amount to burn" />
+            </div>
+
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            {needsApproval ? (
+              <Button className="w-full" onClick={handleApprove} variant="neutral" disabled={isLoading || !burnAmount}>
+                {isApprovePending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Approve DRUGS"}
+              </Button>
+            ) : (
+              <Button
+                className="w-full"
+                onClick={handleTriggerReward}
+                variant="neutral"
+                disabled={isLoading || !burnAmount}
+              >
+                {isBurnPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Burn DRUGS for NFT"}
+              </Button>
+            )}
           </div>
-
-          {error && <div className="alert alert-error">{error}</div>}
-
-          {needsApproval ? (
-            <button className="btn btn-primary w-full" onClick={handleApprove} disabled={isLoading || !burnAmount}>
-              {isApprovePending ? <span className="loading loading-spinner"></span> : "Approve DRUGS"}
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary w-full"
-              onClick={handleTriggerReward}
-              disabled={isLoading || !burnAmount}
-            >
-              {isBurnPending ? <span className="loading loading-spinner"></span> : "Burn DRUGS for NFT"}
-            </button>
-          )}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
