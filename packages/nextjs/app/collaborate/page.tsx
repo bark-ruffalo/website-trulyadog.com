@@ -1,7 +1,6 @@
 "use client";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion";
-import { Card, CardContent } from "../../components/ui/card";
 import type { NextPage } from "next";
 
 const Collaborate: NextPage = () => {

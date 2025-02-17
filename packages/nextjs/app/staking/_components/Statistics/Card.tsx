@@ -13,8 +13,6 @@ export function Card({ cards }: CardProps) {
   return (
     <div className="flex flex-col sm:flex-row items-stretch justify-center w-full gap-4 px-2 sm:px-0">
       {cards.map((card, index) => {
-        const bgClass = card.className === "green" ? "bg-green-500" : "bg-blue-500";
-
         return (
           <CardRoot key={index} className="w-full sm:w-[300px] relative">
             <CardHeader>
