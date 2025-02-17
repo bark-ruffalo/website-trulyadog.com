@@ -97,6 +97,12 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
 
     const daoFunds = await retryContractCall(() => fetchTotalDaoFunds(), { totalUsd: 0, breakdown: {} });
 
+    // Filter out tokens with value less than 1 USD
+    const filteredDaoFunds = {
+      totalUsd: Object.entries(daoFunds.breakdown).reduce((acc, [, value]) => (value >= 1 ? acc + value : acc), 0),
+      breakdown: Object.fromEntries(Object.entries(daoFunds.breakdown).filter(([, value]) => value >= 1)),
+    };
+
     const virtualPrice = await fetchVirtualPriceFromUniswap().catch(error => {
       console.error("Failed to fetch VIRTUAL price from Uniswap:", error);
       const defaultPrice = DEFAULT_CACHE_VALUES.virtual.value;
@@ -120,7 +126,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       pawsyMarketCap,
       realMarketCap,
       agentStatuses,
-      daoFunds,
+      daoFunds: filteredDaoFunds,
       tvl: tvlInPawsy * pawsyPrice,
     };
   });
