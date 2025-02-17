@@ -77,7 +77,7 @@ const Collaborate: NextPage = () => {
                 {accordionItems.map((item, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
                     <AccordionTrigger className="mb-0">{item.title}</AccordionTrigger>
-                    <AccordionContent className="[&_a]:text-green-800 [&_a]:underline [&_a:hover]:text-green-800/70">
+                    <AccordionContent className="[&_a]:text-green-800 [&_a]:underline [&_a:hover]:text-green-800/70 text-text">
                       <p dangerouslySetInnerHTML={{ __html: item.content }} className="whitespace-pre-line" />
                     </AccordionContent>
                   </AccordionItem>
