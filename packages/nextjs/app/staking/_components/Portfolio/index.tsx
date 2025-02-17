@@ -48,11 +48,11 @@ export function Portfolio() {
         <div>
           <h2 className="text-2xl font-bold text-center">My Portfolio</h2>
           <div className="flex justify-center items-stretch w-full h-full min-h-[180px]">
-          <div className="flex flex-wrap justify-center w-full mt-0 gap-8">
-            {stakeData.map((item, index) => (
-            <PortfolioCard item={item} key={index} />
-            ))}
-          </div>
+            <div className="flex flex-wrap justify-center w-full mt-0 gap-8">
+              {stakeData.map((item, index) => (
+                <PortfolioCard item={item} key={index} />
+              ))}
+            </div>
           </div>
         </div>
       )}

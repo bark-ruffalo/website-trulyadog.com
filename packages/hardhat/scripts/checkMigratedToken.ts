@@ -34,14 +34,18 @@ async function main() {
 
       console.log(`MINTER_ROLE: ${MINTER_ROLE}`);
       console.log(`DEFAULT_ADMIN_ROLE: ${DEFAULT_ADMIN_ROLE}`);
-      
+
       // Calculate role hashes manually to verify
       const calculatedMinterRole = ethers.keccak256(ethers.toUtf8Bytes("MINTER_ROLE"));
       const calculatedDefaultAdminRole = ethers.ZeroHash;
 
       console.log("\nRole Hash Verification:");
-      console.log(`MINTER_ROLE matches calculation: ${MINTER_ROLE === calculatedMinterRole ? chalk.green('✅') : chalk.red('❌')}`);
-      console.log(`DEFAULT_ADMIN_ROLE matches known value: ${DEFAULT_ADMIN_ROLE === calculatedDefaultAdminRole ? chalk.green('✅') : chalk.red('❌')}`);
+      console.log(
+        `MINTER_ROLE matches calculation: ${MINTER_ROLE === calculatedMinterRole ? chalk.green("✅") : chalk.red("❌")}`,
+      );
+      console.log(
+        `DEFAULT_ADMIN_ROLE matches known value: ${DEFAULT_ADMIN_ROLE === calculatedDefaultAdminRole ? chalk.green("✅") : chalk.red("❌")}`,
+      );
     } catch (error) {
       console.log(chalk.red("❌ Failed to get role identifiers"));
       console.log(`Error: ${error.message}\n`);
@@ -56,8 +60,8 @@ async function main() {
       const hasMinterRole = await migratedToken.hasRole(MINTER_ROLE, DEPLOYER);
       const hasAdminRole = await migratedToken.hasRole(DEFAULT_ADMIN_ROLE, DEPLOYER);
 
-      console.log(`Deployer has MINTER_ROLE: ${hasMinterRole ? chalk.green('✅') : chalk.red('❌')}`);
-      console.log(`Deployer has DEFAULT_ADMIN_ROLE: ${hasAdminRole ? chalk.green('✅') : chalk.red('❌')}`);
+      console.log(`Deployer has MINTER_ROLE: ${hasMinterRole ? chalk.green("✅") : chalk.red("❌")}`);
+      console.log(`Deployer has DEFAULT_ADMIN_ROLE: ${hasAdminRole ? chalk.green("✅") : chalk.red("❌")}`);
     } catch (error) {
       console.log(chalk.red("❌ Failed to check role assignments"));
       console.log(`Error: ${error.message}\n`);
@@ -69,14 +73,14 @@ async function main() {
       const name = await migratedToken.name();
       const symbol = await migratedToken.symbol();
       const totalSupply = await migratedToken.totalSupply();
-      
-      const isInitialized = name === "Migrated PAWSY" && 
-                           symbol === "mPAWSY" && 
-                           totalSupply > 0;
-                           
-      console.log(isInitialized ? 
-        chalk.green("✅ Contract is initialized (verified by state)") : 
-        chalk.red("❌ Contract might not be initialized"));
+
+      const isInitialized = name === "Migrated PAWSY" && symbol === "mPAWSY" && totalSupply > 0;
+
+      console.log(
+        isInitialized
+          ? chalk.green("✅ Contract is initialized (verified by state)")
+          : chalk.red("❌ Contract might not be initialized"),
+      );
     } catch (error) {
       console.log(chalk.red("❌ Failed to check initialization status"));
       console.log(`Error: ${error.message}\n`);
@@ -92,7 +96,6 @@ async function main() {
       console.log(chalk.red("❌ Failed to get implementation address"));
       console.log(`Error: ${error.message}\n`);
     }
-
   } catch (error) {
     console.error(chalk.red("\n❌ Script failed:"));
     console.error(error);
@@ -101,7 +104,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
-  }); 
+  });

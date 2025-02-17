@@ -2,7 +2,7 @@ import Image from "next/image";
 import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { Button } from "~~/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "~~/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/ui/card";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { convertSecondsToDays, notification } from "~~/utils/scaffold-eth";
 
@@ -135,7 +135,9 @@ export function PortfolioCard({ item }: { item: CardProps }) {
           </div>
           <div className="flex justify-between w-full gap-8">
             <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Lock Status</span>
-            <span className="text-base-content dark:text-white font-light">{item.isLocked ? "Locked" : "Unlocked"}</span>
+            <span className="text-base-content dark:text-white font-light">
+              {item.isLocked ? "Locked" : "Unlocked"}
+            </span>
           </div>
         </div>
       </CardContent>
@@ -158,10 +160,7 @@ export function PortfolioCard({ item }: { item: CardProps }) {
               </Button>
             )}
           </div>
-          <Button
-            onClick={() => onUnstake()}
-            disabled={!canUnstake() || isUnstakePending}
-          >
+          <Button onClick={() => onUnstake()} disabled={!canUnstake() || isUnstakePending}>
             {isUnstakePending ? <span className="loading loading-spinner loading-sm"></span> : "Unstake"}
           </Button>
         </CardFooter>

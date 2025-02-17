@@ -26,11 +26,15 @@ async function main() {
       console.log(`Old Token Address: ${oldTokenAddress}`);
       console.log(`New Token Address: ${newTokenAddress}`);
       console.log(`Migration Ratio: ${migrationRatio}`);
-      console.log(`Migration Paused: ${isPaused ? chalk.red('Yes') : chalk.green('No')}`);
+      console.log(`Migration Paused: ${isPaused ? chalk.red("Yes") : chalk.green("No")}`);
 
       console.log("\nAddress Verification:");
-      console.log(`Old Token Address Match: ${oldTokenAddress.toLowerCase() === OLD_TOKEN_ADDRESS.toLowerCase() ? chalk.green('✅') : chalk.red('❌')}`);
-      console.log(`New Token Address Match: ${newTokenAddress.toLowerCase() === MIGRATED_TOKEN_PROXY.toLowerCase() ? chalk.green('✅') : chalk.red('❌')}`);
+      console.log(
+        `Old Token Address Match: ${oldTokenAddress.toLowerCase() === OLD_TOKEN_ADDRESS.toLowerCase() ? chalk.green("✅") : chalk.red("❌")}`,
+      );
+      console.log(
+        `New Token Address Match: ${newTokenAddress.toLowerCase() === MIGRATED_TOKEN_PROXY.toLowerCase() ? chalk.green("✅") : chalk.red("❌")}`,
+      );
     } catch (error) {
       console.log(chalk.red("❌ Failed to get basic info"));
       console.log(`Error: ${error.message}\n`);
@@ -45,8 +49,8 @@ async function main() {
       const hasPauserRole = await tokenMigration.hasRole(PAUSER_ROLE, DEPLOYER);
       const hasAdminRole = await tokenMigration.hasRole(DEFAULT_ADMIN_ROLE, DEPLOYER);
 
-      console.log(`Deployer has PAUSER_ROLE: ${hasPauserRole ? chalk.green('✅') : chalk.red('❌')}`);
-      console.log(`Deployer has DEFAULT_ADMIN_ROLE: ${hasAdminRole ? chalk.green('✅') : chalk.red('❌')}`);
+      console.log(`Deployer has PAUSER_ROLE: ${hasPauserRole ? chalk.green("✅") : chalk.red("❌")}`);
+      console.log(`Deployer has DEFAULT_ADMIN_ROLE: ${hasAdminRole ? chalk.green("✅") : chalk.red("❌")}`);
     } catch (error) {
       console.log(chalk.red("❌ Failed to check roles"));
       console.log(`Error: ${error.message}\n`);
@@ -62,7 +66,7 @@ async function main() {
       const [migrationEvents, pauseEvents, unpauseEvents] = await Promise.all([
         tokenMigration.queryFilter(migrationFilter, -1000),
         tokenMigration.queryFilter(pauseFilter, -1000),
-        tokenMigration.queryFilter(unpauseFilter, -1000)
+        tokenMigration.queryFilter(unpauseFilter, -1000),
       ]);
 
       if (migrationEvents.length > 0) {
@@ -76,16 +80,17 @@ async function main() {
 
       if (pauseEvents.length > 0 || unpauseEvents.length > 0) {
         console.log("\nPause/Unpause Events:");
-        [...pauseEvents, ...unpauseEvents].sort((a, b) => a.blockNumber - b.blockNumber).forEach(event => {
-          const eventType = event.fragment.name === "MigrationPaused" ? "Paused" : "Unpaused";
-          console.log(`${eventType} by: ${event.args.pauser}`);
-        });
+        [...pauseEvents, ...unpauseEvents]
+          .sort((a, b) => a.blockNumber - b.blockNumber)
+          .forEach(event => {
+            const eventType = event.fragment.name === "MigrationPaused" ? "Paused" : "Unpaused";
+            console.log(`${eventType} by: ${event.args.pauser}`);
+          });
       }
     } catch (error) {
       console.log(chalk.red("❌ Failed to fetch events"));
       console.log(`Error: ${error.message}\n`);
     }
-
   } catch (error) {
     console.error(chalk.red("\n❌ Script failed:"));
     console.error(error);
@@ -94,7 +99,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
-  }); 
+  });

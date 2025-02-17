@@ -4,9 +4,17 @@ import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { Badge } from "~~/components/ui/badge";
 import { Button } from "~~/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "~~/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/ui/card";
 import { Input } from "~~/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "~~/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "~~/components/ui/select";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useStakingStore } from "~~/services/store/stakingStore";
 import {
@@ -152,10 +160,7 @@ export function StakingCard({ item }: { item: CardProps }) {
       <CardContent>
         <div>
           <label>Lock Period:</label>
-          <Select
-            value={lockPeriodIndex.toString()}
-            onValueChange={(value) => setLockPeriodIndex(Number(value))}
-          >
+          <Select value={lockPeriodIndex.toString()} onValueChange={value => setLockPeriodIndex(Number(value))}>
             <SelectTrigger className="bg-bw">
               <SelectValue placeholder="Select a lock period" />
             </SelectTrigger>
@@ -191,11 +196,7 @@ export function StakingCard({ item }: { item: CardProps }) {
         {allowance?.toString() &&
           (parseEther(stakeAmount) > allowance ? (
             <Button onClick={onApprove} disabled={isApprovePending} className="w-full" variant="neutral">
-              {isApprovePending ? (
-                <span className="loading loading-spinner loading-sm"></span>
-              ) : (
-                "Approve to Stake"
-              )}
+              {isApprovePending ? <span className="loading loading-spinner loading-sm"></span> : "Approve to Stake"}
             </Button>
           ) : (
             <Button onClick={onStake} disabled={isStakePending} className="w-full" variant="neutral">

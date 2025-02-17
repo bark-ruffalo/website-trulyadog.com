@@ -71,8 +71,10 @@ describe("TokenMigration", function () {
 
     it("Should revert if migration is paused", async function () {
       await tokenMigration.pause();
-      await expect(tokenMigration.connect(user1).migrateTokens(100))
-        .to.be.revertedWithCustomError(tokenMigration, "EnforcedPause");
+      await expect(tokenMigration.connect(user1).migrateTokens(100)).to.be.revertedWithCustomError(
+        tokenMigration,
+        "EnforcedPause",
+      );
     });
   });
 
@@ -80,7 +82,7 @@ describe("TokenMigration", function () {
     let PAUSER_ROLE: string;
     let DEFAULT_ADMIN_ROLE: string;
 
-    beforeEach(async function() {
+    beforeEach(async function () {
       PAUSER_ROLE = await tokenMigration.PAUSER_ROLE();
       DEFAULT_ADMIN_ROLE = await tokenMigration.DEFAULT_ADMIN_ROLE();
     });
@@ -117,8 +119,9 @@ describe("TokenMigration", function () {
     });
 
     it("Should revert if trying to recover the old token", async function () {
-      await expect(tokenMigration.recoverERC20(await oldToken.getAddress(), 100))
-        .to.be.revertedWith("Cannot recover old token");
+      await expect(tokenMigration.recoverERC20(await oldToken.getAddress(), 100)).to.be.revertedWith(
+        "Cannot recover old token",
+      );
     });
   });
 });

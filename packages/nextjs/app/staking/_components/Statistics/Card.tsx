@@ -1,4 +1,4 @@
-import { Card as CardRoot, CardHeader, CardTitle, CardContent } from "~~/components/ui/card";
+import { CardContent, CardHeader, Card as CardRoot, CardTitle } from "~~/components/ui/card";
 
 interface CardProps {
   cards: {
@@ -18,9 +18,7 @@ export function Card({ cards }: CardProps) {
         return (
           <CardRoot key={index} className="w-full sm:w-[300px] relative">
             <CardHeader>
-              <CardTitle className="text-base !font-normal">
-                {card.title}
-              </CardTitle>
+              <CardTitle className="text-base !font-normal">{card.title}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{card.value}</div>
