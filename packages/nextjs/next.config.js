@@ -1,6 +1,6 @@
 // @ts-check
-import keccak from "keccak";
-import postcssOptimizer from "postcss-optimizer";
+const keccak = require("keccak");
+const postcssOptimizer = require("postcss-optimizer");
 
 postcssOptimizer.config();
 
@@ -41,4 +41,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

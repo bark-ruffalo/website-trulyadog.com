@@ -248,7 +248,7 @@ describe("StakingVault", function () {
     it("Should allow owner to set reward token", async function () {
       const NewRewardToken = await ethers.getContractFactory("RewardToken");
       const newRewardToken = await NewRewardToken.deploy({ gasLimit: GAS_LIMITS.DEPLOY });
-      
+
       await stakingVault.setRewardToken(await newRewardToken.getAddress(), { gasLimit: GAS_LIMITS.LOW });
       expect(await stakingVault.rewardToken()).to.equal(await newRewardToken.getAddress());
     });
@@ -256,9 +256,9 @@ describe("StakingVault", function () {
     it("Should not allow non-owner to set reward token", async function () {
       const NewRewardToken = await ethers.getContractFactory("RewardToken");
       const newRewardToken = await NewRewardToken.deploy({ gasLimit: GAS_LIMITS.DEPLOY });
-      
+
       await expect(
-        stakingVault.connect(user1).setRewardToken(await newRewardToken.getAddress(), { gasLimit: GAS_LIMITS.LOW })
+        stakingVault.connect(user1).setRewardToken(await newRewardToken.getAddress(), { gasLimit: GAS_LIMITS.LOW }),
       ).to.be.revertedWithCustomError(stakingVault, "OwnableUnauthorizedAccount");
     });
   });
@@ -280,16 +280,16 @@ describe("StakingVault", function () {
 
       const pools = await stakingVault.getPools();
       const pool = pools[0];
-      
+
       expect(pool.rewardRates[0]).to.equal(150);
       expect(pool.rewardRates[1]).to.equal(300);
     });
 
     it("Should revert when updating reward rates with mismatched length", async function () {
       const newRewardRates = [150, 300, 450];
-      await expect(
-        stakingVault.updateRewardRates(0, newRewardRates, { gasLimit: GAS_LIMITS.HIGH })
-      ).to.be.revertedWith("Mismatched lock periods and reward rates");
+      await expect(stakingVault.updateRewardRates(0, newRewardRates, { gasLimit: GAS_LIMITS.HIGH })).to.be.revertedWith(
+        "Mismatched lock periods and reward rates",
+      );
     });
   });
 
@@ -300,7 +300,7 @@ describe("StakingVault", function () {
       await stakingVault.addPool(await stakingToken.getAddress(), lockPeriods, rewardRates, {
         gasLimit: GAS_LIMITS.HIGH,
       });
-      
+
       // Add another pool
       await stakingVault.addPool(await stakingToken.getAddress(), lockPeriods, rewardRates, {
         gasLimit: GAS_LIMITS.HIGH,
@@ -329,7 +329,7 @@ describe("StakingVault", function () {
     it("Should return correct locked users by pool", async function () {
       const pool0Users = await stakingVault.getLockedUsersByPool(0);
       const pool1Users = await stakingVault.getLockedUsersByPool(1);
-      
+
       expect(pool0Users.length).to.equal(1);
       expect(pool1Users.length).to.equal(1);
       expect(pool0Users[0]).to.equal(user1.address);

@@ -97,6 +97,12 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
 
     const daoFunds = await retryContractCall(() => fetchTotalDaoFunds(), { totalUsd: 0, breakdown: {} });
 
+    // Filter out tokens with value less than 1 USD
+    const filteredDaoFunds = {
+      totalUsd: Object.entries(daoFunds.breakdown).reduce((acc, [, value]) => (value >= 1 ? acc + value : acc), 0),
+      breakdown: Object.fromEntries(Object.entries(daoFunds.breakdown).filter(([, value]) => value >= 1)),
+    };
+
     const virtualPrice = await fetchVirtualPriceFromUniswap().catch(error => {
       console.error("Failed to fetch VIRTUAL price from Uniswap:", error);
       const defaultPrice = DEFAULT_CACHE_VALUES.virtual.value;
@@ -120,7 +126,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       pawsyMarketCap,
       realMarketCap,
       agentStatuses,
-      daoFunds,
+      daoFunds: filteredDaoFunds,
       tvl: tvlInPawsy * pawsyPrice,
     };
   });
@@ -162,9 +168,9 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
   ).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. The real market cap of BR that includes the additional $mPAWSY supply is $${(
     metrics.realMarketCap / 1_000_000
   ).toFixed(2)} million.
-- The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, LPs, VIRTUAL, mPAWSY, POC, MAR.
+- The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, LPs, VIRTUAL, PAWSY, mPAWSY, POC, MAR, QTG.
 ${lpBreakdown}
-- The DAO sniping addresses hold: SOL, ETH, VIRTUAL, MAR.
-- There are ${AI_AGENTS.length} PUBLIC AI agents in the ecosystem (and many PRIVATE ones being added for shilling/marketing):
+- The DAO sniping address holds: VIRTUAL, MAR.
+- There are ${AI_AGENTS.length} public AI agents in the ecosystem:
 ${agentsSection}`;
 }

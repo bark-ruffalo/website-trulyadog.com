@@ -60,7 +60,7 @@ function calculateAndDisplaySIR(name: string, rates: readonly number[]) {
 const deployStaking: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts } = hre;
   const { deploy, get } = deployments;
-  
+
   // Get deployer address either from named accounts or ledger
   let deployer: string;
   try {

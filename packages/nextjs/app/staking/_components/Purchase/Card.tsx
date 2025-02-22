@@ -2,6 +2,11 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
+import { Badge } from "~~/components/ui/badge";
+import { Button } from "~~/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "~~/components/ui/card";
+import { Input } from "~~/components/ui/input";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "~~/components/ui/select";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { useStakingStore } from "~~/services/store/stakingStore";
 import {
@@ -127,91 +132,70 @@ export function StakingCard({ item }: { item: CardProps }) {
       }
     }
   }
-
   return (
-    <div className="flex flex-col justify-between p-4 sm:p-5 min-h-[120px] w-full sm:max-w-[380px] bg-base-200 dark:bg-[#8d54751a] rounded-lg relative m-1 box-border">
-      <div className="text-base-content dark:text-white font-medium flex flex-wrap gap-2 items-center mb-3">
-        <label className="text-base-content/70 dark:text-[#b2bfce] font-light">Lock Period:</label>
-        <select
-          value={lockPeriodIndex}
-          onChange={e => setLockPeriodIndex(Number(e.target.value))}
-          className="bg-base-100 border border-base-300 dark:border-[#e8effb33] rounded-xl p-1 text-sm sm:text-base text-base-content dark:text-white"
-        >
-          {item.lockPeriods.map((period, index) => (
-            <option key={index} value={index}>
-              {convertSecondsToDays(Number(period))} Days
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="flex flex-col mb-2 gap-2 w-full">
-        <div className="flex justify-between w-full">
-          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Token Name</span>
-          <span className="text-base-content dark:text-white">{getPoolTokens(Number(item.poolId))}</span>
-        </div>
-        <div className="flex justify-between w-full">
-          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Token Address</span>
-          <Address address={item.stakingToken} />
-        </div>
-        <div className="flex justify-between w-full">
-          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Pool Status</span>
-          <span className="text-base-content dark:text-white font-light">{item.isActive ? "Active" : "Paused"}</span>
-        </div>
-        <div className="flex justify-between w-full">
-          <span className="text-base-content/70 dark:text-[#b2bfce] font-light">Reward APY</span>
-          <span className="text-base-content dark:text-white font-light">
+    <Card className="w-full sm:min-w-[400px] sm:w-auto">
+      <CardHeader className="relative">
+        <CardTitle>
+          {getPoolTokens(Number(item.poolId))}
+          <Badge className="absolute top-2 right-2" variant={item.isActive ? "default" : "neutral"}>
             {calculateRewardRate(
               Number(item.rewardRates[lockPeriodIndex]) / (item.poolId === 2n ? 66 : 1),
               Number(item.lockPeriods[lockPeriodIndex]),
             ).toFixed(2)}{" "}
-            %
-          </span>
+            % APY
+          </Badge>
+        </CardTitle>
+        <CardDescription className="flex gap-2">
+          {item.isActive ? "Active" : "Paused"} &bull; Token: <Address address={item.stakingToken} size="sm" />
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div>
+          <label>Lock Period:</label>
+          <Select value={lockPeriodIndex.toString()} onValueChange={value => setLockPeriodIndex(Number(value))}>
+            <SelectTrigger className="bg-bw">
+              <SelectValue placeholder="Select a lock period" />
+            </SelectTrigger>
+            <SelectContent className="bg-bw">
+              <SelectGroup>
+                {item.lockPeriods.map((period, index) => (
+                  <SelectItem key={index} value={index.toString()}>
+                    {convertSecondsToDays(Number(period))} Days
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
-      </div>
 
-      <div className="flex flex-col gap-2 w-full border-t border-[#b2bfce] pt-2">
-        <div className="flex justify-between items-center gap-4 w-full">
-          <div className="flex justify-between items-center bg-base-100 border border-[#e8effb33] rounded-lg p-2 w-full">
-            <input
-              className="bg-transparent border-none outline-none text-base-content dark:text-white px-2 w-3/4"
-              type="text"
-              value={stakeAmount}
-              onChange={handleStakeAmountChange}
-            />
-            <button
+        <div className="mt-2">
+          <label>Stake Amount:</label>
+          <div className="relative">
+            <Input type="number" value={stakeAmount} onChange={handleStakeAmountChange} />
+            <Button
+              size="sm"
+              variant="noShadow"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-7"
               onClick={handleMaxClick}
-              className="px-2 py-1 text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
               disabled={isApprovePending || isStakePending}
             >
-              MAX
-            </button>{" "}
+              Max
+            </Button>
           </div>
         </div>
-
+      </CardContent>
+      <CardFooter>
         {allowance?.toString() &&
           (parseEther(stakeAmount) > allowance ? (
-            <button
-              className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl"
-              onClick={onApprove}
-              disabled={isApprovePending}
-            >
-              {isApprovePending ? (
-                <span className="loading loading-spinner loading-sm"></span>
-              ) : (
-                "Approve in order to Stake"
-              )}
-            </button>
+            <Button onClick={onApprove} disabled={isApprovePending} className="w-full" variant="neutral">
+              {isApprovePending ? <span className="loading loading-spinner loading-sm"></span> : "Approve to Stake"}
+            </Button>
           ) : (
-            <button
-              className="flex justify-center items-center px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray"
-              onClick={onStake}
-              disabled={isStakePending}
-            >
+            <Button onClick={onStake} disabled={isStakePending} className="w-full" variant="neutral">
               {isStakePending ? <span className="loading loading-spinner loading-sm"></span> : "Stake"}
-            </button>
+            </Button>
           ))}
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 }

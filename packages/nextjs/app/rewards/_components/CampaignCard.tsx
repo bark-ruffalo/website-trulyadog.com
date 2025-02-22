@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { formatEther } from "viem";
+import { Card, CardContent, CardHeader, CardTitle } from "~~/components/ui/card";
 
 // type Campaign = readonly [
 //   bigint, // minBurnAmount
@@ -55,11 +56,13 @@ export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCar
   }, [campaign.endDate]);
 
   return (
-    <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative">
-      <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-      <div className="relative z-10 text-base-content dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">Rewards Campaign 1: OG NFTs</h2>
-        <div className="space-y-2">
+    <Card>
+      <CardHeader>
+        <CardTitle>Rewards Campaign 1: OG NFTs</CardTitle>
+      </CardHeader>
+      <CardContent className="relative">
+        <div className="absolute inset-0 rounded-lg z-0 bg-primary/5 blur-sm" />
+        <div className="relative z-10 space-y-2">
           <p>
             <span className="font-semibold">Minimum Burn Required:</span>{" "}
             {campaign.minBurnAmount ? formatEther(campaign.minBurnAmount) : "0"} DRUGS
@@ -83,13 +86,13 @@ export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCar
               href="https://opensea.io/collection/bark-ruffalo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+              className="text-primary hover:text-primary/90 underline"
             >
               View NFT Collection on OpenSea
             </a>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

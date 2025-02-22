@@ -1,8 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import BalanceCard from "./BalanceCard";
+import { Loader2 } from "lucide-react";
 import { formatEther, parseEther } from "viem";
 import { useAccount } from "wagmi";
+import { Button } from "~~/components/ui/button";
+import { Card, CardContent } from "~~/components/ui/card";
+import { Input } from "~~/components/ui/input";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
 
@@ -136,131 +140,143 @@ export function Migrate() {
   }) as { data: bigint };
 
   return (
-    <div className="p-4 sm:p-8 bg-base-200 bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
-      <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-      <div className="relative z-10 w-full">
-        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
-          <div className="w-full lg:w-7/12">
-            <div className="flex flex-col gap-4 sm:gap-6">
-              <div className="text-center">
-                <span className="text-xl sm:text-2xl font-semibold text-base-content/70 dark:text-white/70">
-                  Currently migrated:{" "}
-                  {totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "Loading..."}
-                </span>
-              </div>
-
-              <p className="text-sm sm:text-base">
-                $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future so
-                that we do not depend on Virtuals Protocol. It&apos;s{" "}
-                <a
-                  href="https://aerodrome.finance/swap?from=0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b&to=0x1437819df58ad648e35ed4f6f642d992684b2004&chain0=8453&chain1=8453"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
-                >
-                  trading at the same price
-                </a>{" "}
-                as $PAWSY. Read the screenshot how it started in our Telegram group.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 w-full">
-                <div className="w-full sm:w-1/2">
-                  <BalanceCard
-                    title="$PAWSY balance"
-                    balance={
-                      pawsyBalance
-                        ? Number(formatEther(pawsyBalance)).toLocaleString("en-US", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })
-                        : "0"
-                    }
-                    tokenAddress={pawsyContract?.address}
-                  />
+    <Card className="relative w-full">
+      <CardContent className="p-4 sm:p-8">
+        <div className="absolute inset-0 rounded-lg z-0 bg-primary/5 blur-sm" />
+        <div className="relative z-10 w-full">
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
+            <div className="w-full lg:w-7/12">
+              <div className="flex flex-col gap-4 sm:gap-6">
+                <div className="text-center">
+                  <span className="text-xl sm:text-2xl font-semibold text-muted-foreground">
+                    Currently migrated:{" "}
+                    {totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "Loading..."}
+                  </span>
                 </div>
-                <div className="w-full sm:w-1/2">
-                  <BalanceCard
-                    title="$mPAWSY balance"
-                    balance={
-                      mPawsyBalance
-                        ? Number(formatEther(mPawsyBalance)).toLocaleString("en-US", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })
-                        : "0"
-                    }
-                    tokenAddress={mPawsyContract?.address}
-                    onAddToMetamask={() => addTokenToMetamask(mPawsyContract?.address || "", "mPAWSY")}
-                  />
-                </div>
-              </div>
 
-              <div className="flex flex-col gap-3 sm:gap-4 w-full border-t border-gray-300 dark:border-[#b2bfce] pt-3 sm:pt-4">
-                <div className="flex justify-between items-center gap-3 sm:gap-4 w-full">
-                  <div className="flex justify-between items-center bg-gray-100 dark:bg-base-100 border border-gray-300 dark:border-[#e8effb33] rounded-lg p-2 w-full relative">
-                    <input
-                      className={`bg-transparent border-none outline-none text-gray-800 dark:text-white px-2 w-full text-sm sm:text-base ${
-                        inputError ? "border-red-500" : ""
-                      }`}
-                      type="text"
-                      placeholder="Enter amount"
-                      value={pawsyAmount}
-                      onChange={handlePawsyAmountChange}
-                      disabled={isApprovePending || isMigratePending}
+                <p className="text-sm sm:text-base">
+                  $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem's profitability, and our future so
+                  that we do not depend on Virtuals Protocol. It's{" "}
+                  <a
+                    href="https://aerodrome.finance/swap?from=0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b&to=0x1437819df58ad648e35ed4f6f642d992684b2004&chain0=8453&chain1=8453"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                  >
+                    trading at the same price
+                  </a>{" "}
+                  as $PAWSY. Read the screenshot how it started in our Telegram group.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 w-full">
+                  <div className="w-full sm:w-1/2">
+                    <BalanceCard
+                      title="$PAWSY balance"
+                      balance={
+                        pawsyBalance
+                          ? Number(formatEther(pawsyBalance)).toLocaleString("en-US", {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })
+                          : "0"
+                      }
+                      tokenAddress={pawsyContract?.address}
                     />
-                    <button
-                      onClick={handleMaxClick}
-                      className="px-2 py-1 text-xs sm:text-sm bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                      disabled={isApprovePending || isMigratePending}
-                    >
-                      MAX
-                    </button>
+                  </div>
+                  <div className="w-full sm:w-1/2">
+                    <BalanceCard
+                      title="$mPAWSY balance"
+                      balance={
+                        mPawsyBalance
+                          ? Number(formatEther(mPawsyBalance)).toLocaleString("en-US", {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })
+                          : "0"
+                      }
+                      tokenAddress={mPawsyContract?.address}
+                      onAddToMetamask={() => addTokenToMetamask(mPawsyContract?.address || "", "mPAWSY")}
+                    />
                   </div>
                 </div>
 
-                {inputError && <span className="text-red-500 text-xs sm:text-sm mt-1">{inputError}</span>}
+                <div className="flex flex-col gap-3 sm:gap-4 w-full border-t border-border pt-3 sm:pt-4">
+                  <div className="flex justify-between items-center gap-3 sm:gap-4 w-full">
+                    <div className="flex justify-between items-center w-full relative">
+                      <Input
+                        className={inputError ? "border-destructive" : ""}
+                        type="text"
+                        placeholder="Enter amount"
+                        value={pawsyAmount}
+                        onChange={handlePawsyAmountChange}
+                        disabled={isApprovePending || isMigratePending}
+                      />
+                      <Button
+                        variant="noShadow"
+                        size="sm"
+                        onClick={handleMaxClick}
+                        disabled={isApprovePending || isMigratePending}
+                        className="absolute right-1.5 top-1.5 bottom-1.5 h-auto px-2"
+                      >
+                        MAX
+                      </Button>
+                    </div>
+                  </div>
 
-                {allowance?.toString() &&
-                  (parseEther(pawsyAmount || "0") > allowance ? (
-                    <button
-                      className="flex justify-center items-center px-3 sm:px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl text-sm sm:text-base w-full sm:w-auto"
-                      onClick={onApprove}
-                      disabled={isApprovePending}
-                    >
-                      {isApprovePending ? (
-                        <span className="loading loading-spinner loading-sm"></span>
-                      ) : (
-                        "Approve in order to Migrate"
-                      )}
-                    </button>
-                  ) : (
-                    <button
-                      className="flex justify-center items-center px-3 sm:px-8 py-2 bg-gradient-to-r from-[#1976d2] to-[#64b5f6] text-white rounded-xl bg-disabled-gray text-sm sm:text-base w-full sm:w-auto"
-                      onClick={onMigrate}
-                      disabled={isMigratePending}
-                    >
-                      {isMigratePending ? <span className="loading loading-spinner loading-sm"></span> : "Migrate"}
-                    </button>
-                  ))}
+                  {inputError && <span className="text-destructive text-xs sm:text-sm mt-1">{inputError}</span>}
+
+                  {allowance?.toString() &&
+                    (parseEther(pawsyAmount || "0") > allowance ? (
+                      <Button className="w-full sm:w-auto" onClick={onApprove} disabled={isApprovePending}>
+                        {isApprovePending ? (
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                          "Approve in order to Migrate"
+                        )}
+                      </Button>
+                    ) : (
+                      <Button
+                        className="w-full sm:w-auto"
+                        onClick={onMigrate}
+                        variant="default"
+                        disabled={isMigratePending}
+                      >
+                        {isMigratePending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Migrate"}
+                      </Button>
+                    ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="w-full lg:w-5/12 flex items-start justify-center mt-4 lg:mt-0">
-            <div className="w-full max-w-[500px] flex flex-col gap-4">
-              <div className="rounded-lg overflow-hidden">
-                <Image
-                  src="/vote.png"
-                  alt="community vote"
-                  width={500}
-                  height={300}
-                  className="w-full h-auto object-contain"
-                />
+            <div className="w-full lg:w-5/12 flex items-start justify-center mt-4 lg:mt-0">
+              <div className="w-full max-w-[500px] flex flex-col gap-4">
+                <div className="rounded-lg overflow-hidden">
+                  <Image
+                    src="/vote.png"
+                    alt="community vote"
+                    width={500}
+                    height={300}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+                <p className="text-sm sm:text-base text-center">
+                  The first 10 persons to migrate and stake more than 5 million get airdropped an NFT from the{" "}
+                  <a
+                    href="https://opensea.io/collection/bark-ruffalo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-800 hover:text-blue-600 underline"
+                  >
+                    OG collection
+                  </a>
+                  . Thus, they can have two because they may also get one by trading staking rewards. This text will
+                  disappear when ten persons have already done it.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

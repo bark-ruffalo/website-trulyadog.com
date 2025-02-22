@@ -74,6 +74,7 @@ export function Statistics() {
       {
         title: "Total Value Locked",
         value: isLoading ? "Loading..." : tvl,
+        subtext: "$PAWSY",
         className: tvl === "Error" ? "red" : "green",
       },
       {
@@ -83,23 +84,27 @@ export function Statistics() {
           : totalSupply
             ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US")
             : "0",
+        subtext: "$mPAWSY",
         className: "green",
       },
       {
         title: "Stakers",
         value: isLoading ? "Loading..." : totalStakers ? totalStakers.toString() : "0",
+        subtext: "Total",
         className: "green",
       },
       {
         title: "If You Staked $10,000",
-        value: `so far you earned ${getUserPayout(10000)}`,
+        value: `${getUserPayout(10000)}`,
+        subtext: "$$$ You'd Have",
         className: "green",
       },
       {
         title: "Rewards You Claimed",
         value: rewardsLoading
           ? "Loading..."
-          : `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"} ${rewardTokenSymbol ?? ""}`,
+          : `${totalRewards ? Number(formatEther(totalRewards)).toFixed(2) : "0.00"}`,
+        subtext: "$" + rewardTokenSymbol,
         className: "green",
       },
     ],
@@ -166,7 +171,7 @@ export function Statistics() {
           return acc + poolTVL / pawsyPrice;
         }, 0);
 
-        setTvl(Math.round(totalTVL).toLocaleString("en-US") + " $PAWSY");
+        setTvl(Math.round(totalTVL).toLocaleString("en-US"));
       } catch (error) {
         console.error("Error calculating TVL:", error);
         setTvl("Error");

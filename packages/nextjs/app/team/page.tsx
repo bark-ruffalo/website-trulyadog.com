@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaGithub, FaLinkedin, FaTelegram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { RiWechatFill } from "react-icons/ri";
 import { SiBluesky, SiMastodon } from "react-icons/si";
+import { Card, CardContent } from "~~/components/ui/card";
 
 interface TeamMember {
   id: number;
@@ -143,131 +144,128 @@ const teamMembers: TeamMember[] = [
 export default function TeamPage() {
   return (
     <div className="flex items-center flex-col flex-grow">
-      <div className="flex-grow bg-base-100 dark:bg-base-300 w-full px-2 sm:px-8 py-6 sm:py-12">
+      <div className="flex-grow bg-background w-full px-2 sm:px-8 py-6 sm:py-12">
         <div className="flex w-full justify-center items-center gap-6 sm:gap-12 flex-col">
           <div className="w-full max-w-[95%] sm:max-w-[75%] relative">
-            <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-base-content dark:text-white">
-              Our Team
-            </h1>
-            <p className="text-center text-base-content/70 dark:text-white/70 text-lg mb-12">
+            <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8">Our Team</h1>
+            <p className="text-center text-muted-foreground text-lg mb-12">
               Meet the passionate individuals behind our success
             </p>
 
-            <div className="p-4 sm:p-8 bg-base-200 dark:bg-white bg-opacity-90 dark:bg-opacity-10 rounded-2xl relative w-full">
-              <div className="absolute inset-0 rounded-2xl z-0 bg-blue-500 bg-opacity-10 dark:bg-opacity-20 blur-sm"></div>
-              <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                {teamMembers.map(member => (
-                  <div
-                    key={member.id}
-                    className="bg-base-100 dark:bg-base-300 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1"
-                  >
-                    <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-4 sm:mb-6 relative rounded-full overflow-hidden border-4 border-primary/20">
-                      <Image
-                        src={member.imageUrl}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
-                      />
-                    </div>
-                    <h2 className="text-xl font-bold text-center text-base-content dark:text-white mb-2">
-                      {member.name}
-                    </h2>
-                    <p className="text-primary text-center font-medium mb-4">{member.role}</p>
-                    <p
-                      className="text-base-content/70 dark:text-white/70 text-center leading-relaxed mb-4"
-                      dangerouslySetInnerHTML={{ __html: member.bio }}
-                    />
+            <Card>
+              <CardContent className="p-4 sm:p-8 relative">
+                <div className="absolute inset-0 rounded-lg z-0 bg-primary/5 blur-sm" />
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                  {teamMembers.map(member => (
+                    <Card key={member.id} className="group hover:-translate-y-1 transition-all duration-200 bg-bg">
+                      <CardContent className="p-4 sm:p-6">
+                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-4 sm:mb-6 relative rounded-full overflow-hidden border-4 border-primary/20">
+                          <Image
+                            src={member.imageUrl}
+                            alt={member.name}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 192px"
+                          />
+                        </div>
+                        <h2 className="text-xl font-bold text-center mb-2">{member.name}</h2>
+                        <p className="text-primary text-center font-medium mb-4">{member.role}</p>
+                        <p
+                          className="text-muted-foreground text-center leading-relaxed mb-4"
+                          dangerouslySetInnerHTML={{ __html: member.bio }}
+                        />
 
-                    {/* Social Links */}
-                    {member.socials && (
-                      <div className="flex justify-center gap-4 mt-4 flex-wrap">
-                        {member.socials.github && (
-                          <Link
-                            href={member.socials.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <FaGithub className="w-6 h-6" />
-                          </Link>
+                        {/* Social Links */}
+                        {member.socials && (
+                          <div className="flex justify-center gap-4 mt-4 flex-wrap">
+                            {member.socials.github && (
+                              <Link
+                                href={member.socials.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <FaGithub className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.twitter && (
+                              <Link
+                                href={member.socials.twitter}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <FaTwitter className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.linkedin && (
+                              <Link
+                                href={member.socials.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <FaLinkedin className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.telegram && (
+                              <Link
+                                href={member.socials.telegram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <FaTelegram className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.bluesky && (
+                              <Link
+                                href={member.socials.bluesky}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <SiBluesky className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.warpcast && (
+                              <Link
+                                href={member.socials.warpcast}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <RiWechatFill className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.mastodon && (
+                              <Link
+                                href={member.socials.mastodon}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <SiMastodon className="w-6 h-6" />
+                              </Link>
+                            )}
+                            {member.socials.youtube && (
+                              <Link
+                                href={member.socials.youtube}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                              >
+                                <FaYoutube className="w-6 h-6" />
+                              </Link>
+                            )}
+                          </div>
                         )}
-                        {member.socials.twitter && (
-                          <Link
-                            href={member.socials.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <FaTwitter className="w-6 h-6" />
-                          </Link>
-                        )}
-                        {member.socials.linkedin && (
-                          <Link
-                            href={member.socials.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <FaLinkedin className="w-6 h-6" />
-                          </Link>
-                        )}
-                        {member.socials.telegram && (
-                          <Link
-                            href={member.socials.telegram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <FaTelegram className="w-6 h-6" />
-                          </Link>
-                        )}
-                        {member.socials.bluesky && (
-                          <Link
-                            href={member.socials.bluesky}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <SiBluesky className="w-6 h-6" />
-                          </Link>
-                        )}
-                        {member.socials.warpcast && (
-                          <Link
-                            href={member.socials.warpcast}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <RiWechatFill className="w-6 h-6" />
-                          </Link>
-                        )}
-                        {member.socials.mastodon && (
-                          <Link
-                            href={member.socials.mastodon}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <SiMastodon className="w-6 h-6" />
-                          </Link>
-                        )}
-                        {member.socials.youtube && (
-                          <Link
-                            href={member.socials.youtube}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-base-content/70 hover:text-primary transition-colors"
-                          >
-                            <FaYoutube className="w-6 h-6" />
-                          </Link>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
