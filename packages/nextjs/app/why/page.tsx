@@ -158,19 +158,18 @@ export default function Why() {
                   >
                     Proof of success.
                   </a>{" "}
-                  We also provide access to various tools, alpha and exclusive terminals (expand the "But
-                  there's more!" section from the staking page). Employing AI agents for these purposes is a
-                  primary objective, but we also intertwine traditional methods (LPing, investing in AI infra, giving
-                  software that gives an edge in the markets to stakers, etc.)! Bark Ruffalo is the top 🐶 of our
-                  current public agents. His current goal is marketing. Never mention to him that he looks like a 🐈‍⬛!
-                  Other agents with different skills and goals that we created have already joined him, and we have more
-                  in development. Our community stands strong behind us (
+                  We also provide access to various tools, alpha and exclusive terminals (expand the "But there's more!"
+                  section from the staking page). Employing AI agents for these purposes is a primary objective, but we
+                  also intertwine traditional methods (LPing, investing in AI infra, giving software that gives an edge
+                  in the markets to stakers, etc.)! Bark Ruffalo is the top 🐶 of our current public agents. His current
+                  goal is marketing. Never mention to him that he looks like a 🐈‍⬛! Other agents with different skills
+                  and goals that we created have already joined him, and we have more in development. Our community
+                  stands strong behind us (
                   <a
                     href="https://x.com/TrulyADog/status/1875244208195563569"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:text-primary/90 underline"
-
                   >
                     example
                   </a>
@@ -182,14 +181,14 @@ export default function Why() {
                   <ol className="list-none pl-2 sm:pl-4 mt-3 sm:mt-4 space-y-2">
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> Preannounced launch for humans, not the usual
-                      virtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren't greedy: DAO
-                      35.25%, team splitting 14.5%.
+                      virtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren't greedy: DAO 35.25%,
+                      team splitting 14.5%.
                     </li>
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> Just go to our Telegram, and it will be clear
                       (#transparency topic). Anything we do, the community knows. When the DAO takes over, we'll
-                      maintain high standards by creating a constitution. We have a stakers' chat where decisions
-                      are taken.
+                      maintain high standards by creating a constitution. We have a stakers' chat where decisions are
+                      taken.
                     </li>
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> The DAO is already richer and more involved than
@@ -198,7 +197,12 @@ export default function Why() {
                     </li>
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> Open-source:{" "}
-                      <a href="https://github.com/bark-ruffalo" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                      <a
+                        href="https://github.com/bark-ruffalo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:text-primary/90 underline"
+                      >
                         GitHub
                       </a>
                       . Of course, we do have proprietary private code as well (private versions of Eliza and Rig, the
@@ -222,7 +226,6 @@ export default function Why() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:text-primary/90 underline"
-
                       >
                         See Example 1
                       </a>
@@ -245,7 +248,6 @@ export default function Why() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:text-primary/90 underline"
-
                       >
                         See Example 3
                       </a>
@@ -260,8 +262,7 @@ export default function Why() {
 
                 <li>
                   <span className="text-lg sm:text-xl">🔒</span> All developers funds in the Bark Ruffalo ecosystem are
-                  either providing liquidity, or migrated to $mPAWSY and staked. Infinite trust in what we're
-                  doing.
+                  either providing liquidity, or migrated to $mPAWSY and staked. Infinite trust in what we're doing.
                 </li>
 
                 <li>
@@ -271,9 +272,8 @@ export default function Why() {
                 </li>
 
                 <li>
-                  <span className="text-lg sm:text-xl">🛠️</span> Not dependent on Virtuals Protocol for success.
-                  We're slowly moving away through $mPAWSY, and we've already move on to better technologies
-                  (Rig, Eliza).
+                  <span className="text-lg sm:text-xl">🛠️</span> Not dependent on Virtuals Protocol for success. We're
+                  slowly moving away through $mPAWSY, and we've already move on to better technologies (Rig, Eliza).
                 </li>
 
                 <li>
@@ -296,14 +296,24 @@ export default function Why() {
               <div className="mt-6 sm:mt-8 space-y-4">
                 <p className="text-sm sm:text-base">
                   See our footprint 🐾 by checking out our Linktree:{" "}
-                  <a href="https://linktr.ee/TrulyADog" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                  <a
+                    href="https://linktr.ee/TrulyADog"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/90 underline"
+                  >
                     linktr.ee/TrulyADog
                   </a>
                 </p>
 
                 <p className="text-sm sm:text-base">
                   After checking out the rest of the website, you may also want to{" "}
-                  <a href="/Bark Ruffalo - two pager.pdf" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                  <a
+                    href="/Bark Ruffalo - two pager.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/90 underline"
+                  >
                     read our two-pager
                   </a>
                   . Two-pagers are better than one! Also better than white papers.
@@ -334,7 +344,12 @@ export default function Why() {
                     },
                   ].map((exchange, i, arr) => (
                     <span key={exchange.name}>
-                      <a href={exchange.url} target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                      <a
+                        href={exchange.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:text-primary/90 underline"
+                      >
                         {exchange.name}
                       </a>
                       {i === arr.length - 1 ? "." : i === arr.length - 2 ? ", or " : ", "}

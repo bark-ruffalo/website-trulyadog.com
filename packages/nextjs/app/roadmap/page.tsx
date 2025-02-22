@@ -78,9 +78,14 @@ const Roadmap: NextPage = () => {
                       >
                         Twitter post
                       </a>
-                      . It contains our short-term objectives. We don't update these lists with everything that we
-                      do; if you want that level of detail,{" "}
-                      <a href="https://t.me/cadogai" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                      . It contains our short-term objectives. We don't update these lists with everything that we do;
+                      if you want that level of detail,{" "}
+                      <a
+                        href="https://t.me/cadogai"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:text-primary/90 underline"
+                      >
                         join our public Telegram group
                       </a>
                       .
@@ -111,7 +116,6 @@ const Roadmap: NextPage = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-primary hover:text-primary/90 underline"
-
                         >
                           proof
                         </a>
@@ -123,7 +127,12 @@ const Roadmap: NextPage = () => {
                       </li>
                       <li>
                         ✅ Created good marketing audio content (
-                        <a href="https://www.instagram.com/p/DELpw6_s2BO/" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                        <a
+                          href="https://www.instagram.com/p/DELpw6_s2BO/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary/90 underline"
+                        >
                           example 1
                         </a>
                         ,{" "}
@@ -152,7 +161,12 @@ const Roadmap: NextPage = () => {
                       <li>✅ Hired more developers accross multiple programming languages</li>
                       <li>
                         ✅ Created{" "}
-                        <a href="https://bazar.trulyadog.com/" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                        <a
+                          href="https://bazar.trulyadog.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary/90 underline"
+                        >
                           Bark Ruffalo's bazar
                         </a>
                         . Income from there goes to devs.
@@ -167,7 +181,12 @@ const Roadmap: NextPage = () => {
                       </li>
                       <li>
                         ✅ We launched Early Warning System (
-                        <a href="http://twitter.com/BR_EWS" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                        <a
+                          href="http://twitter.com/BR_EWS"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary/90 underline"
+                        >
                           @BR_EWS
                         </a>
                         ). It attempts to find out about high-potential meme coin launches as soon as possible and then
@@ -185,11 +204,21 @@ const Roadmap: NextPage = () => {
                           AI agents for marketing
                         </a>
                         ,{" "}
-                        <a href="https://app.virtuals.io/virtuals/13983" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                        <a
+                          href="https://app.virtuals.io/virtuals/13983"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary/90 underline"
+                        >
                           Proof-of-Chad
                         </a>{" "}
                         and{" "}
-                        <a href="https://app.virtuals.io/virtuals/20286" target="_blank" rel="noopener noreferrer"  className="text-primary hover:text-primary/90 underline">
+                        <a
+                          href="https://app.virtuals.io/virtuals/20286"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary/90 underline"
+                        >
                           Quantego
                         </a>
                         . Read in the staking page what are some of the benefits that stakers get out of it.
@@ -199,9 +228,8 @@ const Roadmap: NextPage = () => {
                       <li>
                         📩{" "}
                         <b>
-                          Some of the following have already been completed, but we simply don't have time to
-                          update this page every day. We advance fast. Other objectives that we work on might not be
-                          added.
+                          Some of the following have already been completed, but we simply don't have time to update
+                          this page every day. We advance fast. Other objectives that we work on might not be added.
                         </b>{" "}
                         ⬇️
                       </li>
@@ -230,13 +258,13 @@ const Roadmap: NextPage = () => {
                         service for a token allocation or ETH/USDC payments to the DAO or stakers
                       </li>
                       <li>
-                        🎯 <i className="text-sm">(in progress)</i> Create data provider for information on stocks, ETFs,
-                        crypto (maybe other AI agents will rent it, thereby gaining us another source of income)
+                        🎯 <i className="text-sm">(in progress)</i> Create data provider for information on stocks,
+                        ETFs, crypto (maybe other AI agents will rent it, thereby gaining us another source of income)
                       </li>
                       <li>
                         🎯 <i className="text-sm">(in progress)</i> Create generalizable data provider that has various
-                        sources/methods for getting information and various destinations, including non-RAG for more data
-                        accuracy
+                        sources/methods for getting information and various destinations, including non-RAG for more
+                        data accuracy
                       </li>
                       <li>
                         🎯 <i className="text-sm">(in progress)</i> Add ability for AI agents to inherit abilities and
