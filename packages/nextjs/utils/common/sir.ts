@@ -18,6 +18,8 @@ const incomes: IncomeRound[] = [
   // Example: on 2024-12-23, you gave 102.93% => 1.0293 as fraction
   // but if you literally mean 50% => 0.50
   { date: "2024-12-23", percentage: 1.0293 },
+  { date: "2025-02-13", percentage: 0.4684 },
+  { date: "2025-02-15", percentage: 0.2539 },
   // Future incomes can be added here
 ];
 

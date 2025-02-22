@@ -30,17 +30,17 @@ const Staking: NextPage = () => {
                       href="https://x.com/TrulyADog/status/1877740433284935863"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                      className="text-primary hover:text-primary/90 underline"
                     >
                       this tweet
                     </a>
-                    . Future distributions may differ in size; investors shouldn&apos;t assume 100%+ yields happening
+                    . Future distributions may differ in size; investors shouldn't assume 100%+ yields happening
                     every time. We plan to do multiple rounds a year; amounts can vary.
                   </p>
 
                   <details className="mt-4">
                     <summary className="cursor-pointer font-semibold text-sm sm:text-base">
-                      But there&apos;s more! These are the current ADDITIONAL rewards, depending on the amount staked:
+                      But there's more! These are the current ADDITIONAL rewards, depending on the amount staked:
                     </summary>
                     <div className="mt-2 space-y-3 sm:space-y-4">
                       <ul className="space-y-2 list-disc pl-4">
@@ -51,7 +51,7 @@ const Staking: NextPage = () => {
                             href="https://x.com/QuantegoAi"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                            className="text-primary hover:text-primary/90 underline"
                           >
                             Quantego
                           </a>
@@ -63,7 +63,7 @@ const Staking: NextPage = () => {
                             href="https://www.proof-of-chad.fun"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                            className="text-primary hover:text-primary/90 underline"
                           >
                             PoC terminal
                           </a>{" "}
@@ -72,7 +72,7 @@ const Staking: NextPage = () => {
                         </li>
                         <li>
                           5M or more: access to the above + more (like priority when getting alpha drops, and even
-                          exclusive alpha that even EWS won&apos;t provide and it won&apos;t be dripped down to the
+                          exclusive alpha that even EWS won't provide and it won't be dripped down to the
                           other tiers)
                         </li>
                       </ul>
@@ -96,12 +96,12 @@ const Staking: NextPage = () => {
                           href="https://guild.xyz/bark-ruffalo/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                          className="text-primary hover:text-primary/90 underline"
                         >
                           https://guild.xyz/bark-ruffalo/
                         </a>
-                        , and if you&apos;ve staked let&apos;s say 6,500, you select the 5,000 staked club. It should
-                        show &quot;You have access&quot;, and you may click on the big blue connect button. You might
+                        , and if you've staked let's say 6,500, you select the 5,000 staked club. It should
+                        show "You have access", and you may click on the big blue connect button. You might
                         need to enable popups.
                       </p>
                       <p>
@@ -111,7 +111,7 @@ const Staking: NextPage = () => {
                       <p>
                         Access for the virtuals.io sniper has been added as of 2024.12.17 for the 500k club. Access to a
                         more advanced sniper has been added for the 5M club as of 2024.12.27. Go ahead and stake! There
-                        are enough reasons to do it on the &quot;Why $PAWSY?&quot; page.
+                        are enough reasons to do it on the "Why $PAWSY?" page.
                       </p>
                       <p>
                         Screenshots with the first version of the sniper and the private repository: <br />
