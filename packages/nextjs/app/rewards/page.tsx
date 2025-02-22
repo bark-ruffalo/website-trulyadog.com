@@ -107,8 +107,9 @@ const Rewards: NextPage = () => {
                     </CardHeader>
                     <CardContent className="text-lg leading-relaxed">
                       <p>
-                        A more complex sniper has been made available to the 5M club. We've removed some liquidity from
-                        the operational funds (<strong>without selling {"$"}PAWSY</strong>, just so that we get {"$"}
+                        A more complex sniper has been made available to the 5M club. We&apos;ve removed some liquidity
+                        from the operational funds (<strong>without selling {"$"}PAWSY</strong>, just so that we get{" "}
+                        {"$"}
                         VIRTUAL) to start that sniper for BR when the market is in bull stages. Coupled with our
                         expertise in detecting legitimate projects, we should have a good entry point and know when to
                         sell. The profit will go to current stakers (always depending on when the snapshot is taken). On
@@ -121,7 +122,7 @@ const Rewards: NextPage = () => {
                         >
                           first income distribution round
                         </a>
-                        , which was worth $30k. For those who held, a few days later it was worth 10x. Here's{" "}
+                        , which was worth $30k. For those who held, a few days later it was worth 10x. Here&apos;s{" "}
                         <a
                           href="https://x.com/motleyjunks/status/1875144894320443756"
                           target="_blank"
@@ -130,7 +131,7 @@ const Rewards: NextPage = () => {
                         >
                           a report from a happy DAO member
                         </a>
-                        . Here's{" "}
+                        . Here&apos;s{" "}
                         <a
                           href="https://x.com/TrulyADog/status/1875244208195563569"
                           target="_blank"
@@ -144,12 +145,12 @@ const Rewards: NextPage = () => {
                         <a href="/collaborate" className="text-primary hover:text-primary/90 underline">
                           Collaborate
                         </a>{" "}
-                        materialize, they'll add more to the next income round. We'll strive for next rounds to be as
-                        good as the first one! Our objective is to make our 500k-club stakers financially independent.
-                        For the others, this should still be a great passive income and capital gain (from $PAWSY price
-                        going to Mars) opportunity. Note that you can also make money by yourself with the tools, the
-                        information and the terminals that we make available;{" "}
-                        <b>expand the "But there's more!" section from the Staking page!</b>
+                        materialize, they&apos;ll add more to the next income round. We&apos;ll strive for next rounds
+                        to be as good as the first one! Our objective is to make our 500k-club stakers financially
+                        independent. For the others, this should still be a great passive income and capital gain (from
+                        $PAWSY price going to Mars) opportunity. Note that you can also make money by yourself with the
+                        tools, the information and the terminals that we make available;{" "}
+                        <b>expand the &quot;But there&apos;s more!&quot; section from the Staking page!</b>
                       </p>
                     </CardContent>
                   </Card>

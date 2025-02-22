@@ -78,8 +78,8 @@ const Roadmap: NextPage = () => {
                       >
                         Twitter post
                       </a>
-                      . It contains our short-term objectives. We don't update these lists with everything that we do;
-                      if you want that level of detail,{" "}
+                      . It contains our short-term objectives. We don&apos;t update these lists with everything that we
+                      do; if you want that level of detail,{" "}
                       <a
                         href="https://t.me/cadogai"
                         target="_blank"
@@ -167,7 +167,7 @@ const Roadmap: NextPage = () => {
                           rel="noopener noreferrer"
                           className="text-primary hover:text-primary/90 underline"
                         >
-                          Bark Ruffalo's bazar
+                          Bark Ruffalo&apos;s bazar
                         </a>
                         . Income from there goes to devs.
                       </li>
@@ -228,8 +228,9 @@ const Roadmap: NextPage = () => {
                       <li>
                         📩{" "}
                         <b>
-                          Some of the following have already been completed, but we simply don't have time to update
-                          this page every day. We advance fast. Other objectives that we work on might not be added.
+                          Some of the following have already been completed, but we simply don&apos;t have time to
+                          update this page every day. We advance fast. Other objectives that we work on might not be
+                          added.
                         </b>{" "}
                         ⬇️
                       </li>
@@ -247,7 +248,7 @@ const Roadmap: NextPage = () => {
                       <li>
                         🎯 <i className="text-sm">(in progress)</i> Expand AI agent capabilities across social platforms
                       </li>
-                      <li>🎯 Optimize AI agents' uptime and resilience to hacks or social media bans</li>
+                      <li>🎯 Optimize AI agents&apos; uptime and resilience to hacks or social media bans</li>
                       <li>
                         🎯 <i className="text-sm">(in progress)</i> Perfect infrastructure and DevOps for AI agent
                         deployment and maintenance
@@ -308,7 +309,7 @@ const Roadmap: NextPage = () => {
                   <div className="relative z-10">
                     <CardTitle className="text-2xl sm:text-3xl font-bold mb-4">Future Plans 🔮</CardTitle>
                     <p className="text-sm sm:text-base mb-4">
-                      We don't want to reveal too much about our future plans. We prefer to under-promise and
+                      We don&apos;t want to reveal too much about our future plans. We prefer to under-promise and
                       over-deliver. But here are some hints:
                     </p>
                     <ul className="space-y-2 text-sm sm:text-base">

@@ -158,13 +158,13 @@ export default function Why() {
                   >
                     Proof of success.
                   </a>{" "}
-                  We also provide access to various tools, alpha and exclusive terminals (expand the "But there's more!"
-                  section from the staking page). Employing AI agents for these purposes is a primary objective, but we
-                  also intertwine traditional methods (LPing, investing in AI infra, giving software that gives an edge
-                  in the markets to stakers, etc.)! Bark Ruffalo is the top 🐶 of our current public agents. His current
-                  goal is marketing. Never mention to him that he looks like a 🐈‍⬛! Other agents with different skills
-                  and goals that we created have already joined him, and we have more in development. Our community
-                  stands strong behind us (
+                  We also provide access to various tools, alpha and exclusive terminals (expand the &quot;But
+                  there&apos;s more!&quot; section from the staking page). Employing AI agents for these purposes is a
+                  primary objective, but we also intertwine traditional methods (LPing, investing in AI infra, giving
+                  software that gives an edge in the markets to stakers, etc.)! Bark Ruffalo is the top 🐶 of our
+                  current public agents. His current goal is marketing. Never mention to him that he looks like a 🐈‍⬛!
+                  Other agents with different skills and goals that we created have already joined him, and we have more
+                  in development. Our community stands strong behind us (
                   <a
                     href="https://x.com/TrulyADog/status/1875244208195563569"
                     target="_blank"
@@ -181,19 +181,19 @@ export default function Why() {
                   <ol className="list-none pl-2 sm:pl-4 mt-3 sm:mt-4 space-y-2">
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> Preannounced launch for humans, not the usual
-                      virtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren't greedy: DAO 35.25%,
-                      team splitting 14.5%.
+                      virtuals.io bot-fest. Fastest graduation in history. Tokenomics that aren&apos;t greedy: DAO
+                      35.25%, team splitting 14.5%.
                     </li>
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> Just go to our Telegram, and it will be clear
-                      (#transparency topic). Anything we do, the community knows. When the DAO takes over, we'll
-                      maintain high standards by creating a constitution. We have a stakers' chat where decisions are
-                      taken.
+                      (#transparency topic). Anything we do, the community knows. When the DAO takes over, we&apos;ll
+                      maintain high standards by creating a constitution. We have a stakers&apos; chat where decisions
+                      are taken.
                     </li>
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> The DAO is already richer and more involved than
                       all these pathetic investment DAOs popping up every day. Some of them have higher market caps even
-                      though they're actually poor and not transparent in how they spend their funds.
+                      though they&apos;re actually poor and not transparent in how they spend their funds.
                     </li>
                     <li>
                       <span className="text-lg sm:text-xl">🟢</span> Open-source:{" "}
@@ -262,7 +262,8 @@ export default function Why() {
 
                 <li>
                   <span className="text-lg sm:text-xl">🔒</span> All developers funds in the Bark Ruffalo ecosystem are
-                  either providing liquidity, or migrated to $mPAWSY and staked. Infinite trust in what we're doing.
+                  either providing liquidity, or migrated to $mPAWSY and staked. Infinite trust in what we&apos;re
+                  doing.
                 </li>
 
                 <li>
@@ -272,8 +273,9 @@ export default function Why() {
                 </li>
 
                 <li>
-                  <span className="text-lg sm:text-xl">🛠️</span> Not dependent on Virtuals Protocol for success. We're
-                  slowly moving away through $mPAWSY, and we've already move on to better technologies (Rig, Eliza).
+                  <span className="text-lg sm:text-xl">🛠️</span> Not dependent on Virtuals Protocol for success.
+                  We&apos;re slowly moving away through $mPAWSY, and we&apos;ve already move on to better technologies
+                  (Rig, Eliza).
                 </li>
 
                 <li>

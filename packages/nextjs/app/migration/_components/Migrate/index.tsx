@@ -155,8 +155,8 @@ export function Migrate() {
                 </div>
 
                 <p className="text-sm sm:text-base">
-                  $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem's profitability, and our future so
-                  that we do not depend on Virtuals Protocol. It's{" "}
+                  $mPAWSY (migrated $PAWSY) exists for versatility, our ecosystem&apos;s profitability, and our future
+                  so that we do not depend on Virtuals Protocol. It&apos;s{" "}
                   <a
                     href="https://aerodrome.finance/swap?from=0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b&to=0x1437819df58ad648e35ed4f6f642d992684b2004&chain0=8453&chain1=8453"
                     target="_blank"
