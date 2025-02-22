@@ -34,8 +34,8 @@ const Staking: NextPage = () => {
                     >
                       this tweet
                     </a>
-                    . Future distributions may differ in size; investors shouldn't assume 100%+ yields happening
-                    every time. We plan to do multiple rounds a year; amounts can vary.
+                    . Future distributions may differ in size; investors shouldn't assume 100%+ yields happening every
+                    time. We plan to do multiple rounds a year; amounts can vary.
                   </p>
 
                   <details className="mt-4">
@@ -72,8 +72,7 @@ const Staking: NextPage = () => {
                         </li>
                         <li>
                           5M or more: access to the above + more (like priority when getting alpha drops, and even
-                          exclusive alpha that even EWS won't provide and it won't be dripped down to the
-                          other tiers)
+                          exclusive alpha that even EWS won't provide and it won't be dripped down to the other tiers)
                         </li>
                       </ul>
                       <p>
@@ -100,9 +99,8 @@ const Staking: NextPage = () => {
                         >
                           https://guild.xyz/bark-ruffalo/
                         </a>
-                        , and if you've staked let's say 6,500, you select the 5,000 staked club. It should
-                        show "You have access", and you may click on the big blue connect button. You might
-                        need to enable popups.
+                        , and if you've staked let's say 6,500, you select the 5,000 staked club. It should show "You
+                        have access", and you may click on the big blue connect button. You might need to enable popups.
                       </p>
                       <p>
                         Someone from the 500k club should connect to both clubs. And someone from the 5 million club
