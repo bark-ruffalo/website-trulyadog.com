@@ -354,9 +354,19 @@ export default function Why() {
                       >
                         {exchange.name}
                       </a>
-                      {i === arr.length - 1 ? "." : i === arr.length - 2 ? ", or " : ", "}
+                      {i === arr.length - 1 ? ". " : i === arr.length - 2 ? ", or " : ", "}
                     </span>
                   ))}
+                  Depending on the price it trades at (PAWSY and mPAWSY are equal in true value) it might make more
+                  sense to buy $mPAWSY{" "}
+                  <a
+                    href="https://app.uniswap.org/swap?chain=base&inputCurrency=NATIVE&outputCurrency=0x29e39327b5b1e500b87fc0fcae3856cd8f96ed2a"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    directly with USDC from the DAO
+                  </a>
+                  .
                 </p>
               </div>
             </div>
