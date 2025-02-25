@@ -167,7 +167,7 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
 - The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. A part of this supply has been migrated irreversibly.
 - The supply of $mPAWSY is ${Math.round(metrics.totalMigrated).toLocaleString()}, most of which is held by the DAO.
 - The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, mPAWSY, MAR.
-- The DAO sniping addresses hold: VIRTUAL, MAR, SOL.
+- The DAO sniping addresses hold: ETH, SOL, VIRTUAL, MAR.
 - There are ${AI_AGENTS.length} public AI agents in the ecosystem:
 ${agentsSection}`;
   // removed ${lpBreakdown}

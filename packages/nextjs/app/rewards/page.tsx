@@ -146,7 +146,7 @@ const Rewards: NextPage = () => {
                           Collaborate
                         </a>{" "}
                         materialize, they&apos;ll add more to the next income round. We&apos;ll strive for next rounds
-                        to be as good as the first one! Our objective is to make our 500k-club stakers financially
+                        to be as good as the first one! Our objective is to make our 5M-club stakers financially
                         independent. For the others, this should still be a great passive income and capital gain (from
                         $PAWSY price going to Mars) opportunity. Note that you can also make money by yourself with the
                         tools, the information and the terminals that we make available;{" "}

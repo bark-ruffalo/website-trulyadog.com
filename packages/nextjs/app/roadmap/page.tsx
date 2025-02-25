@@ -50,7 +50,7 @@ const Roadmap: NextPage = () => {
                       <li>✅ Established staking system with reward tracking token</li>
                       <li>✅ Launched website with staking and migration functionality</li>
                       <li>✅ Open-sourced all contracts and website for crypto community use</li>
-                      <li>✅ Released advanced app.virtuals.io/prototypes sniper tool for 500k+ and 5M clubs</li>
+                      <li>✅ Released advanced app.virtuals.io/prototypes sniper tool for 5M+ and 50M+ clubs</li>
                       <li>✅ Created multi-agentic AI ecosystem with three instances using various technologies</li>
                     </ul>
                     <p className="text-sm sm:text-base mt-4">
@@ -190,7 +190,7 @@ const Roadmap: NextPage = () => {
                           @BR_EWS
                         </a>
                         ). It attempts to find out about high-potential meme coin launches as soon as possible and then
-                        announces it to the public in a staggered manner: 5M/500k/5k clubs (5min gaps), public (+20min).
+                        announces it to the public in a staggered manner: 50M/5M/50k clubs (5min gaps), public (+20min).
                         It can also snipe the token for the DAO, using its hot wallet on Solana.
                       </li>
                       <li>
