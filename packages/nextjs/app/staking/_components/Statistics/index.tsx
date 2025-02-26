@@ -74,7 +74,7 @@ export function Statistics() {
       {
         title: "Total Value Locked",
         value: isLoading ? "Loading..." : tvl,
-        subtext: "$PAWSY",
+        subtext: "$mPAWSY",
         className: tvl === "Error" ? "red" : "green",
       },
       {
