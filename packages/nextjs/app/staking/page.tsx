@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Portfolio } from "./_components/Portfolio";
-import { Purchase } from "./_components/Purchase";
+// import { Portfolio } from "./_components/Portfolio";
+// import { Purchase } from "./_components/Purchase";
 import { Statistics } from "./_components/Statistics";
 import type { NextPage } from "next";
 import { Card, CardContent } from "~~/components/ui/card";
