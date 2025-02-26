@@ -141,7 +141,7 @@ export function PortfolioCard({ item }: { item: CardProps }) {
           </div>
         </div>
       </CardContent>
-      {item.isLocked && (
+      {item.amount > 0n && (
         <CardFooter className="flex justify-between gap-2 w-full pt-2">
           <div className="flex justify-between items-center gap-2">
             <Button
