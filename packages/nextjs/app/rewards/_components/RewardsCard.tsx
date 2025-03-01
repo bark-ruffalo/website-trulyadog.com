@@ -109,17 +109,20 @@ export function RewardsCard() {
             )}
 
             {needsApproval ? (
-              <Button className="w-full" onClick={handleApprove} variant="neutral" disabled={isLoading || !burnAmount}>
-                {isApprovePending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Approve rPAWSY"}
+              <Button className="w-full" onClick={handleApprove} variant="neutral" disabled={true}>
+                {isApprovePending ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  "Approve rPAWSY (Temporarily Disabled)"
+                )}
               </Button>
             ) : (
-              <Button
-                className="w-full"
-                onClick={handleTriggerReward}
-                variant="neutral"
-                disabled={isLoading || !burnAmount}
-              >
-                {isBurnPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Burn rPAWSY for NFT"}
+              <Button className="w-full" onClick={handleTriggerReward} variant="neutral" disabled={true}>
+                {isBurnPending ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  "Burn rPAWSY for NFT (Temporarily Disabled)"
+                )}
               </Button>
             )}
           </div>

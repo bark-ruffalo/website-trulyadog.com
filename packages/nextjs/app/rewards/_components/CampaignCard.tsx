@@ -68,7 +68,8 @@ export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCar
             {campaign.minBurnAmount ? formatEther(campaign.minBurnAmount) : "0"} rPAWSY
           </p>
           <p>
-            <span className="font-semibold">Campaign Ends In:</span> {timeLeft}
+            <span className="font-semibold">Campaign Ends In:</span>
+            {/* {timeLeft} */} <span className="text-red-200">Temporarily Disabled</span>
           </p>
           <p>
             <span className="font-semibold">Maximum Rewards:</span>{" "}
