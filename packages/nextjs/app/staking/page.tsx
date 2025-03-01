@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-// import { Portfolio } from "./_components/Portfolio";
-// import { Purchase } from "./_components/Purchase";
+import { Portfolio } from "./_components/Portfolio";
+import { Purchase } from "./_components/Purchase";
 import { Statistics } from "./_components/Statistics";
 import type { NextPage } from "next";
 import { Card, CardContent } from "~~/components/ui/card";
@@ -69,10 +69,10 @@ const Staking: NextPage = () => {
                         </li>
                       </ul>
                       <p>
-                        One last thing: the more you stake and the longer the lock period, the more DRUGS you receive.
-                        DRUGS is a reward token with no dollar value that helps Bark Ruffalo track entities most
-                        involved financially in its ecosystem. It will receive various utilities, with the first being
-                        that you can burn it to get NFTs from the OG collection.
+                        One last thing: the more you stake and the longer the lock period, the more rPAWSY (Reward
+                        PAWSY) you receive. rPAWSY is a reward token with no dollar value that helps Bark Ruffalo track
+                        entities most involved financially in its ecosystem. It will receive various utilities, with the
+                        first being that you can burn it to get NFTs from the OG collection.
                       </p>
                     </div>
                   </details>
@@ -131,6 +131,7 @@ const Staking: NextPage = () => {
 
           <div className="flex w-full justify-center items-center mt-8 gap-6 sm:gap-12 flex-col">
             <Statistics />
+            {<Purchase />}
             <div className="w-full max-w-3xl p-4 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded-lg shadow-md">
               <div className="flex items-center">
                 <svg
@@ -148,14 +149,20 @@ const Staking: NextPage = () => {
                   />
                 </svg>
                 <p className="font-medium text-center text-yellow-800 dark:text-yellow-200">
-                  The staking contract is being updated. All positions have been unlocked, funds will be sent to
-                  stakers, and then they&apos;ll have the chance to stake again. There will only be an mPAWSY pool in
-                  the beginning.
+                  The staking contract has been updated. You will need to stake again. All previous positions have been
+                  unlocked, and funds have been sent to stakers, including the new reward token named{" "}
+                  <a
+                    href="https://basescan.org/token/0x11898013f8bd7f656f124d8b772fd8ae0b895279"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    rPAWSY which has replaced DRUGS
+                  </a>
+                  .
                 </p>
               </div>
             </div>
-            {/* <Purchase /> */}
-            {/* <Portfolio /> */}
+            {<Portfolio />}
           </div>
         </div>
       </div>

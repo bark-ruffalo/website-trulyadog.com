@@ -7,12 +7,71 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   8453: {
     RewardToken: {
-      address: "0xD2f2386A1c8a4C6D3605c9343B948b12056BD774",
+      address: "0x11898013F8bD7f656f124D8b772Fd8ae0b895279",
       abi: [
         {
-          inputs: [],
+          inputs: [
+            {
+              internalType: "address",
+              name: "defaultAdmin",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "minter",
+              type: "address",
+            },
+          ],
           stateMutability: "nonpayable",
           type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "AccessControlBadConfirmation",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+            {
+              internalType: "bytes32",
+              name: "neededRole",
+              type: "bytes32",
+            },
+          ],
+          name: "AccessControlUnauthorizedAccount",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "ECDSAInvalidSignature",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "length",
+              type: "uint256",
+            },
+          ],
+          name: "ECDSAInvalidSignatureLength",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "s",
+              type: "bytes32",
+            },
+          ],
+          name: "ECDSAInvalidSignatureS",
+          type: "error",
         },
         {
           inputs: [
@@ -103,12 +162,28 @@ const deployedContracts = {
         {
           inputs: [
             {
+              internalType: "uint256",
+              name: "deadline",
+              type: "uint256",
+            },
+          ],
+          name: "ERC2612ExpiredSignature",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "signer",
+              type: "address",
+            },
+            {
               internalType: "address",
               name: "owner",
               type: "address",
             },
           ],
-          name: "OwnableInvalidOwner",
+          name: "ERC2612InvalidSigner",
           type: "error",
         },
         {
@@ -118,8 +193,29 @@ const deployedContracts = {
               name: "account",
               type: "address",
             },
+            {
+              internalType: "uint256",
+              name: "currentNonce",
+              type: "uint256",
+            },
           ],
-          name: "OwnableUnauthorizedAccount",
+          name: "InvalidAccountNonce",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "InvalidShortString",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "str",
+              type: "string",
+            },
+          ],
+          name: "StringTooLong",
           type: "error",
         },
         {
@@ -149,21 +245,8 @@ const deployedContracts = {
         },
         {
           anonymous: false,
-          inputs: [
-            {
-              indexed: true,
-              internalType: "address",
-              name: "previousOwner",
-              type: "address",
-            },
-            {
-              indexed: true,
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "OwnershipTransferred",
+          inputs: [],
+          name: "EIP712DomainChanged",
           type: "event",
         },
         {
@@ -171,18 +254,24 @@ const deployedContracts = {
           inputs: [
             {
               indexed: true,
-              internalType: "address",
-              name: "from",
-              type: "address",
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
             },
             {
-              indexed: false,
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
+              indexed: true,
+              internalType: "bytes32",
+              name: "previousAdminRole",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "newAdminRole",
+              type: "bytes32",
             },
           ],
-          name: "TokensBurned",
+          name: "RoleAdminChanged",
           type: "event",
         },
         {
@@ -190,18 +279,49 @@ const deployedContracts = {
           inputs: [
             {
               indexed: true,
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
               internalType: "address",
-              name: "to",
+              name: "account",
               type: "address",
             },
             {
-              indexed: false,
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
+              indexed: true,
+              internalType: "address",
+              name: "sender",
+              type: "address",
             },
           ],
-          name: "TokensMinted",
+          name: "RoleGranted",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "sender",
+              type: "address",
+            },
+          ],
+          name: "RoleRevoked",
           type: "event",
         },
         {
@@ -228,6 +348,45 @@ const deployedContracts = {
           ],
           name: "Transfer",
           type: "event",
+        },
+        {
+          inputs: [],
+          name: "DEFAULT_ADMIN_ROLE",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "DOMAIN_SEPARATOR",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "MINTER_ROLE",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
         },
         {
           inputs: [
@@ -300,7 +459,7 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "uint256",
-              name: "amount",
+              name: "value",
               type: "uint256",
             },
           ],
@@ -318,7 +477,7 @@ const deployedContracts = {
             },
             {
               internalType: "uint256",
-              name: "amount",
+              name: "value",
               type: "uint256",
             },
           ],
@@ -335,6 +494,110 @@ const deployedContracts = {
               internalType: "uint8",
               name: "",
               type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "eip712Domain",
+          outputs: [
+            {
+              internalType: "bytes1",
+              name: "fields",
+              type: "bytes1",
+            },
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "version",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "chainId",
+              type: "uint256",
+            },
+            {
+              internalType: "address",
+              name: "verifyingContract",
+              type: "address",
+            },
+            {
+              internalType: "bytes32",
+              name: "salt",
+              type: "bytes32",
+            },
+            {
+              internalType: "uint256[]",
+              name: "extensions",
+              type: "uint256[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+          ],
+          name: "getRoleAdmin",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "grantRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "hasRole",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
             },
           ],
           stateMutability: "view",
@@ -372,23 +635,120 @@ const deployedContracts = {
           type: "function",
         },
         {
-          inputs: [],
-          name: "owner",
-          outputs: [
+          inputs: [
             {
               internalType: "address",
-              name: "",
+              name: "owner",
               type: "address",
+            },
+          ],
+          name: "nonces",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
             },
           ],
           stateMutability: "view",
           type: "function",
         },
         {
-          inputs: [],
-          name: "renounceOwnership",
+          inputs: [
+            {
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "deadline",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "v",
+              type: "uint8",
+            },
+            {
+              internalType: "bytes32",
+              name: "r",
+              type: "bytes32",
+            },
+            {
+              internalType: "bytes32",
+              name: "s",
+              type: "bytes32",
+            },
+          ],
+          name: "permit",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "callerConfirmation",
+              type: "address",
+            },
+          ],
+          name: "renounceRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes32",
+              name: "role",
+              type: "bytes32",
+            },
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "revokeRole",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes4",
+              name: "interfaceId",
+              type: "bytes4",
+            },
+          ],
+          name: "supportsInterface",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -467,19 +827,6 @@ const deployedContracts = {
               type: "bool",
             },
           ],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "address",
-              name: "newOwner",
-              type: "address",
-            },
-          ],
-          name: "transferOwnership",
-          outputs: [],
           stateMutability: "nonpayable",
           type: "function",
         },
@@ -1429,7 +1776,7 @@ const deployedContracts = {
       },
     },
     StakingVault: {
-      address: "0xA6FaCD417faf801107bF19F4a24062Ff15AE9C61",
+      address: "0xcdb42f68A2Da339cB6fEEfA08B96359b0Bf2736F",
       abi: [
         {
           inputs: [
@@ -1489,6 +1836,19 @@ const deployedContracts = {
           ],
           name: "SafeERC20FailedOperation",
           type: "error",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          name: "EmergencyUnlock",
+          type: "event",
         },
         {
           anonymous: false,
@@ -1580,8 +1940,45 @@ const deployedContracts = {
               name: "stakingToken",
               type: "address",
             },
+            {
+              indexed: false,
+              internalType: "uint256[]",
+              name: "lockPeriods",
+              type: "uint256[]",
+            },
+            {
+              indexed: false,
+              internalType: "uint256[]",
+              name: "rewardRates",
+              type: "uint256[]",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "tokenMultiplier",
+              type: "uint256",
+            },
           ],
           name: "PoolAdded",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "bool",
+              name: "isStakingPaused",
+              type: "bool",
+            },
+          ],
+          name: "PoolStakingStatusUpdated",
           type: "event",
         },
         {
@@ -1628,6 +2025,25 @@ const deployedContracts = {
             {
               indexed: true,
               internalType: "address",
+              name: "oldRewardToken",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newRewardToken",
+              type: "address",
+            },
+          ],
+          name: "RewardTokenUpdated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
               name: "user",
               type: "address",
             },
@@ -1641,6 +2057,18 @@ const deployedContracts = {
               indexed: false,
               internalType: "uint256",
               name: "amount",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "lockId",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "timestamp",
               type: "uint256",
             },
           ],
@@ -1674,8 +2102,70 @@ const deployedContracts = {
               name: "lockPeriod",
               type: "uint256",
             },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "lockId",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "unlockTime",
+              type: "uint256",
+            },
           ],
           name: "Staked",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "oldMultiplier",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "newMultiplier",
+              type: "uint256",
+            },
+          ],
+          name: "TokenMultiplierUpdated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "token",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "TokensRecovered",
           type: "event",
         },
         {
@@ -1703,6 +2193,12 @@ const deployedContracts = {
               indexed: false,
               internalType: "uint256",
               name: "poolId",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "timestamp",
               type: "uint256",
             },
           ],
@@ -1749,9 +2245,43 @@ const deployedContracts = {
               name: "reward",
               type: "uint256",
             },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "lockId",
+              type: "uint256",
+            },
           ],
           name: "Unstaked",
           type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "contract IERC20",
+              name: "_stakingToken",
+              type: "address",
+            },
+            {
+              internalType: "uint256[]",
+              name: "_lockPeriods",
+              type: "uint256[]",
+            },
+            {
+              internalType: "uint256[]",
+              name: "_rewardRates",
+              type: "uint256[]",
+            },
+            {
+              internalType: "uint256",
+              name: "_tokenMultiplier",
+              type: "uint256",
+            },
+          ],
+          name: "addPool",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
         },
         {
           inputs: [
@@ -1821,6 +2351,24 @@ const deployedContracts = {
         {
           inputs: [],
           name: "emergencyUnlockAll",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "startIndex",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "endIndex",
+              type: "uint256",
+            },
+          ],
+          name: "emergencyUnlockBatch",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -1912,6 +2460,16 @@ const deployedContracts = {
                   internalType: "bool",
                   name: "isActive",
                   type: "bool",
+                },
+                {
+                  internalType: "bool",
+                  name: "isStakingPaused",
+                  type: "bool",
+                },
+                {
+                  internalType: "uint256",
+                  name: "tokenMultiplier",
+                  type: "uint256",
                 },
               ],
               internalType: "struct StakingVault.Pool[]",
@@ -2026,6 +2584,29 @@ const deployedContracts = {
         {
           inputs: [
             {
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "lockId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "additionalAmount",
+              type: "uint256",
+            },
+          ],
+          name: "increaseStake",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
               internalType: "address",
               name: "",
               type: "address",
@@ -2119,6 +2700,16 @@ const deployedContracts = {
               name: "isActive",
               type: "bool",
             },
+            {
+              internalType: "bool",
+              name: "isStakingPaused",
+              type: "bool",
+            },
+            {
+              internalType: "uint256",
+              name: "tokenMultiplier",
+              type: "uint256",
+            },
           ],
           stateMutability: "view",
           type: "function",
@@ -2164,6 +2755,24 @@ const deployedContracts = {
             },
           ],
           stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "isStakingPaused",
+              type: "bool",
+            },
+          ],
+          name: "setPoolStakingStatus",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -2272,6 +2881,24 @@ const deployedContracts = {
             },
           ],
           name: "updateRewardRates",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "poolId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "newMultiplier",
+              type: "uint256",
+            },
+          ],
+          name: "updateTokenMultiplier",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",

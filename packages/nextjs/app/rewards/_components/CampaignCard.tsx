@@ -65,7 +65,7 @@ export function CampaignCard({ campaign /* , userParticipation */ }: CampaignCar
         <div className="relative z-10 space-y-2">
           <p>
             <span className="font-semibold">Minimum Burn Required:</span>{" "}
-            {campaign.minBurnAmount ? formatEther(campaign.minBurnAmount) : "0"} DRUGS
+            {campaign.minBurnAmount ? formatEther(campaign.minBurnAmount) : "0"} rPAWSY
           </p>
           <p>
             <span className="font-semibold">Campaign Ends In:</span> {timeLeft}

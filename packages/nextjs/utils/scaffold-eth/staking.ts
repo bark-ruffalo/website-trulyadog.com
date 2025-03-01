@@ -9,7 +9,6 @@ export const calculateRewardRate = (rewardRate: number, lockPeriodInSeconds: num
 };
 
 export const convertSecondsToDays = (seconds: number) => {
-  const secondsInADay = 24 * 60 * 60; // 86,400 seconds in a day
   return seconds / SECONDS_IN_DAY;
 };
 

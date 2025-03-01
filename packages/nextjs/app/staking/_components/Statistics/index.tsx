@@ -54,9 +54,10 @@ export function Statistics() {
     functionName: "getTotalLockedUsers",
   });
 
-  const { data: PAWSY } = useScaffoldContract({ contractName: "$PAWSY" });
+  // Restore mPAWSY but keep other removed pools commented out
   const { data: mPAWSY } = useScaffoldContract({ contractName: "$mPAWSY" });
-  const { data: PAWSY_VIRTUAL_LP } = useScaffoldContract({ contractName: "$PAWSY/$VIRTUAL LP" });
+  // const { data: PAWSY } = useScaffoldContract({ contractName: "$PAWSY" });
+  // const { data: PAWSY_VIRTUAL_LP } = useScaffoldContract({ contractName: "$PAWSY/$VIRTUAL LP" });
 
   const { data: totalRewards, isLoading: rewardsLoading } = useScaffoldReadContract({
     contractName: "StakingVault",
@@ -166,7 +167,7 @@ export function Statistics() {
         );
 
         const totalTVL = pools.reduce((acc, pool, i) => {
-          const tokenPrice = pool.stakingToken === PAWSY_VIRTUAL_LP?.address ? lpPrice : pawsyPrice;
+          const tokenPrice = pool.stakingToken === mPAWSY?.address ? pawsyPrice : lpPrice;
           const poolTVL = Number(formatEther(stakingAmounts[i])) * tokenPrice;
           return acc + poolTVL / pawsyPrice;
         }, 0);
@@ -179,7 +180,7 @@ export function Statistics() {
     }
 
     calculateTVL();
-  }, [pools, vault, config, lpPrice, PAWSY, mPAWSY, PAWSY_VIRTUAL_LP]);
+  }, [pools, vault, config, lpPrice, mPAWSY]);
 
   return (
     <div className="w-full max-w-[95%] sm:max-w-[75%]">

@@ -15,9 +15,9 @@ const scaffoldConfig = {
   // The networks on which your DApp is live
   targetNetworks: [chains.base],
 
-  poolTokens: ["$PAWSY", "$mPAWSY", "$PAWSY/$VIRTUAL LP"],
+  poolTokens: ["$mPAWSY"],
 
-  pawsyPrice: 0.0022,
+  pawsyPrice: 0.0001,
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect if you only target the local network (default is 4000)

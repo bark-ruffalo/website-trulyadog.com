@@ -58,7 +58,7 @@ export function RewardsCard() {
       }
 
       if (!rewardBalance || parseEther(burnAmount) > rewardBalance) {
-        throw new Error("Insufficient DRUGS balance");
+        throw new Error("Insufficient rPAWSY balance");
       }
 
       if (!allowance || parseEther(burnAmount) > allowance) {
@@ -81,7 +81,7 @@ export function RewardsCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your DRUGS Balance</CardTitle>
+        <CardTitle>Your rPAWSY Balance</CardTitle>
       </CardHeader>
       <CardContent className="relative">
         <div className="absolute inset-0 rounded-lg z-0 bg-primary/5 blur-sm" />
@@ -93,7 +93,7 @@ export function RewardsCard() {
                   maximumFractionDigits: 2,
                 })
               : "0.00"}{" "}
-            DRUGS
+            rPAWSY
           </p>
 
           <div className="space-y-4">
@@ -110,7 +110,7 @@ export function RewardsCard() {
 
             {needsApproval ? (
               <Button className="w-full" onClick={handleApprove} variant="neutral" disabled={isLoading || !burnAmount}>
-                {isApprovePending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Approve DRUGS"}
+                {isApprovePending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Approve rPAWSY"}
               </Button>
             ) : (
               <Button
@@ -119,7 +119,7 @@ export function RewardsCard() {
                 variant="neutral"
                 disabled={isLoading || !burnAmount}
               >
-                {isBurnPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Burn DRUGS for NFT"}
+                {isBurnPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Burn rPAWSY for NFT"}
               </Button>
             )}
           </div>

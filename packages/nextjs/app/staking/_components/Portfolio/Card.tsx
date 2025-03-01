@@ -85,7 +85,7 @@ export function PortfolioCard({ item }: { item: CardProps }) {
           type: "ERC20",
           options: {
             address: rewardTokenContract?.address || "",
-            symbol: "DRUGS",
+            symbol: "rPAWSY",
             decimals: 18,
           },
         },
