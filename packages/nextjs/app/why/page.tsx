@@ -358,15 +358,15 @@ export default function Why() {
                     </span>
                   ))}
                   Depending on the price it trades at (PAWSY and mPAWSY are equal in true value) it might make more
-                  sense to buy $mPAWSY{" "}
+                  sense to{" "}
                   <a
-                    href="https://app.uniswap.org/swap?chain=base&inputCurrency=NATIVE&outputCurrency=0x29e39327b5b1e500b87fc0fcae3856cd8f96ed2a"
+                    href="https://tokentool.bitbond.com/tokensale/0xF544D44081005219217A0bE72ceBEfE3d2C42519?chainId=8453"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    directly with USDC from the DAO
-                  </a>
-                  .
+                    buy $mPAWSY directly with USDC from the DAO
+                  </a>{" "}
+                  (this is on a discount, transferred after sale ends when $100k-worth of tokens sold or 365 days pass).
                 </p>
               </div>
             </div>

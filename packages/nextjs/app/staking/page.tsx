@@ -35,7 +35,17 @@ const Staking: NextPage = () => {
                       this tweet
                     </a>
                     . Future distributions may differ in size; investors shouldn&apos;t assume 100%+ yields happening
-                    every time.
+                    every time. You may{" "}
+                    <a
+                      href="https://tokentool.bitbond.com/tokensale/0xF544D44081005219217A0bE72ceBEfE3d2C42519?chainId=8453"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/90 underline"
+                    >
+                      buy $mPAWSY with USDC directly from the DAO
+                    </a>{" "}
+                    (this is on a discount, transferred after sale ends when $100k-worth of tokens sold or 365 days
+                    pass).
                   </p>
 
                   <details className="mt-4">
