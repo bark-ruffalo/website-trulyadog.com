@@ -24,9 +24,15 @@ export const AI_AGENTS = [
     goal: "promote BR ecosystem, help with tech support for the sniper in the private groups",
   },
   {
-    name: "Shill",
+    name: "Human-like shill",
     handle: "@laur_science",
-    ipEnv: "SHILL_IP",
+    ipEnv: "LAUR_IP",
+    goal: "shill and raid for the BR ecosystem",
+  },
+  {
+    name: "AI-like shill",
+    handle: "@QuantegoAi",
+    ipEnv: "QUANTEGO_IP",
     goal: "shill and raid for the BR ecosystem",
   },
   {
