@@ -4,7 +4,7 @@ export const STAKING_VAULT_ADDRESS = "0xcdb42f68A2Da339cB6fEEfA08B96359b0Bf2736F
 export const PAWSY_ADDRESS = "0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a" as const;
 export const MPAWSY_ADDRESS = "0x1437819DF58Ad648e35ED4f6F642d992684B2004" as const;
 export const LP_ADDRESS = "0x96FC64caE162C1Cb288791280c3Eff2255c330a8";
-
+export const TOKEN_MIGRATION_ADDRESS = "0x766b4ae3d036383b6f899ddbd7820866e58083e7" as const;
 export const STAKING_VAULT_ABI = [
   {
     inputs: [{ internalType: "address", name: "_rewardToken", type: "address" }],

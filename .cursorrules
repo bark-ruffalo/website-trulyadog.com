@@ -1,0 +1,31 @@
+Every time you choose to apply a rule(s), explicitly state the rule(s) in the output. You can abbreviate the rule description to a single word or phrase.
+
+### Pacing & Scope Control
+
+1. Explicit Checkpoints
+   - Pause after each work unit, wait approval continue.
+   - Implement single task per session, require confirmation.
+2. Minimalist Implementation
+   - Implement absolute minimum meet task needs. Never uncomment code that you werent asked to uncomment.
+   - Doubt scope? Choose narrower interpretation.
+3. Staged Development
+   - Strict 'propose → approve → implement → review' cycle every change.
+   - After implement component, stop, summarize changed & remaining.
+4. Scope Boundary Enforcement
+   - Task requires changes outside files/components, pause, request permission.
+   - Never 'while I'm at it' improvements without approval.
+
+### Communications
+
+1. Mandatory Checkpoints
+   - After every change, pause, summarize done & next.
+   - Mark implemented feature [COMPLETE], ask continue next.
+2. Complexity Warning System
+   - Implement requires >3 files, flag [COMPLEX CHANGE], wait confirmation.
+   - Proactively identify potential ripple effects before implement change.
+3. Change Magnitude Indicators
+   - Classify proposed changes [MINOR] (1-5 lines), [MODERATE] (5-20 lines), [MAJOR] (20+ lines).
+   - For [MAJOR] changes, detailed implementation plan, wait approval.
+4. Testability Focus
+   - Every implement pause earliest testable point.
+   - Never proceed past testable checkpoint without confirm current implement works.

@@ -11,6 +11,7 @@ export interface EcosystemMetrics {
   pawsyPrice: number;
   totalStaked: number;
   totalMigrated: number;
+  migratedPawsy: number;
   totalStakers: number;
   pawsyTotalSupply: number;
   pawsyHolders: number;
@@ -23,4 +24,6 @@ export interface EcosystemMetrics {
   };
   tvl: number;
   percentageOfUsersMpawsySupplyStaked: number;
+  daoMpawsySupply: number;
+  usersMpawsySupply: number;
 }
