@@ -176,6 +176,15 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
     const barkRuffaloSupply = tradingSupply + Number(formatUnits(mPawsyTotalSupply, 18));
     const barkRuffaloMarketCap = barkRuffaloSupply * pawsyPrice;
 
+    // Pre-calculate percentages
+    const migratedPawsyPercentage = (migratedPawsy / pawsyTotalSupplyFormatted) * 100;
+    const pawsyInBurnAddressPercentage = (pawsyInBurnAddressFormatted / pawsyTotalSupplyFormatted) * 100;
+    const pawsyInLostAddressPercentage = (pawsyInLostAddressFormatted / pawsyTotalSupplyFormatted) * 100;
+    const pawsyInLpAddressPercentage = (pawsyInLpAddressFormatted / pawsyTotalSupplyFormatted) * 100;
+
+    // Create agent status map for quick lookup
+    const agentStatusMap = Object.fromEntries(agentStatuses.map(status => [status.name, status.status]));
+
     return {
       timestamp: new Date().toISOString(),
       btcPrice: btcPrice ?? DEFAULT_CACHE_VALUES.bitcoin.value,
@@ -202,6 +211,13 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       tradingSupply,
       barkRuffaloSupply,
       barkRuffaloMarketCap,
+      // Add pre-calculated percentages
+      migratedPawsyPercentage,
+      pawsyInBurnAddressPercentage,
+      pawsyInLostAddressPercentage,
+      pawsyInLpAddressPercentage,
+      // Add agent status map
+      agentStatusMap,
     };
   });
 }
@@ -227,7 +243,8 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
   };
 
   const agentsSection = AI_AGENTS.map(agent => {
-    const status = metrics.agentStatuses.find(s => s.name === agent.name)?.status || "offline";
+    // Use the pre-calculated agent status map instead of find operation
+    const status = metrics.agentStatusMap?.[agent.name] || "offline";
     const xHandle = "handle" in agent ? `${agent.handle} on X` : null;
     const telegramHandle = "telegramHandle" in agent ? `${agent.telegramHandle} on Telegram` : null;
     const handles = [xHandle, telegramHandle].filter(Boolean).join(", ");
@@ -240,10 +257,10 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
   ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${(metrics.pawsyPrice * 1_000_000).toFixed(2)} per 1M tokens.
 - On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 11.1 billion $mPAWSY, which will be used mostly for LPing, operational costs, and community rewards. The users own slightly more.
 - The total supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. Out of this:
-   * ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens have been migrated irreversibly (${formatPercentage((metrics.migratedPawsy / metrics.pawsyTotalSupply) * 100)}%);
-   * ${Math.round(metrics.pawsyInBurnAddress).toLocaleString()} tokens are in a burn address (${formatPercentage((metrics.pawsyInBurnAddress / metrics.pawsyTotalSupply) * 100)}%);
-   * ${Math.round(metrics.pawsyInLostAddress).toLocaleString()} tokens are in an address with a lost private key (${formatPercentage((metrics.pawsyInLostAddress / metrics.pawsyTotalSupply) * 100)}%);
-   * ${Math.round(metrics.pawsyInLpAddress).toLocaleString()} tokens are in locked PAWSY/VIRTUAL LP (${formatPercentage((metrics.pawsyInLpAddress / metrics.pawsyTotalSupply) * 100)}%).
+   * ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens have been migrated irreversibly (${formatPercentage(metrics.migratedPawsyPercentage)}%);
+   * ${Math.round(metrics.pawsyInBurnAddress).toLocaleString()} tokens are in a burn address (${formatPercentage(metrics.pawsyInBurnAddressPercentage)}%);
+   * ${Math.round(metrics.pawsyInLostAddress).toLocaleString()} tokens are in an address with a lost private key (${formatPercentage(metrics.pawsyInLostAddressPercentage)}%);
+   * ${Math.round(metrics.pawsyInLpAddress).toLocaleString()} tokens are in locked PAWSY/VIRTUAL LP (${formatPercentage(metrics.pawsyInLpAddressPercentage)}%).
    This means that the trading supply of $PAWSY is ${Math.round(metrics.tradingSupply).toLocaleString()}, with a market cap of $${Math.round(metrics.pawsyMarketCap).toLocaleString()}.
 - The total market cap of the Bark Ruffalo ecosystem (trading $PAWSY + $mPAWSY) is $${Math.round(metrics.barkRuffaloMarketCap).toLocaleString()} (${Math.round(metrics.barkRuffaloSupply).toLocaleString()} tokens), but that is considering the $PAWSY value as equal to $mPAWSY, even though for the former the DAO is not yet offering liquidity.
 - Ignoring the potential value of $mPAWSY, the DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, MAR.

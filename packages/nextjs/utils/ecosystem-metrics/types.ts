@@ -32,4 +32,9 @@ export interface EcosystemMetrics {
   tradingSupply: number;
   barkRuffaloSupply: number;
   barkRuffaloMarketCap: number;
+  migratedPawsyPercentage: number;
+  pawsyInBurnAddressPercentage: number;
+  pawsyInLostAddressPercentage: number;
+  pawsyInLpAddressPercentage: number;
+  agentStatusMap?: Record<string, string>;
 }
