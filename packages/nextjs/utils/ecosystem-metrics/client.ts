@@ -23,9 +23,26 @@ export async function loadFormattedMetrics(): Promise<string> {
       QTG: "https://app.virtuals.io/virtuals/20286",
     };
 
+    // Add links for specific phrases
+    const phraseLinks: { [key: string]: string } = {
+      "have been migrated irreversibly":
+        "https://basescan.org/token/0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a?a=0x000000000000000000000000000000000000dead",
+      "are in a burn address":
+        "https://basescan.org/token/0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a?a=0x000000000000000000000000000000000000dEaD",
+      "are in an address with a lost private key":
+        "https://basescan.org/token/0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a?a=0xb3465F07A33E282A0f2f378F534D3f5241aD1940",
+      "are in locked PAWSY/VIRTUAL LP":
+        "https://basescan.org/token/0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a?a=0x96FC64caE162C1Cb288791280c3Eff2255c330a8",
+    };
+
     // Replace token names with links (only first occurrence)
     Object.entries(tokenLinks).forEach(([token, link]) => {
       text = text.replace(new RegExp(token), `<a href="${link}" target="_blank">${token}</a>`);
+    });
+
+    // Replace phrases with links
+    Object.entries(phraseLinks).forEach(([phrase, link]) => {
+      text = text.replace(phrase, `<a href="${link}" target="_blank">${phrase}</a>`);
     });
 
     return text;

@@ -26,4 +26,8 @@ export interface EcosystemMetrics {
   percentageOfUsersMpawsySupplyStaked: number;
   daoMpawsySupply: number;
   usersMpawsySupply: number;
+  pawsyInBurnAddress: number;
+  pawsyInLostAddress: number;
+  pawsyInLpAddress: number;
+  tradingSupply: number;
 }

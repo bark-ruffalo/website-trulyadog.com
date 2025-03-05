@@ -86,10 +86,49 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
           }),
         BigInt(0),
       ),
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: PAWSY_ADDRESS,
+            abi: ERC20_ABI,
+            functionName: "balanceOf",
+            args: ["0x000000000000000000000000000000000000dEaD"],
+          }),
+        BigInt(0),
+      ),
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: PAWSY_ADDRESS,
+            abi: ERC20_ABI,
+            functionName: "balanceOf",
+            args: ["0xb3465F07A33E282A0f2f378F534D3f5241aD1940"],
+          }),
+        BigInt(0),
+      ),
+      retryContractCall(
+        () =>
+          publicClient.readContract({
+            address: PAWSY_ADDRESS,
+            abi: ERC20_ABI,
+            functionName: "balanceOf",
+            args: [LP_ADDRESS],
+          }),
+        BigInt(0),
+      ),
     ]);
 
-    const [totalStakers, mPawsyTotalSupply, pawsyTotalSupply, pawsyHolders, pools, pawsyInMigrationContract] =
-      contractData;
+    const [
+      totalStakers,
+      mPawsyTotalSupply,
+      pawsyTotalSupply,
+      pawsyHolders,
+      pools,
+      pawsyInMigrationContract,
+      pawsyInBurnAddress,
+      pawsyInLostAddress,
+      pawsyInLpAddress,
+    ] = contractData;
 
     const tvlData = await retryContractCall(
       async () =>
@@ -128,6 +167,12 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
     const agentStatuses = await checkAllAgentsStatus();
 
     const migratedPawsy = Number(formatUnits(pawsyInMigrationContract, 18));
+    const pawsyInBurnAddressFormatted = Number(formatUnits(pawsyInBurnAddress, 18));
+    const pawsyInLostAddressFormatted = Number(formatUnits(pawsyInLostAddress, 18));
+    const pawsyInLpAddressFormatted = Number(formatUnits(pawsyInLpAddress, 18));
+    const pawsyTotalSupplyFormatted = Number(formatUnits(pawsyTotalSupply, 18));
+    const tradingSupply =
+      pawsyTotalSupplyFormatted - migratedPawsy - pawsyInBurnAddressFormatted - pawsyInLostAddressFormatted;
 
     return {
       timestamp: new Date().toISOString(),
@@ -139,7 +184,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       totalMigrated: Number(formatUnits(mPawsyTotalSupply, 18)),
       migratedPawsy: migratedPawsy,
       totalStakers: totalStakers ? Number(totalStakers.toString()) : 0,
-      pawsyTotalSupply: Number(formatUnits(pawsyTotalSupply, 18)),
+      pawsyTotalSupply: pawsyTotalSupplyFormatted,
       pawsyHolders,
       pawsyMarketCap,
       realMarketCap,
@@ -149,6 +194,10 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       percentageOfUsersMpawsySupplyStaked,
       daoMpawsySupply,
       usersMpawsySupply,
+      pawsyInBurnAddress: pawsyInBurnAddressFormatted,
+      pawsyInLostAddress: pawsyInLostAddressFormatted,
+      pawsyInLpAddress: pawsyInLpAddressFormatted,
+      tradingSupply,
     };
   });
 }
@@ -186,7 +235,12 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
     metrics.ethPrice,
   ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${(metrics.pawsyPrice * 1_000_000).toFixed(2)} per 1M tokens.
 - On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 11.1 billion $mPAWSY, which will be used mostly for LPing, operational costs and community rewards. The users own slightly more.
-- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders, most of which have been airdropped small amounts. A part of this supply has been migrated irreversibly: ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens (${formatPercentage((metrics.migratedPawsy / metrics.pawsyTotalSupply) * 100)}% of the supply).
+- The total supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. Out of this:
+   * ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens have been migrated irreversibly (${formatPercentage((metrics.migratedPawsy / metrics.pawsyTotalSupply) * 100)}%);
+   * ${Math.round(metrics.pawsyInBurnAddress).toLocaleString()} tokens are in a burn address (${formatPercentage((metrics.pawsyInBurnAddress / metrics.pawsyTotalSupply) * 100)}%);
+   * ${Math.round(metrics.pawsyInLostAddress).toLocaleString()} tokens are in an address with a lost private key (${formatPercentage((metrics.pawsyInLostAddress / metrics.pawsyTotalSupply) * 100)}%);
+   * ${Math.round(metrics.pawsyInLpAddress).toLocaleString()} tokens are in locked PAWSY/VIRTUAL LP (${formatPercentage((metrics.pawsyInLpAddress / metrics.pawsyTotalSupply) * 100)}%).
+   This means that the trading supply of $PAWSY is ${Math.round(metrics.tradingSupply).toLocaleString()}, with a market cap of $${metrics.pawsyMarketCap.toLocaleString()}.
 - The total market cap of the Bark Ruffalo ecosystem ($PAWSY + $mPAWSY) is $${(
     metrics.realMarketCap / 1_000_000
   ).toFixed(2)} million, which is approximated as 23 times the market cap of $PAWSY.
