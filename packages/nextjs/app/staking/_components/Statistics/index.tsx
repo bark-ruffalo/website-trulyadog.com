@@ -6,6 +6,7 @@ import { readContract } from "wagmi/actions";
 import { useScaffoldContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { withCache } from "~~/utils/cache";
 import { getUserPayout } from "~~/utils/common/sir";
+import { fetchEcosystemMetrics } from "~~/utils/ecosystem-metrics/metrics";
 import { fetchPawsyPriceFromUniswap } from "~~/utils/scaffold-eth";
 import { fetchVirtualPriceFromUniswap } from "~~/utils/scaffold-eth/fetchVirtualPriceFromUniswap";
 
@@ -21,6 +22,7 @@ export function Statistics() {
   const [tvl, setTvl] = useState("-");
   const [lpPrice, setLpPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [percentageStaked, setPercentageStaked] = useState("-");
 
   const { data: lpData } = useReadContracts({
     contracts: [
@@ -70,6 +72,21 @@ export function Statistics() {
     functionName: "symbol",
   });
 
+  useEffect(() => {
+    async function fetchPercentageStaked() {
+      try {
+        const metrics = await fetchEcosystemMetrics();
+        const percentage = metrics.percentageOfUsersMpawsySupplyStaked.toFixed(2).replace(/\.?0+$/, "");
+        setPercentageStaked(percentage);
+      } catch (error) {
+        console.error("Error fetching percentage staked:", error);
+        setPercentageStaked("Error");
+      }
+    }
+
+    fetchPercentageStaked();
+  }, []);
+
   const cards = useMemo(
     () => [
       {
@@ -79,14 +96,10 @@ export function Statistics() {
         className: tvl === "Error" ? "red" : "green",
       },
       {
-        title: "$mPAWSY Supply",
-        value: isLoading
-          ? "Loading..."
-          : totalSupply
-            ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US")
-            : "0",
-        subtext: "$mPAWSY",
-        className: "green",
+        title: "% Staked",
+        value: isLoading || percentageStaked === "-" ? "Loading..." : `${percentageStaked}%`,
+        subtext: "of non-DAO $mPAWSY",
+        className: percentageStaked === "Error" ? "red" : "green",
       },
       {
         title: "Stakers",
@@ -109,7 +122,7 @@ export function Statistics() {
         className: "green",
       },
     ],
-    [tvl, totalSupply, totalStakers, isLoading, totalRewards, rewardsLoading, rewardTokenSymbol],
+    [tvl, percentageStaked, totalStakers, isLoading, totalRewards, rewardsLoading, rewardTokenSymbol],
   );
 
   useEffect(() => {
