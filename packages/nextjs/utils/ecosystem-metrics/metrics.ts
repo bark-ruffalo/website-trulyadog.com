@@ -160,11 +160,11 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(
     metrics.ethPrice,
   ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${metrics.pawsyPrice.toFixed(4)}.
-- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} staked. Total number of stakers is ${metrics.totalStakers}.
+- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked. Total number of stakers is ${metrics.totalStakers}.
 - The total market cap of the Bark Ruffalo ecosystem ($PAWSY + $mPAWSY) is $${(
     metrics.realMarketCap / 1_000_000
   ).toFixed(2)} million, which is approximated as 23 times the market cap of $PAWSY.
-- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. A part of this supply has been migrated irreversibly.
+- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. A part of this supply has been migrated irreversibly: ${metrics.totalMigrated.toLocaleString()}.
 - The supply of $mPAWSY is ${Math.round(metrics.totalMigrated).toLocaleString()}, most of which is held by the DAO.
 - The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, mPAWSY, MAR.
 - The DAO sniping addresses hold: ETH, SOL, VIRTUAL, MAR.

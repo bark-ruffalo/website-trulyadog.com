@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { NextPage } from "next";
+import { loadFormattedMetrics } from "~~/utils/ecosystem-metrics/client";
 
 const Home: NextPage = () => {
   const [showMetrics, setShowMetrics] = useState(false);
@@ -10,32 +11,16 @@ const Home: NextPage = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const loadMetrics = async () => {
+    const fetchMetrics = async () => {
       try {
-        const response = await fetch("/api/transparency");
-        let text = await response.text();
-        // add links for X (Twitter) accounts first
-        text = text.replace(/@(\w+)(?!_bot)/g, '<a href="https://x.com/$1" target="_blank">@$1</a>');
-        // then add links for telegram agents
-        text = text.replace(/@(\w+_bot)/g, '<a href="https://t.me/$1" target="_blank">@$1</a>');
-        // Add links for specific tokens
-        const tokenLinks: { [key: string]: string } = {
-          POC: "https://app.virtuals.io/virtuals/13983",
-          MAR: "https://app.virtuals.io/prototypes/0x5066d3df51FE1546b110918bf9f578baB92979c2",
-          QTG: "https://app.virtuals.io/virtuals/20286",
-        };
-
-        // Replace token names with links (only first occurrence)
-        Object.entries(tokenLinks).forEach(([token, link]) => {
-          text = text.replace(new RegExp(token), `<a href="${link}" target="_blank">${token}</a>`);
-        });
-        setMetrics(text);
+        const formattedMetrics = await loadFormattedMetrics();
+        setMetrics(formattedMetrics);
       } catch (error) {
         console.error("Error loading metrics:", error);
       }
     };
 
-    loadMetrics();
+    fetchMetrics();
   }, []);
 
   const handleVideoEnded = () => {

@@ -9,6 +9,7 @@ import {
   Bars3Icon,
   BugAntIcon,
   CakeIcon,
+  ChartBarIcon,
   CurrencyDollarIcon,
   GiftIcon,
   MapIcon,
@@ -30,6 +31,11 @@ export const menuLinks: HeaderMenuLink[] = [
   {
     label: "Home",
     href: "/",
+  },
+  {
+    label: "Metrics",
+    href: "/metrics",
+    icon: <ChartBarIcon className="h-4 w-4" />,
   },
   {
     label: "$mPAWSY",
