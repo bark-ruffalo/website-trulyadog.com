@@ -9,10 +9,12 @@ import { Card, CardContent } from "~~/components/ui/card";
 import { Input } from "~~/components/ui/input";
 import { useDeployedContractInfo, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { notification } from "~~/utils/scaffold-eth";
+import { fetchEcosystemMetrics } from "~~/utils/ecosystem-metrics";
 
 export function Migrate() {
   const { address } = useAccount();
   const [pawsyAmount, setPawsyAmount] = useState<string>("");
+  const [migratedPercentage, setMigratedPercentage] = useState<string | null>(null);
 
   const { data: tokenMigrationContract } = useDeployedContractInfo("TokenMigration");
   const { data: pawsyContract } = useDeployedContractInfo("$PAWSY");
@@ -104,6 +106,22 @@ export function Migrate() {
     }
   }, [pawsyBalance]);
 
+  useEffect(() => {
+    const fetchMigratedPercentage = async () => {
+      try {
+        const metrics = await fetchEcosystemMetrics();
+        if (metrics && metrics.migratedPawsyOfEligiblePercentage !== undefined) {
+          const formattedPercentage = metrics.migratedPawsyOfEligiblePercentage.toFixed(2).replace(/\.?0+$/, "");
+          setMigratedPercentage(formattedPercentage);
+        }
+      } catch (error) {
+        console.error("Error fetching migrated percentage:", error);
+      }
+    };
+
+    fetchMigratedPercentage();
+  }, []);
+
   const [inputError, setInputError] = useState<string>("");
 
   function handlePawsyAmountChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -150,7 +168,7 @@ export function Migrate() {
                 <div className="text-center">
                   <span className="text-xl sm:text-2xl font-semibold text-muted-foreground">
                     Currently migrated:{" "}
-                    {totalSupply ? Math.round(Number(formatEther(totalSupply))).toLocaleString("en-US") : "Loading..."}
+                    {migratedPercentage ? `${migratedPercentage}% of eligible $PAWSY` : "..."}
                   </span>
                 </div>
 

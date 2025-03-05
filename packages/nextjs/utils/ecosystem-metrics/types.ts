@@ -36,5 +36,6 @@ export interface EcosystemMetrics {
   pawsyInBurnAddressPercentage: number;
   pawsyInLostAddressPercentage: number;
   pawsyInLpAddressPercentage: number;
+  migratedPawsyOfEligiblePercentage: number;
   agentStatusMap?: Record<string, string>;
 }
