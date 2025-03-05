@@ -173,6 +173,8 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
     const pawsyTotalSupplyFormatted = Number(formatUnits(pawsyTotalSupply, 18));
     const tradingSupply =
       pawsyTotalSupplyFormatted - migratedPawsy - pawsyInBurnAddressFormatted - pawsyInLostAddressFormatted;
+    const barkRuffaloSupply = tradingSupply + Number(formatUnits(mPawsyTotalSupply, 18));
+    const barkRuffaloMarketCap = barkRuffaloSupply * pawsyPrice;
 
     return {
       timestamp: new Date().toISOString(),
@@ -198,6 +200,8 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       pawsyInLostAddress: pawsyInLostAddressFormatted,
       pawsyInLpAddress: pawsyInLpAddressFormatted,
       tradingSupply,
+      barkRuffaloSupply,
+      barkRuffaloMarketCap,
     };
   });
 }
@@ -241,12 +245,9 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
    * ${Math.round(metrics.pawsyInLostAddress).toLocaleString()} tokens are in an address with a lost private key (${formatPercentage((metrics.pawsyInLostAddress / metrics.pawsyTotalSupply) * 100)}%);
    * ${Math.round(metrics.pawsyInLpAddress).toLocaleString()} tokens are in locked PAWSY/VIRTUAL LP (${formatPercentage((metrics.pawsyInLpAddress / metrics.pawsyTotalSupply) * 100)}%).
    This means that the trading supply of $PAWSY is ${Math.round(metrics.tradingSupply).toLocaleString()}, with a market cap of $${metrics.pawsyMarketCap.toLocaleString()}.
-- The total market cap of the Bark Ruffalo ecosystem ($PAWSY + $mPAWSY) is $${(
-    metrics.realMarketCap / 1_000_000
-  ).toFixed(2)} million, which is approximated as 23 times the market cap of $PAWSY.
-- The supply of $mPAWSY is ${Math.round(metrics.totalMigrated).toLocaleString()}, most of which is held by the DAO.
-- The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, mPAWSY, MAR.
-- The DAO sniping addresses hold: ETH, SOL, VIRTUAL, MAR.
+- The total market cap of the Bark Ruffalo ecosystem (trading $PAWSY + $mPAWSY) is $${metrics.barkRuffaloMarketCap.toLocaleString()} (${Math.round(metrics.barkRuffaloSupply).toLocaleString()} tokens), but that is considering the $PAWSY value as equal to $mPAWSY, even though for the former the DAO is not yet offering liquidity.
+- Ignoring the potential value of $mPAWSY, the DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, MAR.
+- The DAO sniping addresses (#1 and #2) hold: ETH, SOL, VIRTUAL, MAR, mPAWSY.
 - There are ${AI_AGENTS.length} public AI agents in the ecosystem:
 ${agentsSection}`;
   // removed ${lpBreakdown}

@@ -33,6 +33,9 @@ export async function loadFormattedMetrics(): Promise<string> {
         "https://basescan.org/token/0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a?a=0xb3465F07A33E282A0f2f378F534D3f5241aD1940",
       "are in locked PAWSY/VIRTUAL LP":
         "https://basescan.org/token/0x29e39327b5B1E500B87FC0fcAe3856CD8F96eD2a?a=0x96FC64caE162C1Cb288791280c3Eff2255c330a8",
+      "DAO main address": "https://basescan.org/address/0xc638fb83d2bad5dd73d4c7c7dec0445d46a0716f",
+      "#1": "https://basescan.org/address/0xbdc2be9628daef54f8b802357a86b550fe164acf",
+      "#2": "https://solscan.io/account/DL2q1uWW3oNjE6gDSt7L1yWmrjpH4pXdCPrqC41dcTDF",
     };
 
     // Replace token names with links (only first occurrence)

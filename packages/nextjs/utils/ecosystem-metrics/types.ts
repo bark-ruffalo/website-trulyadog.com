@@ -30,4 +30,6 @@ export interface EcosystemMetrics {
   pawsyInLostAddress: number;
   pawsyInLpAddress: number;
   tradingSupply: number;
+  barkRuffaloSupply: number;
+  barkRuffaloMarketCap: number;
 }
