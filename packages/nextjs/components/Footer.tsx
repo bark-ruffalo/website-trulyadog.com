@@ -22,8 +22,8 @@ export const Footer = () => {
             {pawsyPrice > 0 && (
               <div>
                 <div className="inline-flex items-center px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-lg cursor-default">
-                  PAWSY Price: <CurrencyDollarIcon className="h-4 w-4 ml-1" />
-                  <span className="ml-1">{pawsyPrice.toFixed(4)}</span>
+                  $PAWSY:
+                  <span className="ml-1">${(pawsyPrice * 1_000_000).toFixed(2)} / 1M tokens</span>
                 </div>
               </div>
             )}

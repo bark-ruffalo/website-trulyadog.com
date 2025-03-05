@@ -184,9 +184,9 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
   return `Bark Ruffalo ecosystem metrics for ${formattedDate}, ${formattedTime} ${timeZone}:
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(
     metrics.ethPrice,
-  ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${metrics.pawsyPrice.toFixed(4)}.
-- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 1.11 billion $mPAWSY, which will be used mostly for LPing and community rewards. The users own ${Math.round(metrics.usersMpawsySupply).toLocaleString()} $mPAWSY.
-- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders, most of which have been airdropped small amounts. A part of this supply has been migrated irreversibly: ${Math.round(metrics.migratedPawsy).toLocaleString()} $PAWSY (${formatPercentage((metrics.migratedPawsy / metrics.pawsyTotalSupply) * 100)}% of total supply).
+  ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${(metrics.pawsyPrice * 1_000_000).toFixed(2)} per 1M tokens.
+- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 11.1 billion $mPAWSY, which will be used mostly for LPing, operational costs and community rewards. The users own slightly more.
+- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders, most of which have been airdropped small amounts. A part of this supply has been migrated irreversibly: ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens (${formatPercentage((metrics.migratedPawsy / metrics.pawsyTotalSupply) * 100)}% of the supply).
 - The total market cap of the Bark Ruffalo ecosystem ($PAWSY + $mPAWSY) is $${(
     metrics.realMarketCap / 1_000_000
   ).toFixed(2)} million, which is approximated as 23 times the market cap of $PAWSY.
