@@ -238,14 +238,14 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(
     metrics.ethPrice,
   ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${(metrics.pawsyPrice * 1_000_000).toFixed(2)} per 1M tokens.
-- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 11.1 billion $mPAWSY, which will be used mostly for LPing, operational costs and community rewards. The users own slightly more.
+- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 11.1 billion $mPAWSY, which will be used mostly for LPing, operational costs, and community rewards. The users own slightly more.
 - The total supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. Out of this:
    * ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens have been migrated irreversibly (${formatPercentage((metrics.migratedPawsy / metrics.pawsyTotalSupply) * 100)}%);
    * ${Math.round(metrics.pawsyInBurnAddress).toLocaleString()} tokens are in a burn address (${formatPercentage((metrics.pawsyInBurnAddress / metrics.pawsyTotalSupply) * 100)}%);
    * ${Math.round(metrics.pawsyInLostAddress).toLocaleString()} tokens are in an address with a lost private key (${formatPercentage((metrics.pawsyInLostAddress / metrics.pawsyTotalSupply) * 100)}%);
    * ${Math.round(metrics.pawsyInLpAddress).toLocaleString()} tokens are in locked PAWSY/VIRTUAL LP (${formatPercentage((metrics.pawsyInLpAddress / metrics.pawsyTotalSupply) * 100)}%).
-   This means that the trading supply of $PAWSY is ${Math.round(metrics.tradingSupply).toLocaleString()}, with a market cap of $${metrics.pawsyMarketCap.toLocaleString()}.
-- The total market cap of the Bark Ruffalo ecosystem (trading $PAWSY + $mPAWSY) is $${metrics.barkRuffaloMarketCap.toLocaleString()} (${Math.round(metrics.barkRuffaloSupply).toLocaleString()} tokens), but that is considering the $PAWSY value as equal to $mPAWSY, even though for the former the DAO is not yet offering liquidity.
+   This means that the trading supply of $PAWSY is ${Math.round(metrics.tradingSupply).toLocaleString()}, with a market cap of $${Math.round(metrics.pawsyMarketCap).toLocaleString()}.
+- The total market cap of the Bark Ruffalo ecosystem (trading $PAWSY + $mPAWSY) is $${Math.round(metrics.barkRuffaloMarketCap).toLocaleString()} (${Math.round(metrics.barkRuffaloSupply).toLocaleString()} tokens), but that is considering the $PAWSY value as equal to $mPAWSY, even though for the former the DAO is not yet offering liquidity.
 - Ignoring the potential value of $mPAWSY, the DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, MAR.
 - The DAO sniping addresses (#1 and #2) hold: ETH, SOL, VIRTUAL, MAR, mPAWSY.
 - There are ${AI_AGENTS.length} public AI agents in the ecosystem:

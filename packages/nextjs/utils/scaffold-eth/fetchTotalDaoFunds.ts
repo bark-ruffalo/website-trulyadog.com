@@ -267,32 +267,32 @@ export async function fetchTotalDaoFunds(): Promise<{ totalUsd: number; breakdow
       breakdown.VIRTUAL = virtualValue;
       logTokenBalance("VIRTUAL", tokenBalances.VIRTUAL, virtualPrice, virtualValue, "Uniswap V2 Pool");
 
-      // Process LP pairs
-      for (const lpConfig of CONFIG.lpPairs) {
-        const { lpValue, tokenPrice } = await calculateLPValue(lpConfig, virtualPrice);
+      // // Process LP pairs
+      // for (const lpConfig of CONFIG.lpPairs) {
+      //   const { lpValue, tokenPrice } = await calculateLPValue(lpConfig, virtualPrice);
 
-        // Add LP value to breakdown
-        breakdown[`${lpConfig.symbol}-VIRTUAL-LP`] = lpValue;
+      //   // Add LP value to breakdown
+      //   breakdown[`${lpConfig.symbol}-VIRTUAL-LP`] = lpValue;
 
-        // Get token balance and value
-        const tokenBalance = await publicClient.readContract({
-          address: lpConfig.tokenAddress,
-          abi: ERC20_ABI,
-          functionName: "balanceOf",
-          args: [DAO_ADDRESS],
-        });
+      //   // Get token balance and value
+      //   const tokenBalance = await publicClient.readContract({
+      //     address: lpConfig.tokenAddress,
+      //     abi: ERC20_ABI,
+      //     functionName: "balanceOf",
+      //     args: [DAO_ADDRESS],
+      //   });
 
-        const tokenValue = Number(formatUnits(tokenBalance, lpConfig.decimals)) * tokenPrice;
-        breakdown[lpConfig.symbol] = tokenValue;
+      //   const tokenValue = Number(formatUnits(tokenBalance, lpConfig.decimals)) * tokenPrice;
+      //   breakdown[lpConfig.symbol] = tokenValue;
 
-        logTokenBalance(
-          lpConfig.symbol,
-          Number(formatUnits(tokenBalance, lpConfig.decimals)),
-          tokenPrice,
-          tokenValue,
-          "Uniswap V2 Pool",
-        );
-      }
+      //   logTokenBalance(
+      //     lpConfig.symbol,
+      //     Number(formatUnits(tokenBalance, lpConfig.decimals)),
+      //     tokenPrice,
+      //     tokenValue,
+      //     "Uniswap V2 Pool",
+      //   );
+      // }
 
       const totalUsd = Object.values(breakdown).reduce((a, b) => a + b, 0);
       console.log("Total DAO funds:", breakdown);

@@ -11,6 +11,9 @@ export async function loadFormattedMetrics(): Promise<string> {
     const response = await fetch("/api/transparency");
     let text = await response.text();
 
+    // Add red text formatting for market cap section
+    text = text.replace(/(The total market cap.*?\([^\(]*)/, '<span style="color: red">$1</span>');
+
     // Add links for X (Twitter) accounts first
     text = text.replace(/@(\w+)(?!_bot)/g, '<a href="https://x.com/$1" target="_blank">@$1</a>');
 
