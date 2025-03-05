@@ -77,7 +77,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       ),
     ]);
 
-    const [totalStakers, totalMigrated, pawsyTotalSupply, pawsyHolders, pools] = contractData;
+    const [totalStakers, mPawsyTotalSupply, pawsyTotalSupply, pawsyHolders, pools] = contractData;
 
     const tvlData = await retryContractCall(
       async () =>
@@ -93,7 +93,10 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
     const { tvlInPawsy, pawsyPrice } = tvlData;
 
     const pawsyMarketCap = Number(formatUnits(pawsyTotalSupply, 18)) * pawsyPrice;
-    const realMarketCap = pawsyMarketCap * 23;
+    const realMarketCap = pawsyMarketCap * 23.1;
+    const daoMpawsySupply = 11_100_000_000; // 11.1 billion mPAWSY in DAO's posession
+    const usersMpawsySupply = Number(formatUnits(mPawsyTotalSupply, 18)) - daoMpawsySupply;
+    const percentageOfUsersMpawsySupplyStaked = (tvlInPawsy / usersMpawsySupply) * 100;
 
     const daoFunds = await retryContractCall(() => fetchTotalDaoFunds(), { totalUsd: 0, breakdown: {} });
 
@@ -119,8 +122,8 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       virtualPrice: virtualPrice ?? DEFAULT_CACHE_VALUES.virtual.value,
       pawsyPrice: pawsyPrice ?? DEFAULT_CACHE_VALUES.pawsy.value,
       totalStaked: tvlInPawsy,
-      totalMigrated: Number(formatUnits(totalMigrated, 18)),
-      totalStakers: Number(totalStakers),
+      totalMigrated: Number(formatUnits(mPawsyTotalSupply, 18)),
+      totalStakers: totalStakers ? Number(totalStakers.toString()) : 0,
       pawsyTotalSupply: Number(formatUnits(pawsyTotalSupply, 18)),
       pawsyHolders,
       pawsyMarketCap,
@@ -128,6 +131,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
       agentStatuses,
       daoFunds: filteredDaoFunds,
       tvl: tvlInPawsy * pawsyPrice,
+      percentageOfUsersMpawsySupplyStaked,
     };
   });
 }
@@ -160,11 +164,11 @@ export function formatEcosystemMetrics(metrics: EcosystemMetrics): string {
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(
     metrics.ethPrice,
   ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${metrics.pawsyPrice.toFixed(4)}.
-- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked. Total number of stakers is ${metrics.totalStakers}.
+- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users. This represents ${metrics.percentageOfUsersMpawsySupplyStaked.toFixed(2)}% of the non-DAO $mPAWSY supply.
+- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. A part of this supply has been migrated irreversibly: ${metrics.totalMigrated.toLocaleString()}.
 - The total market cap of the Bark Ruffalo ecosystem ($PAWSY + $mPAWSY) is $${(
     metrics.realMarketCap / 1_000_000
   ).toFixed(2)} million, which is approximated as 23 times the market cap of $PAWSY.
-- The supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. A part of this supply has been migrated irreversibly: ${metrics.totalMigrated.toLocaleString()}.
 - The supply of $mPAWSY is ${Math.round(metrics.totalMigrated).toLocaleString()}, most of which is held by the DAO.
 - The DAO main address holds ~$${Math.round(metrics.daoFunds.totalUsd).toLocaleString()} in these assets: ETH, VIRTUAL, mPAWSY, MAR.
 - The DAO sniping addresses hold: ETH, SOL, VIRTUAL, MAR.

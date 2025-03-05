@@ -22,4 +22,5 @@ export interface EcosystemMetrics {
     breakdown: { [key: string]: number };
   };
   tvl: number;
+  percentageOfUsersMpawsySupplyStaked: number;
 }

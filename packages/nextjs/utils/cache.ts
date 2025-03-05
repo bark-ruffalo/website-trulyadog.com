@@ -37,7 +37,7 @@ export const DEFAULT_CACHE_VALUES: CacheValues = {
 
   totalStaked: { value: 450000000, timestamp: 0, source: "initial" },
   totalMigrated: { value: 80000000, timestamp: 0, source: "initial" },
-  totalStakers: { value: 16193, timestamp: 0, source: "initial" },
+  totalStakers: { value: 56, timestamp: 0, source: "initial" },
   pawsyTotalSupply: { value: 1000000000, timestamp: 0, source: "initial" },
   pawsyHolders: { value: 27595, timestamp: 0, source: "initial" },
   pawsyMarketCap: { value: 230000, timestamp: 0, source: "contract" },
