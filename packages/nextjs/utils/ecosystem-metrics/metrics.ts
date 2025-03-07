@@ -145,7 +145,7 @@ export async function fetchEcosystemMetrics(): Promise<EcosystemMetrics> {
 
     const pawsyMarketCap = Number(formatUnits(pawsyTotalSupply, 18)) * pawsyPrice;
     const realMarketCap = pawsyMarketCap * 23.1;
-    const daoMpawsySupply = 11_100_000_000; // 11.1 billion mPAWSY in DAO's posession
+    const daoMpawsySupply = 13_100_000_000; // 13.1 billion mPAWSY in DAO's posession
     const usersMpawsySupply = Number(formatUnits(mPawsyTotalSupply, 18)) - daoMpawsySupply;
     const percentageOfUsersMpawsySupplyStaked = (tvlInPawsy / usersMpawsySupply) * 100;
 
@@ -267,7 +267,7 @@ The current main focuses of BR devs are:
 - Prices of main cryptocurrencies: BTC $${metrics.btcPrice.toLocaleString()}, ETH $${Math.round(
     metrics.ethPrice,
   ).toLocaleString()}, VIRTUAL $${metrics.virtualPrice.toFixed(2)}, PAWSY $${(metrics.pawsyPrice * 1_000_000).toFixed(2)} per 1M tokens.
-- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 11.1 billion $mPAWSY, which will be used mostly for LPing, operational costs, and community rewards. The users own slightly more.
+- On trulyadog.com, there's ${Math.round(metrics.totalStaked).toLocaleString()} $mPAWSY staked by ${metrics.totalStakers} users (${formatPercentage(metrics.percentageOfUsersMpawsySupplyStaked)}% of the non-DAO $mPAWSY supply). The DAO owns 13.1 billion $mPAWSY, which will be used mostly for LPing, operational costs, and community rewards. The users own ${Math.round(metrics.usersMpawsySupply).toLocaleString()}.
 - The total supply of $PAWSY is ${Math.round(metrics.pawsyTotalSupply).toLocaleString()}. It has ${metrics.pawsyHolders.toLocaleString()} holders. Out of this:
    * ${Math.round(metrics.migratedPawsy).toLocaleString()} tokens have been migrated irreversibly (${formatPercentage(metrics.migratedPawsyPercentage)}%);
    * ${Math.round(metrics.pawsyInBurnAddress).toLocaleString()} tokens are in a burn address (${formatPercentage(metrics.pawsyInBurnAddressPercentage)}%);
