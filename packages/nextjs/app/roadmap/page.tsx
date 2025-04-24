@@ -235,6 +235,18 @@ const Roadmap: NextPage = () => {
                         ⬇️
                       </li>
                       <li>
+                        🎯 <i className="text-sm">(in progress)</i> Make{" "}
+                        <a
+                          href="https://scanner.trulyadog.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary/90 underline"
+                        >
+                          https://scanner.trulyadog.com
+                        </a>{" "}
+                        useful
+                      </li>
+                      <li>
                         🎯 <i className="text-sm">(in progress)</i> Add multiple new high-utility AI agents to the Bark
                         Ruffalo ecosystem
                       </li>

@@ -23,7 +23,7 @@ const Staking: NextPage = () => {
                 <CardContent className="relative z-10 space-y-3 sm:space-y-4 text-sm sm:text-base">
                   <p>
                     The primary purpose of staking is to participate in our income rounds. We have a large income round
-                    on the 15th of December of each year. Our first income distribution was on 2025-12-23 and amounted
+                    on the 15th of December of each year. Our first income distribution was on 2024-12-23 and amounted
                     to more than double the staked amount in dollar terms. The following two rounds distributed more
                     than $50k. More about how it works in{" "}
                     <a
