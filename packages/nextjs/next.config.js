@@ -1,8 +1,5 @@
 // @ts-check
 const keccak = require("keccak");
-const postcssOptimizer = require("postcss-optimizer");
-
-postcssOptimizer.config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -23,7 +20,6 @@ const nextConfig = {
     return config;
   },
   generateBuildId: async () => {
-    postcssOptimizer.config();
     return keccak("keccak256").update("trulyadog").digest("hex");
   },
   async headers() {

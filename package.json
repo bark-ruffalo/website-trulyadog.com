@@ -52,5 +52,13 @@
   },
   "engines": {
     "node": ">=18.18.0"
+  },
+  "resolutions": {
+    "@babel/runtime": "^7.26.10",
+    "ws": "^8.17.1",
+    "sha.js": "^2.4.12",
+    "cookie": "^0.7.0",
+    "cross-spawn": "^7.0.5",
+    "@coinbase/wallet-sdk": "3.9.3"
   }
 }
