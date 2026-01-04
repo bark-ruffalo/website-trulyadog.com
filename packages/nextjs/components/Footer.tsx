@@ -1,47 +1,18 @@
 import Link from "next/link";
 import { SwitchTheme } from "./SwitchTheme";
-import { hardhat } from "viem/chains";
-import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Faucet } from "~~/components/scaffold-eth";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { useGlobalState } from "~~/services/store/store";
 
 /**
- * Site footer
+ * Site footer (Sunset version - simplified)
  */
 export const Footer = () => {
-  const pawsyPrice = useGlobalState(state => state.pawsy.price);
-  const { targetNetwork } = useTargetNetwork();
-  const isLocalNetwork = targetNetwork.id === hardhat.id;
-
   return (
     <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0">
       <div>
         <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
           <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
-            {pawsyPrice > 0 && (
-              <div>
-                <div className="inline-flex items-center px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-lg cursor-default">
-                  $PAWSY:
-                  <span className="ml-1">${(pawsyPrice * 1_000_000).toFixed(2)} / 1M tokens</span>
-                </div>
-              </div>
-            )}
-            {isLocalNetwork && (
-              <>
-                <Faucet />
-                <Link
-                  href="/blockexplorer"
-                  passHref
-                  className="inline-flex items-center px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
-                >
-                  <MagnifyingGlassIcon className="h-4 w-4 mr-1" />
-                  <span>Block Explorer</span>
-                </Link>
-              </>
-            )}
+            {/* Price display and dev tools removed - project sunset */}
           </div>
-          <SwitchTheme className={`pointer-events-auto ${isLocalNetwork ? "self-end md:self-auto" : ""}`} />
+          <SwitchTheme className="pointer-events-auto" />
         </div>
       </div>
       <div className="w-full">

@@ -50,7 +50,6 @@
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/minimatch": "^6.0.0",
     "@types/node": "18.19.68",
     "@types/react": "^18.3.18",
     "abitype": "1.0.6",

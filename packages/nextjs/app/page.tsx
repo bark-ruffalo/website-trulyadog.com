@@ -1,32 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { NextPage } from "next";
-import { loadFormattedMetrics } from "~~/utils/ecosystem-metrics/client";
 
 const Home: NextPage = () => {
-  const [showMetrics, setShowMetrics] = useState(false);
-  const [metrics, setMetrics] = useState<string>("");
+  const [showSunsetMessage, setShowSunsetMessage] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const fetchMetrics = async () => {
-      try {
-        const formattedMetrics = await loadFormattedMetrics();
-        setMetrics(formattedMetrics);
-      } catch (error) {
-        console.error("Error loading metrics:", error);
-      }
-    };
-
-    fetchMetrics();
-  }, []);
 
   const handleVideoEnded = () => {
     if (!videoRef.current) return;
 
-    setShowMetrics(true);
+    setShowSunsetMessage(true);
     if (videoRef.current && contentRef.current) {
       videoRef.current.style.transform = "translateX(-100%)";
       videoRef.current.style.transition = "transform 1s ease-out";
@@ -59,8 +44,8 @@ const Home: NextPage = () => {
           </h1>
         </div>
 
-        {/* Metrics */}
-        {showMetrics && (
+        {/* Sunset Message */}
+        {showSunsetMessage && (
           <div
             className="absolute inset-0 bg-base-100 dark:bg-base-300 p-8 overflow-y-auto"
             style={{
@@ -68,10 +53,99 @@ const Home: NextPage = () => {
             }}
           >
             <div className="max-w-4xl mx-auto">
-              <div
-                className="whitespace-pre-wrap text-base-content dark:text-white font-mono text-sm sm:text-base [&_a]:text-blue-500 [&_a]:hover:text-blue-600 dark:[&_a]:text-blue-400 dark:[&_a]:hover:text-blue-300"
-                dangerouslySetInnerHTML={{ __html: metrics }}
-              />
+              <div className="text-base-content dark:text-white text-base sm:text-lg leading-relaxed">
+                <p className="mb-6 text-xl font-semibold">
+                  This project has been sunset. At the end, we had 7,258,162,016 $mPAWSY staked by 84 users (78.95% of
+                  the non-DAO $mPAWSY supply). Thank you for the trust!
+                </p>
+
+                <p className="mb-6">
+                  Our last income distribution was on December 15, 2025:{" "}
+                  <a
+                    href="https://x.com/TrulyADog/status/2000530685409259709"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                  >
+                    https://x.com/TrulyADog/status/2000530685409259709
+                  </a>
+                </p>
+
+                <p className="mb-4">
+                  These three agents will be reactivated eventually to help with marketing for other projects:
+                </p>
+
+                <ul className="list-disc list-inside space-y-3 ml-4">
+                  <li>
+                    <strong>Bark Ruffalo</strong> (
+                    <a
+                      href="https://x.com/TrulyADog"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      @TrulyADog
+                    </a>{" "}
+                    on X,{" "}
+                    <a
+                      href="https://t.me/BarkRuffalo_bot"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      @BarkRuffalo_bot
+                    </a>{" "}
+                    on Telegram)
+                  </li>
+                  <li>
+                    <strong>The Great Pupdini</strong> (
+                    <a
+                      href="https://x.com/TheGreatPupdini"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      @TheGreatPupdini
+                    </a>{" "}
+                    on X,{" "}
+                    <a
+                      href="https://t.me/TheGreatPupdini_bot"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      @TheGreatPupdini_bot
+                    </a>{" "}
+                    on Telegram)
+                  </li>
+                  <li>
+                    <strong>The Alpha Doggo</strong> (
+                    <a
+                      href="https://x.com/TheAlphaDoggo"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      @TheAlphaDoggo
+                    </a>{" "}
+                    on X,{" "}
+                    <a
+                      href="https://t.me/TheAlphaDoggo_bot"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      @TheAlphaDoggo_bot
+                    </a>{" "}
+                    on Telegram)
+                  </li>
+                </ul>
+
+                <p className="mt-6">
+                  The Telegram group will continue to function (link in the footer). Our repository will stay unchanged
+                  for historical purposes and in case anyone wants to reuse any of our code.
+                </p>
+              </div>
             </div>
           </div>
         )}
